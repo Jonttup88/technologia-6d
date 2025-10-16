@@ -1,0 +1,7 @@
+Binaries/
+Diagnosis/
+Temp/
+/*.set
+*.db
+*.isopen
+.venv

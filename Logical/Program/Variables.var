@@ -1,0 +1,69 @@
+VAR
+	MainState : MainStateEnum;
+	ShIndex : UINT;
+END_VAR
+(*Function blocks*)
+VAR
+	AssemblyReadInfo : MC_BR_AsmReadInfo_Acp6D;
+	AssemblyPowerOn : MC_BR_AsmPowerOn_Acp6D;
+	AssemblyPowerOff : MC_BR_AsmPowerOff_Acp6D;
+	AssemblyReset : MC_BR_AsmReset_Acp6D;
+	AssemblyGetShuttle : MC_BR_AsmGetShuttle_Acp6D;
+	ShuttleMoveXY : MC_BR_MoveInPlane_Acp6D;
+	MC_BR_MoveCyclicPosition_Acp6D_0 : MC_BR_MoveCyclicPosition_Acp6D;
+	jkiTest : BOOL;
+	MC_BR_ShReadInfo_Acp6D_0 : MC_BR_ShReadInfo_Acp6D;
+	jkiTest1 : BOOL;
+	X : REAL;
+	Y : REAL;
+	start : BOOL;
+	dir : INT;
+	MC_BR_MoveInPlaneAsync_Acp6D_0 : MC_BR_MoveInPlaneAsync_Acp6D;
+END_VAR
+(*Random value variables*)
+VAR
+	original : ARRAY[0..7] OF INT := [0,1,2,3,4,5,6,7];
+	shuffled : ARRAY[0..7] OF INT;
+	available : ARRAY[0..7] OF BOOL := [8(TRUE)];
+	count : USINT := 0;
+	randIndex : INT;
+	i : USINT;
+	jkiTest2 : BOOL;
+	temp : INT;
+	jkiShuffle : BOOL;
+	jkiTest3 : BOOL;
+	demoStep : INT;
+	TON_0 : TON;
+	MoveInPlane : MC_BR_MoveInPlane_Acp6D;
+	loadCounter : USINT;
+	MoveArc : MC_BR_MoveArc_Acp6D;
+	tempCounter : INT;
+	randomIndex : INT;
+	j : INT;
+	found : BOOL;
+	index : INT;
+	shuffled1 : ARRAY[0..7] OF INT;
+	minValue : INT;
+	jkiCircle : BOOL;
+	demoState : INT;
+	movePlane : ARRAY[0..3] OF MC_BR_MoveInPlane_Acp6D;
+	tempCounter1 : INT;
+	newRUN : BOOL;
+	jkiTest4 : BOOL;
+	TON_1 : TON;
+	counter : USINT;
+	shIndex : INT;
+	jkiFeatureDemo : BOOL;
+	MC_BR_ShGroupCoupleCtrl_Acp6D_0 : MC_BR_ShGroupCoupleCtrl_Acp6D;
+	MC_BR_ShGroupDelete_Acp6D_0 : MC_BR_ShGroupDelete_Acp6D;
+	MC_BR_ShGroupCreate_Acp6D_0 : MC_BR_ShGroupCreate_Acp6D;
+	MC_BR_ShGroupAddShuttle_Acp6D_0 : MC_BR_ShGroupAddShuttle_Acp6D;
+	MC_BR_MoveShortAxis_Acp6D_0 : MC_BR_MoveShortAxis_Acp6D;
+	FeatureShuttles : ARRAY[0..7] OF FeatureShuttle_typ;
+	ready : BOOL;
+	R_TRIG_0 : R_TRIG;
+	MC_BR_ZoneCreate_Acp6D_0 : MC_BR_ZoneCreate_Acp6D;
+	MC_BR_AsmGetZone_Acp6D_0 : MC_BR_AsmGetZone_Acp6D;
+	zoneState : INT;
+	MC_BR_ZoneOverride_Acp6D_0 : MC_BR_ZoneOverride_Acp6D;
+END_VAR

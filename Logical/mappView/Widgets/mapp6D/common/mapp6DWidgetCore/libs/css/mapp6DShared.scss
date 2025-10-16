@@ -1,0 +1,112 @@
+@import './mapp6DVariables.scss';
+
+@mixin coordinate-system-axis($color) {
+    fill: $color;
+    stroke: $color;
+    stroke-width: 7.5;
+    stroke-miterlimit: 10;
+}
+
+@mixin mapp6d-classes {
+    svg {
+        fill: none;
+        fill-rule: evenodd;
+        font-size: 12px;
+        overflow: visible;
+        stroke-linecap: square;
+        stroke-miterlimit: 3;
+        user-select: none;
+    }
+
+    text {
+        font-family: Calibri;
+        font-size: 2em;
+        alignment-baseline: hanging;
+        text-anchor: start;
+        fill: var(--m6d-main-text-color);
+    }
+
+    .text-anchor-end {
+        text-anchor: end;
+    }
+
+    .text-anchor-middle {
+        text-anchor: middle;
+    }
+
+    .text-anchor-start {
+        text-anchor: start;
+    }
+
+    .display-none {
+        display: none;
+    }
+
+    .visibility-hidden {
+        visibility: hidden;
+    }
+
+    .visibility-visible {
+        visibility: visible;
+    }
+
+    .display-block {
+        display: block;
+    }
+
+    .alignment-baseline-after-edge {
+        alignment-baseline: after-edge;
+    }
+
+    .alignment-baseline-hanging {
+        alignment-baseline: hanging;
+    }
+
+    .dominant-baseline-middle {
+        dominant-baseline: middle;
+    }
+
+    .coordinate-system {
+        font-size: 2em;
+
+        .x-axis {
+            @include coordinate-system-axis(
+                var(--m6d-coordinate-system-x-axis-color)
+            );
+        }
+
+        .y-axis {
+            @include coordinate-system-axis(
+                var(--m6d-coordinate-system-y-axis-color)
+            );
+        }
+
+        .z-axis {
+            fill: var(--m6d-coordinate-system-z-axis-color);
+            stroke: none;
+        }
+
+        .label-x-axis {
+            fill: var(--m6d-coordinate-system-x-axis-color);
+            alignment-baseline: central;
+            text-anchor: middle;
+            font-weight: bold;
+        }
+
+        .label-y-axis {
+            fill: var(--m6d-coordinate-system-y-axis-color);
+            alignment-baseline: central;
+            text-anchor: middle;
+            font-weight: bold;
+        }
+    }
+
+    .crosshair {
+        color: var(--m6d-crosshair-color);
+    }
+
+    .transparent {
+        fill: transparent !important;
+        stroke: transparent !important;
+    }
+}

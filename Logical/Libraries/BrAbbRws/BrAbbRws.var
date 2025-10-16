@@ -1,0 +1,18 @@
+VAR CONSTANT
+	BR_ABB_RWS_SIGNAL_TYPE_GO : STRING[80] := 'GO'; (*Signal type name *)
+	BR_ABB_RWS_SIGNAL_TYPE_GI : STRING[80] := 'GI'; (*Signal type name *)
+	BR_ABB_RWS_SIGNAL_TYPE_DO : STRING[80] := 'DO'; (*Signal type name *)
+	BR_ABB_RWS_SIGNAL_TYPE_DI : STRING[80] := 'DI'; (*Signal type name *)
+	BR_ABB_RWS_SIGNAL_TYPE_AO : STRING[80] := 'AO'; (*Signal type name *)
+	BR_ABB_RWS_SIGNAL_TYPE_AI : STRING[80] := 'AI'; (*Signal type name *)
+	BR_ABB_RWS_MAX_BUFFER_LENGTH : USINT := 50; (*Request buffer length*)
+	BR_ABB_RWS_REALM : STRING[30] := 'validusers@robapi.abb'; (*Authorization parameter*)
+	BR_ABB_RWS_QOP : STRING[10] := 'auth'; (*Authorization parameter*)
+	BR_ABB_RWS_OPAQUE : STRING[10] := '799d5'; (*Authorization parameter*)
+	BR_ABB_RWS_MAX_STATE_RESPONSE : USINT := 4; (*Maximum number of state response*)
+	BR_ABB_RWS_MAX_ELOG : USINT := 49; (*Maximum number of logs to be read*)
+	BR_ABB_RWS_MAX_RESPONSE_LEN : UDINT := 200000; (*Maximum size of response data length*)
+	BR_ABB_RWS_MAX_HEADER_LEN : UINT := 1500; (*Maximum size of header data length*)
+	BR_ABB_RWS_LOGGER_SIZE : UDINT := 50000; (*Logger size*)
+	BR_ABB_RWS_EMPTY_STR : STRING[80] := ''; (*Empty string*)
+END_VAR

@@ -1,0 +1,128 @@
+<svg id="gAssembly6D_1-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
+    viewBox="-1.875000 -721.875000 723.750000 723.750000" preserveAspectRatio="xMidYMid meet">
+    <style>svg {--m6d-main-text-color: #020202;--m6d-main-white-color:
+        #ffffff;--m6d-main-gray-color: #d3d1d1;--m6d-main-error-color:
+        #cb0000;--m6d-coordinate-system-x-axis-color: #8b0000;--m6d-coordinate-system-y-axis-color:
+        #008000;--m6d-coordinate-system-z-axis-color: #000080;--m6d-segment-power-on-color:
+        #555555;--m6d-segment-power-on-color: #7b7b7b;--m6d-segment-homing-color:
+        #c8c8c8;--m6d-segment-stopping-color: #666666;--m6d-segment-stroke-color:
+        #666666;--m6d-segment-error-color: #cb0000;--m6d-shuttle-power-on-color:
+        #85857e;--m6d-shuttle-power-on-color: #ffffff;--m6d-shuttle-stopping-color:
+        #ff8800;--m6d-shuttle-idling-color: #ffffff;--m6d-shuttle-landed-color:
+        #b0b0b0;--m6d-shuttle-motion-color: #e0e0e0;--m6d-shuttle-obstacle-color:
+        #b0b0b0;--m6d-shuttle-stroke-color: #000000;--m6d-shuttle-error-color:
+        #cb0000;--m6d-zone-main-color: #ff8800;--m6d-zone-error-color:
+        #cb0000;--m6d-power-sector-main-color: #8e50d0;--m6d-power-sector-error-color:
+        #cb0000;--m6d-station-active-open-color: #12b8ff;--m6d-waypoint-active-open-color:
+        #b266ff;--m6d-branching-waypoint-active-open-fill-color:
+        #ffffff;--m6d-branching-waypoint-active-open-stroke-color:
+        #7f7f7f;--m6d-traffic-manager-main-fill-color: #ffffff;--m6d-link-gray-color:
+        #d3d1d1;--m6d-link-white-color: #ffffff;}svg {fill: none;fill-rule: evenodd;font-size:
+        12px;overflow: visible;stroke-linecap: square;stroke-miterlimit: 3;}text {font-family:
+        Calibri;font-size: 2em;alignment-baseline: hanging;text-anchor: start;fill:
+        #020202;}.text-anchor-end {text-anchor: end;}.text-anchor-middle {text-anchor:
+        middle;}.text-anchor-start {text-anchor: start;}.display-none {display: none;}.display-block
+        {display: block;}.alignment-baseline-after-edge {alignment-baseline:
+        after-edge;}.alignment-baseline-hanging {alignment-baseline:
+        hanging;}.dominant-baseline-middle {dominant-baseline: middle;}.coordinate-system
+        {font-size: 2em;}.coordinate-system .x-axis {fill:
+        var(--m6d-coordinate-system-x-axis-color);stroke:
+        var(--m6d-coordinate-system-x-axis-color);stroke-width: 7.5;stroke-miterlimit:
+        10;}.coordinate-system .y-axis {fill: var(--m6d-coordinate-system-y-axis-color);stroke:
+        var(--m6d-coordinate-system-y-axis-color);stroke-width: 7.5;stroke-miterlimit:
+        10;}.coordinate-system .z-axis {fill: var(--m6d-coordinate-system-z-axis-color);stroke:
+        none;}.coordinate-system .label-x-axis {fill:
+        var(--m6d-coordinate-system-x-axis-color);alignment-baseline: central;text-anchor:
+        start;font-weight: bold;}.coordinate-system .label-y-axis {fill:
+        var(--m6d-coordinate-system-y-axis-color);alignment-baseline: baseline;text-anchor:
+        middle;font-weight: bold;}.segment.power-on {fill: #7b7b7b;}.segment.power-on {fill:
+        #7b7b7b;}.segment.error {fill: var(--m6d-segment-error-color);}.segment.homing {fill:
+        var(--m6d-segment-homing-color);}.segment.stopping {fill:
+        var(--m6d-segment-stopping-color);}.segment &gt; rect {stroke: #666666;stroke-linecap:
+        round;stroke-linejoin: round;stroke-width: 3.75;}.segment &gt; text {fill: #020202;}.segment
+        &gt; text.text-power-sector-name {text-anchor: end;}.shuttle.power-on {fill:
+        #ffffff;}.shuttle.power-on {fill: #ffffff;}.shuttle.error {fill:
+        var(--m6d-shuttle-error-color);}.shuttle.stopping {fill:
+        var(--m6d-shuttle-stopping-color);}.shuttle.idling {fill:
+        var(--m6d-shuttle-idling-color);}.shuttle.landed {fill:
+        var(--m6d-shuttle-landed-color);}.shuttle.motion {fill:
+        var(--m6d-shuttle-motion-color);}.shuttle.obstacle {fill:
+        var(--m6d-shuttle-obstacle-color);}.shuttle &gt; rect {stroke: #000000;stroke-linecap:
+        round;stroke-linejoin: round;stroke-width: 3;}.shuttle &gt; text {fill: #020202;}.shuttle
+        &gt; .additional-info {font-size: 1.2em;}.shuttle &gt; .position-info-container {display:
+        grid;grid-template-columns: 1fr 1fr;gap: 0px 0px;height: calc(100% - 8px);align-content:
+        end;padding-left: 6px;padding-right: 6px;}.shuttle &gt;
+        .position-info-container.cell-count-le-3 {grid-template-columns: 1fr 1fr;}.shuttle &gt;
+        .position-info-container &gt; .position-info {fill: #020202;font-size: 1.1em;}.shuttle &gt;
+        .position-info-container.cell-count-le-3 &gt; .position-info {fill: #020202;font-size:
+        1.5em;}.zone.active-open {display: none;}.zone.active-closed {stroke:
+        var(--m6d-zone-main-color);}.zone.not-active {stroke: var(--m6d-zone-main-color);fill:
+        var(--m6d-zone-main-color);fill-opacity: 0.3;}.zone.error {stroke:
+        var(--m6d-zone-error-color);}.zone &gt; rect {stroke-linecap: round;stroke-linejoin:
+        round;stroke-width: 7.5;}.power-sector.disconnected {display:
+        none;}.power-sector.active-open {display: none;}.power-sector.active-closed {stroke:
+        var(--m6d-power-sector-main-color);}.power-sector.not-active {stroke:
+        var(--m6d-power-sector-main-color);fill: var(--m6d-power-sector-main-color);fill-opacity:
+        0.3;}.power-sector.error {stroke: var(--m6d-power-sector-error-color);}.power-sector &gt;
+        path {stroke-linecap: round;stroke-linejoin: round;stroke-width: 7.5;}.station &gt; rect
+        {stroke: none;}.station.active-open {fill: var(--m6d-station-active-open-color);}.waypoint
+        &gt; ellipse {stroke: none;}.waypoint.active-open {fill:
+        var(--m6d-waypoint-active-open-color);}.branching_waypoint &gt; rect {stroke-width:
+        1;}.branching_waypoint.active-open {fill:
+        var(--m6d-branching-waypoint-active-open-fill-color);stroke:
+        var(--m6d-branching-waypoint-active-open-stroke-color);}.arrow.white {fill:
+        var(--m6d-link-white-color);}.arrow.gray {fill: var(--m6d-link-gray-color);}.link &gt; line
+        {stroke-width: 2;}.link.white-one-way {stroke: var(--m6d-link-white-color);marker-end:
+        url(#white_arrowhead);}.link.white-two-way {stroke:
+        var(--m6d-link-white-color);marker-start: url(#white_arrowhead);marker-end:
+        url(#white_arrowhead);}.link.gray-one-way {stroke: var(--m6d-link-gray-color);marker-end:
+        url(#gray_arrowhead);}.link.gray-two-way {stroke: var(--m6d-link-gray-color);marker-start:
+        url(#gray_arrowhead);marker-end: url(#gray_arrowhead);}.traffic-object-label
+        {alignment-baseline: middle;font-size: 1.2em;}</style>
+    <g id="gAssembly6D_1" class="assembly">
+        <g id="Layout6D_Placeholder" class="layout">
+            <g id="segment-1" class="segment power-on" transform="translate(0.000000 -240.000000)"
+                segment-id="1" position-x="0" position-y="0" master="true">
+                <rect width="240" height="240" rx="3.75" ry="3.75"></rect>
+                <text x="10" y="10" alignment-baseline="hanging">1</text>
+            </g>
+            <g id="segment-2" class="segment power-on" transform="translate(0.000000 -480.000000)"
+                segment-id="2" position-x="0" position-y="1" master="false">
+                <rect width="240" height="240" rx="3.75" ry="3.75"></rect>
+                <text x="10" y="10" alignment-baseline="hanging">2</text>
+            </g>
+            <g id="segment-3" class="segment power-on" transform="translate(0.000000 -720.000000)"
+                segment-id="3" position-x="0" position-y="2" master="false">
+                <rect width="240" height="240" rx="3.75" ry="3.75"></rect>
+                <text x="10" y="10" alignment-baseline="hanging">3</text>
+            </g>
+            <g id="segment-4" class="segment power-on" transform="translate(240.000000 -480.000000)"
+                segment-id="4" position-x="1" position-y="1" master="false">
+                <rect width="240" height="240" rx="3.75" ry="3.75"></rect>
+                <text x="10" y="10" alignment-baseline="hanging">4</text>
+            </g>
+            <g id="segment-5" class="segment power-on" transform="translate(480.000000 -240.000000)"
+                segment-id="5" position-x="2" position-y="0" master="false">
+                <rect width="240" height="240" rx="3.75" ry="3.75"></rect>
+                <text x="10" y="10" alignment-baseline="hanging">5</text>
+            </g>
+            <g id="segment-6" class="segment power-on" transform="translate(480.000000 -480.000000)"
+                segment-id="6" position-x="2" position-y="1" master="false">
+                <rect width="240" height="240" rx="3.75" ry="3.75"></rect>
+                <text x="10" y="10" alignment-baseline="hanging">6</text>
+            </g>
+        </g>
+        <g id="shuttle-3" class="shuttle power-on" transform="translate(621.5 -258.5) rotate(0)">
+            <rect x="-60" y="-60" width="117" height="117" rx="8.504" ry="8.504" stroke-width="3"></rect>
+            <text x="-50" y="-50" alignment-baseline="hanging">3</text>
+        </g>
+        <g id="shuttle-2" class="shuttle power-on" transform="translate(261.5 -351.5) rotate(0)">
+            <rect x="-60" y="-60" width="117" height="117" rx="8.504" ry="8.504" stroke-width="3"></rect>
+            <text x="-50" y="-50" alignment-baseline="hanging">2</text>
+        </g>
+        <g id="shuttle-1" class="shuttle power-on" transform="translate(121.5 -121.5) rotate(-10)">
+            <rect x="-60" y="-60" width="117" height="117" rx="8.504" ry="8.504" stroke-width="3"></rect>
+            <text x="-50" y="-50" alignment-baseline="hanging">1</text>
+        </g>
+    </g>
+</svg>

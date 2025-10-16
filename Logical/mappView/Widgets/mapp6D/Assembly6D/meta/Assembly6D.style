@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StyleInformation name="widgets.mapp6D.Assembly6D"
+	xmlns="http://www.br-automation.com/iat2014/widgetStyles"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<StyleProperties>
+		<StyleProperty name="width" type="AutoSize" not_styleable="true" default="140">
+			<StyleElement attribute="@include elemAutoWidth($value)"></StyleElement>
+			<Description>outer width of widget</Description>
+		</StyleProperty>
+		<StyleProperty name="height" type="AutoSize" not_styleable="true" default="140">
+			<StyleElement attribute="@include elemAutoHeight($value)"></StyleElement>
+			<Description>outer height of widget</Description>
+		</StyleProperty>
+
+		<StyleProperty name="textColor" category="Appearance" type="Color" default="#020202" >
+			<StyleElement selector="text" attribute="fill"></StyleElement>
+			<Description>Text color for the labels"</Description>
+		</StyleProperty>
+
+		<StyleProperty name="segmentPowerOffColor" category="Appearance" type="Color" default="#555555" >
+			<StyleElement selector=".segment.power-off" attribute="fill"></StyleElement>
+			<Description>Segment color for the state "Power Off"</Description>
+		</StyleProperty>
+		<StyleProperty name="segmentPowerOnColor" category="Appearance" type="Color" default="#7b7b7b" >
+			<StyleElement selector=".segment.power-on" attribute="fill"></StyleElement>
+			<Description>Segment color for the state "Power On"</Description>
+		</StyleProperty>
+		<StyleProperty name="segmentErrorColor" category="Appearance" type="Color" default="#cb0000" >
+			<StyleElement selector=".segment.error" attribute="fill"></StyleElement>
+			<Description>Segment color for the state "Error"</Description>
+		</StyleProperty>
+		<StyleProperty name="segmentHomingColor" category="Appearance" type="Color" default="#c8c8c8" >
+			<StyleElement selector=".segment.homing" attribute="fill"></StyleElement>
+			<Description>Segment color for the state "Homing"</Description>
+		</StyleProperty>
+		<StyleProperty name="segmentStoppingColor" category="Appearance" type="Color" default="#666666" >
+			<StyleElement selector=".segment.stopping" attribute="fill"></StyleElement>
+			<Description>Segment color for the state "Stopping"</Description>
+		</StyleProperty>
+		
+		<StyleProperty name="shuttlePowerOffColor" category="Appearance" type="Color" default="#85857e" >
+			<StyleElement selector=".shuttle.power-off" attribute="fill"></StyleElement>
+			<Description>Shuttle color for the state "Power Off"</Description>
+		</StyleProperty>
+		<StyleProperty name="shuttlePowerOnColor" category="Appearance" type="Color" default="#ffffff" >
+			<StyleElement selector=".shuttle.power-on" attribute="fill"></StyleElement>
+			<Description>Shuttle color for the state "Power On"</Description>
+		</StyleProperty>
+		<StyleProperty name="shuttleErrorColor" category="Appearance" type="Color" default="#cb0000" >
+			<StyleElement selector=".shuttle.error" attribute="fill"></StyleElement>
+			<Description>Shuttle color for the state "Error"</Description>
+		</StyleProperty>
+		<StyleProperty name="shuttleStoppingColor" category="Appearance" type="Color" default="#ff8800" >
+			<StyleElement selector=".shuttle.stopping" attribute="fill"></StyleElement>
+			<Description>Shuttle color for the state "Stopping"</Description>
+		</StyleProperty>
+		<StyleProperty name="shuttleIdlingColor" category="Appearance" type="Color" default="#ffffff" >
+			<StyleElement selector=".shuttle.idling" attribute="fill"></StyleElement>
+			<Description>Shuttle color for the state "Idling"</Description>
+		</StyleProperty>
+		<StyleProperty name="shuttleLandedColor" category="Appearance" type="Color" default="#b0b0b0" >
+			<StyleElement selector=".shuttle.landed" attribute="fill"></StyleElement>
+			<Description>Shuttle color for the state "Landed"</Description>
+		</StyleProperty>
+		<StyleProperty name="shuttleMotionColor" category="Appearance" type="Color" default="#e0e0e0" >
+			<StyleElement selector=".shuttle.motion" attribute="fill"></StyleElement>
+			<Description>Shuttle color for the state "Motion"</Description>
+		</StyleProperty>
+		<StyleProperty name="shuttleObstacleColor" category="Appearance" type="Color" default="#b0b0b0" >
+			<StyleElement selector=".shuttle.obstacle" attribute="fill"></StyleElement>
+			<Description>Shuttle color for the state "Obstacle"</Description>
+		</StyleProperty>
+		
+		<StyleProperty name="zoneActiveClosedColor" category="Appearance" type="Color" default="#ff8800" >
+			<StyleElement selector=".zone.active-closed" attribute="stroke"></StyleElement>
+			<Description>Zone color for the state "Active Closed"</Description>
+		</StyleProperty>
+		<StyleProperty name="zoneNotActiveColor" category="Appearance" type="Color" default="#ff8800" >
+			<StyleElement selector=".zone.not-active" attribute="stroke"></StyleElement>
+			<StyleElement selector=".zone.not-active" attribute="fill"></StyleElement>
+			<Description>Zone color for the state "Not Active"</Description>
+		</StyleProperty>
+		<StyleProperty name="zoneErrorColor" category="Appearance" type="Color" default="#cb0000" >
+			<StyleElement selector=".zone.error" attribute="stroke"></StyleElement>
+			<Description>Zone color for the state "Error"</Description>
+		</StyleProperty>
+		
+		<StyleProperty name="powerSectorActiveClosedColor" category="Appearance" type="Color" default="#8e50d0" >
+			<StyleElement selector=".power-sector.active-closed" attribute="stroke"></StyleElement>
+			<Description>Power sector color for the state "Active Closed"</Description>
+		</StyleProperty>
+		<StyleProperty name="powerSectorNotActiveColor" category="Appearance" type="Color" default="#8e50d0" >
+			<StyleElement selector=".power-sector.not-active" attribute="stroke"></StyleElement>
+			<StyleElement selector=".power-sector.not-active" attribute="fill"></StyleElement>
+			<Description>Power sector color for the state "Not Active"</Description>
+		</StyleProperty>
+		<StyleProperty name="powerSectorErrorColor" category="Appearance" type="Color" default="#cb0000" >
+			<StyleElement selector=".power-sector.error" attribute="stroke"></StyleElement>
+			<Description>Power sector color for the state "Error"</Description>
+		</StyleProperty>
+
+		<StyleProperty name="stationActiveOpenColor" category="Appearance" type="Color" default="#12b8ff" >
+			<StyleElement selector=".station.active-open" attribute="fill"></StyleElement>
+			<Description>Station color for the state "Active Open"</Description>
+		</StyleProperty>
+
+		<StyleProperty name="waypointActiveOpenColor" category="Appearance" type="Color" default="#b266ff" >
+			<StyleElement selector=".waypoint.active-open" attribute="fill"></StyleElement>
+			<Description>Waypoint color for the state "Active Open"</Description>
+		</StyleProperty>
+
+		<StyleProperty name="branchingWaypointActiveOpenColor" category="Appearance" type="Color" default="#ffffff" >
+			<StyleElement selector=".branching_waypoint.active-open" attribute="fill"></StyleElement>
+			<StyleElement selector=".branching_waypoint.active-open" attribute="stroke"></StyleElement>
+			<Description>Branching waypoint color for the state "Active Open"</Description>
+		</StyleProperty>
+
+		<StyleProperty name="trafficManagerLinkColor" category="Appearance" type="Color" default="#d3d1d1" >
+			<StyleElement selector=".arrow.gray" attribute="fill"></StyleElement>
+			<StyleElement selector=".link.gray-one-way" attribute="stroke"></StyleElement>
+			<StyleElement selector=".link.gray-two-way" attribute="stroke"></StyleElement>
+			<Description>Traffic manager link color</Description>
+		</StyleProperty>
+	</StyleProperties>
+</StyleInformation>

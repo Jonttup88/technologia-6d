@@ -1,0 +1,68 @@
+@import './mapp6DVariables.scss';
+
+.station > rect {
+    stroke: none;
+}
+
+.station.active-open {
+    fill: var(--m6d-station-active-open-color);
+}
+
+.waypoint > ellipse {
+    stroke: none;
+}
+
+.waypoint.active-open {
+    fill: var(--m6d-waypoint-active-open-color);
+}
+
+.branching_waypoint > rect {
+    stroke-width: 1;
+}
+
+.branching_waypoint.active-open {
+    fill: var(--m6d-branching-waypoint-active-open-fill-color);
+    stroke: var(--m6d-branching-waypoint-active-open-stroke-color);
+}
+
+.arrow > polygon {
+}
+
+.arrow.white {
+    fill: var(--m6d-link-white-color);
+}
+
+.arrow.gray {
+    fill: var(--m6d-link-gray-color);
+}
+
+.link > line {
+    stroke-width: 2;
+}
+
+.link.white-one-way {
+    stroke: var(--m6d-link-white-color);
+    marker-end: url(#white_arrowhead);
+}
+
+.link.white-two-way {
+    stroke: var(--m6d-link-white-color);
+    marker-start: url(#white_arrowhead);
+    marker-end: url(#white_arrowhead);
+}
+
+.link.gray-one-way {
+    stroke: var(--m6d-link-gray-color);
+    marker-end: url(#gray_arrowhead);
+}
+
+.link.gray-two-way {
+    stroke: var(--m6d-link-gray-color);
+    marker-start: url(#gray_arrowhead);
+    marker-end: url(#gray_arrowhead);
+}
+
+.traffic-object-label {
+    alignment-baseline: middle;
+    font-size: 1.2em;
+}

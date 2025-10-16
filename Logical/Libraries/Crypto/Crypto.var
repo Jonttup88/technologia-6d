@@ -1,0 +1,13 @@
+(********************************************************************
+ * COPYRIGHT -- Bernecker + Rainer
+ ********************************************************************
+ * Library: SafetyExt
+ * File: SafetyExt.var
+ * Author: raymom
+ * Created: March 06, 2013
+ ********************************************************************
+ * Constants of library SafetyExt
+ ********************************************************************)
+VAR CONSTANT
+	SF_MAX_SIZE : UDINT := 50000; (*Kb - max download dimension*)
+END_VAR

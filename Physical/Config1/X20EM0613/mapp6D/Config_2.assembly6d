@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?AutomationStudio FileVersion="4.9"?>
+<Configuration>
+  <Element ID="gAssembly6D_1" Type="assembly6d">
+    <Property ID="Simulation6D" Value="SimOff" />
+    <Group ID="Ethernet6D">
+      <Property ID="IpAddress" Value="192.168.125.239" />
+      <Property ID="SubnetMask" Value="255.255.255.0" />
+      <Property ID="Gateway" Value="192.168.125.1" />
+    </Group>
+    <Group ID="Shuttles">
+      <Property ID="MaxShuttleCount" Value="8" />
+      <Property ID="ShuttleIDMode" Value="RealTimeID" />
+      <Property ID="RealModeDetectionType" Value="Any" />
+      <Group ID="DefaultPosition">
+        <Property ID="DefZ" Value="1.0" />
+        <Property ID="DefRx" Value="0" />
+        <Property ID="DefRy" Value="0" />
+        <Property ID="DefRz" Value="0" />
+      </Group>
+      <Group ID="Limits">
+        <Group ID="InPlaneLimits">
+          <Property ID="InPlaneVelLim" Value="2" />
+          <Property ID="InPlaneAccLim" Value="20" />
+          <Property ID="InPlaneEmergDec" Value="20" />
+        </Group>
+        <Group ID="ShortAxLim">
+          <Group ID="ShortAxAccLim">
+            <Property ID="AccZLim" Value="10.0" />
+            <Property ID="AccRxLim" Value="10.0" />
+            <Property ID="AccRyLim" Value="10.0" />
+            <Property ID="AccRzLim" Value="10.0" />
+          </Group>
+          <Group ID="ShortAxVelLim">
+            <Property ID="VelZLim" Value="0.15" />
+            <Property ID="VelRxLim" Value="0.1" />
+            <Property ID="VelRyLim" Value="0.1" />
+            <Property ID="VelRzLim" Value="0.3" />
+          </Group>
+        </Group>
+      </Group>
+    </Group>
+    <Group ID="CyclicChannel6D">
+      <Group ID="ReadChannel">
+        <Property ID="Xaxis" Value="TRUE" />
+        <Property ID="Yaxis" Value="TRUE" />
+        <Property ID="Zaxis" Value="TRUE" />
+        <Property ID="Rxaxis" Value="TRUE" />
+        <Property ID="Ryaxis" Value="TRUE" />
+        <Property ID="Rzaxis" Value="TRUE" />
+      </Group>
+    </Group>
+    <Group ID="SystemReactions6D">
+      <Property ID="LostCommReaction6D" Value="Continue" />
+    </Group>
+    <Group ID="Fieldbus6D">
+      <Property ID="SyncMode6D" Value="ExternalPlkSync" />
+      <Property ID="IFName" Value="IF3" />
+      <Property ID="NodeNumber" Value="239" />
+    </Group>
+    <Group ID="IOMapp">
+      <Property ID="Input" Value="::gCommInput" />
+      <Property ID="Output" Value="::gCommOutput" />
+    </Group>
+    <Group ID="Layout">
+      <Property ID="Layout6D[1]" Value="Layout6D_1" />
+    </Group>
+  </Element>
+</Configuration>

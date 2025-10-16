@@ -1,0 +1,10 @@
+VAR
+	BrAbbRwsCore_0 : BrAbbRwsCore;
+	BrAbbRwsVariable_0 : BrAbbRwsVariable;
+	xPos : REAL;
+	state : INT;
+	yPos : REAL;
+	returnState : INT;
+	TON_0 : TON;
+	writeValue : BOOL;
+END_VAR

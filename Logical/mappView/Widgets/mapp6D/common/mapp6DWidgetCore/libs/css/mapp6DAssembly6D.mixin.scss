@@ -1,0 +1,34 @@
+@import './mapp6DVariables.scss';
+@import './mapp6DShared.scss';
+
+// force that the stroke of the segments is at the inner side of the segment
+@mixin mapp6d-assembly6d-segment-inner-stroke(
+    $stroke,
+    $stroke-width,
+    $stroke-width-highlight-multiplier: 4
+) {
+    .mapp6DAssembly6D {
+        .segment > g {
+            stroke: $stroke;
+        }
+        .segment-size-240x240 > g {
+            clip-path: url(#segment-240x240-clipPath) !important;
+        }
+        .segment-size-480x120 > g {
+            clip-path: url(#segment-480x120-clipPath) !important;
+        }
+        .segment-size-120x480 > g {
+            clip-path: url(#segment-120x480-clipPath) !important;
+        }
+
+        .segment > g > rect {
+            stroke-width: $stroke-width !important;
+        }
+
+        .segment.highlight > g > rect {
+            stroke-width: calc(
+                $stroke-width * $stroke-width-highlight-multiplier
+            ) !important;
+        }
+    }
+}

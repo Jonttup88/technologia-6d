@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Content id="SXGA_LS1_contentProduction1" guid="bd88c1c0-4b73-47a0-9a39-10432a7c7a1c" height="924" width="1160" xmlns="http://www.br-automation.com/iat2015/contentDefinition/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:types="http://www.br-automation.com/iat2015/widgetTypes/v2">
+  <Widgets>
+    <Widget xsi:type="widgets.brease.OnlineChartHDA" id="OnlineChartHDA1" top="0" left="0" width="1078" height="700" zIndex="0">
+      <Properties>
+        <yAxis>
+          <Element id="yAxis1" />
+        </yAxis>
+        <xAxis>
+          <Element id="xAxis1" />
+        </xAxis>
+        <graph>
+          <Element id="graph1" yAxisReference="yAxis1" />
+        </graph>
+        <cursor>
+          <Element id="cursor1" />
+        </cursor>
+      </Properties>
+    </Widget>
+    <Widget xsi:type="widgets.brease.BasicSlider" id="BasicSliderGraphValue" top="10" left="1070" width="50" height="640" zIndex="1" orientation="BottomToTop" thumbSize="40px" />
+  </Widgets>
+</Content>

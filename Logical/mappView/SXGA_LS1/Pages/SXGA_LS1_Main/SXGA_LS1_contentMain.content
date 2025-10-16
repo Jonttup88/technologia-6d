@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Content id="SXGA_LS1_contentMain" guid="6cbbf16c-17fb-4f22-a4e7-cffc702fe6ff" height="964" width="1170" xmlns="http://www.br-automation.com/iat2015/contentDefinition/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Widgets>
+    <Widget xsi:type="widgets.brease.GroupBox" id="GroupBox1" top="10" left="10" width="325" height="280" zIndex="0" text="PRODUCTION">
+      <Widgets>
+        <Widget xsi:type="widgets.brease.DonutChart" id="DonutChart1" top="1" left="32" width="238" height="238" zIndex="0">
+          <Widgets>
+            <Widget xsi:type="widgets.brease.DonutChartItem" id="DonutChartItem1" top="43" left="114" zIndex="0" text="DonutChartItem1" value="100" style="orange" />
+            <Widget xsi:type="widgets.brease.DonutChartItem" id="DonutChartItem2" top="15" left="167" zIndex="1" text="DonutChartItem2" style="gold" />
+          </Widgets>
+        </Widget>
+      </Widgets>
+    </Widget>
+    <Widget xsi:type="widgets.brease.GroupBox" id="GroupBox2" top="10" left="350" width="810" height="610" zIndex="1" text="OVERVIEW">
+      <Widgets>
+        <Widget xsi:type="widgets.mapp6D.Assembly6D" id="Assembly6D1" top="32" left="28" width="632" height="488" zIndex="0" mpLink="mapp6D::gAssembly6D_1" showAdditionalShuttleInfo="false" />
+      </Widgets>
+    </Widget>
+    <Widget xsi:type="widgets.brease.GroupBox" id="GroupBox3" top="300" left="10" width="325" height="105" zIndex="2" text="PRODUCTS">
+      <Widgets>
+        <Widget xsi:type="widgets.brease.NumericOutput" id="NumericOutputProducts" top="2" left="69" width="183" height="61" zIndex="0" format="{'metric':{'decimalPlaces':0,'minimumIntegerDigits':1},'imperial':{'decimalPlaces':0,'minimumIntegerDigits':1},'imperial-us':{'decimalPlaces':0,'minimumIntegerDigits':1}}" textAlign="center" fontSize="48px" />
+      </Widgets>
+    </Widget>
+  </Widgets>
+</Content>

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Content id="SXGA_LS1_contentAlarmList" guid="b0f3d7af-bfa4-480a-b46c-8a5ee0b05092" height="924" width="1160" xmlns="http://www.br-automation.com/iat2015/contentDefinition/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Widgets>
+    <Widget xsi:type="widgets.brease.AlarmList" id="AlarmList1" top="0" left="0" width="1160" height="840" zIndex="0" itemsPerPage="15">
+      <Widgets>
+        <Widget xsi:type="widgets.brease.AlarmListItem" id="AlarmListItem1" width="300" zIndex="0" columnType="timestamp" text="Time" />
+        <Widget xsi:type="widgets.brease.AlarmListItem" id="AlarmListItem2" width="770" zIndex="1" text="Message" />
+        <Widget xsi:type="widgets.brease.AlarmListItem" id="AlarmListItem3" width="90" zIndex="2" columnType="state" text="State" />
+      </Widgets>
+    </Widget>
+    <Widget xsi:type="widgets.brease.Button" id="ButtonAcknowledge" top="860" left="16" height="50" zIndex="1" image="Media/Img_SXGA_LS1/Alarm/Acknowledge.svg" imageHeight="50" imageWidth="50" imageColor="rgba(0, 192, 0, 1)" />
+    <Widget xsi:type="widgets.brease.Button" id="ButtonAcknowledgeAll" top="860" left="122" height="50" zIndex="2" image="Media/Img_SXGA_LS1/Alarm/AcknowledgeAll.svg" imageHeight="60" imageWidth="60" imageColor="rgba(255, 0, 0, 1)" />
+  </Widgets>
+</Content>

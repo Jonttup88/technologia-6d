@@ -1,0 +1,8 @@
+@import "mixins.scss";
+@mixin widgets_mapp6D_OpcUaNodeBindingEventManager_base {
+
+}
+
+.widgets_mapp6D_OpcUaNodeBindingEventManager_style_default {
+@include widgets_mapp6D_OpcUaNodeBindingEventManager_base
+}
