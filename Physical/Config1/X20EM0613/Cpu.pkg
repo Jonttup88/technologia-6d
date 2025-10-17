@@ -13,7 +13,6 @@
     <Object Type="Package">mappControl</Object>
     <Object Type="Package">mappMotion</Object>
     <Object Type="Package">mapp6D</Object>
-    <Object Type="Package">brfiServices</Object>
     <Object Type="Package">mappServices</Object>
     <Object Type="Package">mappSafety</Object>
     <Object Type="Package">mappView</Object>

@@ -66,4 +66,15 @@ VAR
 	MC_BR_AsmGetZone_Acp6D_0 : MC_BR_AsmGetZone_Acp6D;
 	zoneState : INT;
 	MC_BR_ZoneOverride_Acp6D_0 : MC_BR_ZoneOverride_Acp6D;
+	gameActive : BOOL;
+	gameState : INT;
+	gameTest : BOOL;
+	z : INT;
+	done : BOOL;
+	calibrate : BOOL;
+	R_TRIG_1 : R_TRIG;
+	jkiTestPayload : BOOL;
+	weightOffsets : ARRAY[0..7] OF Weight_data_typ;
+	cubeID : UINT;
+	tempDone : BOOL;
 END_VAR

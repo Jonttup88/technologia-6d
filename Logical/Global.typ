@@ -29,9 +29,9 @@ TYPE
 		Ref : Mc6DShuttleType; (*Reference to the shuttle*)
 	END_STRUCT;
 	gRobotTyp : 	STRUCT 
-		AcoposResetDone : BOOL;
-		AcoposStart : BOOL;
-		AcoposEnd : BOOL;
+		liftCup : BOOL;
+		placeCup : BOOL;
+		moveRobotHome : BOOL;
 		AcoposWin : BOOL;
 		CupCoordinate : gRobotParTyp;
 		CupSelection : gRobotParTyp;
@@ -42,9 +42,7 @@ TYPE
 		Y : REAL;
 	END_STRUCT;
 	gRobotStatusTyp : 	STRUCT 
-		Ready : BOOL;
-		StartPhaseOK : BOOL;
-		GamePhaseOK : BOOL;
-		EndPhaseOK : BOOL;
+		phaseOK : BOOL;
+		phaseNum : REAL;
 	END_STRUCT;
 END_TYPE
