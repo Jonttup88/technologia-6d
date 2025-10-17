@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?AutomationStudio FileVersion="6.0"?>
+<OpcUaSource FileVersion="10">
+  <Aliases>
+    <ACLAliases />
+    <EURangeViolationAliases />
+    <EURangesAliases />
+    <EngineeringUnitAliases />
+  </Aliases>
+  <Module Name="&lt;Default&gt;">
+    <GlobalVariables Name="Global Variables">
+      <Variable Name="gShuttles" RecursiveEnable="2" MinimumSamplingInterval="Timer4" />
+      <Variable Name="gAssembly6D_1" RecursiveEnable="2" />
+    </GlobalVariables>
+  </Module>
+</OpcUaSource>
