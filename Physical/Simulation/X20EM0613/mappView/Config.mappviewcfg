@@ -6,17 +6,17 @@
       <Selector ID="WebServerProtocol" Value="1">
         <Property ID="WebServerPort" Value="81" />
       </Selector>
-      <Property ID="MaxClientConnections" Value="1" />
+      <Property ID="MaxClientConnections" Value="100" />
       <Property ID="MpUserXUserPreferences" Value="FALSE" />
-      <Selector ID="StartupUser" Value="StartupUserAnonymousToken" />
+      <Selector ID="StartupUser" Value="StartupUserForcedLogin" />
       <Group ID="TcpProxyConf">
         <Selector ID="InsecureMode" Value="1" />
       </Group>
-      <Group ID="FileDeviceWhitelist">
-        <Property ID="FileDeviceName[1]" Value="6DData" />
-      </Group>
+      <Group ID="FileDeviceWhitelist" />
       <Group ID="DiagnosticPageConf">
-        <Selector ID="DiagnosticPageSelection" Value="1" />
+        <Selector ID="DiagnosticPageSelection" Value="2">
+          <Property ID="DiagnosticPageRole[1]" Value="Everyone" />
+        </Selector>
       </Group>
       <Selector ID="Deployment" Value="DeploymentPLC" />
     </Group>
@@ -25,7 +25,7 @@
       <Group ID="SamplingRates">
         <Property ID="default" Value="200" />
         <Property ID="slow" Value="1000" />
-        <Property ID="fast" Value="100" />
+        <Property ID="fast" Value="1" />
       </Group>
       <Property ID="InitValueChangedEvents" Value="TRUE" />
     </Group>
@@ -35,14 +35,12 @@
         <Property ID="cachingSlots" Value="200" />
         <Property ID="preserveOldValues" Value="TRUE" />
       </Group>
-      <Property ID="defaultVisu" Value="SXGA_LS1" />
+      <Property ID="defaultVisu" Value="visu" />
       <Group ID="Widget">
         <Selector ID="renderingPolicy" Value="1" />
-        <Selector ID="securityPolicy" Value="2" />
+        <Selector ID="securityPolicy" Value="1" />
       </Group>
-      <Selector ID="EventbindingExecution" Value="2">
-        <Selector ID="enableJsDebugging" Value="1" />
-      </Selector>
+      <Selector ID="EventbindingExecution" Value="1" />
     </Group>
   </Element>
 </Configuration>

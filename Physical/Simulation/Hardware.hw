@@ -46,11 +46,13 @@
     </Connector>
     <Parameter ID="ConfigurationID" Value="Teknologia25_Config1" />
     <Parameter ID="Simulation" Value="1" />
+    <Parameter ID="RemanentGlobalPvSize" Value="1024" />
     <Parameter ID="TimerDeviceType" Value="EPLX2X" />
     <Parameter ID="TimerDevice" Value="X20EM0613.IF3" />
     <Parameter ID="TaskClassIdleTime" Value="2000" />
     <Parameter ID="Cyclic1Duration" Value="2000" />
     <Parameter ID="Cyclic1Tolerance" Value="0" />
+    <Parameter ID="Cyclic4Duration" Value="10000" />
     <Group ID="FileDevice1" />
     <Parameter ID="FileDeviceName1" Value="6DData" />
     <Parameter ID="FileDevicePath1" Value="USER_PATH" />

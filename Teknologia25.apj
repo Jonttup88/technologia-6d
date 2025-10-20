@@ -7,7 +7,7 @@
   <Motion RestartAcoposParameter="true" RestartInitParameter="true" />
   <Variables DefaultInitValue="0" DefaultRetain="false" DefaultVolatile="true" />
   <TechnologyPackages>
-    <mapp6D McAcp6DSys="3.4.0" Version="3.4.0" />
+    <mapp6D McAcp6DSys="3.4.1" Version="3.4.1" />
     <mappView Version="6.3.2" />
     <OpcUaCs Version="6.0.0" />
   </TechnologyPackages>

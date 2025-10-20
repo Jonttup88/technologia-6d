@@ -44,7 +44,7 @@ PROGRAM _CYCLIC
 			END_IF
 
 		MAIN_DISABLED:
-			IF gMain.Cmd.Power THEN
+			IF gMain1.Cmd.Power THEN
 				MainState := MAIN_POWER_ON;
 			END_IF
 
@@ -62,7 +62,7 @@ PROGRAM _CYCLIC
 			AssemblyGetShuttle.Enable := TRUE;
 
 			IF AssemblyGetShuttle.Valid THEN
-				gMain.Status.ShuttlesPresent := AssemblyGetShuttle.TotalCount;
+				gMain1.Status.ShuttlesPresent := AssemblyGetShuttle.TotalCount;
 
 				IF (AssemblyGetShuttle.TotalCount = 0) THEN
 					AssemblyGetShuttle.Enable := FALSE;
@@ -91,12 +91,12 @@ PROGRAM _CYCLIC
 			MainState := MAIN_GET_SHUTTLE;
 
 		MAIN_READY:
-			IF NOT(gMain.Cmd.Power) THEN
+			IF NOT(gMain1.Cmd.Power) THEN
 				MainState := MAIN_POWER_OFF;
 			END_IF
 
 		MAIN_ERROR:
-			IF gMain.Cmd.ErrorReset THEN
+			IF gMain1.Cmd.ErrorReset THEN
 				AssemblyReset.Execute := FALSE;
 				MainState := MAIN_RESET;
 			END_IF
@@ -105,7 +105,7 @@ PROGRAM _CYCLIC
 			AssemblyReset.Execute := TRUE;
 
 			IF AssemblyReset.Done THEN
-				gMain.Cmd.ErrorReset := FALSE;
+				gMain1.Cmd.ErrorReset := FALSE;
 				AssemblyReset.Execute := FALSE;
 				MainState := MAIN_POWER_OFF;
 				//Commands which caused error are not reset yet
@@ -114,13 +114,13 @@ PROGRAM _CYCLIC
 				AssemblyGetShuttle.Enable := FALSE;
 				AssemblyGetShuttle.Next := FALSE;
 			ELSIF AssemblyReset.Error OR AssemblyReset.CommandAborted THEN
-				gMain.Cmd.ErrorReset := FALSE;
+				gMain1.Cmd.ErrorReset := FALSE;
 				MainState := MAIN_ERROR;
 			END_IF
 	END_CASE
 	
 	
-	IF gMain.Status.ShuttlesPresent > 0 THEN
+	IF gMain1.Status.ShuttlesPresent > 0 THEN
 	
 		FOR i := 0 TO 7 DO 
 		
@@ -189,8 +189,8 @@ PROGRAM _CYCLIC
 		MoveToStartPosition;
 		MC_BR_MoveInPlaneAsync_Acp6D_0.Assembly := ADR(gAssembly6D_1);
 		MC_BR_MoveInPlaneAsync_Acp6D_0.Execute := TRUE;
-		MC_BR_MoveInPlaneAsync_Acp6D_0.Parameters.Velocity := gMain.Par.Velocity;
-		MC_BR_MoveInPlaneAsync_Acp6D_0.Parameters.Acceleration := gMain.Par.Acceleration;
+		MC_BR_MoveInPlaneAsync_Acp6D_0.Parameters.Velocity := gMain1.Par.Velocity;
+		MC_BR_MoveInPlaneAsync_Acp6D_0.Parameters.Acceleration := gMain1.Par.Acceleration;
 	END_IF;
 	
 	MC_BR_MoveInPlaneAsync_Acp6D_0;
@@ -662,7 +662,7 @@ PROGRAM _CYCLIC
 	
 
 	//Provide the assembly status globally
-	gMain.Status.AssemblyState := AssemblyReadInfo.AssemblyInfo.AssemblyState;
+	gMain1.Status.AssemblyState := AssemblyReadInfo.AssemblyInfo.AssemblyState;
 	//Call all used function blocks
 	AssemblyReadInfo();
 	AssemblyPowerOn();

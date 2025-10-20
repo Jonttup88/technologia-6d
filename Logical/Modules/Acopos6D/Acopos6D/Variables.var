@@ -1,0 +1,139 @@
+VAR
+	NettimeLastCycle_us : DINT; (*Old nettime used to calculate Powerlink cycle time*)
+	TON_Wait : TON;
+	PowerlinkCycle_us : DINT;
+	Wait : BOOL;
+	TriggerTimeDelta_us : DINT; (*Delta time in microseconds to the next trigger*)
+	TriggerPosDelta : LREAL; (*Delta position in units to the next trigger*)
+	AxisPositionNow : LREAL;
+	steelSheetFlyingHeight : REAL := 0.003;
+	ABBRobot : ABB_typ;
+	cm : REFERENCE TO brdkCM;
+	ConveyorMovementWorkstation1Time : REAL := 1.5;
+	ConveyorMovementWorkstation2Time : REAL := 4;
+	createShGroup : USINT;
+END_VAR
+VAR RETAIN
+	danfossWorkStation1NUMRotations : USINT := 5;
+	danfossWorkStation1Timer : USINT := 8;
+	danfossWorkStation2NUMRotations : USINT := 5;
+	danfossWorkStation2Timer : USINT := 8;
+END_VAR
+VAR
+	em : brdkEM;
+	enableButtons : BOOL;
+	fbPayload : REAL;
+	flaskProgramAcceleration : REAL := 0.2;
+	flaskProgramVelocity : REAL := 2;
+	stainlessAcceleration : REAL := 1;
+	stainlessVelocity : REAL := 0.2;
+	stainlessWaitTime : TIME := T#250ms;
+	levitationVelocity : REAL := 0.003;
+	gameBrain : gameMemory_typ;
+	gShuttles : ARRAY[0..NUM_SHUTTLES] OF shuttle_typ;
+	i : USINT;
+	j : USINT;
+	k : USINT;
+	localCurrentNumShuttles : UINT;
+	MARGIN : REAL := 0.0059;
+	macroCreater : USINT;
+	oldNetTime : DINT;
+	rotCnt : UDINT;
+	deltaRad : REAL;
+	correctedPosRz : REAL;
+	skipRot : UDINT := 4;
+	triggerPointRz : REAL := 1;
+	maWindowLen : UINT := 5000;
+	movingAverage : MTFilterMovingAverage;
+	rzRad : REAL;
+	rzSpeed : REAL;
+	rzPosOld : REAL;
+	MC_BR_RotaryMotion_Acp6D_0 : MC_BR_RotaryMotion_Acp6D;
+	MC_BR_ShStop_Acp6D_0 : MC_BR_ShStop_Acp6D;
+	MC_BR_AsmLevitation_Acp6D_0 : MC_BR_AsmLevitation_Acp6D;
+	MC_BR_AsmGetInfo_Acp6D_0 : MC_BR_AsmGetInfo_Acp6D;
+	MC_BR_MacroRun_Acp6D_0 : MC_BR_MacroRun_Acp6D;
+	MC_BR_MacroSave_Acp6D_0 : MC_BR_MacroSave_Acp6D;
+	MC_BR_SegBarrierCommand_Acp6D_0 : MC_BR_SegBarrierCommand_Acp6D;
+	MC_BR_MacroCreate_Acp6D_0 : MC_BR_MacroCreate_Acp6D;
+	MC_BR_AsmGetShuttle_Acp6D_0 : MC_BR_AsmGetShuttle_Acp6D;
+	MC_BR_ReadCyclicPosition_Acp6D_1 : MC_BR_ReadCyclicPosition_Acp6D;
+	MC_BR_ReadCyclicPosition_Acp6D_2 : MC_BR_ReadCyclicPosition_Acp6D;
+	MC_BR_ReadCyclicPosition_Acp6D_3 : MC_BR_ReadCyclicPosition_Acp6D;
+	MC_BR_ReadCyclicPosition_Acp6D_0 : MC_BR_ReadCyclicPosition_Acp6D;
+	MC_BR_AsmPowerOff_Acp6D_0 : MC_BR_AsmPowerOff_Acp6D;
+	MC_BR_AsmPowerOn_Acp6D_0 : MC_BR_AsmPowerOn_Acp6D;
+	MC_BR_AsmReadStatus_Acp6D_0 : MC_BR_AsmReadStatus_Acp6D;
+	MC_BR_AsmStop_Acp6D_0 : MC_BR_AsmStop_Acp6D;
+	MC_BR_Move6D_Acp6D_0 : MC_BR_Move6D_Acp6D;
+	MC_BR_MoveArc_Acp6D_0 : MC_BR_MoveArc_Acp6D;
+	MC_BR_MoveInPlaneAsync_Acp6D_0 : MC_BR_MoveInPlaneAsync_Acp6D;
+	MC_BR_MoveInPlane_Acp6D_0 : MC_BR_MoveInPlane_Acp6D;
+	MC_BR_MoveShortAxis_Acp6D_0 : ARRAY[0..3] OF MC_BR_MoveShortAxis_Acp6D;
+	MC_BR_MoveShortAxis_Acp6D_winner : MC_BR_MoveShortAxis_Acp6D;
+	MC_BR_ShGroupAddShuttle_Acp6D_0 : MC_BR_ShGroupAddShuttle_Acp6D;
+	MC_BR_ShGroupCoupleCtrl_Acp6D_0 : MC_BR_ShGroupCoupleCtrl_Acp6D;
+	MC_BR_ShGroupCreate_Acp6D_0 : MC_BR_ShGroupCreate_Acp6D;
+	MC_BR_ShGroupCreate_Acp6D_1 : MC_BR_ShGroupCreate_Acp6D;
+	MC_BR_ShGroupCreate_Acp6D_2 : MC_BR_ShGroupCreate_Acp6D;
+	MC_BR_ShGroupCreate_Acp6D_3 : MC_BR_ShGroupCreate_Acp6D;
+	MC_BR_ShGroupGetInfo_Acp6D_0 : MC_BR_ShGroupGetInfo_Acp6D;
+	MC_BR_ShLevitation_Acp6D_0 : MC_BR_ShLevitation_Acp6D;
+	MC_BR_AsmGetSegment_Acp6D_0 : MC_BR_AsmGetSegment_Acp6D;
+	MC_BR_SegPowerOn_Acp6D_0 : MC_BR_SegPowerOn_Acp6D;
+	MC_BR_SegPowerOff_Acp6D_0 : MC_BR_SegPowerOff_Acp6D;
+	MC_BR_RotaryMotionSpin_Acp6D_0 : MC_BR_RotaryMotionSpin_Acp6D;
+	MC_BR_ShReadInfo_Acp6D_0 : ARRAY[0..NUM_SHUTTLES] OF MC_BR_ShReadInfo_Acp6D;
+	MC_BR_AsmReset_Acp6D_0 : MC_BR_AsmReset_Acp6D;
+	modeSelectorString : STRING[80];
+	positionContainerTrakMode : ARRAY[0..3] OF shuttleStartup_typ;
+	positionContainerBoxProgram : ARRAY[0..3] OF shuttleStartup_typ;
+	positionContainerDemo_0 : ARRAY[0..3] OF shuttleStartup_typ;
+	positionContainerDialGauge : ARRAY[0..3] OF shuttleStartup_typ;
+	positionContainerFlaskProgram : ARRAY[0..3] OF shuttleStartup_typ;
+	positionContainerGameProgram : ARRAY[0..3] OF shuttleStartup_typ;
+	positionContainerLinkMovement : ARRAY[0..7] OF thisShuttleSetup;
+	positionContainerLoosingShuttles : ARRAY[0..2] OF shuttleStartup_typ;
+	positionContainerShuttleToConv : ARRAY[0..3] OF shuttleStartup_typ;
+	positionContainerVisionMovement : ARRAY[0..3] OF shuttleStartup_typ;
+	positionContainerWorkstationMov : ARRAY[0..3] OF shuttleStartup_typ;
+	trakMode : trakMode_typ;
+	positionDanfoss : ARRAY[0..3] OF shuttleStartup_typ;
+	positionContainerSteelSheet : ARRAY[0..3] OF shuttleStartup_typ;
+	positionContainerRotation : ARRAY[0..3] OF shuttleStartup_typ;
+	posotionContainerSunMovement : ARRAY[0..3] OF shuttleStartup_typ;
+	pShuttle : REFERENCE TO shuttle_typ;
+	pWorkStations : REFERENCE TO workStation_typ;
+	shGroupShuttle1_2 : UDINT;
+	shGroupShuttle1_4 : UDINT;
+	shGroupShuttle2_3 : UDINT;
+	shGroupShuttle3_4 : UDINT;
+	shuttle : USINT;
+	shuttlePayload : REAL;
+	shuttleToTakePictureOf : USINT;
+	tempCounter : USINT;
+	tempShuttleCnt : USINT;
+	tempShuttleCounter : USINT;
+	tempShuttleID : USINT;
+	tmpCnt : USINT;
+	TON_0 : TON;
+	TON_watchdog : TON;
+	visionFlipFlop : BOOL;
+	visionLightTON : TON;
+	watchPShuttle : {REDUND_UNREPLICABLE} USINT;
+	watchPWorkstation : USINT;
+	weightCalibration : REAL;
+END_VAR
+VAR RETAIN
+	weightProgramFlyingHight : REAL := 1.48;
+END_VAR
+VAR
+	WorkStation1MovementTimer : REAL := 1.5;
+	teachProgram : teachProgram_typ;
+	shuttleDeativatedLock : BOOL;
+	WorkStation2And3MovementTimer : REAL := 4;
+	deltaTimeUs : REAL;
+	sheetMoveDone : BOOL;
+	tempINT : INT;
+	correctionValue : REAL;
+END_VAR

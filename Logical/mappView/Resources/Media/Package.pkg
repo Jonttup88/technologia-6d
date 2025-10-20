@@ -2,6 +2,8 @@
 <?AutomationStudio FileVersion="4.9"?>
 <Package SubType="MediaPackage" PackageType="MediaPackage" xmlns="http://br-automation.co.at/AS/Package">
   <Objects>
-    <Object Type="Package" TransferedForTargetSourceCompare="true">Img_SXGA_LS1</Object>
+    <Object Type="File">BR_Logo_Tagline_below_Print_CMYK_BR_HD.png</Object>
+    <Object Type="File">bootlogo.png</Object>
+    <Object Type="Package">SymbolLib</Object>
   </Objects>
 </Package>
