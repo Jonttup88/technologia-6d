@@ -1,0 +1,74 @@
+
+TYPE
+	Acp6DActionsType : 	STRUCT 
+		task : Acp6DTaskActionsType; (*Task actions are not automatically reset*)
+		state : Acp6DStateActionsType; (*State actions are automatically reset whenever major task changes*)
+		substate : Acp6DSubstateActionsType; (*Substate actions are automatically reset whenever major or substate changes*)
+	END_STRUCT;
+	Acp6DFbType : 	STRUCT 
+		AssemblyReadInfo : MC_BR_AsmReadInfo_Acp6D;
+		AssemblyPowerOn : MC_BR_AsmPowerOn_Acp6D;
+		AssemblyPowerOff : MC_BR_AsmPowerOff_Acp6D;
+		AssemblyReset : MC_BR_AsmReset_Acp6D;
+		AssemblyGetShuttle : MC_BR_AsmGetShuttle_Acp6D;
+		MoveInPlaneAsync : MC_BR_MoveInPlaneAsync_Acp6D;
+		TON_delay : TON;
+		Move6D : ARRAY[0..gMAX_INDEX_SHUTTLE]OF MC_BR_Move6D_Acp6D;
+		ShGetInfo : ARRAY[0..gMAX_INDEX_SHUTTLE]OF MC_BR_ShGetInfo_Acp6D;
+		ReadCyclicForce : ARRAY[0..gMAX_INDEX_SHUTTLE]OF MC_BR_ReadCyclicForce_Acp6D;
+		ReadCyclicPosition : ARRAY[0..gMAX_INDEX_SHUTTLE]OF MC_BR_ReadCyclicPosition_Acp6D;
+		MoveCyclicPosition : ARRAY[0..gMAX_INDEX_SHUTTLE]OF MC_BR_MoveCyclicPosition_Acp6D;
+		Move6DQueue : ARRAY[0..gMAX_INDEX_SHUTTLE]OF brfiMove6DQueue;
+		MoveXYQueue : ARRAY[0..gMAX_INDEX_SHUTTLE]OF brfiMoveXYQueue;
+	END_STRUCT;
+	Acp6DHmiType : 	STRUCT 
+		isRunning : BOOL;
+	END_STRUCT;
+	Acp6DLocalType : 	STRUCT 
+		lastState : DINT;
+		lastSubState : DINT;
+		actions : Acp6DActionsType;
+		allValid : BOOL;
+		measurement_index : DINT;
+		targetPos : ARRAY[0..gMAX_INDEX_SHUTTLE]OF McAcp6DShPositionType;
+		shuttleOrder : ARRAY[0..gMAX_INDEX_SHUTTLE]OF DINT;
+		Fz_highest : REAL;
+		executing : BOOL;
+	END_STRUCT;
+	Acp6DTaskActionsType : 	STRUCT 
+		dummy : BOOL;
+	END_STRUCT;
+	Acp6DStateActionsType : 	STRUCT 
+		assemblyGetShuttles : BOOL;
+		assemblyGetNextShuttle : BOOL;
+		cyclicModeRequest : Acp6DCyclicModeEnum;
+	END_STRUCT;
+	Acp6DSubstateActionsType : 	STRUCT 
+		assemblyPowerOff : BOOL;
+		assemblyPowerOn : BOOL;
+		assemblyReset : BOOL;
+		moveInPlaneAsync : BOOL;
+		delay : BOOL;
+	END_STRUCT;
+	Acp6DTablePositionType : 	STRUCT 
+		home : ARRAY[0..gMAX_INDEX_SHUTTLE]OF McAcp6DShPositionType;
+		user : ARRAY[0..gMAX_INDEX_SHUTTLE]OF McAcp6DShPositionType;
+		pickup : ARRAY[0..gMAX_INDEX_SHUTTLE]OF McAcp6DShPositionType;
+		shuffle : ARRAY[0..gMAX_INDEX_SHUTTLE]OF McAcp6DShPositionType;
+		clockface : ARRAY[0..gMAX_INDEX_SHUTTLE]OF McAcp6DShPositionType;
+		dance : ARRAY[0..gMAX_INDEX_SHUTTLE]OF McAcp6DShPositionType;
+	END_STRUCT;
+	Acp6DStatusType : 	STRUCT 
+		cyclicChannelsReleased : BOOL;
+		cyclicPositionsValid : BOOL;
+		cyclicForcesValid : BOOL;
+		cyclicControlActive : BOOL;
+		Move6DQueue : Acp6DStatusFbType;
+		MoveXYQueue : Acp6DStatusFbType;
+	END_STRUCT;
+	Acp6DStatusFbType : 	STRUCT 
+		AllDone : BOOL;
+		Error : BOOL;
+		LastErrorID : DINT;
+	END_STRUCT;
+END_TYPE

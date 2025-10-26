@@ -1,0 +1,6 @@
+VAR
+  task : REFERENCE TO MainType;
+  local : MainLocalType;
+    fb : MainFbType;
+  hmi : MainHmiType;
+END_VAR

@@ -1,0 +1,20 @@
+VAR
+	task : REFERENCE TO Acp6DType;
+	local : Acp6DLocalType;
+	fb : Acp6DFbType;
+	hmi : Acp6DHmiType;
+	i : DINT;
+	x : DINT;
+	no_command : Acp6DInputCommandType;
+	shuttle : REFERENCE TO Acp6dShuttleType;
+	targetList6D : ARRAY[0..gMAX_INDEX_TARGETS] OF brfiMove6DQueueTargetType;
+	targetListXY : ARRAY[0..gMAX_INDEX_TARGETS] OF brfiMoveXYQueueTargetType;
+	group_status : Acp6DStatusType;
+END_VAR
+(**)
+(*ACOPOS 6D*)
+VAR
+	shuttles : ARRAY[0..gMAX_INDEX_SHUTTLE] OF Acp6dShuttleType; (*Global shuttle list*)
+	shuttlesPos : ARRAY[0..gMAX_INDEX_SHUTTLE] OF McAcp6DShPositionType;
+	positions : Acp6DTablePositionType;
+END_VAR

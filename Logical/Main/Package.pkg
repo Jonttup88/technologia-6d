@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Package xmlns="http://br-automation.co.at/AS/Package" Version="1.00.0">
+  <Objects>
+  <Object Type="File">global.var</Object><Object Type="File">global.typ</Object><Object Type="Package">Main</Object></Objects>
+</Package>

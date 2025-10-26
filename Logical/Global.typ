@@ -1,25 +1,6 @@
 (*Main control datatype*)
 
-TYPE
-	gMainType : 	STRUCT  (*Main control variable datatype*)
-		Cmd : gMainCmdType; (*Main commands*)
-		Par : gMainParType; (*Main parameter*)
-		Status : gMainStatusType; (*Main status*)
-	END_STRUCT;
-	gMainCmdType : 	STRUCT  (*Main commands type*)
-		Power : BOOL; (*Power on the system*)
-		Recover : BOOL; (* Recover the system*)
-		ErrorReset : BOOL; (*Reset any active error*)
-	END_STRUCT;
-	gMainParType : 	STRUCT  (*Main parameter type*)
-		Velocity : REAL;
-		Acceleration : REAL;
-	END_STRUCT;
-	gMainStatusType : 	STRUCT  (*Main status type*)
-		AssemblyState : McAcp6dPLCopenStateEnum; (*Assembly state*)
-		ShuttlesPresent : UINT; (*Number of shuttles present on the assembly*)
-	END_STRUCT;
-END_TYPE
+
 
 (*Global shuttle array datatype*)
 

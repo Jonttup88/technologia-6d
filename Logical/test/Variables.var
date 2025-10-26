@@ -1,0 +1,19 @@
+VAR
+	shuttles : ARRAY[0..gMAX_INDEX_SHUTTLE] OF Acp6dShuttleType; (*Global shuttle list*)
+	count : DINT;
+	Y0 : REAL;
+	X0 : REAL;
+	Y1 : REAL;
+	X1 : REAL;
+	i : USINT;
+	selection : ARRAY[0..gMAX_INDEX_SHUTTLE] OF brfiShuttleSelectionType;
+END_VAR
+(*Insert your comment here.*)
+VAR
+	point1 : jpCoordinate;
+	point2 : jpCoordinate;
+	point3 : jpCoordinate;
+	line1 : jpLine;
+	line2 : jpLine;
+	slope : REAL;
+END_VAR
