@@ -14,12 +14,11 @@ TYPE
 		MoveInPlaneAsync : MC_BR_MoveInPlaneAsync_Acp6D;
 		TON_delay : TON;
 		Move6D : ARRAY[0..gMAX_INDEX_SHUTTLE]OF MC_BR_Move6D_Acp6D;
-		ShGetInfo : ARRAY[0..gMAX_INDEX_SHUTTLE]OF MC_BR_ShGetInfo_Acp6D;
 		ReadCyclicForce : ARRAY[0..gMAX_INDEX_SHUTTLE]OF MC_BR_ReadCyclicForce_Acp6D;
 		ReadCyclicPosition : ARRAY[0..gMAX_INDEX_SHUTTLE]OF MC_BR_ReadCyclicPosition_Acp6D;
 		MoveCyclicPosition : ARRAY[0..gMAX_INDEX_SHUTTLE]OF MC_BR_MoveCyclicPosition_Acp6D;
-		Move6DQueue : ARRAY[0..gMAX_INDEX_SHUTTLE]OF brfiMove6DQueue;
-		MoveXYQueue : ARRAY[0..gMAX_INDEX_SHUTTLE]OF brfiMoveXYQueue;
+		MoveQueue : ARRAY[0..gMAX_INDEX_SHUTTLE]OF brfi6DMoveQueue;
+		ShGetInfo : MC_BR_ShGetInfo_Acp6D;
 	END_STRUCT;
 	Acp6DHmiType : 	STRUCT 
 		isRunning : BOOL;
@@ -34,6 +33,7 @@ TYPE
 		shuttleOrder : ARRAY[0..gMAX_INDEX_SHUTTLE]OF DINT;
 		Fz_highest : REAL;
 		executing : BOOL;
+		selectionList : ARRAY[0..gMAX_INDEX_SHUTTLE]OF brfiShuttleSelectionType;
 	END_STRUCT;
 	Acp6DTaskActionsType : 	STRUCT 
 		dummy : BOOL;
@@ -53,22 +53,52 @@ TYPE
 	Acp6DTablePositionType : 	STRUCT 
 		home : ARRAY[0..gMAX_INDEX_SHUTTLE]OF McAcp6DShPositionType;
 		user : ARRAY[0..gMAX_INDEX_SHUTTLE]OF McAcp6DShPositionType;
+		side : ARRAY[0..gMAX_INDEX_SHUTTLE]OF McAcp6DShPositionType;
 		pickup : ARRAY[0..gMAX_INDEX_SHUTTLE]OF McAcp6DShPositionType;
 		shuffle : ARRAY[0..gMAX_INDEX_SHUTTLE]OF McAcp6DShPositionType;
 		clockface : ARRAY[0..gMAX_INDEX_SHUTTLE]OF McAcp6DShPositionType;
 		dance : ARRAY[0..gMAX_INDEX_SHUTTLE]OF McAcp6DShPositionType;
 	END_STRUCT;
-	Acp6DStatusType : 	STRUCT 
-		cyclicChannelsReleased : BOOL;
-		cyclicPositionsValid : BOOL;
-		cyclicForcesValid : BOOL;
-		cyclicControlActive : BOOL;
-		Move6DQueue : Acp6DStatusFbType;
-		MoveXYQueue : Acp6DStatusFbType;
+END_TYPE
+
+(**)
+
+TYPE
+	Acp6DCyclicChannelsType : 	STRUCT 
+		mode : Acp6DCyclicModeEnum;
+		allChannelsReleased : BOOL;
+		allPositionsValid : BOOL;
+		allForceValuesValid : BOOL;
+		allControlReady : BOOL;
 	END_STRUCT;
-	Acp6DStatusFbType : 	STRUCT 
-		AllDone : BOOL;
-		Error : BOOL;
-		LastErrorID : DINT;
+	Acp6DCyclicModeEnum : 
+		(
+		a6dCYCLIC_DISABLED := -1,
+		a6dCYCLIC_READ_POSITION,
+		a6dCYCLIC_READ_FORCE,
+		a6dCYCLIC_MOVE_POSITION,
+		a6dCYCLIC_RELEASE_CHANNELS
+		);
+END_TYPE
+
+(**)
+
+TYPE
+	Acp6DMoveQueueStatusType : 	STRUCT 
+		executing : BOOL;
+		allDone : BOOL;
+		error : BOOL;
+		errorID : DINT;
+	END_STRUCT;
+END_TYPE
+
+(**)
+
+TYPE
+	Acp6DShuttleStatusPollType : 	STRUCT 
+		state : DINT;
+		index : DINT;
+		allValid : BOOL;
+		allIdle : BOOL;
 	END_STRUCT;
 END_TYPE

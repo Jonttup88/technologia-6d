@@ -70,6 +70,23 @@ FUNCTION brfiShuttleSelect
 	
 END_FUNCTION
 
+FUNCTION brfiShuttleSelectClosest
+	
+	dist_min := 1000000;
+	
+	FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
+		dist := SQRT(EXPT(X - Shuttles[i].position.value.X, 2) + EXPT(Y - Shuttles[i].position.value.Y, 2));
+		
+		IF  dist < dist_min THEN
+			dist_min := dist;
+	  		index_min := i;
+		END_IF;
+	END_FOR;
+	
+	brfiShuttleSelectClosest := index_min;
+	
+END_FUNCTION
+
 
 FUNCTION brfiSortCompare
 	// Comparison function for two pairs (A, B)
@@ -107,6 +124,18 @@ FUNCTION brfiSortCompare
 		END_IF;  
 	END_IF;
 		
+END_FUNCTION
+
+FUNCTION brfiToRAD
+	
+	brfiToRAD := degrees * brmPI / 180.0;
+	  
+END_FUNCTION
+
+FUNCTION brfiToDEG
+	
+	brfiToDEG := radians / brmPI * 180.0;
+	  
 END_FUNCTION
 
 

@@ -7,102 +7,95 @@ TYPE
 	END_STRUCT;
 END_TYPE
 
-(*----- brfiMove6DQueue -----*)
+(**)
+(*----- brfi6DMoveQueue -----*)
 
 TYPE
-	brfiMove6DQueueStateEnum : 
+	brfi6DMoveQueueStateEnum : 
 		(
-		brfiMOVE6DQUEUE_DISABLED,
-		brfiMOVE6DQUEUE_RUN,
-		brfiMOVE6DQUEUE_DONE,
-		brfiMOVE6DQUEUE_ERROR
+		brfi6DMOVEQUEUE_DISABLED,
+		brfi6DMOVEQUEUE_RUN,
+		brfi6DMOVEQUEUE_DONE,
+		brfi6DMOVEQUEUE_ERROR
 		);
-	brfiMove6DQueueIrnalType : 	STRUCT 
+	brfi6DMoveQueueFbType : 	STRUCT 
+		ShGetInfo : MC_BR_ShGetInfo_Acp6D;
+		MoveInPlane : MC_BR_MoveInPlane_Acp6D;
+		Move6D : MC_BR_Move6D_Acp6D;
+		MoveArc : MC_BR_MoveArc_Acp6D;
+		ShWaitTime : MC_BR_ShWaitTime_Acp6D;
+		RotaryMotion : MC_BR_RotaryMotion_Acp6D;
+		ShLevitation : MC_BR_ShLevitation_Acp6D;
+		RotaryMotionSpin : MC_BR_RotaryMotionSpin_Acp6D;
+	END_STRUCT;
+	brfi6DMoveQueueIrnalType : 	STRUCT 
 		initialized : BOOL;
-		actions : brfiMove6DQueueActionsType;
-		lastState : brfiMove6DQueueStateEnum;
+		onStateEntry : BOOL;
+		lastState : brfi6DMoveQueueStateEnum;
 		lastSubState : DINT;
 		i : DINT;
 		position : McAcp6DShPositionType;
-	END_STRUCT;
-	brfiMove6DQueueActionsType : 	STRUCT 
-		ready : BOOL;
-		executeMove : BOOL;
-		executeReadPosition : BOOL;
-		error : BOOL;
-	END_STRUCT;
-	brfiMove6DQueueTargetType : 	STRUCT 
-		axisMask : USINT;
-		x : REAL;
-		y : REAL;
-		z : REAL;
-		Rx : REAL;
-		Ry : REAL;
-		Rz : REAL;
-		velocity_xy : REAL;
-		velocity_short : REAL;
-		acceleration : REAL;
-		mode : brfiMove6DQueueModeEnum;
-	END_STRUCT;
-	brfiMove6DQueueParamType : 	STRUCT 
-		velocity_xy : REAL;
-		velocity_short : REAL;
-		acceleration : REAL;
-	END_STRUCT;
-	brfiMove6DQueueModeEnum : 
-		(
-		brfiMOVE6D_ABSOLUTE,
-		brfiMOVE6D_RELATIVE
-		);
-END_TYPE
-
-(**)
-(*----- brfiMoveXYQueue -----*)
-
-TYPE
-	brfiMoveXYQueueStateEnum : 
-		(
-		brfiMOVEXYQUEUE_DISABLED,
-		brfiMOVEXYQUEUE_RUN,
-		brfiMOVEXYQUEUE_DONE,
-		brfiMOVEXYQUEUE_ERROR
-		);
-	brfiMoveXYQueueIrnalType : 	STRUCT 
-		initialized : BOOL;
-		actions : brfiMoveXYQueueActionsType;
-		lastState : brfiMoveXYQueueStateEnum;
-		lastSubState : DINT;
-		i : DINT;
-		position : McAcp6DInPlaneAxesType;
-	END_STRUCT;
-	brfiMoveXYQueueActionsType : 	STRUCT 
-		ready : BOOL;
-		executeMove : BOOL;
-		executeReadPosition : BOOL;
-		error : BOOL;
-	END_STRUCT;
-	brfiMoveXYQueueTargetType : 	STRUCT 
-		axisMask : USINT;
-		x : REAL;
-		y : REAL;
-		velocity : REAL;
-		acceleration : REAL;
-		mode : McAcp6DMoveModeEnum;
-		path : McAcp6DInPlanePathEnum;
+		Xc : REAL;
+		Yc : REAL;
+		dx : REAL;
+		dy : REAL;
 		radius : REAL;
+		angle : REAL;
 	END_STRUCT;
-	brfiMoveXYQueueParamType : 	STRUCT 
-		velocity : REAL;
+	brfi6DMoveQueueActionsType : 	STRUCT 
+		acknowledge : BOOL;
+		error : BOOL;
+		done : BOOL;
+		getInfo : BOOL;
+	END_STRUCT;
+	brfi6DMoveQueueExecuteType : 	STRUCT 
+		moveInPlane : BOOL;
+		move6D : BOOL;
+		moveArc : BOOL;
+		wait : BOOL;
+		moveRotary : BOOL;
+		levitate : BOOL;
+		spin : BOOL;
+		readInfo : BOOL;
+	END_STRUCT;
+	brfi6DMoveQueueCommandType : 	STRUCT 
+		mask : UINT;
+		inPlane : McAcp6DInPlaneParType;
+		inSpace : McAcp6DMove6DParType;
+		moveMode6D : McAcp6DMoveModeEnum;
+		waitTime : REAL;
+		rotary : McAcp6DRotaryMotionParType;
+		arc : McAcp6DArcParType;
+		levitation : McAcp6DLevitationParType;
+		spin : McAcp6DRotaryMotionSpinParType;
+	END_STRUCT;
+	brfi6DMoveQueueParamType : 	STRUCT 
+		velocity_xy : REAL;
+		velocity_short : REAL;
+		velocity_rotary : REAL;
 		acceleration : REAL;
+		acceleration_rotary : REAL;
 	END_STRUCT;
-	brfiMoveAxisSelectionEnum : 
+	brfi6DMoveCommandSelectionEnum : 
 		(
-		aX := 1,
-		aY := 2,
-		aZ := 4,
-		aRx := 8,
-		aRy := 16,
-		aRz := 32
+		sX := 1,
+		sY := 2,
+		sZ := 4,
+		sRx := 8,
+		sRy := 16,
+		sRz := 32,
+		sArc := 64,
+		sRotary := 128,
+		sWait := 256,
+		sLevitate := 512,
+		sSpin := 1024,
+		sUpdatePosition := 2048
+		);
+	brfi6DMoveCommandPathEnum : 
+		(
+		pathDIRECT,
+		pathX_Y,
+		pathY_X
 		);
 END_TYPE
 
@@ -113,6 +106,7 @@ TYPE
 		ID : UINT; (*ID of the shuttle*)
 		Ref : Mc6DShuttleType; (*Reference to the shuttle*)
 		index : DINT; (*ID of the shuttle*)
+		status : Acp6dShuttleStatusType; (*Reference to the shuttle*)
 		position : Acp6dShuttlePositionType;
 		force : Acp6dShuttleForceType;
 		command : Acp6dShuttleCmdType;
@@ -120,9 +114,7 @@ TYPE
 	END_STRUCT;
 	Acp6dShuttleCmdType : 	STRUCT  (*Global shuttle list datatype*)
 		move6D : BOOL; (*ID of the shuttle*)
-		move6DQueue : BOOL; (*ID of the shuttle*)
-		moveXYQueue : BOOL; (*ID of the shuttle*)
-		updateInfo : BOOL; (*ID of the shuttle*)
+		moveQueue : BOOL; (*ID of the shuttle*)
 	END_STRUCT;
 	Acp6dShuttlePositionType : 	STRUCT  (*Global shuttle list datatype*)
 		isValid : BOOL; (*ID of the shuttle*)
@@ -134,5 +126,9 @@ TYPE
 		Z_avg : REAL;
 		Fz_baseline : REAL;
 		readings : ARRAY[0..gMAX_INDEX_MEASUREMENT]OF McAcp6DShForceType;
+	END_STRUCT;
+	Acp6dShuttleStatusType : 	STRUCT  (*Global shuttle list datatype*)
+		isValid : BOOL; (*ID of the shuttle*)
+		state : McAcp6DShStateEnum; (*ID of the shuttle*)
 	END_STRUCT;
 END_TYPE

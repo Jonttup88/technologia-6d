@@ -35,6 +35,20 @@ FUNCTION brfiShuttleSelect : DINT
 	END_VAR
 END_FUNCTION
 
+FUNCTION brfiShuttleSelectClosest : DINT
+	VAR_INPUT
+		Shuttles : REFERENCE TO ARRAY[0..gMAX_INDEX_SHUTTLE] OF Acp6dShuttleType;
+		X : REAL;
+		Y : REAL;
+	END_VAR
+	VAR
+		i : DINT;
+		dist : REAL;
+		dist_min : REAL;
+		index_min : DINT;
+	END_VAR
+END_FUNCTION
+
 FUNCTION brfiSortCompare : BOOL
 	VAR_INPUT
 		A : brfiShuttleSelectionType;
@@ -46,117 +60,59 @@ FUNCTION brfiSortCompare : BOOL
 		isEqualX : BOOL;
 	END_VAR
 END_FUNCTION
-(**)
 
-{REDUND_ERROR} {REDUND_UNREPLICABLE} FUNCTION_BLOCK brfiMove6DQueue (* *) (*$GROUP=User,$CAT=User,$GROUPICON=User.png,$CATICON=User.png*)
+FUNCTION brfiToRAD : REAL
 	VAR_INPUT
-		Shuttle : REFERENCE TO Mc6DShuttleType;
-		Execute : {REDUND_UNREPLICABLE} BOOL;
-		Parameters : {REDUND_UNREPLICABLE} brfiMove6DQueueParamType;
-		Targets : {REDUND_UNREPLICABLE} ARRAY[0..gMAX_INDEX_TARGETS] OF brfiMove6DQueueTargetType;
-	END_VAR
-	VAR_OUTPUT
-		Done : {REDUND_UNREPLICABLE} BOOL;
-		Ready : {REDUND_UNREPLICABLE} BOOL;
-		Error : {REDUND_UNREPLICABLE} BOOL;
-		LastStatusCode : {REDUND_UNREPLICABLE} DINT;
-		LastExecutedState : {REDUND_UNREPLICABLE} brfiMove6DQueueStateEnum;
-	END_VAR
-	VAR
-		refTarget : REFERENCE TO brfiMove6DQueueTargetType;
-		state : {REDUND_UNREPLICABLE} brfiMove6DQueueStateEnum;
-		subState : {REDUND_UNREPLICABLE} DINT;
-		Move6D : {REDUND_UNREPLICABLE} MC_BR_Move6D_Acp6D;
-		ShGetInfo : {REDUND_UNREPLICABLE} MC_BR_ShGetInfo_Acp6D;
-		internal : {REDUND_UNREPLICABLE} brfiMove6DQueueIrnalType;
-	END_VAR
-END_FUNCTION_BLOCK
-
-FUNCTION AddTarget6D_xyz : BOOL
-	VAR_INPUT
-		TargetList : REFERENCE TO ARRAY[0..gMAX_INDEX_TARGETS] OF brfiMove6DQueueTargetType;
-		axisSelect : brfiMoveAxisSelectionEnum;
-		x : REAL;
-		y : REAL;
-		z : REAL;
-		velocity_xy : REAL;
-		velocity_short : REAL;
-		acceleration : REAL;
-		mode : brfiMove6DQueueModeEnum;
-	END_VAR
-	VAR
-		i : DINT;
+		degrees : REAL;
 	END_VAR
 END_FUNCTION
 
-FUNCTION AddTarget6D_Rxyz : BOOL
+FUNCTION brfiToDEG : REAL
 	VAR_INPUT
-		TargetList : REFERENCE TO ARRAY[0..gMAX_INDEX_TARGETS] OF brfiMove6DQueueTargetType;
-		axisSelect : brfiMoveAxisSelectionEnum;
-		Rx : REAL;
-		Ry : REAL;
-		Rz : REAL;
-		velocity_short : REAL;
-		mode : brfiMove6DQueueModeEnum;
-	END_VAR
-	VAR
-		i : DINT;
-	END_VAR
-END_FUNCTION
-
-FUNCTION AddTarget6D_all : BOOL
-	VAR_INPUT
-		TargetList : REFERENCE TO ARRAY[0..gMAX_INDEX_TARGETS] OF brfiMove6DQueueTargetType;
-		axisSelect : brfiMoveAxisSelectionEnum;
-		x : REAL;
-		y : REAL;
-		z : REAL;
-		Rx : REAL;
-		Ry : REAL;
-		Rz : REAL;
-		velocity_xy : REAL;
-		velocity_short : REAL;
-		acceleration : REAL;
-		mode : brfiMove6DQueueModeEnum;
-	END_VAR
-	VAR
-		i : DINT;
+		radians : REAL;
 	END_VAR
 END_FUNCTION
 (**)
 
-{REDUND_ERROR} {REDUND_UNREPLICABLE} FUNCTION_BLOCK brfiMoveXYQueue (* *) (*$GROUP=User,$CAT=User,$GROUPICON=User.png,$CATICON=User.png*)
+{REDUND_ERROR} FUNCTION_BLOCK brfi6DMoveQueue (* *) (*$GROUP=User,$CAT=User,$GROUPICON=User.png,$CATICON=User.png*)
 	VAR_INPUT
 		Shuttle : REFERENCE TO Mc6DShuttleType;
 		Execute : {REDUND_UNREPLICABLE} BOOL;
-		Parameters : {REDUND_UNREPLICABLE} brfiMoveXYQueueParamType;
-		Targets : {REDUND_UNREPLICABLE} ARRAY[0..gMAX_INDEX_TARGETS] OF brfiMoveXYQueueTargetType;
+		Parameters : {REDUND_UNREPLICABLE} brfi6DMoveQueueParamType;
+		Commands : {REDUND_UNREPLICABLE} ARRAY[0..gMAX_INDEX_TARGETS] OF brfi6DMoveQueueCommandType;
 	END_VAR
 	VAR_OUTPUT
 		Done : {REDUND_UNREPLICABLE} BOOL;
-		Ready : {REDUND_UNREPLICABLE} BOOL;
+		Acknowledge : {REDUND_UNREPLICABLE} BOOL;
 		Error : {REDUND_UNREPLICABLE} BOOL;
-		LastStatusCode : {REDUND_UNREPLICABLE} DINT;
-		LastExecutedState : {REDUND_UNREPLICABLE} brfiMoveXYQueueStateEnum;
+		ErrorID : {REDUND_UNREPLICABLE} DINT;
+		FailedCommand : {REDUND_UNREPLICABLE} brfi6DMoveQueueCommandType;
+		FailedCommandIndex : {REDUND_UNREPLICABLE} DINT;
+		LastExecutedState : {REDUND_UNREPLICABLE} DINT;
 	END_VAR
 	VAR
-		refTarget : REFERENCE TO brfiMoveXYQueueTargetType;
-		state : {REDUND_UNREPLICABLE} brfiMoveXYQueueStateEnum;
+		refCommand : REFERENCE TO brfi6DMoveQueueCommandType;
+		refAllCommandsDone : REFERENCE TO BOOL;
+		state : {REDUND_UNREPLICABLE} brfi6DMoveQueueStateEnum;
 		subState : {REDUND_UNREPLICABLE} DINT;
-		MoveXY : {REDUND_UNREPLICABLE} MC_BR_MoveInPlane_Acp6D;
-		ShGetInfo : {REDUND_UNREPLICABLE} MC_BR_ShGetInfo_Acp6D;
-		internal : {REDUND_UNREPLICABLE} brfiMoveXYQueueIrnalType;
+		onStateEntry : BOOL;
+		fb : {REDUND_UNREPLICABLE} brfi6DMoveQueueFbType;
+		actions : {REDUND_UNREPLICABLE} brfi6DMoveQueueActionsType;
+		cmd : {REDUND_UNREPLICABLE} brfi6DMoveQueueExecuteType;
+		internal : {REDUND_UNREPLICABLE} brfi6DMoveQueueIrnalType;
 	END_VAR
 END_FUNCTION_BLOCK
 
-FUNCTION AddTargetDIR : BOOL
+FUNCTION AddCommand6D_xy : BOOL
 	VAR_INPUT
-		TargetList : REFERENCE TO ARRAY[0..gMAX_INDEX_TARGETS] OF brfiMoveXYQueueTargetType;
-		axisSelect : brfiMoveAxisSelectionEnum;
+		Commands : REFERENCE TO ARRAY[0..gMAX_INDEX_TARGETS] OF brfi6DMoveQueueCommandType;
+		axisSelect : brfi6DMoveCommandSelectionEnum;
 		x : REAL;
 		y : REAL;
 		velocity : REAL;
+		endVelocity : REAL;
 		acceleration : REAL;
+		path : brfi6DMoveCommandPathEnum;
 		radius : REAL;
 		mode : McAcp6DMoveModeEnum;
 	END_VAR
@@ -165,15 +121,16 @@ FUNCTION AddTargetDIR : BOOL
 	END_VAR
 END_FUNCTION
 
-FUNCTION AddTargetXY : BOOL
+FUNCTION AddCommand6D_xyz : BOOL
 	VAR_INPUT
-		TargetList : REFERENCE TO ARRAY[0..gMAX_INDEX_TARGETS] OF brfiMoveXYQueueTargetType;
-		axisSelect : brfiMoveAxisSelectionEnum;
+		Commands : REFERENCE TO ARRAY[0..gMAX_INDEX_TARGETS] OF brfi6DMoveQueueCommandType;
+		axisSelect : brfi6DMoveCommandSelectionEnum;
 		x : REAL;
 		y : REAL;
+		z : REAL;
 		velocity : REAL;
+		velocity_short : REAL;
 		acceleration : REAL;
-		radius : REAL;
 		mode : McAcp6DMoveModeEnum;
 	END_VAR
 	VAR
@@ -181,15 +138,161 @@ FUNCTION AddTargetXY : BOOL
 	END_VAR
 END_FUNCTION
 
-FUNCTION AddTargetYX : BOOL
+FUNCTION AddCommand6D_Rxyz : BOOL
 	VAR_INPUT
-		TargetList : REFERENCE TO ARRAY[0..gMAX_INDEX_TARGETS] OF brfiMoveXYQueueTargetType;
-		axisSelect : brfiMoveAxisSelectionEnum;
+		Commands : REFERENCE TO ARRAY[0..gMAX_INDEX_TARGETS] OF brfi6DMoveQueueCommandType;
+		axisSelect : brfi6DMoveCommandSelectionEnum;
+		Rx : REAL;
+		Ry : REAL;
+		Rz : REAL;
+		velocity_short : REAL;
+		mode : McAcp6DMoveModeEnum;
+	END_VAR
+	VAR
+		i : DINT;
+	END_VAR
+END_FUNCTION
+
+FUNCTION AddCommand6D_wait : BOOL
+	VAR_INPUT
+		Commands : REFERENCE TO ARRAY[0..gMAX_INDEX_TARGETS] OF brfi6DMoveQueueCommandType;
+		time : REAL; (*wait time in seconds*)
+	END_VAR
+	VAR
+		i : DINT;
+	END_VAR
+END_FUNCTION
+
+FUNCTION AddCommand6D_land : BOOL
+	VAR_INPUT
+		Commands : REFERENCE TO ARRAY[0..gMAX_INDEX_TARGETS] OF brfi6DMoveQueueCommandType;
+		speed : USINT;
+		Fz : REAL;
+	END_VAR
+	VAR
+		i : DINT;
+	END_VAR
+END_FUNCTION
+
+FUNCTION AddCommand6D_levitate : BOOL
+	VAR_INPUT
+		Commands : REFERENCE TO ARRAY[0..gMAX_INDEX_TARGETS] OF brfi6DMoveQueueCommandType;
+		speed : USINT;
+		Fz : REAL;
+	END_VAR
+	VAR
+		i : DINT;
+	END_VAR
+END_FUNCTION
+
+FUNCTION AddCommand6D_spin : BOOL
+	VAR_INPUT
+		Commands : REFERENCE TO ARRAY[0..gMAX_INDEX_TARGETS] OF brfi6DMoveQueueCommandType;
+		duration : REAL; (*Duration of the rotational movement after reaching the target velocity (s)*)
+		angle : REAL; (*Angle at which the shuttle stops after the rotational movement (rad)*)
+		velocity : REAL; (*Rotational speed (rad/s)*)
+		acceleration : REAL; (*Rotational acceleration (rad/s2)*)
+	END_VAR
+	VAR
+		i : DINT;
+	END_VAR
+END_FUNCTION
+
+FUNCTION AddCommand6D_rotateAbs : BOOL
+	VAR_INPUT
+		Commands : REFERENCE TO ARRAY[0..gMAX_INDEX_TARGETS] OF brfi6DMoveQueueCommandType;
+		angle : REAL; (*Target angle (rad)*)
+		velocity : REAL; (*Rotational speed (rad/s)*)
+		acceleration : REAL; (*Rotational acceleration (rad/s2)*)
+	END_VAR
+	VAR
+		i : DINT;
+	END_VAR
+END_FUNCTION
+
+FUNCTION AddCommand6D_rotateCW : BOOL
+	VAR_INPUT
+		Commands : REFERENCE TO ARRAY[0..gMAX_INDEX_TARGETS] OF brfi6DMoveQueueCommandType;
+		angle : REAL; (*Target angle (rad)*)
+		velocity : REAL; (*Rotational speed (rad/s)*)
+		acceleration : REAL; (*Rotational acceleration (rad/s2)*)
+	END_VAR
+	VAR
+		i : DINT;
+	END_VAR
+END_FUNCTION
+
+FUNCTION AddCommand6D_rotateCCW : BOOL
+	VAR_INPUT
+		Commands : REFERENCE TO ARRAY[0..gMAX_INDEX_TARGETS] OF brfi6DMoveQueueCommandType;
+		angle : REAL; (*Target angle (rad)*)
+		velocity : REAL; (*Rotational speed (rad/s)*)
+		acceleration : REAL; (*Rotational acceleration (rad/s2)*)
+	END_VAR
+	VAR
+		i : DINT;
+	END_VAR
+END_FUNCTION
+
+FUNCTION AddCommand6D_arcAngularCW : BOOL
+	VAR_INPUT
+		Commands : REFERENCE TO ARRAY[0..gMAX_INDEX_TARGETS] OF brfi6DMoveQueueCommandType;
 		x : REAL;
 		y : REAL;
-		velocity : REAL;
-		acceleration : REAL;
+		angle : REAL;
+		velocity : REAL; (*Rotational speed (rad/s)*)
+		endVelocity : REAL; (*Target angle (rad)*)
+		acceleration : REAL; (*Rotational acceleration (rad/s2)*)
+		mode : McAcp6DMoveModeEnum;
+	END_VAR
+	VAR
+		i : DINT;
+	END_VAR
+END_FUNCTION
+
+FUNCTION AddCommand6D_arcAngularCCW : BOOL
+	VAR_INPUT
+		Commands : REFERENCE TO ARRAY[0..gMAX_INDEX_TARGETS] OF brfi6DMoveQueueCommandType;
+		x : REAL;
+		y : REAL;
+		angle : REAL;
+		velocity : REAL; (*Rotational speed (rad/s)*)
+		endVelocity : REAL; (*Target angle (rad)*)
+		acceleration : REAL; (*Rotational acceleration (rad/s2)*)
+		mode : McAcp6DMoveModeEnum;
+	END_VAR
+	VAR
+		i : DINT;
+	END_VAR
+END_FUNCTION
+
+FUNCTION AddCommand6D_arcRadialCW : BOOL
+	VAR_INPUT
+		Commands : REFERENCE TO ARRAY[0..gMAX_INDEX_TARGETS] OF brfi6DMoveQueueCommandType;
+		x : REAL;
+		y : REAL;
 		radius : REAL;
+		type : McAcp6DArcTypeEnum; (*Rotational speed (rad/s)*)
+		velocity : REAL; (*Rotational speed (rad/s)*)
+		endVelocity : REAL; (*Target angle (rad)*)
+		acceleration : REAL; (*Rotational acceleration (rad/s2)*)
+		mode : McAcp6DMoveModeEnum;
+	END_VAR
+	VAR
+		i : DINT;
+	END_VAR
+END_FUNCTION
+
+FUNCTION AddCommand6D_arcRadialCCW : BOOL
+	VAR_INPUT
+		Commands : REFERENCE TO ARRAY[0..gMAX_INDEX_TARGETS] OF brfi6DMoveQueueCommandType;
+		x : REAL;
+		y : REAL;
+		radius : REAL;
+		type : McAcp6DArcTypeEnum; (*Rotational speed (rad/s)*)
+		velocity : REAL; (*Rotational speed (rad/s)*)
+		endVelocity : REAL; (*Target angle (rad)*)
+		acceleration : REAL; (*Rotational acceleration (rad/s2)*)
 		mode : McAcp6DMoveModeEnum;
 	END_VAR
 	VAR

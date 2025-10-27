@@ -6,7 +6,7 @@
     <File Description="Exported constants">Constants.var</File>
     <File Description="Exported functions and function blocks">brfiDemo.fun</File>
     <File>Common.st</File>
-    <File>Move6DQueue.st</File>
-    <File>MoveXYQueue.st</File>
+    <File>MoveQueue.st</File>
+    <File>AddCommand6D.st</File>
   </Files>
 </Library>

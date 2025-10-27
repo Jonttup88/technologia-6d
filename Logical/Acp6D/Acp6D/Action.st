@@ -14,7 +14,13 @@ ACTION acInitializePositions:
 	// ---------------------------------------------------------------------------------------
 	FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
 		positions.user[i].X := i * 0.120 + 0.060;
-		positions.user[i].Y := 3 * 0.240;
+		positions.user[i].Y := 2 * 0.240;
+	END_FOR;
+	
+	// ---------------------------------------------------------------------------------------
+	FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
+		positions.side[i].X := 4 * 0.240 - 0.060;
+		positions.side[i].Y := 0.060 + i * 0.120;
 	END_FOR;
 	
 	// ---------------------------------------------------------------------------------------
@@ -73,52 +79,225 @@ ACTION acClearTargetQueues :
 	  
 END_ACTION
 
-ACTION acFunctionGroupStatus :
-	
-	// 6D Queue
-	// Check if any of the FBs are executing
-	local.executing := FALSE;
+
+ACTION acCyclicChannelHandling :
 	
 	FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
-		local.executing := (local.executing OR fb.Move6DQueue[i].Execute);	
-	END_FOR
-	
-	IF NOT local.executing THEN
-		brsmemset(ADR(group_status.Move6DQueue), 0, SIZEOF(group_status.Move6DQueue));
-	ELSE
-		group_status.Move6DQueue.AllDone := TRUE;
+		fb.ReadCyclicPosition[i].Enable := FALSE;
+		shuttles[i].position.isValid := FALSE;
 		
-		FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
-			IF NOT fb.Move6DQueue[i].Done THEN
-				group_status.Move6DQueue.AllDone := FALSE;
-			ELSIF fb.Move6DQueue[i].Error THEN
-				group_status.Move6DQueue.LastErrorID := fb.Move6DQueue[i].LastStatusCode;	
-				group_status.Move6DQueue.Error := TRUE;
-			END_IF;
-		END_FOR;	
-	END_IF;
+		fb.ReadCyclicForce[i].Enable := FALSE;
+		shuttles[i].force.isValid := FALSE;
+		
+		fb.MoveCyclicPosition[i].Enable := FALSE;
+		shuttles[i].moveCyclicActive := FALSE;
+	END_FOR;
 	
-	// XY Queue
-	// Check if any of the FBs are executing
-	local.executing := FALSE;
+	// set global statuses so states can use them if required
+	cyclic.allPositionsValid := TRUE;
+	cyclic.allForceValuesValid := TRUE;
+	cyclic.allControlReady := TRUE;
+	cyclic.allChannelsReleased := FALSE;
 	
 	FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
-		local.executing := (local.executing OR fb.MoveXYQueue[i].Execute);	
-	END_FOR
-	
-	IF NOT local.executing THEN
-		brsmemset(ADR(group_status.MoveXYQueue), 0, SIZEOF(group_status.MoveXYQueue));
-	ELSE
-		group_status.MoveXYQueue.AllDone := TRUE;
+		IF NOT fb.ReadCyclicPosition[i].Valid THEN 
+			cyclic.allPositionsValid := FALSE; 
+		END_IF;
 		
-		FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
-			IF NOT fb.MoveXYQueue[i].Done THEN
-				group_status.MoveXYQueue.AllDone := FALSE;
-			ELSIF fb.MoveXYQueue[i].Error THEN
-				group_status.MoveXYQueue.LastErrorID := fb.MoveXYQueue[i].LastStatusCode;	
-				group_status.MoveXYQueue.Error := TRUE;
+		IF NOT fb.ReadCyclicForce[i].Valid THEN 
+			cyclic.allForceValuesValid := FALSE; 
+		END_IF;
+		
+		IF NOT fb.MoveCyclicPosition[i].Valid THEN
+			cyclic.allControlReady := FALSE;
+		END_IF;
+	END_FOR;
+	
+	CASE cyclic.mode OF
+		a6dCYCLIC_DISABLED:
+			// ---------------------------------------------------------------------------------			
+			CASE local.actions.state.cyclicModeRequest OF
+				a6dCYCLIC_READ_POSITION: 
+					cyclic.mode := a6dCYCLIC_READ_POSITION;
+				a6dCYCLIC_READ_FORCE:
+					cyclic.mode := a6dCYCLIC_READ_FORCE;
+				a6dCYCLIC_MOVE_POSITION:
+					cyclic.mode := a6dCYCLIC_MOVE_POSITION;
+			END_CASE;
+			
+		a6dCYCLIC_RELEASE_CHANNELS:
+			// ---------------------------------------------------------------------------------
+			cyclic.allChannelsReleased := TRUE;
+			
+			FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
+				IF fb.ReadCyclicPosition[i].Busy OR fb.ReadCyclicForce[i].Busy OR fb.MoveCyclicPosition[i].Busy THEN
+					cyclic.allChannelsReleased := FALSE;
+				END_IF;
+			END_FOR;
+			
+			IF cyclic.allChannelsReleased THEN
+				cyclic.mode := a6dCYCLIC_DISABLED;
+			END_IF;	
+		
+		a6dCYCLIC_READ_POSITION:
+			// ---------------------------------------------------------------------------------
+			IF local.actions.state.cyclicModeRequest <> a6dCYCLIC_READ_POSITION THEN
+				cyclic.mode := a6dCYCLIC_RELEASE_CHANNELS;
+			ELSE
+				FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
+					fb.ReadCyclicPosition[i].Enable := TRUE;	
+					
+					IF fb.ReadCyclicPosition[i].Valid THEN
+						shuttles[i].position.value := fb.ReadCyclicPosition[i].CyclicPosition;
+						shuttles[i].position.isValid := TRUE;
+					END_IF;
+				END_FOR;
 			END_IF;
-		END_FOR;	
-	END_IF;
+			
+		a6dCYCLIC_READ_FORCE:
+			// ---------------------------------------------------------------------------------
+			IF local.actions.state.cyclicModeRequest <> a6dCYCLIC_READ_FORCE THEN
+				cyclic.mode := a6dCYCLIC_RELEASE_CHANNELS;
+			ELSE
+				FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
+					fb.ReadCyclicForce[i].Enable := TRUE;
+					fb.ReadCyclicForce[i]();
+				
+					IF fb.ReadCyclicForce[i].Valid THEN
+						shuttles[i].force.value := fb.ReadCyclicForce[i].CyclicForce;
+						shuttles[i].force.isValid := TRUE;
+					END_IF;
+				END_FOR;
+			END_IF;
+			
+		a6dCYCLIC_MOVE_POSITION:
+			// ---------------------------------------------------------------------------------
+			IF local.actions.state.cyclicModeRequest <> a6dCYCLIC_MOVE_POSITION THEN
+				cyclic.mode := a6dCYCLIC_RELEASE_CHANNELS;
+			ELSE
+				FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
+					fb.MoveCyclicPosition[i].Enable := TRUE;
+					fb.MoveCyclicPosition[i]();
+				
+					IF fb.MoveCyclicPosition[i].Valid THEN
+						shuttles[i].moveCyclicActive := TRUE;
+					END_IF;
+				END_FOR;
+			END_IF;
+	END_CASE;
+	
+	FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
+		fb.ReadCyclicPosition[i].Shuttle := ADR(shuttles[i].Ref);
+		fb.ReadCyclicPosition[i]();
+		
+		fb.ReadCyclicForce[i].Shuttle := ADR(shuttles[i].Ref);
+		fb.ReadCyclicForce[i]();
+
+		fb.MoveCyclicPosition[i].Shuttle := ADR(shuttles[i].Ref);
+		fb.MoveCyclicPosition[i]();
+	END_FOR;
 	  
 END_ACTION
+
+ACTION acShuttleStatusPolling :
+	
+	shuttleStatus.allValid := TRUE;
+			
+	FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
+		IF (shuttles[i].Ref.controlif > 0) AND (NOT shuttles[i].status.isValid) THEN
+			shuttleStatus.allValid := FALSE;
+		END_IF;
+	END_FOR;
+	
+	shuttleStatus.allIdle := TRUE;
+	
+	IF shuttleStatus.allValid THEN
+		FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
+			IF shuttles[i].status.state <> mcACP6D_SH_STATE_IDLING THEN
+				shuttleStatus.allIdle := FALSE;
+			END_IF;
+		END_FOR;
+	ELSE
+		shuttleStatus.allIdle := FALSE;
+	END_IF;
+	
+	CASE shuttleStatus.state OF
+		0:
+			// ---------------------------------------------------------------------------------
+			CASE task.Output.AssemblyInfo.AssemblyState OF
+				mcACP6D_INVALID_CONFIGURATION, 
+				mcACP6D_STARTUP:
+					// Wait
+				ELSE
+					shuttleStatus.state := 10;
+					shuttleStatus.index := 0;
+			END_CASE;
+			
+			FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
+				brsmemset(ADR(shuttles[i].status), 0, SIZEOF(shuttles[i].status));
+			END_FOR;
+			
+			fb.ShGetInfo.Execute := FALSE;
+		
+		10:
+			// ---------------------------------------------------------------------------------
+			CASE task.Output.AssemblyInfo.AssemblyState OF
+				mcACP6D_INVALID_CONFIGURATION:
+				mcACP6D_STARTUP:
+					shuttleStatus.state := 0;
+			END_CASE;
+
+			fb.ShGetInfo.Execute := TRUE;
+		
+			IF fb.ShGetInfo.Done THEN
+				shuttles[shuttleStatus.index].status.isValid := TRUE;
+				shuttles[shuttleStatus.index].status.state := fb.ShGetInfo.ShuttleInfo.State;
+				shuttleStatus.index := shuttleStatus.index + 1;
+				
+			ELSIF fb.ShGetInfo.Error THEN
+				brsmemset(ADR(shuttles[i].status), 0, SIZEOF(shuttles[i].status));
+				shuttleStatus.index := shuttleStatus.index + 1;	
+			END_IF;
+			 
+	END_CASE;
+	
+	IF shuttleStatus.index > gMAX_INDEX_SHUTTLE THEN
+		shuttleStatus.index := 0;
+	END_IF;
+	
+	fb.ShGetInfo.Shuttle := ADR(shuttles[shuttleStatus.index].Ref);
+	fb.ShGetInfo();
+			
+END_ACTION
+
+ACTION acMoveQueueStatusHandling:
+	
+	queueStatus.executing := FALSE;
+	
+	FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
+		IF fb.MoveQueue[i].Execute THEN
+			queueStatus.executing := TRUE;
+		END_IF;
+	END_FOR;
+	
+	IF NOT queueStatus.executing THEN
+		queueStatus.allDone := FALSE;
+		queueStatus.error := FALSE;
+	ELSE
+		queueStatus.allDone := TRUE;
+		queueStatus.error := FALSE;
+
+		FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
+			IF fb.MoveQueue[i].Execute AND (NOT fb.MoveQueue[i].Done) THEN
+				queueStatus.allDone := FALSE;
+			END_IF;
+			
+			IF fb.MoveQueue[i].Execute AND fb.MoveQueue[i].Error THEN
+				queueStatus.error := TRUE;
+				queueStatus.errorID := fb.MoveQueue[i].ErrorID;
+			END_IF;
+		END_FOR;
+	END_IF;
+	
+END_ACTION
+

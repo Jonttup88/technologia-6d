@@ -19,14 +19,6 @@ TYPE
 		ACP6D_SELECT_SHUTTLE,
 		ACP6D_FIND_PAYLOAD
 		);
-	Acp6DCyclicModeEnum : 
-		(
-		a6dCYCLIC_DISABLED := -1,
-		a6dCYCLIC_READ_POSITION,
-		a6dCYCLIC_READ_FORCE,
-		a6dCYCLIC_MOVE_POSITION,
-		a6dCYCLIC_RELEASE_CHANNELS
-		);
 END_TYPE
 
 (*========== INPUTS ==========*)
@@ -34,14 +26,18 @@ END_TYPE
 TYPE
 	Acp6DInputCommandType : 	STRUCT 
 		Reinitialize : BOOL;
-		MoveToHome : BOOL;
-		MoveToUser : BOOL;
-		MoveToPickup : BOOL;
-		MoveToShuffle : BOOL;
-		MoveToClockface : BOOL;
-		MoveToDance : BOOL;
+		MoveTo : Acp6DMoveToCommandType;
 		FindPayload : BOOL;
 		SelectShuttle : BOOL;
+	END_STRUCT;
+	Acp6DMoveToCommandType : 	STRUCT 
+		Home : BOOL;
+		User : BOOL;
+		Pickup : BOOL;
+		Shuffle : BOOL;
+		Clockface : BOOL;
+		Dance : BOOL;
+		Side : BOOL;
 	END_STRUCT;
 	Acp6DInputStatusType : 	STRUCT 
 		test : BOOL;
@@ -64,8 +60,13 @@ TYPE
 		Status : Acp6DOutputStatusType;
 		TotalShuttleCount : DINT;
 		AssemblyInfo : McAcp6DAsmInfoType;
-		ShuttleWithPayload : DINT;
-		SelectedShuttle : DINT;
+		ShuttleWithPayload : Acp6DOutputShuttleType;
+		ShuttleUserSelected : Acp6DOutputShuttleType;
+	END_STRUCT;
+	Acp6DOutputShuttleType : 	STRUCT 
+		index : DINT;
+		X : REAL;
+		Y : REAL;
 	END_STRUCT;
 END_TYPE
 
@@ -76,7 +77,8 @@ TYPE
 		Active : BOOL;
 		Acknowledge : BOOL;
 		Code : DINT;
-		Description : STRING[80];
+		State : Acp6DStateEnum;
+		SubState : DINT;
 	END_STRUCT;
 END_TYPE
 
@@ -92,6 +94,5 @@ TYPE
 		SubState : DINT;
 		StateInfo : STRING[255];
 		OnStateEntry : BOOL; (*True for one cycle after state change*)
-		CyclicMode : Acp6DCyclicModeEnum;
 	END_STRUCT;
 END_TYPE
