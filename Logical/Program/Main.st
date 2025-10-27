@@ -219,526 +219,7 @@ PROGRAM _CYCLIC
 	
 
 	
-	IF jkiTest3 THEN
-		CASE demoStep OF
-			0:
-				MoveToStartPosition;
-				MC_BR_MoveInPlaneAsync_Acp6D_0.Assembly := ADR(gAssembly6D_1);
-				MC_BR_MoveInPlaneAsync_Acp6D_0.Execute := TRUE;
-				MC_BR_MoveInPlaneAsync_Acp6D_0.Parameters.Velocity := 1;
-				MC_BR_MoveInPlaneAsync_Acp6D_0.Parameters.Acceleration := 10;
-				demoStep := 1;
-			
-			1:
-				IF MC_BR_MoveInPlaneAsync_Acp6D_0.Done THEN
-					MC_BR_MoveInPlaneAsync_Acp6D_0.Execute := FALSE;
-					MC_BR_MoveInPlaneAsync_Acp6D_0;
-					demoStep := 20;
-					loadCounter := 0;
-					tempCounter := 1;
-				END_IF;
-			
-			17:
-				MoveInPlane.Shuttle := ADR(gShuttleList[tempCounter].Ref);
-				MoveInPlane.Parameters.Path := mcACP6D_PATH_X_THEN_Y;
-				MoveInPlane.Parameters.EndVelocity := 0;
-				MoveInPlane.Parameters.Velocity := 1;
-				MoveInPlane.Parameters.Acceleration := 10;
-				MoveInPlane.Parameters.Position.X := 0.06;
-				MoveInPlane.Parameters.Position.Y := 0.540;
-				MoveInPlane.Execute := TRUE;
-				demoStep := 18;
-			18:
-				IF MoveInPlane.Acknowledge OR MoveInPlane.Done THEN
-					MoveInPlane.Execute := FALSE;
-					MoveInPlane;
-					tempCounter := tempCounter + 1;
-					IF tempCounter > 7 THEN
-						demoStep := 22;
-					ELSE
-						demoStep := 17;
-					END_IF;
-				END_IF;
-				
-				
-			20:
-				MoveToLoadPosition;
-				MC_BR_MoveInPlaneAsync_Acp6D_0.Assembly := ADR(gAssembly6D_1);
-				MC_BR_MoveInPlaneAsync_Acp6D_0.Execute := TRUE;
-				MC_BR_MoveInPlaneAsync_Acp6D_0.Parameters.Velocity := 2;
-				MC_BR_MoveInPlaneAsync_Acp6D_0.Parameters.Acceleration := 10;
-				demoStep := 21;
-				
-				
-			21:
-				IF MC_BR_MoveInPlaneAsync_Acp6D_0.Done THEN
-					MC_BR_MoveInPlaneAsync_Acp6D_0.Execute := FALSE;
-					demoStep := 17;
-					loadCounter := 0;
-				END_IF;
-				
-			22:
-				TON_0.IN := TRUE;
-				TON_0.PT := TIME#1s;
-				TON_0;
-				
-				IF TON_0.Q THEN
-					TON_0.IN := FALSE;
-					TON_0;
-					MoveInPlane.Shuttle := ADR(gShuttleList[loadCounter].Ref);
-					MoveInPlane.Parameters.Acceleration := 10;
-					MoveInPlane.Parameters.Velocity := 0.5;
-					MoveInPlane.Parameters.EndVelocity := 0.5;
-					MoveInPlane.Parameters.Path := mcACP6D_PATH_DIRECT;
-					MoveInPlane.Parameters.Position.X := 0.060;
-					MoveInPlane.Parameters.Position.Y := 0.120;
-					MoveInPlane.Execute := TRUE;
-					demoStep := 23;
-				END_IF;
-				
-			23:
-				IF MoveInPlane.Acknowledge OR MoveInPlane.Done THEN
-					MoveInPlane.Execute := FALSE;
-					MoveInPlane;
-					MoveArc.Shuttle := ADR(gShuttleList[loadCounter].Ref);
-					MoveArc.Parameters.Acceleration := 10;
-					MoveArc.Parameters.Velocity := 0.5;
-					MoveArc.Parameters.EndVelocity := 0.5;
-					MoveArc.Parameters.Option := mcACP6D_ARC_RADIUS;
-					MoveArc.Parameters.Direction := mcACP6D_ARC_COUNTER_CLOCKWISE;
-					MoveArc.Parameters.Radius.ArcType := mcACP6D_ARC_MINOR;
-					MoveArc.Parameters.Radius.Radius := 0.06;
-					MoveArc.Parameters.Radius.Position.X := 0.120;
-					MoveArc.Parameters.Radius.Position.Y := 0.060;
-					MoveArc.Execute := TRUE;
-					demoStep := 24;
-				END_IF;
-				
-			24:
-				IF MoveArc.Acknowledge OR MoveArc.Done THEN 
-					MoveArc.Execute := FALSE;
-					MoveArc;
-					MoveInPlane.Shuttle := ADR(gShuttleList[loadCounter].Ref);
-					MoveInPlane.Parameters.Acceleration := 10;
-					MoveInPlane.Parameters.Velocity := 0.5;
-					MoveInPlane.Parameters.EndVelocity := 0.5;
-					MoveInPlane.Parameters.Path := mcACP6D_PATH_DIRECT;
-					(*
-						MC_BR_MoveInPlaneAsync_Acp6D_0.Parameters.AsyncPar[0].X		:= 0.300;
-						MC_BR_MoveInPlaneAsync_Acp6D_0.Parameters.AsyncPar[0].Y		:= 0.660;
-					*)
-					CASE loadCounter OF
-						0..1:
-							MoveInPlane.Parameters.Position.X := 0.240;
-							MoveInPlane.Parameters.Position.Y := 0.060;
-						2..3:
-							MoveInPlane.Parameters.Position.X := 0.360;
-							MoveInPlane.Parameters.Position.Y := 0.060;
-						4..5:
-							MoveInPlane.Parameters.Position.X := 0.480;
-							MoveInPlane.Parameters.Position.Y := 0.060;
-						6..7:
-							MoveInPlane.Parameters.Position.X := 0.600;
-							MoveInPlane.Parameters.Position.Y := 0.060;
-					END_CASE;
-					MoveInPlane.Execute := TRUE;
-					demoStep := 25;
-				END_IF;
-				
-			25:
-				IF MoveInPlane.Acknowledge OR MoveInPlane.Done THEN
-					MoveInPlane.Execute := FALSE;
-					MoveInPlane;
-					MoveArc.Shuttle := ADR(gShuttleList[loadCounter].Ref);
-					MoveArc.Parameters.Acceleration := 10;
-					MoveArc.Parameters.Velocity := 0.5;
-					MoveArc.Parameters.EndVelocity := 0.5;
-					MoveArc.Parameters.Option := mcACP6D_ARC_RADIUS;
-					MoveArc.Parameters.Direction := mcACP6D_ARC_COUNTER_CLOCKWISE;
-					MoveArc.Parameters.Radius.ArcType := mcACP6D_ARC_MINOR;
-					MoveArc.Parameters.Radius.Radius := 0.06;
-					CASE loadCounter OF
-						0..1:
-							MoveArc.Parameters.Radius.Position.X := 0.300;
-							MoveArc.Parameters.Radius.Position.Y := 0.120;
-						2..3:
-							MoveArc.Parameters.Radius.Position.X := 0.420;
-							MoveArc.Parameters.Radius.Position.Y := 0.120;
-						4..5:
-							MoveArc.Parameters.Radius.Position.X := 0.540;
-							MoveArc.Parameters.Radius.Position.Y := 0.120;
-						6..7:
-							MoveArc.Parameters.Radius.Position.X := 0.660;
-							MoveArc.Parameters.Radius.Position.Y := 0.120;
-					END_CASE;
-					MoveArc.Execute := TRUE;
-					demoStep := 26;
-				END_IF;
-			
-			26:
-				IF MoveArc.Acknowledge OR MoveArc.Done THEN 
-					MoveArc.Execute := FALSE;
-					MoveArc;
-					MoveInPlane.Shuttle := ADR(gShuttleList[loadCounter].Ref);
-					MoveInPlane.Parameters.Acceleration := 10;
-					MoveInPlane.Parameters.Velocity := 0.5;
-					MoveInPlane.Parameters.EndVelocity := 0;
-					MoveInPlane.Parameters.Path := mcACP6D_PATH_DIRECT;
-					(*
-						MC_BR_MoveInPlaneAsync_Acp6D_0.Parameters.AsyncPar[0].X		:= 0.300;
-						MC_BR_MoveInPlaneAsync_Acp6D_0.Parameters.AsyncPar[0].Y		:= 0.660;
-					*)
-					CASE loadCounter OF
-						0:
-							MoveInPlane.Parameters.Position.X := 0.300;
-							MoveInPlane.Parameters.Position.Y := 0.660;
-						1:
-							MoveInPlane.Parameters.Position.X := 0.300;
-							MoveInPlane.Parameters.Position.Y := 0.540;
-						2:
-							MoveInPlane.Parameters.Position.X := 0.420;
-							MoveInPlane.Parameters.Position.Y := 0.660;
-						3:
-							MoveInPlane.Parameters.Position.X := 0.420;
-							MoveInPlane.Parameters.Position.Y := 0.540;
-						4:
-							MoveInPlane.Parameters.Position.X := 0.540;
-							MoveInPlane.Parameters.Position.Y := 0.660;
-						5:
-							MoveInPlane.Parameters.Position.X := 0.540;
-							MoveInPlane.Parameters.Position.Y := 0.540;
-						6:
-							MoveInPlane.Parameters.Position.X := 0.660;
-							MoveInPlane.Parameters.Position.Y := 0.660;
-						7:
-							MoveInPlane.Parameters.Position.X := 0.660;
-							MoveInPlane.Parameters.Position.Y := 0.540;
-					END_CASE;
-					MoveInPlane.Execute := TRUE;
-					demoStep := 27;
-				END_IF;
-				
-			27:
-				IF (MoveInPlane.Acknowledge AND NOT (loadCounter = 7)) OR MoveInPlane.Done THEN
-					MoveInPlane.Execute := FALSE;
-					MoveInPlane;
-					loadCounter := loadCounter + 1;
-					IF loadCounter > 7 THEN
-						demoStep := 2;
-					ELSE
-						demoStep := 22;
-					END_IF;
-				END_IF;
-				
-			2:
-				MoveToExtremePosition;
-				MC_BR_MoveInPlaneAsync_Acp6D_0.Assembly := ADR(gAssembly6D_1);
-				MC_BR_MoveInPlaneAsync_Acp6D_0.Execute := TRUE;
-				MC_BR_MoveInPlaneAsync_Acp6D_0.Parameters.Velocity := 1;
-				MC_BR_MoveInPlaneAsync_Acp6D_0.Parameters.Acceleration := 10;
-				demoStep := 3;
-	
-			
-			3:
-			
-				IF MC_BR_MoveInPlaneAsync_Acp6D_0.Done THEN
-					MC_BR_MoveInPlaneAsync_Acp6D_0.Execute := FALSE;
-					demoStep := 4;
-				END_IF;
-			
-			4:
-				MoveToExtremeInvPosition;
-				MC_BR_MoveInPlaneAsync_Acp6D_0.Assembly := ADR(gAssembly6D_1);
-				MC_BR_MoveInPlaneAsync_Acp6D_0.Execute := TRUE;
-				MC_BR_MoveInPlaneAsync_Acp6D_0.Parameters.Velocity := 1;
-				MC_BR_MoveInPlaneAsync_Acp6D_0.Parameters.Acceleration := 10;
-				demoStep := 5;
-	
-			
-			5:
-			
-				IF MC_BR_MoveInPlaneAsync_Acp6D_0.Done THEN
-					MC_BR_MoveInPlaneAsync_Acp6D_0.Execute := FALSE;
-					demoStep := 6;
-				END_IF;
-			
-			6:
-				MoveToStartPosition;
-				MC_BR_MoveInPlaneAsync_Acp6D_0.Assembly := ADR(gAssembly6D_1);
-				MC_BR_MoveInPlaneAsync_Acp6D_0.Execute := TRUE;
-				MC_BR_MoveInPlaneAsync_Acp6D_0.Parameters.Velocity := 1;
-				MC_BR_MoveInPlaneAsync_Acp6D_0.Parameters.Acceleration := 10;
-				demoStep := 7;
-			
-			7:
-				IF MC_BR_MoveInPlaneAsync_Acp6D_0.Done THEN
-					MC_BR_MoveInPlaneAsync_Acp6D_0.Execute := FALSE;
-					demoStep := 0;
-					jkiTest3 := FALSE;
-				END_IF;
-			
-		END_CASE;
-	
-	
-	END_IF;
-	
-	
-	IF jkiTest4 THEN
-		CASE demoStep OF
-			0:
-				MoveToStartPosition;
-				MC_BR_MoveInPlaneAsync_Acp6D_0.Assembly := ADR(gAssembly6D_1);
-				MC_BR_MoveInPlaneAsync_Acp6D_0.Execute := TRUE;
-				MC_BR_MoveInPlaneAsync_Acp6D_0.Parameters.Velocity := 1;
-				MC_BR_MoveInPlaneAsync_Acp6D_0.Parameters.Acceleration := 10;
-				demoStep := 1;
-			
-			1:
-				IF MC_BR_MoveInPlaneAsync_Acp6D_0.Done THEN
-					MC_BR_MoveInPlaneAsync_Acp6D_0.Execute := FALSE;
-					MC_BR_MoveInPlaneAsync_Acp6D_0;
-					demoStep := 2;
-					loadCounter := 0;
-					shIndex := 0;
-					tempCounter := 1;
-				END_IF;
-			
-			2:
-				MoveInPlane.Shuttle := ADR(gShuttleList[shuffled[loadCounter]].Ref);
-				MoveInPlane.Parameters.Acceleration := 20;
-				MoveInPlane.Parameters.EndVelocity := 1;
-				MoveInPlane.Parameters.Velocity := 1;
-				MoveInPlane.Parameters.Position.X := MC_BR_MoveInPlaneAsync_Acp6D_0.Parameters.AsyncPar[loadCounter].X-0.180-(0.120*USINT_TO_REAL(loadCounter/2));
-				MoveInPlane.Parameters.Position.Y := MC_BR_MoveInPlaneAsync_Acp6D_0.Parameters.AsyncPar[0].Y;//-120;
-				MoveInPlane.Parameters.Path :=  mcACP6D_PATH_Y_THEN_X;
-				
-				MoveArc.Shuttle := ADR(gShuttleList[shuffled[loadCounter]].Ref);
-				MoveArc.Parameters.Option := mcACP6D_ARC_RADIUS;
-				MoveArc.Parameters.Direction := mcACP6D_ARC_COUNTER_CLOCKWISE;
-				MoveArc.Parameters.Radius.ArcType := mcACP6D_ARC_MINOR;
-				MoveArc.Parameters.Radius.Radius := 0.06;
-				MoveArc.Parameters.Acceleration := 20;
-				MoveArc.Parameters.Velocity := 1;
-				MoveArc.Parameters.EndVelocity := 1;
-				
-				
-				MoveInPlane.Execute := TRUE;
-				MoveInPlane;
-			
-				IF MoveInPlane.Acknowledge OR MoveInPlane.Done THEN
-					MoveInPlane.Execute := FALSE;
-					MoveInPlane;
-					demoStep := 3;
-				END_IF;
-			
-			3:
-				MoveArc.Parameters.Radius.Position.X := 0.06;
-				MoveArc.Parameters.Radius.Position.Y := 0.600;
-				
-				MoveArc.Execute := TRUE;
-				MoveArc;
-			
-				IF MoveArc.Acknowledge OR MoveArc.Done THEN
-					MoveArc.Execute := FALSE;
-					MoveArc;
-					demoStep := 4;
-				END_IF;
-			
-			4:
-				MoveInPlane.Parameters.Position.X := 0.06;
-				MoveInPlane.Parameters.Position.Y := 0.48;//-120;
-				MoveInPlane.Execute := TRUE;
-				MoveInPlane;
-			
-				IF MoveInPlane.Acknowledge OR MoveInPlane.Done THEN
-					MoveInPlane.Execute := FALSE;
-					MoveInPlane;
-					demoStep := 5;
-				END_IF;
-			
-			5:
-				MoveArc.Parameters.Radius.Position.X := 0.9;
-				MoveArc.Parameters.Radius.Position.Y := 0.48;
-				MoveArc.Execute := TRUE;
-				MoveArc.Parameters.Radius.Radius := 0.42;
-				MoveArc;
-			
-				IF MoveArc.Acknowledge OR MoveArc.Done THEN
-					MoveArc.Execute := FALSE;
-					MoveArc;
-					demoStep := 10;
-					(*
-					IF (loadCounter MOD 2) = 0 THEN
-						loadCounter := loadCounter + 2;
-						IF loadCounter > 6 THEN
-							loadCounter := 1;
-						END_IF;
-					ELSE
-						loadCounter := loadCounter + 2;
-						IF loadCounter > 7 THEN
-							demoStep := 10;
-							loadCounter := 0;
-						ELSE
-							demoStep := 2;
-						END_IF;
-					END_IF;
-					*)
-				END_IF;
-			6:
-				TON_1.IN := TRUE;
-				TON_1.PT := TIME#60ms;
-				TON_1;
-				
-				IF TON_1.Q THEN
-					TON_1.IN := FALSE;
-					TON_1;
-					demoStep := 2;
-				END_IF;
-			
-			
-			10:
-				MoveArc.Shuttle := ADR(gShuttleList[shuffled[loadCounter]].Ref);
-				MoveArc.Parameters.Radius.Position.X := 0.06;
-				MoveArc.Parameters.Radius.Position.Y := 0.48;
-				MoveArc.Execute := TRUE;
-				MoveArc.Parameters.Radius.Radius := 0.42;
-				MoveArc;
-				
-				IF MoveArc.Acknowledge OR MoveArc.Done THEN
-					MoveArc.Execute := FALSE;
-					MoveArc;
-					demoStep := 11;
-				END_IF;
-			
-			11:
-				MoveArc.Shuttle := ADR(gShuttleList[shuffled[loadCounter]].Ref);
-				MoveArc.Parameters.Radius.Position.X := 0.9;
-				MoveArc.Parameters.Radius.Position.Y := 0.48;
-				MoveArc.Execute := TRUE;
-				MoveArc.Parameters.Radius.Radius := 0.42;
-				MoveArc;
-				
-				IF MoveArc.Acknowledge OR MoveArc.Done THEN
-					MoveArc.Execute := FALSE;
-					MoveArc;
-					demoStep := 10;
-					counter := counter + 1;
-					IF counter > 3 THEN
-						counter := 0;
-						shIndex := shIndex + 1;
-						IF (loadCounter MOD 2) = 0 THEN
-							loadCounter := loadCounter + 2;
-							IF loadCounter > 6 THEN
-								loadCounter := 1;
-							END_IF;
-							demoStep := 2;
-						ELSE
-							loadCounter := loadCounter + 2;
-							IF loadCounter > 7 THEN
-								demoStep := 20;
-								loadCounter := 0;
-							ELSE
-								demoStep := 2;
-							END_IF;
-						END_IF;
-					ELSIF counter > 1 AND (shIndex MOD 2) = 1 THEN
-						counter := 0;
-						demoStep := 12;
-					END_IF;
-					
-				END_IF;
-				
-			12:
-				MoveArc.Shuttle := ADR(gShuttleList[shuffled[loadCounter]].Ref);
-				MoveArc.Parameters.Radius.Position.X := 0.65;
-				MoveArc.Parameters.Radius.Position.Y := 0.73;
-				MoveArc.Execute := TRUE;
-				MoveArc.Parameters.Radius.Radius := 0.30;
-				MoveArc;
-			
-				IF MoveArc.Acknowledge OR MoveArc.Done THEN
-					MoveArc.Execute := FALSE;
-					MoveArc;
-					demoStep := 13;
-				END_IF;
-			
-			
-			13:
-				MoveInPlane.Shuttle  := ADR(gShuttleList[shuffled[loadCounter]].Ref);
-				MoveInPlane.Parameters.Position.X := 0.48;
-				MoveInPlane.Parameters.Position.Y := 0.73;//-120;
-				MoveInPlane.Execute := TRUE;
-				MoveInPlane;
-			
-				IF MoveInPlane.Acknowledge OR MoveInPlane.Done THEN
-					MoveInPlane.Execute := FALSE;
-					MoveInPlane;
-					demoStep := 14;
-				END_IF;
-			
-			14:
-				MoveArc.Shuttle := ADR(gShuttleList[shuffled[loadCounter]].Ref);
-				MoveArc.Parameters.Radius.Position.X := 0.48;
-				MoveArc.Parameters.Radius.Position.Y := 0.23;
-				MoveArc.Execute := TRUE;
-				MoveArc.Parameters.Radius.Radius := 0.25;
-				MoveArc;
-			
-				IF MoveArc.Acknowledge OR MoveArc.Done THEN
-					MoveArc.Execute := FALSE;
-					MoveArc;
-					demoStep := 15;
-				END_IF;
-			
-			15:
-				MoveArc.Shuttle := ADR(gShuttleList[shuffled[loadCounter]].Ref);
-				MoveArc.Parameters.Radius.Position.X := 0.48;
-				MoveArc.Parameters.Radius.Position.Y := 0.73;
-				MoveArc.Execute := TRUE;
-				MoveArc.Parameters.Radius.Radius := 0.25;
-				MoveArc;
-			
-				IF MoveArc.Acknowledge OR MoveArc.Done THEN
-					MoveArc.Execute := FALSE;
-					MoveArc;
-					counter := counter + 1;
-					IF counter < 4 THEN
-						demoStep := 14;
-					ELSE
-						counter := 0;
-						shIndex := shIndex + 1;
-						IF (loadCounter MOD 2) = 0 THEN
-							loadCounter := loadCounter + 2;
-							IF loadCounter > 6 THEN
-								loadCounter := 1;
-							END_IF;
-							demoStep := 2;
-						ELSE
-							loadCounter := loadCounter + 2;
-							IF loadCounter > 7 THEN
-								demoStep := 20;
-								loadCounter := 0;
-							ELSE
-								demoStep := 2;
-							END_IF;
-						END_IF;
-					END_IF;
-				END_IF;
-			
-			16:
-			
-			
-			
-			
-			
-			
-			
-				
-		END_CASE;	
-		
-	END_IF;
 
-	
 	
 	MoveInPlane;
 	MoveArc;
@@ -1152,7 +633,53 @@ PROGRAM _CYCLIC
 		
 	END_IF;
 	
+	IF gameTest THEN
+		GameAction;
+	END_IF;	
 	
+	R_TRIG_1.CLK := calibrate;
+	R_TRIG_1;
+	
+	IF R_TRIG_1.Q THEN
+		FOR z := 0 TO 7 DO
+			FeatureShuttles[z].Status.Calibrated := FALSE;	
+		END_FOR;
+	END_IF;		
+	
+	IF calibrate THEN
+		getShuttleWeights;
+		calibrate := NOT done;
+	END_IF;
+	
+	
+	IF jkiTestPayload THEN
+		jkiTestPayload := FALSE;
+		FOR z := 0 TO 7 DO
+			weightOffsets[z].Payload.Shuttle := ADR(gShuttleList[z].Ref);
+			weightOffsets[z].Payload.Execute := TRUE;
+			weightOffsets[z].Payload.Duration := 0.02;
+			weightOffsets[z].Payload.Mode := mcACP6D_PAYLOAD_DURATION;
+			weightOffsets[z].Payload;	
+			
+			IF NOT weightOffsets[z].Payload.Done THEN
+				jkiTestPayload := TRUE;
+			ELSE
+				weightOffsets[z].CurrentPayload := weightOffsets[z].Payload.Payload - weightOffsets[z].Offset;
+				IF weightOffsets[z].CurrentPayload > 0.015 THEN
+					cubeID := gShuttleList[z].ID;
+				END_IF;
+			END_IF;
+		END_FOR;
+		
+		IF NOT jkiTestPayload THEN
+			FOR z := 0 TO 7 DO
+				weightOffsets[z].Payload.Shuttle := ADR(gShuttleList[z].Ref);
+				weightOffsets[z].Payload.Execute := FALSE;
+				weightOffsets[z].Payload;				
+			END_FOR;
+		END_IF;
+		
+	END_IF;
 	
 	
 

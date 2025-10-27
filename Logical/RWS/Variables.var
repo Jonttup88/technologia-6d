@@ -7,4 +7,5 @@ VAR
 	returnState : INT;
 	TON_0 : TON;
 	writeValue : BOOL;
+	nWriteValue : REAL;
 END_VAR

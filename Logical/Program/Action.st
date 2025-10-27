@@ -206,4 +206,29 @@ ACTION Shuffle:
 	
 END_ACTION
 
+ACTION getShuttleWeights:
 
+	done := TRUE;
+	FOR z := 0 TO 7 DO
+		weightOffsets[z].Payload.Shuttle := ADR(gShuttleList[z].Ref);
+		weightOffsets[z].Payload.Mode := mcACP6D_PAYLOAD_DURATION;
+		weightOffsets[z].Payload.Duration := 0.02;
+		weightOffsets[z].Payload.Execute := NOT FeatureShuttles[z].Status.Calibrated;
+		weightOffsets[z].Payload;
+				
+		IF weightOffsets[z].Payload.Done THEN
+			weightOffsets[z].ID := gShuttleList[z].ID;
+			weightOffsets[z].Offset := 	weightOffsets[z].Payload.Payload;
+			weightOffsets[z].Payload.Execute := FALSE;
+			weightOffsets[z].Payload;
+			FeatureShuttles[z].Status.Calibrated := TRUE;
+		END_IF;
+		
+		IF NOT FeatureShuttles[z].Status.Calibrated THEN
+			// not done
+			done := FALSE;
+		END_IF;
+		
+	END_FOR;
+
+END_ACTION
