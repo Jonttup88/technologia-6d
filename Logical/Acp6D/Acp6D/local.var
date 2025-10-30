@@ -27,3 +27,24 @@ VAR
 	positions : Acp6DTablePositionType;
 	test : brfiSunPlanet;
 END_VAR
+(*FEATURES*)
+VAR
+	FeatureShuttles : ARRAY[0..7] OF FeatureShuttle_typ;
+	original : ARRAY[0..7] OF INT := [0,1,2,3,4,5,6,7];
+	shuffled1 : ARRAY[0..7] OF INT;
+	shuffled : ARRAY[0..7] OF INT;
+	count : USINT := 0;
+	j : INT;
+	counter : USINT;
+	ready : BOOL;
+	z : INT;
+	nextIndex : DINT;
+	minValue : INT;
+	index : DINT;
+END_VAR
+(*HMI*)
+VAR
+	TON_ResetPLC : TON;
+	R_TRIG_0 : R_TRIG;
+	R_TRIG_1 : R_TRIG;
+END_VAR

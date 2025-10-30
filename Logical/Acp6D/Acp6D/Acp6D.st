@@ -28,13 +28,13 @@ PROGRAM _INIT
 	END_FOR;
 	
 	// soundwave liikerata
-	// Victory dance logiikka aalto z-aalto aalto -> vanhoihin asemmin -> keskellä spin ja z pomppuja -> kehällä arc movella kiertoradalle ja muutamak ierros ympäri -> paririviin keinahtelemaan ja kumartamaan pelaajalle
+	// Victory dance logiikka aalto z-aalto aalto -> vanhoihin asemmin -> keskellï¿½ spin ja z pomppuja -> kehï¿½llï¿½ arc movella kiertoradalle ja muutamak ierros ympï¿½ri -> paririviin keinahtelemaan ja kumartamaan pelaajalle
 	// pelilogiikka mainiin loppuun
 	// warm restartg mainiin
-	// pelikäyttöliittymäsekvenssi
-	// Circular shuffle loppuun -> group -> arc move -> sun planet -> asyncillä user selectiin
+	// pelikï¿½yttï¿½liittymï¿½sekvenssi
+	// Circular shuffle loppuun -> group -> arc move -> sun planet -> asyncillï¿½ user selectiin
 	// sun plenet tarkistus ja fb
-	// pyöristyksiä liikeratoihin simple suffleen
+	// pyï¿½ristyksiï¿½ liikeratoihin simple suffleen
 	// circular shufflen loppuosa
 	// win asento
 	
@@ -49,6 +49,9 @@ PROGRAM _CYCLIC
 	test.SunShuttle := ADR(shuttles[4].Ref);
 	test.PlanetShuttles[0] := shuttles[3].Ref;
 	test();
+	
+	
+	HmiAction; // read inputs from HMI 
 	
 	// Inputs
 	// =================================================================================================================
@@ -187,7 +190,9 @@ PROGRAM _CYCLIC
 				task.State := ACP6D_INITIALIZE;
 				
 			ELSIF task.Input.Command.StartDemoMode THEN
+				task.Input.Command.StartDemoMode := FALSE; // Dummy - but force to FALSE still
 				task.State := ACP6D_DEMO;
+				gFeatureDemo.Cmd.StartDemo := TRUE;
 			
 			ELSIF task.Input.Command.FindPayload THEN
 				task.State := ACP6D_FIND_PAYLOAD;
@@ -249,15 +254,22 @@ PROGRAM _CYCLIC
 			
 		ACP6D_DEMO:
 			task.StateInfo := 'Running Acopos 6D feature demo';
+			
+			FeatureAction;
 			// ---------------------------------------------------------------------------------
-			IF task.Input.Command.StopDemoMode THEN
-				/// ..... Tähän kohtaan sit oma käsittely ja kun on demo taas inaktiviisiena niin hyppy COMMAND_DONE stateen
+			IF task.Input.Command.StopDemoMode AND gFeatureDemo.Active THEN
+				gFeatureDemo.Cmd.StopDemo := TRUE;
+				/// ..... Tï¿½hï¿½n kohtaan sit oma kï¿½sittely ja kun on demo taas inaktiviisiena niin hyppy COMMAND_DONE stateen
 //				//IF FEATUREMODE INACTIEV THEN
 //					task.State := ACP6D_COMMAND_DONE;
-//				END_IF
+				//				END_IF
+			ELSIF task.Input.Command.StopDemoMode THEN
+				task.Input.Command.StopDemoMode := FALSE;  // Dummy - but force to FALSE still
+				task.State := ACP6D_COMMAND_DONE;
+				gFeatureDemo.Cmd.StopDemo := FALSE;
 			END_IF;
 				
-			//task.Output.Status.DemoModeActive := // MIKÄLIE LOGIIKKA ET MILLON ON PÄÄLLÄ!
+			//task.Output.Status.DemoModeActive := // MIKï¿½LIE LOGIIKKA ET MILLON ON Pï¿½ï¿½LLï¿½!
 		
 		ACP6D_LOSE:
 			CASE task.SubState OF

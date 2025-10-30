@@ -21,10 +21,10 @@
   </Objects>
   <Configuration ModuleId="X20EM0613">
     <AutomationRuntime Version="6.0.2" />
-    <Build GccVersion="11.3.0" />
+    <Build AdditionalBuildOptions="" AnsicIncludeDirectories="" GccVersion="11.3.0" />
     <DefaultTargetMemory Tasks="UserROM" />
     <Transfer AddToUserPart="False" AdditionalUserDir="" AllowDowngrade="False" AllowInitialTransfer="False" AllowPartitioning="False" ExecuteInitExitProgram="False" ForceInitialTransfer="False" IdentificationTypeValue="" IgnoreVersion="True" KeepNonVolatileMemory="False" PreserveVariableValues="True" ProjectConsistent="True" RebootDuringTransfer="False" SavedOfflineInstallationFolder="" SavedPipDestinationFolder="" SavedRuntimeUtilityCenterPackagePath="" TargetIdentificationType="Always" TryToBootInRunMode="False" UserFilesIgnoreDifference="True" />
     <Vc FirmwareVersion="6.0.0" />
-    <OnlineConfiguration Name="X20EM0613" DeviceType="TCPIP" DeviceParameters="/IF=tcpip" ConnectionParameters="/COMT=2500 /AM=* /SDT=5 /IP=192.168.125.201 /PT=11169" Description="" />
+    <OnlineConfiguration Name="Automatic ARSim connection" DeviceType="TCPIP" DeviceParameters="/IF=tcpip /LOPO=11159 /SA=1" ConnectionParameters="/COMT=2500 /ANSL=1 /AM=* /IP=127.0.0.1 /PT=11169" Description="" />
   </Configuration>
 </Cpu>

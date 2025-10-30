@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SVG Rect with Inverted Y, Snap & Adaptive Ribbon</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  svg {
+    background: #111;
+    border: 1px solid #444;
+    touch-action: none;
+  }
+  rect {
+    cursor: move;
+  }
+  .ribbon-button:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<svg id="svgCanvas" width="600" height="400"></svg>
+
+<script>
+(() => {
+  const svg = document.getElementById("svgCanvas");
+  const GRID_SIZE = 60;
+  const EDGE_SIZE = 10;
+  let rect = null;
+  let ribbon = null;
+  let action = null;
+  let offset = { x: 0, y: 0 };
+  let start = { x: 0, y: 0 };
+  let rectBox = {};
+
+  const getPointer = (e) => e.touches ? e.touches[0] : e;
+  const snap = (val) => Math.round(val / GRID_SIZE) * GRID_SIZE;
+
+  // ---- Create rect on double click ----
+  svg.addEventListener("dblclick", (e) => {
+    const p = getPointer(e);
+    const svgRect = svg.getBoundingClientRect();
+    const svgHeight = parseFloat(svg.getAttribute("height"));
+    const x = p.clientX - svgRect.left;
+    const y = p.clientY - svgRect.top;
+
+    // Invert Y for coordinate system
+    const invertedY = svgHeight - y;
+
+    if (rect) {
+      svg.removeChild(rect);
+      if (ribbon) svg.removeChild(ribbon);
+    }
+
+    rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    rect.setAttribute("x", snap(x - 50));
+    rect.setAttribute("y", snap(invertedY - 30 - 60)); // Adjust rect height offset
+    rect.setAttribute("width", snap(100));
+    rect.setAttribute("height", snap(60));
+    rect.setAttribute("stroke", "rgba(173,255,47,1)");
+    rect.setAttribute("stroke-width", "3");
+    rect.setAttribute("stroke-dasharray", "10");
+    rect.setAttribute("fill", "rgba(255,255,255,0.1)");
+    rect.setAttribute("rx", "4");
+    rect.setAttribute("ry", "4");
+    svg.appendChild(rect);
+
+    createRibbon();
+    positionRibbon();
+  });
+
+  // ---- Create Ribbon UI ----
+  function createRibbon() {
+    ribbon = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    ribbon.setAttribute("id", "ribbon");
+
+    // Background
+    const bg = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    bg.setAttribute("width", 100);
+    bg.setAttribute("height", 40);
+    bg.setAttribute("rx", 8);
+    bg.setAttribute("ry", 8);
+    bg.setAttribute("fill", "rgba(0,0,0,0.7)");
+    bg.setAttribute("stroke", "rgba(173,255,47,0.6)");
+    bg.setAttribute("stroke-width", 2);
+    bg.setAttribute("filter", "drop-shadow(0 2px 4px rgba(0,0,0,0.5))");
+    ribbon.appendChild(bg);
+
+    // ✔ button
+    const check = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    check.setAttribute("x", 28);
+    check.setAttribute("y", 26);
+    check.setAttribute("fill", "lime");
+    check.setAttribute("font-size", "24");
+    check.textContent = "✔";
+    check.classList.add("ribbon-button");
+    check.addEventListener("click", applyRect);
+    check.addEventListener("touchstart", applyRect);
+    ribbon.appendChild(check);
+
+    // 🗑 button
+    const del = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    del.setAttribute("x", 68);
+    del.setAttribute("y", 26);
+    del.setAttribute("fill", "red");
+    del.setAttribute("font-size", "24");
+    del.textContent = "🗑";
+    del.classList.add("ribbon-button");
+    del.addEventListener("click", deleteRect);
+    del.addEventListener("touchstart", deleteRect);
+    ribbon.appendChild(del);
+
+    svg.appendChild(ribbon);
+  }
+
+  // ---- Position Ribbon (auto above/below) ----
+  function positionRibbon() {
+    if (!rect || !ribbon) return;
+
+    const svgHeight = parseFloat(svg.getAttribute("height"));
+    const x = parseFloat(rect.getAttribute("x"));
+    const y = parseFloat(rect.getAttribute("y"));
+    const width = parseFloat(rect.getAttribute("width"));
+    const height = parseFloat(rect.getAttribute("height"));
+
+    // Convert inverted y back for UI placement
+    const realY = svgHeight - (y + height);
+
+    let ribbonY = realY - 50; // above by default
+
+    if (realY < 60) {
+      ribbonY = realY + height + 10; // below if near top
+    }
+
+    const displayY = svgHeight - ribbonY - 40;
+    ribbon.setAttribute("transform", `translate(${x + width / 2 - 50}, ${displayY})`);
+  }
+
+  function applyRect() {
+    if (!rect) return;
+    rect.setAttribute("stroke-dasharray", "0");
+    if (ribbon) svg.removeChild(ribbon);
+    ribbon = null;
+  }
+
+  function deleteRect() {
+    if (rect) svg.removeChild(rect);
+    if (ribbon) svg.removeChild(ribbon);
+    rect = null;
+    ribbon = null;
+  }
+
+  // ---- Interaction handling ----
+  function onDown(e) {
+    if (!rect) return;
+    const svgHeight = parseFloat(svg.getAttribute("height"));
+    const p = getPointer(e);
+    const svgRect = svg.getBoundingClientRect();
+    const x = p.clientX - svgRect.left;
+    const y = p.clientY - svgRect.top;
+    const invertedY = svgHeight - y;
+    rectBox = rect.getBBox();
+
+    const nearRight = Math.abs(x - (rectBox.x + rectBox.width)) < EDGE_SIZE;
+    const nearTop = Math.abs(invertedY - rectBox.y) < EDGE_SIZE;
+    const nearBottom = Math.abs(invertedY - (rectBox.y + rectBox.height)) < EDGE_SIZE;
+    const nearLeft = Math.abs(x - rectBox.x) < EDGE_SIZE;
+
+    if (nearRight || nearBottom || nearLeft || nearTop) {
+      action = "resize";
+      start = { x, y: invertedY };
+    } else if (
+      x >= rectBox.x && x <= rectBox.x + rectBox.width &&
+      invertedY >= rectBox.y && invertedY <= rectBox.y + rectBox.height
+    ) {
+      action = "move";
+      offset.x = x - rectBox.x;
+      offset.y = invertedY - rectBox.y;
+    } else return;
+
+    e.preventDefault();
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+    window.addEventListener("touchmove", onMove, { passive: false });
+    window.addEventListener("touchend", onUp);
+  }
+
+  function onMove(e) {
+    if (!action || !rect) return;
+    e.preventDefault();
+    const svgHeight = parseFloat(svg.getAttribute("height"));
+    const p = getPointer(e);
+    const svgRect = svg.getBoundingClientRect();
+    const x = p.clientX - svgRect.left;
+    const y = p.clientY - svgRect.top;
+    const invertedY = svgHeight - y;
+
+    if (action === "move") {
+      const newX = snap(x - offset.x);
+      const newY = snap(invertedY - offset.y);
+      rect.setAttribute("x", newX);
+      rect.setAttribute("y", newY);
+    } else if (action === "resize") {
+      const newW = Math.max(20, rectBox.width + (x - start.x));
+      const newH = Math.max(20, rectBox.height + (invertedY - start.y));
+      rect.setAttribute("width", snap(newW));
+      rect.setAttribute("height", snap(newH));
+    }
+
+    positionRibbon();
+  }
+
+  function onUp() {
+    action = null;
+    window.removeEventListener("mousemove", onMove);
+    window.removeEventListener("mouseup", onUp);
+    window.removeEventListener("touchmove", onMove);
+    window.removeEventListener("touchend", onUp);
+  }
+
+  svg.addEventListener("mousedown", onDown);
+  svg.addEventListener("touchstart", onDown, { passive: false });
+})();
+</script>
+</body>
+</html>

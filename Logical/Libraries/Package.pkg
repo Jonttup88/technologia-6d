@@ -6,7 +6,6 @@
     <Object Type="Library" Language="binary" Description="This library contains runtime functions for IEC tasks.">runtime</Object>
     <Object Type="Library" Language="binary" Description="The AsTime Library supports DATE_AND_TIME and TIME data types.">astime</Object>
     <Object Type="Library" Language="binary" Description="This library contains function interfaces for IEC 61131-3 conversion functions.">AsIecCon</Object>
-    <Object Type="Library" Language="binary" Description="[mapp 6D] ACOPOS 6D library">McAcp6D</Object>
     <Object Type="Library" Language="binary" Description="This library contains standard function blocks and functions for IEC 61131-3.">standard</Object>
     <Object Type="Library" Language="ANSIC">RandLib</Object>
     <Object Type="Library" Language="binary" Description="The AsBrStr Library contains FBKs for memory and character string handling.">AsBrStr</Object>
@@ -18,7 +17,20 @@
     <Object Type="Library" Language="binary" Description="This library contains FBs for handling SSL configurations.">ArSsl</Object>
     <Object Type="Library" Language="Binary" Description="Advanced Safety Functions">Crypto</Object>
     <Object Type="Library" Language="binary" Description="The AsIODiag library provides functions for creating and evaluating I/O module information.">AsIODiag</Object>
-    <Object Type="Library" Language="Binary" Description="Core library for mapp components">MpBase</Object>
+    <Object Type="Library" Language="ANSIC" Description="BRDK machine unit library. Provides functionality to control machines.">brdkMU</Object>
+    <Object Type="Library" Language="binary" Description="This library contains FBKs to use semaphores.">AsSem</Object>
+    <Object Type="Library" Language="binary" Description="The SYS_LIB library contains functions for memory management and operating system manipulation as well as hardware-specific functions.">sys_lib</Object>
+    <Object Type="Library" Language="binary" Description="The BRSystem library provides the user with a number of system functions for e.g. handling permanent memory, accessing exception information, etc.">brsystem</Object>
+    <Object Type="Library" Language="ANSIC" Description="brdk string handling library. Expands string functionality.">brdkSTR</Object>
+    <Object Type="Library" Language="Binary" Description="This mechatronics library contains function blocks for filtering and basic signal processing.">MTFilter</Object>
+    <Object Type="Library" Language="binary" Description="This mechatronics library contains different system datatypes and general error numbers.">MTTypes</Object>
+    <Object Type="Library" Language="Binary" Description="This library is used to calculate matrices, vectors and systems of linear equations.">MTLinAlg</Object>
+    <Object Type="Library" Language="binary" Description="This library contains FBKs for exchanging data packets via datagram sockets (UDP).">AsUDP</Object>
+    <Object Type="Library" Language="binary" Description="This library contains FBKs for exchanging data (data stream) via stream sockets (TCP).">AsTCP</Object>
+    <Object Type="Library" Language="ANSIC">comUtil</Object>
+    <Object Type="Library" Language="ANSIC">strUtil</Object>
+    <Object Type="Library" Language="binary" Description="[mapp 6D] ACOPOS 6D library">McAcp6D</Object>
     <Object Type="Library" Language="binary" Description="[mapp Motion] Base library">McBase</Object>
+    <Object Type="Library" Language="Binary" Description="Core library for mapp components">MpBase</Object>
   </Objects>
 </Package>

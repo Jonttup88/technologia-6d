@@ -6,5 +6,7 @@
     <File Private="true">local.typ</File>
     <File Private="true">local.var</File>
     <File>Action.st</File>
+    <File>Feature.st</File>
+    <File>HMI.st</File>
   </Files>
 </Program>

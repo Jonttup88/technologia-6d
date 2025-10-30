@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EventBindingSet id="content_gamePage2" xmlns="http://www.br-automation.com/iat2014/eventbinding/v2" xmlns:types="http://www.br-automation.com/iat2015/widgetTypes/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Bindings>
+    <EventBinding id="content_gamePage2.Button1.Click">
+      <Source xsi:type="widgets.brease.Button.Event" contentRefId="content_gamePage2" widgetRefId="Button1" event="Click" />
+      <EventHandler>
+        <Action>
+          <Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:gHMI.Game.Selection">
+            <Method xsi:type="opcUa.NodeAction.SetValueNumber" value="1" />
+          </Target>
+        </Action>
+      </EventHandler>
+    </EventBinding>
+    <EventBinding id="content_gamePage2.Button2.Click">
+      <Source xsi:type="widgets.brease.Button.Event" contentRefId="content_gamePage2" widgetRefId="Button2" event="Click" />
+      <EventHandler>
+        <Action>
+          <Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:gHMI.Game.Selection">
+            <Method xsi:type="opcUa.NodeAction.SetValueNumber" value="2" />
+          </Target>
+        </Action>
+      </EventHandler>
+    </EventBinding>
+    <EventBinding id="content_gamePage2.Button3.Click">
+      <Source xsi:type="widgets.brease.Button.Event" contentRefId="content_gamePage2" widgetRefId="Button3" event="Click" />
+      <EventHandler>
+        <Action>
+          <Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:gHMI.Game.Selection">
+            <Method xsi:type="opcUa.NodeAction.SetValueNumber" value="3" />
+          </Target>
+        </Action>
+      </EventHandler>
+    </EventBinding>
+    <EventBinding id="content_gamePage2.Button4.Click">
+      <Source xsi:type="widgets.brease.Button.Event" contentRefId="content_gamePage2" widgetRefId="Button4" event="Click" />
+      <EventHandler>
+        <Action>
+          <Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:gHMI.Game.Selection">
+            <Method xsi:type="opcUa.NodeAction.SetValueNumber" value="4" />
+          </Target>
+        </Action>
+      </EventHandler>
+    </EventBinding>
+  </Bindings>
+</EventBindingSet>

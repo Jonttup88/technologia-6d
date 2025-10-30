@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Content id="content_gamePage" guid="e7604d56-75cb-4571-bdd2-d6ce5f213947" height="1000" width="1360" xmlns="http://www.br-automation.com/iat2015/contentDefinition/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Widgets>
+    <Widget xsi:type="widgets.brease.Label" id="Label1" top="140" left="0" width="1360" height="240" zIndex="0" text="Select difficulty" textColor="rgba(0, 0, 0, 1)" textAlign="center" fontSize="72px" bold="true" />
+    <Widget xsi:type="widgets.brease.Button" id="Button1" top="480" left="260" width="340" height="180" zIndex="1" text="Easy" fontSize="72px" />
+    <Widget xsi:type="widgets.brease.Button" id="Button2" top="480" left="760" width="340" height="180" zIndex="2" text="Difficult" fontSize="72px" />
+  </Widgets>
+</Content>

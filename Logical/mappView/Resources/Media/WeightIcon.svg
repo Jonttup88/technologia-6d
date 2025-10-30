@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="133px" height="115px" viewBox="-0.5 -0.5 133 115" content="&lt;mxfile host=&quot;Electron&quot; modified=&quot;2021-09-21T17:00:14.585Z&quot; agent=&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/14.6.13 Chrome/89.0.4389.128 Electron/12.0.7 Safari/537.36&quot; version=&quot;14.6.13&quot; etag=&quot;CUu_k5gQSDMsjlOTue6w&quot; type=&quot;device&quot;&gt;&lt;diagram id=&quot;H_0CNjVL9RQUMUU59lmu&quot;&gt;rZVNc5swEIZ/DVdGSMbGx5qkySGd6YwPPctIBjWCZYQc4/76Skh8GZJOOgHGIz2r1cfuq3VA0rJ9UrQufgDjMsCItQF5CDAmCJtfC24O4G3iQK4EcwiN4Cj+cAejnl4E441nDmkAqUU9hxlUFc/0jFGl4DofdgbJZqCmOV+AY0blkv4STBeOJjEa+TMXedGvHCFvKWk/2IOmoAyuE0QeA5IqAO1aZZtyaWM3j8v3d6zDxhSv9IoDnH7beGAk6cmkpBvgXPoZ8LCJYfJG3/qDK7hUjNuhUUAO10JofqxpZq1Xk2nDCl1Kbz4LKVOQoDpfco7ta3ijFbzyiWXbPdYDKj3h7hk8+lCb/R1qrkTJNVd2eVHlBiODFWiqBVS+S1XmxYMT03UnfeNK8/bdeEWTADxxMIuomxniHfBuE8bey4s3QcT1r6MUIoLCvdd0MVWCTzv1AsyHBcYcmYYPfd/1WVtPuV/8jcqLT9Jr7rU15s2eWRj9vti0/4RG+CCVgjE75tAP+CZFbg0n0BrKeT6NVms7X9nm9laHJ9qILKxB3nI72cG2UgDFusPFB/OhkMQBTlEY4yA2G0k7tl2i3Qrbb0wr+gjYOjIDNhr305D9hJnPbVSKinuVyLugZEYLXFn5+GAM4PPKvbsDDxv7fpEUk32I45kUd32dmUqxZ3Mdfl6IC+VtFspb6M44mJrM/10raFO7Qn0Wra0vK1f+C0JGCA53dyEjycrtXYkY+Z+bOxbyzjb5NySPfwE=&lt;/diagram&gt;&lt;/mxfile&gt;">
+    <defs/>
+    <g>
+        <rect x="0.51" y="103" width="130.98" height="10" rx="2.8" ry="2.8" fill="#f5f5f5" stroke="#666666" stroke-width="2" pointer-events="all"/>
+        <path d="M 50.25 52 L 75.25 52 L 91.25 52 L 109.25 100 L 109.25 100 L 17.25 100 L 38.25 52 L 54.25 52 Z" fill="#d4d4d4" stroke="#666666" stroke-miterlimit="10" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <text x="65" y="97" fill="#333333" font-family="Helvetica" font-size="12px" text-anchor="middle">kg</text>
+            </switch>
+        </g>
+        <ellipse cx="65.25" cy="44.5" rx="6.5" ry="6.5" fill="#ffffff" stroke="#000000" stroke-width="2" pointer-events="all"/>
+    </g>
+</svg>

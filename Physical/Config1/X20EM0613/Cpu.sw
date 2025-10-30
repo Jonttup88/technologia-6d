@@ -13,9 +13,13 @@
   <TaskClass Name="Cyclic#5" />
   <TaskClass Name="Cyclic#6" />
   <TaskClass Name="Cyclic#7" />
+<<<<<<< HEAD
+  <TaskClass Name="Cyclic#8" />
+=======
   <TaskClass Name="Cyclic#8">
     <Task Name="Robot" Source="Robot.Robot.prg" Memory="UserROM" Language="IEC" Debugging="true" />
   </TaskClass>
+>>>>>>> 1178b26630a328d951ab40b2e903b256e69066c8
   <NcDataObjects>
     <NcDataObject Name="McDriveLog" Source="" Memory="UserROM" Language="Binary" />
   </NcDataObjects>
@@ -24,7 +28,10 @@
     <BinaryObject Name="ArSvcReg" Source="" Memory="UserROM" Language="Binary" />
     <BinaryObject Name="FWRules" Source="" Memory="UserROM" Language="Binary" />
     <BinaryObject Name="mvLoader" Source="" Memory="UserROM" Language="Binary" />
+<<<<<<< HEAD
+=======
     <BinaryObject Name="OpcUaSrv" Source="" Memory="UserROM" Language="Binary" />
+>>>>>>> 1178b26630a328d951ab40b2e903b256e69066c8
     <BinaryObject Name="TCData" Source="" Memory="SystemROM" Language="Binary" />
     <BinaryObject Name="udbdef" Source="" Memory="UserROM" Language="Binary" />
     <BinaryObject Name="iomap" Source="" Memory="UserROM" Language="Binary" />
@@ -42,7 +49,12 @@
     <BinaryObject Name="UaCsConfig" Source="" Memory="UserROM" Language="Binary" />
   </Binaries>
   <Libraries>
+<<<<<<< HEAD
+    <LibraryObject Name="McBase" Source="Libraries.McBase.lby" Memory="UserROM" Language="Binary" Debugging="true" />
+    <LibraryObject Name="MpBase" Source="Libraries.MpBase.lby" Memory="UserROM" Language="Binary" Debugging="true" />
+=======
     <LibraryObject Name="McAcp6D" Source="Libraries.McAcp6D.lby" Memory="UserROM" Language="Binary" Debugging="true" />
+>>>>>>> 1178b26630a328d951ab40b2e903b256e69066c8
     <LibraryObject Name="standard" Source="Libraries.standard.lby" Memory="UserROM" Language="Binary" Debugging="true" />
     <LibraryObject Name="RandLib" Source="Libraries.RandLib.lby" Memory="UserROM" Language="ANSIC" Debugging="true" />
     <LibraryObject Name="AsBrStr" Source="Libraries.AsBrStr.lby" Memory="UserROM" Language="Binary" Debugging="true" />
@@ -58,12 +70,21 @@
     <LibraryObject Name="ArSsl" Source="Libraries.ArSsl.lby" Memory="UserROM" Language="Binary" Debugging="true" />
     <LibraryObject Name="Crypto" Source="Libraries.Crypto.lby" Memory="UserROM" Language="Binary" Debugging="true" />
     <LibraryObject Name="AsIODiag" Source="Libraries.AsIODiag.lby" Memory="UserROM" Language="Binary" Debugging="true" />
+<<<<<<< HEAD
+    <LibraryObject Name="McAcp6D" Source="Libraries.McAcp6D.lby" Memory="UserROM" Language="Binary" Debugging="true" />
+=======
     <LibraryObject Name="MpBase" Source="Libraries.MpBase.lby" Memory="UserROM" Language="Binary" Debugging="true" />
     <LibraryObject Name="McBase" Source="Libraries.McBase.lby" Memory="UserROM" Language="Binary" Debugging="true" />
     <LibraryObject Name="brfiDemo" Source="Acp6D.brfiDemo.lby" Memory="UserROM" Language="IEC" Debugging="true" />
+>>>>>>> 1178b26630a328d951ab40b2e903b256e69066c8
     <LibraryObject Name="sys_lib" Source="" Memory="UserROM" Language="Binary" Debugging="true" />
     <LibraryObject Name="McAcp6DSys" Source="" Memory="UserROM" Language="Binary" Debugging="true" />
     <LibraryObject Name="UaCoal" Source="" Memory="UserROM" Language="Binary" Debugging="true" />
     <LibraryObject Name="UaCoalPrv" Source="" Memory="UserROM" Language="Binary" Debugging="true" />
+<<<<<<< HEAD
+    <LibraryObject Name="comUtil" Source="Libraries.comUtil.lby" Memory="UserROM" Language="ANSIC" AdditionalLibraryDirectories="\Logical\Libraries\comUtil\IA32\" AdditionalLibraries="AR" Debugging="true" />
+    <LibraryObject Name="AsTCP" Source="Libraries.AsTCP.lby" Memory="UserROM" Language="binary" Debugging="true" />
+=======
+>>>>>>> 1178b26630a328d951ab40b2e903b256e69066c8
   </Libraries>
 </SwConfiguration>

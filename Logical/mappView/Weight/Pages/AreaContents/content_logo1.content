@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Content id="content_logo1" guid="de0bb577-9113-487a-a41d-bc6df08f7101" height="1000" width="1600" xmlns="http://www.br-automation.com/iat2015/contentDefinition/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Widgets>
+    <Widget xsi:type="widgets.brease.Image" id="Image1" top="360" left="600" width="410" height="279" zIndex="0" image="Media/BR_Logo_Tagline_below_Print_CMYK_BR_HD.png" borderColor="rgba(51, 51, 51, 0)" />
+  </Widgets>
+</Content>

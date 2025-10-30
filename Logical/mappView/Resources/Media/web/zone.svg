@@ -1,0 +1,449 @@
+<svg id="zoneSvg"  xmlns="http://www.w3.org/2000/svg" xml:space="preserve" color-interpolation-filters="sRGB" width="960" height="900" viewBox="-3.750000 -963.750000 967.500000 967.500000" preserveAspectRatio="xMidYMid meet">
+ <style>svg{fill:none; fill-rule:evenodd; font-size:12px; overflow:visible; stroke-linecap:square; stroke-miterlimit:3;}.segment.power-off {fill:#555555;}.segment.power-on {fill:#fbfbfb;}.segment.error {fill:#cb0000;}.segment.homing {fill:#c8c8c8;}.segment.stopping {fill:#666666;}.segment &gt; g &gt; rect {stroke:#666666;stroke-linecap:round;stroke-linejoin:round;stroke-width:3.750000;}.segment-cls-1,.segment-cls-2{stroke-width:7.500000 !important;}.segment-cls-2{fill:#666666;}.segment-cls-3{clip-path:url(#segment-clippath);stroke:#666666;}.segment &gt; text {fill:#020202;font-family:Calibri;font-size:2em;display: block;alignment-baseline: hanging;}  svg {
+    touch-action: none;
+  }
+  rect {
+    cursor: move;
+  }
+  .ribbon-button:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+  text{
+  -webkit-touch-callout: none;
+  -webkit-user-select:none;
+  -khtml-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  -o-user-select:none;
+  user-select:none;
+}
+  </style>
+ <defs>
+  <clipPath id="segment-240x240-clipPath">
+   <rect class="segment-cls-2" width="240.5" height="240.5" rx="3.75" ry="3.75"/>
+  </clipPath>
+  <clipPath id="segment-480x120-clipPath">
+   <rect class="segment-cls-2" width="480.5" height="120.5" rx="3.75" ry="3.75"/>
+  </clipPath>
+  <clipPath id="segment-120x480-clipPath">
+   <rect class="segment-cls-2" width="120.5" height="480.5" rx="3.75" ry="3.75"/>
+  </clipPath>
+  <clipPath id="segment-320x320-clipPath">
+   <rect class="segment-cls-2" width="320.5" height="320.5" rx="3.75" ry="3.75"/>
+  </clipPath>
+ </defs>
+ <g id="gAssembly6D_1" class="assembly">
+  <g id="Layout6D_1" class="layout" grid-size="240">
+
+   <g id="segment-1" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment1" segment-id="1" master="true" position-x="0" position-y="0" position-x-mm="0" position-y-mm="0" transform="translate(0 -240)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">1</text>
+   </g>
+   <g id="segment-2" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment2" segment-id="2" master="false" position-x="0" position-y="1" position-x-mm="0" position-y-mm="240" transform="translate(0 -480)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">2</text>
+   </g>
+   <g id="segment-3" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment3" segment-id="3" master="false" position-x="0" position-y="2" position-x-mm="0" position-y-mm="480" transform="translate(0 -720)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">3</text>
+   </g>
+   <g id="segment-4" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment4" segment-id="4" master="false" position-x="0" position-y="3" position-x-mm="0" position-y-mm="720" transform="translate(0 -960)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">4</text>
+   </g>
+   <g id="segment-5" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment5" segment-id="5" master="false" position-x="1" position-y="0" position-x-mm="240" position-y-mm="0" transform="translate(240 -240)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">5</text>
+   </g>
+   <g id="segment-6" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment6" segment-id="6" master="false" position-x="1" position-y="1" position-x-mm="240" position-y-mm="240" transform="translate(240 -480)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">6</text>
+   </g>
+   <g id="segment-7" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment7" segment-id="7" master="false" position-x="1" position-y="2" position-x-mm="240" position-y-mm="480" transform="translate(240 -720)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">7</text>
+   </g>
+   <g id="segment-8" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment8" segment-id="8" master="false" position-x="1" position-y="3" position-x-mm="240" position-y-mm="720" transform="translate(240 -960)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">8</text>
+   </g>
+   <g id="segment-9" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment9" segment-id="9" master="false" position-x="2" position-y="0" position-x-mm="480" position-y-mm="0" transform="translate(480 -240)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">9</text>
+   </g>
+   <g id="segment-10" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment10" segment-id="10" master="false" position-x="2" position-y="1" position-x-mm="480" position-y-mm="240" transform="translate(480 -480)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">10</text>
+   </g>
+   <g id="segment-11" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment11" segment-id="11" master="false" position-x="2" position-y="2" position-x-mm="480" position-y-mm="480" transform="translate(480 -720)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">11</text>
+   </g>
+   <g id="segment-12" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment12" segment-id="12" master="false" position-x="2" position-y="3" position-x-mm="480" position-y-mm="720" transform="translate(480 -960)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">12</text>
+   </g>
+   <g id="segment-13" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment13" segment-id="13" master="false" position-x="3" position-y="0" position-x-mm="720" position-y-mm="0" transform="translate(720 -240)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">13</text>
+   </g>
+   <g id="segment-14" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment14" segment-id="14" master="false" position-x="3" position-y="1" position-x-mm="720" position-y-mm="240" transform="translate(720 -480)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">14</text>
+   </g>
+   <g id="segment-15" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment15" segment-id="15" master="false" position-x="3" position-y="2" position-x-mm="720" position-y-mm="480" transform="translate(720 -720)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">15</text>
+   </g>
+   <g id="segment-16" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment16" segment-id="16" master="false" position-x="3" position-y="3" position-x-mm="720" position-y-mm="720" transform="translate(720 -960)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">16</text>
+   </g>
+   
+   
+   
+   
+  </g>
+  <g id="myZones">
+	  <g transform="translate(0 -240)">
+		<g transform="translate(2 2)">
+		 <rect width="236" height="236" rx="3.75" ry="3.75" stroke="rgba(173,255,47,1)" stroke-width="3" stroke-dasharray="10" />
+		</g>
+	 </g>
+  </g>
+  
+  <g id="myPreviewZones">
+	  
+  </g>
+  <g class="power-sectors"/>
+  <g class="shuttles"/>
+ </g>
+ 
+ <script>
+    // <![CDATA[
+	
+	
+(() => {
+  const svg = document.getElementById("zoneSvg");
+  const GRID_SIZE = 60;
+  const EDGE_SIZE = 10;
+  let rect = null;
+  let ribbon = null;
+  let action = null;
+  let offset = { x: 0, y: 0 };
+  let start = { x: 0, y: 0 };
+  let rectBox = {};
+
+  const getPointer = (e) => e.touches ? e.touches[0] : e;
+  const snap = (val) => Math.round(val / GRID_SIZE) * GRID_SIZE;
+
+  // ---- Create rect on double click ----
+  svg.addEventListener("dblclick", (e) => {
+    const p = getPointer(e);
+    const svgRect = svg.getBoundingClientRect();
+    const x = p.clientX - svgRect.left;
+    const y = p.clientY - svgRect.top;
+
+    if (rect) {
+      svg.removeChild(rect);
+      if (ribbon) svg.removeChild(ribbon);
+    }
+
+    rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    rect.setAttribute("x", snap(240));
+    rect.setAttribute("y", snap(0));
+    rect.setAttribute("width", snap(240));
+    rect.setAttribute("height", snap(240));
+    rect.setAttribute("stroke", "blue");
+    rect.setAttribute("stroke-width", "3");
+    rect.setAttribute("stroke-dasharray", "10");
+    rect.setAttribute("fill", "rgba(0,0,255,0.7)");
+    rect.setAttribute("rx", "4");
+    rect.setAttribute("ry", "4");
+	rect.setAttribute('transform','translate(0,-960)');
+    svg.appendChild(rect);
+
+    createRibbon();
+    positionRibbon();
+  });
+
+  // ---- Create Ribbon UI ----
+  function createRibbon() {
+    ribbon = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    ribbon.setAttribute("id", "ribbon");
+
+    // Background
+    const bg = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    bg.setAttribute("width", 100);
+    bg.setAttribute("height", 40);
+    bg.setAttribute("rx", 8);
+    bg.setAttribute("ry", 8);
+    bg.setAttribute("fill", "rgba(127,127,127,0.5)");
+    bg.setAttribute("stroke", "rgba(173,255,47,0.6)");
+    bg.setAttribute("stroke-width", 2);
+    bg.setAttribute("filter", "drop-shadow(0 2px 4px rgba(0,0,0,0.5))");
+    ribbon.appendChild(bg);
+
+    // ✔ button
+    const check = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    check.setAttribute("x", 28);
+    check.setAttribute("y", 26);
+    check.setAttribute("fill", "lime");
+    check.setAttribute("font-size", "24");
+    check.textContent = "✔";
+    check.classList.add("ribbon-button");
+    check.addEventListener("click", applyRect);
+    check.addEventListener("touchstart", applyRect);
+    ribbon.appendChild(check);
+
+    // 🗑 button
+    const del = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    del.setAttribute("x", 68);
+    del.setAttribute("y", 26);
+    del.setAttribute("fill", "red");
+    del.setAttribute("font-size", "24");
+    del.textContent = "🗑";
+    del.classList.add("ribbon-button");
+    del.addEventListener("click", deleteRect);
+    del.addEventListener("touchstart", deleteRect);
+    ribbon.appendChild(del);
+
+    svg.appendChild(ribbon);
+  }
+
+  // ---- Position Ribbon (above or below depending on rect position) ----
+  function positionRibbon() {
+    if (!rect || !ribbon) return;
+
+    const x = parseFloat(rect.getAttribute("x"));
+    const y = parseFloat(rect.getAttribute("y"));
+    const width = parseFloat(rect.getAttribute("width"));
+    const height = parseFloat(rect.getAttribute("height"));
+    const svgHeight = parseFloat(svg.getAttribute("height"));
+
+    // Default position: above
+    let ribbonY = y - 50;
+
+    // If near top edge, show below instead
+    if (y < 60) {
+      ribbonY = y + height + 10;
+    }
+
+    // Prevent going beyond bottom of SVG
+    if (ribbonY + 40 > svgHeight) {
+      ribbonY = svgHeight - 50;
+    }
+
+    ribbon.setAttribute("transform", `translate(${x + width / 2 - 50}, ${ribbonY-960})`);
+  }
+
+  function applyRect() {
+	console.log(rect);
+	var topRight = {x:(parseFloat(rect.getAttribute('x'))+parseFloat(rect.getAttribute('width')))/1000,y:(960-parseFloat(rect.getAttribute('y')))/1000};
+	var bottomLeft = {x:(parseFloat(rect.getAttribute('x')))/1000,y:(960-parseFloat(rect.getAttribute('y'))-parseFloat(rect.getAttribute('height')))/1000};
+	console.log(topRight,bottomLeft);
+    if (rect) svg.removeChild(rect);
+    if (ribbon) svg.removeChild(ribbon);
+    rect = null;
+    ribbon = null;
+	doSend(`{"cmd":"write","parameter":[{"variable":"gFeatureDemo.newZoneData.BottomLeft.X","value":"${bottomLeft.x}"},{"variable":"gFeatureDemo.newZoneData.BottomLeft.Y","value":"${bottomLeft.y}"},{"variable":"gFeatureDemo.newZoneData.TopRight.X","value":"${topRight.x}"},{"variable":"gFeatureDemo.newZoneData.TopRight.Y","value":"${topRight.y}"},{"variable":"gFeatureDemo.Cmd.newZone","value":"1"}]}`);
+  }
+
+  function deleteRect() {
+    if (rect) svg.removeChild(rect);
+    if (ribbon) svg.removeChild(ribbon);
+    rect = null;
+    ribbon = null;
+  }
+
+  // ---- Interaction handling ----
+  function onDown(e) {
+    if (!rect) return;
+    const p = getPointer(e);
+    const svgRect = svg.getBoundingClientRect();
+    const x = p.clientX - svgRect.left;
+    const y = p.clientY - svgRect.top;
+    rectBox = rect.getBBox();
+
+    const nearRight = Math.abs(x - (rectBox.x + rectBox.width)) < EDGE_SIZE;
+    const nearBottom = Math.abs(y - (rectBox.y + rectBox.height)) < EDGE_SIZE;
+    const nearLeft = Math.abs(x - rectBox.x) < EDGE_SIZE;
+    const nearTop = Math.abs(y - rectBox.y) < EDGE_SIZE;
+
+    if (nearRight || nearBottom || nearLeft || nearTop) {
+      action = "resize";
+      start = { x, y };
+    } else if (
+      x >= rectBox.x && x <= rectBox.x + rectBox.width &&
+      y >= rectBox.y && y <= rectBox.y + rectBox.height
+    ) {
+      action = "move";
+      offset.x = x - rectBox.x;
+      offset.y = y - rectBox.y;
+    } else return;
+
+    e.preventDefault();
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+    window.addEventListener("touchmove", onMove, { passive: false });
+    window.addEventListener("touchend", onUp);
+  }
+
+  function onMove(e) {
+    if (!action || !rect) return;
+    e.preventDefault();
+    const p = getPointer(e);
+    const svgRect = svg.getBoundingClientRect();
+    const x = p.clientX - svgRect.left;
+    const y = p.clientY - svgRect.top;
+
+    if (action === "move") {
+      const newX = snap(x - offset.x);
+      const newY = snap(y - offset.y);
+      rect.setAttribute("x", newX);
+      rect.setAttribute("y", newY);
+    } else if (action === "resize") {
+      const newW = Math.max(20, rectBox.width + (x - start.x));
+      const newH = Math.max(20, rectBox.height + (y - start.y));
+      rect.setAttribute("width", snap(newW));
+      rect.setAttribute("height", snap(newH));
+    }
+
+    positionRibbon();
+  }
+
+  function onUp() {
+    action = null;
+    window.removeEventListener("mousemove", onMove);
+    window.removeEventListener("mouseup", onUp);
+    window.removeEventListener("touchmove", onMove);
+    window.removeEventListener("touchend", onUp);
+  }
+
+  svg.addEventListener("mousedown", onDown);
+  svg.addEventListener("touchstart", onDown, { passive: false });
+})();
+	
+	
+	
+	
+    const wsUri = "ws://"+window.location.hostname+":8889";
+    const websocket = new WebSocket(wsUri);
+
+    websocket.onopen = (e) => {
+      writeToScreen("CONNECTED");
+	  const text = '{"cmd":"monitor","pvName":"gHMI.Zone"}';
+
+      text && doSend(text);
+    };
+
+    websocket.onclose = (e) => {
+      writeToScreen("DISCONNECTED");
+    };
+
+    websocket.onmessage = (e) => {
+	  var receivedData = JSON.parse(e.data);
+	  if(receivedData.status == "valueChanged")
+	  {
+		for(var i = 0; i < receivedData.data.length; ++i)
+		{
+			if(receivedData.data[i]["Sim.Robots"])
+			{
+				//read robot data
+				callMyRobotFunction(receivedData.data[i]["Sim.Robots"]);
+			}
+			else if(receivedData.data[i]["Sim.Arrays"])
+			{
+				//do somthing with array data
+				callMyArrayFunction(receivedData.data[i]["Sim.Arrays"]);
+			}
+			else
+			{
+				var myZones = document.getElementById("myZones");
+				var myPreviewZones = document.getElementById("myPreviewZones");
+				var topRight = receivedData.data[i]["gHMI.Zone"]["Active"]["TopRight"];
+				if(topRight)
+				{
+					var topRight1 = receivedData.data[i]["gHMI.Zone"]["Preview"]["TopRight"];
+					
+					var bottomLeft = receivedData.data[i]["gHMI.Zone"]["Active"]["BottomLeft"];
+					var bottomLeft1 = receivedData.data[i]["gHMI.Zone"]["Preview"]["BottomLeft"];
+					var width = parseFloat(topRight.X)*1000 - parseFloat(bottomLeft.X)*1000;
+					var height = parseFloat(topRight.Y)*1000 - parseFloat(bottomLeft.Y)*1000;
+					var width1 = parseFloat(topRight1.X)*1000 - parseFloat(bottomLeft1.X)*1000;
+					var height1 = parseFloat(topRight1.Y)*1000 - parseFloat(bottomLeft1.Y)*1000;
+
+					myZones.innerHTML = `
+						<g transform="translate(${(parseFloat(topRight.X)*1000-width)} -${(parseFloat(topRight.Y)*1000)})">
+							<g transform="translate(3 3)">
+								<rect width="${(width-6)}" height="${(height-6)}" rx="3.75" ry="3.75" stroke="rgba(173,255,47,1)" fill="rgba(173,255,47,0.5)" stroke-width="3" stroke-dasharray="10" />
+							</g>
+						</g>
+					 `;
+					 
+					 myPreviewZones.innerHTML = `
+							 <g transform="translate(${(parseFloat(topRight1.X)*1000-width1)} -${(parseFloat(topRight1.Y)*1000)})">
+								<g transform="translate(2 2)">
+								 <rect width="${(width1-6)}" height="${(height1-6)}" rx="3.75" ry="3.75" stroke="orange" stroke-width="3" fill="rgba(255,69,0,0.3)" stroke-dasharray="10" />
+								</g>
+							 </g>
+					 `;
+					 
+					 
+					 
+				 }
+			}
+		}
+	  }
+    };
+
+    websocket.onerror = (e) => {
+      
+    };
+
+    function doSend(message) {
+      websocket.send(message);
+    }
+
+    function writeToScreen(message) {
+    }
+
+	
+    // ]]>
+  </script>
+ 
+ 
+</svg>
