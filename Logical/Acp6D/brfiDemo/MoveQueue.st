@@ -19,6 +19,8 @@ FUNCTION_BLOCK brfi6DMoveQueue
 			// ------------------------------------------------------
 			IF Execute THEN
 				internal.initialized := TRUE;
+				dummyDone := TRUE;
+				refAllCommandsDone ACCESS ADR(dummyDone);
 				brsmemset(ADR(FailedCommand), 0, SIZEOF(FailedCommand));
 				brsmemset(ADR(cmd), 0, SIZEOF(cmd));
 				FailedCommandIndex := -1;
@@ -353,7 +355,7 @@ FUNCTION_BLOCK brfi6DMoveQueue
 			// If pointer is not set then just indicate all done as this means queue contained
 			// no valid commands and nothing was queued to 6D controller. 
 			// Otherwise wait for the last called function block to finish to indicate shuttles has
-			// executed all of its queued commands
+			// executed all of its queued commands			
 			IF ADR(refAllCommandsDone) = 0 THEN
 				actions.done := TRUE;
 			ELSE

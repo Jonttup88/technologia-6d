@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD:Logical/mappView/Layouts/Landscape16_9.layout
 <ldef:Layout id="Landscape16_9" height="1000" width="1600" xmlns:ldef="http://www.br-automation.com/iat2015/layoutDefinition/v2">
+=======
+<ldef:Layout id="layout_1" height="1000" width="1600" xmlns:ldef="http://www.br-automation.com/iat2015/layoutDefinition/v2">
+>>>>>>> fb0ee170c7ef1b8c25e2bf60105b6f6218a5151b:Logical/mappView/Layouts/layout_1.layout
   <Areas>
     <Area id="AreaContent" height="1000" width="1360" left="240" top="0" zIndex="0" />
     <Area id="AreaNavigation" height="1000" width="240" left="0" top="0" zIndex="1" />

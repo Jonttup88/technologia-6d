@@ -5,5 +5,9 @@
 <Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.Weight.Payload" attribute="value" />
 <Target xsi:type="brease" contentRefId="content_weight" widgetRefId="NumericOutput1" attribute="value" />
 </Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.Weight.StoreOffset" attribute="value" />
+<Target xsi:type="brease" contentRefId="content_weight" widgetRefId="ToggleButton1" attribute="value" />
+</Binding>
 </Bindings>
 </BindingsSet>

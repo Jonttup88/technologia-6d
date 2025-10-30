@@ -16,6 +16,7 @@
     <Page refId="page_gameSelect8" />
     <Page refId="page_gameWin" />
     <Page refId="page_gameLose" />
+    <Page refId="page_gameWaitReveal" />
   </Pages>
   <Navigations />
   <BindingsSets>
@@ -46,12 +47,15 @@
     <Content refId="content_gamePage3" />
     <Content refId="content_gamePage4" />
     <Content refId="content_gamePage5" />
+    <Content refId="content_gamePage6" />
   </Contents>
   <SnippetsSets />
   <VariablesSets>
     <VariablesSet refId="vars" />
   </VariablesSets>
-  <ExpressionsSets />
+  <ExpressionsSets>
+    <ExpressionsSet refId="expression_0" />
+  </ExpressionsSets>
   <StartTheme themeRefId="BuRTheme" />
   <Themes>
     <Theme refId="BuRTheme" />

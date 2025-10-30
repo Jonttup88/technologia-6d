@@ -61,12 +61,21 @@ FUNCTION brfiShuttleSelect
 		key := Selection[i];
 		j := i - 1;
 		
-		// Compare key with each element on the LEFT OF it UNTIL an element smaller than it is found
-		WHILE j >= 0 AND brfiSortCompare(key, Selection[j], (X0 < X1), (Y0 < Y1)) DO
-			Selection[j + 1] := Selection[j];
-			j := j - 1;
-			Selection[j + 1] := key;
-		END_WHILE;
+		IF byX THEN
+			// Compare key with each element on the LEFT OF it UNTIL an element smaller than it is found
+			WHILE j >= 0 AND brfiSortCompare(key, Selection[j], (X0 < X1), (Y0 < Y1)) DO
+				Selection[j + 1] := Selection[j];
+				j := j - 1;
+				Selection[j + 1] := key;
+			END_WHILE;
+		ELSE
+			// Compare key with each element on the LEFT OF it UNTIL an element smaller than it is found
+			WHILE j >= 0 AND brfiSortCompareY(key, Selection[j], (X0 < X1), (Y0 < Y1)) DO
+				Selection[j + 1] := Selection[j];
+				j := j - 1;
+				Selection[j + 1] := key;
+			END_WHILE;	
+		END_IF;
 	END_FOR
 	
 END_FUNCTION
@@ -120,6 +129,44 @@ FUNCTION brfiSortCompare
 			// Y needs to be sorted in descending order
 			IF A.y > B.y THEN
 				brfiSortCompare := TRUE;
+				RETURN;
+			END_IF;  
+		END_IF;  
+	END_IF;
+		
+END_FUNCTION
+
+FUNCTION brfiSortCompareY
+	// Comparison function for two pairs (A, B)
+	
+	IF AscendingY THEN
+		// X needs to be sorted in ascending order
+		IF A.y < B.y THEN
+			brfiSortCompareY := TRUE;
+			RETURN;
+		END_IF;  
+	ELSE
+		// X needs to be sorted in descending order
+		IF A.y > B.y THEN
+			brfiSortCompareY := TRUE;
+			RETURN;
+		END_IF;  
+	END_IF;
+	
+	isEqualX := ABS(A.y - B.y) < 0.001;
+	
+	IF isEqualX THEN
+		// Only sort by Y if X is equal as we primarily sort by X
+		IF AscendingX THEN
+			// Y needs to be sorted in ascending order
+			IF A.x < B.x THEN
+				brfiSortCompareY := TRUE;
+				RETURN;
+			END_IF;  
+		ELSE
+			// Y needs to be sorted in descending order
+			IF A.x > B.x THEN
+				brfiSortCompareY := TRUE;
 				RETURN;
 			END_IF;  
 		END_IF;  

@@ -4,6 +4,7 @@
   <Pages>
     <Page refId="page_0" />
     <Page refId="page_1" />
+    <Page refId="page_gameWaitReveal" />
   </Pages>
   <Navigations />
   <BindingsSets>
@@ -16,10 +17,14 @@
   </EventBindingsSets>
   <EventScriptsSets />
   <Dialogs />
-  <Contents preCache="all" />
+  <Contents preCache="all">
+    <Content refId="content_gamePage6" />
+  </Contents>
   <SnippetsSets />
   <VariablesSets />
-  <ExpressionsSets />
+  <ExpressionsSets>
+    <ExpressionsSet refId="expression_0" />
+  </ExpressionsSets>
   <StartTheme themeRefId="BuRTheme" />
   <Themes>
     <Theme refId="BuRTheme" />

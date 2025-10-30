@@ -21,7 +21,7 @@
       </EventHandler>
     </EventBinding>
     <EventBinding id="EventBinding_4">
-      <Source xsi:type="opcUa.Event" refId="::AsGlobalPV:gHMI.Game.GameFinished" event="ValueChanged" />
+      <Source xsi:type="opcUa.Event" refId="::AsGlobalPV:gHMI.Game.GameShuffleFinished" event="ValueChanged" />
       <EventHandler condition="newValue">
         <Action>
           <ReadTarget xsi:type="opcUa.NodeAction.Read" refId="::AsGlobalPV:gHMI.Game.Mode">
@@ -39,32 +39,6 @@
               <Action>
                 <Target xsi:type="clientSystem.Action">
                   <Method xsi:type="clientSystem.Action.Navigate" pageId="page_gameSelect4" />
-                </Target>
-              </Action>
-            </ResultHandler>
-          </Result>
-        </Action>
-      </EventHandler>
-    </EventBinding>
-    <EventBinding id="EventBinding_5">
-      <Source xsi:type="opcUa.Event" refId="::AsGlobalPV:gHMI.Game.Selection" event="ValueChanged" />
-      <EventHandler condition="newValue &gt; 0">
-        <Action>
-          <ReadTarget xsi:type="opcUa.NodeAction.Read" refId="::AsGlobalPV:gHMI.Game.CorrectShuttle">
-            <Method xsi:type="opcUa.NodeAction.GetValue" />
-          </ReadTarget>
-          <Result>
-            <ResultHandler condition="newValue = result">
-              <Action>
-                <Target xsi:type="clientSystem.Action">
-                  <Method xsi:type="clientSystem.Action.Navigate" pageId="page_gameWin" />
-                </Target>
-              </Action>
-            </ResultHandler>
-            <ResultHandler condition="NOT (newValue = result)">
-              <Action>
-                <Target xsi:type="clientSystem.Action">
-                  <Method xsi:type="clientSystem.Action.Navigate" pageId="page_gameLose" />
                 </Target>
               </Action>
             </ResultHandler>
@@ -95,6 +69,42 @@
               </Action>
             </ResultHandler>
           </Result>
+        </Action>
+      </EventHandler>
+    </EventBinding>
+    <EventBinding id="EventBinding_5">
+      <Source xsi:type="opcUa.Event" refId="::AsGlobalPV:gHMI.Game.EndUserSelection" event="ValueChanged" />
+      <EventHandler condition="newValue &gt; 0">
+        <Action>
+          <ReadTarget xsi:type="opcUa.NodeAction.Read" refId="::AsGlobalPV:gHMI.Game.CorrectShuttle">
+            <Method xsi:type="opcUa.NodeAction.GetValue" />
+          </ReadTarget>
+          <Result>
+            <ResultHandler condition="newValue = result">
+              <Action>
+                <Target xsi:type="clientSystem.Action">
+                  <Method xsi:type="clientSystem.Action.Navigate" pageId="page_gameWin" />
+                </Target>
+              </Action>
+            </ResultHandler>
+            <ResultHandler condition="NOT (newValue = result)">
+              <Action>
+                <Target xsi:type="clientSystem.Action">
+                  <Method xsi:type="clientSystem.Action.Navigate" pageId="page_gameLose" />
+                </Target>
+              </Action>
+            </ResultHandler>
+          </Result>
+        </Action>
+      </EventHandler>
+    </EventBinding>
+    <EventBinding id="EventBinding_7">
+      <Source xsi:type="opcUa.Event" refId="::AsGlobalPV:gHMI.Game.Selection" event="ValueChanged" />
+      <EventHandler condition="newValue &gt; 0">
+        <Action>
+          <Target xsi:type="clientSystem.Action">
+            <Method xsi:type="clientSystem.Action.Navigate" pageId="page_gameWaitReveal" />
+          </Target>
         </Action>
       </EventHandler>
     </EventBinding>

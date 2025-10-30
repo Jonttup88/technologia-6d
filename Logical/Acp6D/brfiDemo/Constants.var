@@ -2,7 +2,7 @@ VAR CONSTANT
 	MEASUREMENT_COUNT : DINT := 10;
 	MAX_NUM_SHUTTLE : DINT := 8; (*Maximum numer of shuttles on the system*)
 	MAX_NUM_SHUTTLE_VIRTUAL : DINT := 2; (*Maximum numer of shuttles on the system*)
-	MAX_NUM_TARGETS : DINT := 20; (*Maximum numer of shuttles on the system*)
+	MAX_NUM_TARGETS : DINT := 30; (*Maximum numer of shuttles on the system*)
 	SHUFFLE_SEQUENCE_LEN : DINT := 16;
 END_VAR
 (**)

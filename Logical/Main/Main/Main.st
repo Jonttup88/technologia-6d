@@ -15,7 +15,12 @@ PROGRAM _CYCLIC
     // =================================================================================================================
 	task ACCESS ADR(gMain);
 
-
+	R_TRIG_0.CLK := (gHMI.Game.Mode > 0);
+	R_TRIG_0;
+	
+	IF R_TRIG_0.Q THEN
+		task.Input.Command.StartGame := TRUE;
+	END_IF;
 	// Inputs
 	// =================================================================================================================
 	IF NOT task.Input.Force THEN
@@ -30,12 +35,8 @@ PROGRAM _CYCLIC
 				0:
 					task.StateInfo := 'Wait robot communication';
 					// ---------------------------------------------------------------------------------
-					IF gRobot.Output.Status.CommunicationOk AND gRobot.Output.Status.RobReady THEN
+					IF (gRobot.Output.Status.CommunicationOk AND gRobot.Output.Status.RobReady) OR task.IsSimulated THEN
 						task.SubState := 10;	
-					END_IF;
-					
-					IF task.IsSimulated THEN
-						task.State := MAIN_IDLE;
 					END_IF;
 				
 				10:
@@ -43,11 +44,18 @@ PROGRAM _CYCLIC
 					// ---------------------------------------------------------------------------------		
 					local.actions.substate.robHome := TRUE;
 					
-					IF gRobot.Output.Status.RobPhaseDone THEN
+					IF gRobot.Output.Status.RobPhaseDone OR task.IsSimulated THEN
 						task.SubState := 20;
 					END_IF;
 					
 				20:
+					task.StateInfo := 'Wait 6D controller to startup';
+					// ---------------------------------------------------------------------------------			
+					IF gAcp6D.Output.Status.Initialized THEN
+						task.SubState := 30;
+					END_IF;
+					
+				30:
 					task.StateInfo := '6D Shuttles to home';
 					// ---------------------------------------------------------------------------------			
 					local.actions.substate.br6dHome := TRUE;
@@ -102,6 +110,8 @@ PROGRAM _CYCLIC
 				task.State := MAIN_RESET;
 				
 			ELSIF task.Input.Command.StartGame THEN
+				task.Input.Command.StartGame := FALSE; // dummy - reset caller
+			
 				task.State := MAIN_GAME;
 					
 				//			ELSIF task.Input.Command. THEN
@@ -120,14 +130,7 @@ PROGRAM _CYCLIC
 					IF gRobot.Output.Status.CommandDone THEN
 						task.SubState := 10;
 					END_IF;
-					
-				10:
-					task.StateInfo := 'Wait 6D controller to startup';
-					// ---------------------------------------------------------------------------------			
-					IF gAcp6D.Output.Status.Initialized THEN
-						task.SubState := 20;
-					END_IF;
-				
+
 				20:
 					task.StateInfo := '6D Shuttles to home';
 					// ---------------------------------------------------------------------------------			

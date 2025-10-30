@@ -92,6 +92,82 @@ ACTION acInitializePositions:
 		END_IF;  
 	END_FOR;
 	
+	// Letters
+	// ---------------------------------------------------------------------------------------
+	positions._L[0].X := 0.24 * 3 - 0.06;
+	positions._L[0].Y := 0.24 + 0.12 * 0;
+	positions._L[1].X := 0.24 * 3 - 0.06;
+	positions._L[1].Y := 0.24 + 0.12 * 1;
+	positions._L[2].X := 0.24 * 3 - 0.06;
+	positions._L[2].Y := 0.24 + 0.12 * 2;
+	positions._L[3].X := 0.24 * 3 - 0.06;
+	positions._L[3].Y := 0.24 + 0.12 * 3;
+	positions._L[4].X := 0.24 * 3 - 0.06;
+	positions._L[4].Y := 0.24 + 0.12 * 4;
+	positions._L[5].X := 0.24 + 0.12 * 1 - 0.06;
+	positions._L[5].Y := 0.24 * 3;
+	positions._L[6].X := 0.24 + 0.12 * 2 - 0.06;
+	positions._L[6].Y := 0.24 * 3;
+	positions._L[7].X := 0.24 + 0.12 * 3 - 0.06;
+	positions._L[7].Y := 0.24 * 3;
+	
+	positions._O[0].X := 0.24 + 0.06;
+	positions._O[0].Y := 0.24 + 0.10;
+	positions._O[1].X := 0.24 + 0.06;
+	positions._O[1].Y := 0.24 * 2;
+	positions._O[2].X := 0.24 + 0.06;
+	positions._O[2].Y := 0.24 * 3 - 0.1;
+	positions._O[3].X := 0.24 * 3 - 0.06;
+	positions._O[3].Y := 0.24 + 0.10;
+	positions._O[4].X := 0.24 * 3 - 0.06;
+	positions._O[4].Y := 0.24 * 2;
+	positions._O[5].X := 0.24 * 3 - 0.06;
+	positions._O[5].Y := 0.24 * 3 - 0.1;
+	positions._O[6].X := 0.24 * 2;
+	positions._O[6].Y := 0.24;
+	positions._O[7].X := 0.24 * 2;
+	positions._O[7].Y := 0.24 * 3;
+
+	positions._S[0].X := 0.36;
+	positions._S[0].Y := 0.24;
+
+	positions._S[1].X := 0.54;
+	positions._S[1].Y := 0.24;
+
+	positions._S[2].X := 0.635;
+	positions._S[2].Y := 0.365;
+
+	positions._S[3].X := 0.53;
+	positions._S[3].Y := 0.485;
+
+	positions._S[4].X := 0.38;
+	positions._S[4].Y := 0.485;
+
+	positions._S[5].X := 0.305;	
+	positions._S[5].Y := 0.61;
+
+	positions._S[6].X := 0.41;
+	positions._S[6].Y := 0.73;
+
+	positions._S[7].X := 0.60;
+	positions._S[7].Y := 0.73;
+
+	positions._E[0].X := 2 * 0.24 + 0.12;
+	positions._E[0].Y := 0.24 + 0 * 0.12;
+	positions._E[1].X := 2 * 0.24 + 0.12;
+	positions._E[1].Y := 0.24 + 1 * 0.12;
+	positions._E[2].X := 2 * 0.24 + 0.12;
+	positions._E[2].Y := 0.24 + 2 * 0.12;
+	positions._E[3].X := 2 * 0.24 + 0.12;
+	positions._E[3].Y := 0.24 + 3 * 0.12;
+	positions._E[4].X := 2 * 0.24 + 0.12;
+	positions._E[4].Y := 0.24 + 4 * 0.12;
+	positions._E[5].X := 2 * 0.24 - 0.06;	
+	positions._E[5].Y := 0.24;
+	positions._E[6].X := 2 * 0.24 - 0.06;
+	positions._E[6].Y := 0.24 + 4 * 0.12;
+	positions._E[7].X := 2 * 0.24;
+	positions._E[7].Y := 0.24 + 2 * 0.12;
 END_ACTION
 
 ACTION acClearTargetQueues :
