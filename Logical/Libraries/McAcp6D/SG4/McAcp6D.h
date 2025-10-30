@@ -1,6 +1,6 @@
 /* Automation Studio generated header file */
 /* Do not edit ! */
-/* McAcp6D 3.4.1 */
+/* McAcp6D 3.4.0 */
 
 #ifndef _MCACP6D_
 #define _MCACP6D_
@@ -9,7 +9,7 @@ extern "C"
 {
 #endif
 #ifndef _McAcp6D_VERSION
-#define _McAcp6D_VERSION 3.4.1
+#define _McAcp6D_VERSION 3.4.0
 #endif
 
 #include <bur/plctypes.h>
