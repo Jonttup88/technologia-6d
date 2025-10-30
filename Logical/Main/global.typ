@@ -12,10 +12,10 @@ TYPE
 		(
 		MAIN_INITIALIZE,
 		MAIN_IDLE,
-		MAIN_RESET,
 		MAIN_DEMO,
 		MAIN_GAME,
-		MAIN_ERROR
+		MAIN_ERROR,
+		MAIN_RESET
 		);
 	MainDifficultyLevelEnum : 
 		(
@@ -29,14 +29,9 @@ END_TYPE
 
 TYPE
 	MainInputCommandType : 	STRUCT 
-		Start : BOOL;
-		Stop : BOOL;
 		Reset : BOOL;
-		SetModeDemo : BOOL;
-		SetModeGame : BOOL;
-		SetDifficultyEasy : BOOL;
-		SetDifficultyNormal : BOOL;
-		SetDifficultyHard : BOOL;
+		StartGame : BOOL;
+		ReleasePrize : BOOL;
 	END_STRUCT;
 	MainInputStatusType : 	STRUCT 
 		SetupComplete : BOOL;
@@ -62,7 +57,19 @@ TYPE
 		SetDifficultyHard : BOOL;
 	END_STRUCT;
 	MainOutputCommandType : 	STRUCT 
-		NewCommand : BOOL;
+		robHome : BOOL;
+		robPickup : BOOL;
+		robGivePrize : BOOL;
+		robGetPrize : BOOL;
+		robDance : BOOL;
+		br6dReset : BOOL;
+		br6dHome : BOOL;
+		br6dFindPayload : BOOL;
+		br6dSelectShuttle : BOOL;
+		br6dSimpleShuffle : BOOL;
+		br6dcircularShuffle : BOOL;
+		br6dWinDance : BOOL;
+		br6dLoseDance : BOOL;
 	END_STRUCT;
 	MainOutputStatusType : 	STRUCT 
 		CommandAllowed : MainOutputStatusCmdAllowedType;

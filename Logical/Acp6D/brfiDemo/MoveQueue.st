@@ -72,7 +72,10 @@ FUNCTION_BLOCK brfi6DMoveQueue
 								subState := 700;
 							ELSIF refCommand.mask = sSpin THEN
 								cmd.spin := FALSE;
-								subState := 800;	
+								subState := 800;
+							ELSIF refCommand.mask = sWaitCmdLb THEN
+								cmd.waitCmdLb := FALSE;
+								subState := 900;
 							ELSE
 								state := brfi6DMOVEQUEUE_ERROR;
 								ErrorID := 666;
@@ -320,6 +323,25 @@ FUNCTION_BLOCK brfi6DMoveQueue
 						state := brfi6DMOVEQUEUE_ERROR;
 					END_IF;
 				
+				900:
+					// ------------------------------------------------------------------------------------------------------------
+					IF onStateEntry THEN
+						fb.ShWaitCmdLb.TriggerXID := refCommand.waitCmdLb.monitoredShuttleID;
+						fb.ShWaitCmdLb.CommandLabel := refCommand.waitCmdLb.commandLabel;
+						fb.ShWaitCmdLb.LabelType := refCommand.waitCmdLb.labelType;
+						fb.ShWaitCmdLb.TriggerType := refCommand.waitCmdLb.triggerType;
+					END_IF;
+					
+					cmd.waitCmdLb := TRUE;
+				
+					IF fb.ShWaitCmdLb.Acknowledge THEN
+						refAllCommandsDone ACCESS ADR(fb.ShWaitCmdLb.Done);
+						subState := 100;
+					ELSIF fb.ShWaitCmdLb.Error THEN
+						ErrorID := fb.ShWaitCmdLb.ErrorID;
+						FailedCommand.waitCmdLb := refCommand.waitCmdLb;
+						state := brfi6DMOVEQUEUE_ERROR;
+					END_IF;
 			END_CASE;
 
 
@@ -397,6 +419,10 @@ FUNCTION_BLOCK brfi6DMoveQueue
 	fb.RotaryMotionSpin.Shuttle := ADR(Shuttle);
 	fb.RotaryMotionSpin.Execute := cmd.spin;
 	fb.RotaryMotionSpin();
+	
+	fb.ShWaitCmdLb.Shuttle := ADR(Shuttle);
+	fb.ShWaitCmdLb.Execute := cmd.waitCmdLb;
+	fb.ShWaitCmdLb();
 	
 	// Outputs
 	// ========================================================================================================

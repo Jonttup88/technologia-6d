@@ -17,7 +17,14 @@ TYPE
 		ACP6D_COMMAND_ERROR,
 		ACP6D_COMMAND_DONE,
 		ACP6D_SELECT_SHUTTLE,
-		ACP6D_FIND_PAYLOAD
+		ACP6D_FIND_PAYLOAD,
+		ACP6D_SHUFFLE_SIMPLE,
+		ACP6D_SHUFFLE_CIRCULAR,
+		ACP6D_STOP_ALL,
+		ACP6D_FORCE_RESET,
+		ACP6D_VICTORY,
+		ACP6D_ANIMATE,
+		ACP6D_DEMO
 		);
 END_TYPE
 
@@ -26,9 +33,16 @@ END_TYPE
 TYPE
 	Acp6DInputCommandType : 	STRUCT 
 		Reinitialize : BOOL;
+		ForceReset : BOOL;
+		StopAll : BOOL;
+		Victory : BOOL;
+		Animate : BOOL;
 		MoveTo : Acp6DMoveToCommandType;
 		FindPayload : BOOL;
 		SelectShuttle : BOOL;
+		Shuffle : Acp6DShuffleCommandType;
+		StartDemoMode : BOOL;
+		StopDemoMode : BOOL;
 	END_STRUCT;
 	Acp6DMoveToCommandType : 	STRUCT 
 		Home : BOOL;
@@ -38,6 +52,10 @@ TYPE
 		Clockface : BOOL;
 		Dance : BOOL;
 		Side : BOOL;
+	END_STRUCT;
+	Acp6DShuffleCommandType : 	STRUCT 
+		Simple : BOOL;
+		Circular : BOOL;
 	END_STRUCT;
 	Acp6DInputStatusType : 	STRUCT 
 		test : BOOL;
@@ -55,6 +73,7 @@ TYPE
 	Acp6DOutputStatusType : 	STRUCT 
 		Initialized : BOOL;
 		CommandDone : BOOL;
+		DemoModeActive : BOOL;
 	END_STRUCT;
 	Acp6DOutputType : 	STRUCT 
 		Status : Acp6DOutputStatusType;

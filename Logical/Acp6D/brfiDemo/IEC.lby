@@ -8,5 +8,7 @@
     <File>Common.st</File>
     <File>MoveQueue.st</File>
     <File>AddCommand6D.st</File>
+    <File>ShuttleGroup.st</File>
+    <File>SunPlanet.st</File>
   </Files>
 </Library>

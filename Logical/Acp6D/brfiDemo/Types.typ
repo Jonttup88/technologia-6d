@@ -1,6 +1,7 @@
 
 TYPE
 	brfiShuttleSelectionType : 	STRUCT 
+		ID : DINT;
 		index : DINT;
 		x : REAL;
 		y : REAL;
@@ -27,6 +28,7 @@ TYPE
 		RotaryMotion : MC_BR_RotaryMotion_Acp6D;
 		ShLevitation : MC_BR_ShLevitation_Acp6D;
 		RotaryMotionSpin : MC_BR_RotaryMotionSpin_Acp6D;
+		ShWaitCmdLb : MC_BR_ShWaitCmdLb_Acp6D;
 	END_STRUCT;
 	brfi6DMoveQueueIrnalType : 	STRUCT 
 		initialized : BOOL;
@@ -57,6 +59,7 @@ TYPE
 		levitate : BOOL;
 		spin : BOOL;
 		readInfo : BOOL;
+		waitCmdLb : BOOL;
 	END_STRUCT;
 	brfi6DMoveQueueCommandType : 	STRUCT 
 		mask : UINT;
@@ -68,6 +71,7 @@ TYPE
 		arc : McAcp6DArcParType;
 		levitation : McAcp6DLevitationParType;
 		spin : McAcp6DRotaryMotionSpinParType;
+		waitCmdLb : brfi6DMoveWaitLabelParamType;
 	END_STRUCT;
 	brfi6DMoveQueueParamType : 	STRUCT 
 		velocity_xy : REAL;
@@ -89,7 +93,8 @@ TYPE
 		sWait := 256,
 		sLevitate := 512,
 		sSpin := 1024,
-		sUpdatePosition := 2048
+		sUpdatePosition := 2048,
+		sWaitCmdLb := 4096
 		);
 	brfi6DMoveCommandPathEnum : 
 		(
@@ -97,6 +102,12 @@ TYPE
 		pathX_Y,
 		pathY_X
 		);
+	brfi6DMoveWaitLabelParamType : 	STRUCT 
+		monitoredShuttleID : UINT;
+		triggerType : McAcp6DShWaitCmdLbTriggerEnum;
+		commandLabel : UINT;
+		labelType : McAcp6DShWaitCmdLbLabelEnum;
+	END_STRUCT;
 END_TYPE
 
 (**)
@@ -132,3 +143,17 @@ TYPE
 		state : McAcp6DShStateEnum; (*ID of the shuttle*)
 	END_STRUCT;
 END_TYPE
+
+(**)
+
+TYPE
+	brfiShuttleGroupFbType : 	STRUCT 
+		GroupCreate : MC_BR_ShGroupCreate_Acp6D;
+		GroupAddShuttle : MC_BR_ShGroupAddShuttle_Acp6D;
+		GroupDelete : MC_BR_ShGroupDelete_Acp6D;
+		GroupGetInfo : MC_BR_ShGroupGetInfo_Acp6D;
+		GroupCoupleCtrl : MC_BR_ShGroupCoupleCtrl_Acp6D;
+	END_STRUCT;
+END_TYPE
+
+(**)

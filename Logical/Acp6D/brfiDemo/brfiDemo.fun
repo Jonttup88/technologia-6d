@@ -110,8 +110,8 @@ FUNCTION AddCommand6D_xy : BOOL
 		x : REAL;
 		y : REAL;
 		velocity : REAL;
-		endVelocity : REAL;
 		acceleration : REAL;
+		endVelocity : REAL;
 		path : brfi6DMoveCommandPathEnum;
 		radius : REAL;
 		mode : McAcp6DMoveModeEnum;
@@ -240,9 +240,9 @@ FUNCTION AddCommand6D_arcAngularCW : BOOL
 		x : REAL;
 		y : REAL;
 		angle : REAL;
-		velocity : REAL; (*Rotational speed (rad/s)*)
-		endVelocity : REAL; (*Target angle (rad)*)
-		acceleration : REAL; (*Rotational acceleration (rad/s2)*)
+		velocity : REAL;
+		acceleration : REAL;
+		endVelocity : REAL;
 		mode : McAcp6DMoveModeEnum;
 	END_VAR
 	VAR
@@ -256,9 +256,9 @@ FUNCTION AddCommand6D_arcAngularCCW : BOOL
 		x : REAL;
 		y : REAL;
 		angle : REAL;
-		velocity : REAL; (*Rotational speed (rad/s)*)
-		endVelocity : REAL; (*Target angle (rad)*)
-		acceleration : REAL; (*Rotational acceleration (rad/s2)*)
+		velocity : REAL;
+		acceleration : REAL;
+		endVelocity : REAL;
 		mode : McAcp6DMoveModeEnum;
 	END_VAR
 	VAR
@@ -274,8 +274,8 @@ FUNCTION AddCommand6D_arcRadialCW : BOOL
 		radius : REAL;
 		type : McAcp6DArcTypeEnum; (*Rotational speed (rad/s)*)
 		velocity : REAL; (*Rotational speed (rad/s)*)
-		endVelocity : REAL; (*Target angle (rad)*)
 		acceleration : REAL; (*Rotational acceleration (rad/s2)*)
+		endVelocity : REAL; (*Target angle (rad)*)
 		mode : McAcp6DMoveModeEnum;
 	END_VAR
 	VAR
@@ -291,11 +291,67 @@ FUNCTION AddCommand6D_arcRadialCCW : BOOL
 		radius : REAL;
 		type : McAcp6DArcTypeEnum; (*Rotational speed (rad/s)*)
 		velocity : REAL; (*Rotational speed (rad/s)*)
-		endVelocity : REAL; (*Target angle (rad)*)
 		acceleration : REAL; (*Rotational acceleration (rad/s2)*)
+		endVelocity : REAL; (*Target angle (rad)*)
 		mode : McAcp6DMoveModeEnum;
 	END_VAR
 	VAR
 		i : DINT;
 	END_VAR
 END_FUNCTION
+
+FUNCTION AddCommand6D_waitCmdLb : BOOL
+	VAR_INPUT
+		Commands : REFERENCE TO ARRAY[0..gMAX_INDEX_TARGETS] OF brfi6DMoveQueueCommandType;
+		monitoredShuttleID : UINT;
+		triggerType : McAcp6DShWaitCmdLbTriggerEnum;
+		commandLabel : UINT;
+		labelType : McAcp6DShWaitCmdLbLabelEnum;
+	END_VAR
+	VAR
+		i : DINT;
+	END_VAR
+END_FUNCTION
+(**)
+
+{REDUND_ERROR} FUNCTION_BLOCK brfiShuttleGroup (* *) (*$GROUP=User,$CAT=User,$GROUPICON=User.png,$CATICON=User.png*)
+	VAR_INPUT
+		Assembly : REFERENCE TO Mc6DAssemblyType;
+		Shuttles : {REDUND_UNREPLICABLE} ARRAY[0..gMAX_INDEX_SHUTTLE] OF Mc6DShuttleType;
+		Enable : {REDUND_UNREPLICABLE} BOOL;
+	END_VAR
+	VAR_OUTPUT
+		Inactive : {REDUND_UNREPLICABLE} BOOL;
+		Active : {REDUND_UNREPLICABLE} BOOL;
+		Busy : {REDUND_UNREPLICABLE} BOOL;
+		Error : {REDUND_UNREPLICABLE} BOOL;
+		ErrorID : {REDUND_UNREPLICABLE} DINT;
+		NumberOfShuttles : {REDUND_UNREPLICABLE} UINT;
+	END_VAR
+	VAR
+		shuttleGroupRef : Mc6DShuttleGroupType;
+		state : {REDUND_UNREPLICABLE} DINT;
+		i : {REDUND_UNREPLICABLE} DINT;
+		fb : {REDUND_UNREPLICABLE} brfiShuttleGroupFbType;
+	END_VAR
+END_FUNCTION_BLOCK
+(**)
+
+{REDUND_ERROR} FUNCTION_BLOCK brfiSunPlanet (* *) (*$GROUP=User,$CAT=User,$GROUPICON=User.png,$CATICON=User.png*)
+	VAR_INPUT
+		SunShuttle : REFERENCE TO Mc6DShuttleType;
+		PlanetShuttles : {REDUND_UNREPLICABLE} ARRAY[0..gMAX_INDEX_SHUTTLE] OF Mc6DShuttleType;
+		Enable : {REDUND_UNREPLICABLE} BOOL;
+	END_VAR
+	VAR_OUTPUT
+		Active : {REDUND_UNREPLICABLE} BOOL;
+		Busy : {REDUND_UNREPLICABLE} BOOL;
+		Error : {REDUND_UNREPLICABLE} BOOL;
+		ErrorID : {REDUND_UNREPLICABLE} DINT;
+	END_VAR
+	VAR
+		state : {REDUND_UNREPLICABLE} DINT;
+		i : {REDUND_UNREPLICABLE} DINT;
+		ShPlanet : {REDUND_UNREPLICABLE} MC_BR_ShPlanet_Acp6D;
+	END_VAR
+END_FUNCTION_BLOCK

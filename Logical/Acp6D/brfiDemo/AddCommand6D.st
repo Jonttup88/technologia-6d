@@ -77,6 +77,21 @@ FUNCTION AddCommand6D_wait
 	END_FOR;	
 END_FUNCTION
 
+FUNCTION AddCommand6D_waitCmdLb
+	FOR i := 0 TO gMAX_INDEX_TARGETS DO
+		IF Commands[i].mask = 0 THEN 
+			Commands[i].mask := DINT_TO_UINT(sWaitCmdLb);
+			Commands[i].waitCmdLb.monitoredShuttleID := monitoredShuttleID;
+			Commands[i].waitCmdLb.triggerType := triggerType;
+			Commands[i].waitCmdLb.commandLabel := commandLabel;
+			Commands[i].waitCmdLb.labelType := labelType;
+			AddCommand6D_waitCmdLb := TRUE;
+			RETURN;
+		END_IF;
+	END_FOR;	
+END_FUNCTION
+
+
 // Rotary
 // ========================================================================================================
 FUNCTION AddCommand6D_rotateAbs

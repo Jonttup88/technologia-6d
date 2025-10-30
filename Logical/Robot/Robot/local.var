@@ -1,0 +1,7 @@
+VAR
+	task : REFERENCE TO RobotType;
+	local : RobotLocalType;
+	fb : RobotFbType;
+	hmi : RobotHmiType;
+	no_command : RobotInputCommandType;
+END_VAR

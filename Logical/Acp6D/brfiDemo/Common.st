@@ -42,6 +42,7 @@ FUNCTION brfiShuttleSelect
 		IF Shuttles[i].position.value.X < maxX AND Shuttles[i].position.value.X > minX THEN
 			IF Shuttles[i].position.value.Y < maxY AND Shuttles[i].position.value.Y > minY THEN
 				Selection[count].index := Shuttles[i].index;
+				Selection[count].ID := Shuttles[i].ID;
 				Selection[count].x := Shuttles[i].position.value.X;
 				Selection[count].y := Shuttles[i].position.value.Y;
 				count := count + 1;	
@@ -105,7 +106,7 @@ FUNCTION brfiSortCompare
 		END_IF;  
 	END_IF;
 	
-	isEqualX := ABS(A.x - B.x) < 0.0001;
+	isEqualX := ABS(A.x - B.x) < 0.001;
 	
 	IF isEqualX THEN
 		// Only sort by Y if X is equal as we primarily sort by X

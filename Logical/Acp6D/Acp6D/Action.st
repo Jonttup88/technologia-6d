@@ -14,7 +14,7 @@ ACTION acInitializePositions:
 	// ---------------------------------------------------------------------------------------
 	FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
 		positions.user[i].X := i * 0.120 + 0.060;
-		positions.user[i].Y := 2 * 0.240;
+		positions.user[i].Y := 1 * 0.240 + 0.120;
 	END_FOR;
 	
 	// ---------------------------------------------------------------------------------------
@@ -36,8 +36,8 @@ ACTION acInitializePositions:
 	
 	// ---------------------------------------------------------------------------------------
 	FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
-		positions.clockface[i].X := 0.480 + COS(DINT_TO_REAL(i) * 45.0 * brmPI/180.0) * 0.420;
-		positions.clockface[i].Y := 0.480 + SIN(DINT_TO_REAL(i) * 45.0 * brmPI/180.0) * 0.420;
+		positions.clockface[i].X := 0.480 + COS(DINT_TO_REAL(i) * 45.0 * brmPI/180.0) * 0.300;
+		positions.clockface[i].Y := 0.480 + SIN(DINT_TO_REAL(i) * 45.0 * brmPI/180.0) * 0.300;
 	END_FOR;
 	
 	// ---------------------------------------------------------------------------------------
@@ -65,8 +65,32 @@ ACTION acInitializePositions:
 	
 	FOR i := 1 TO gMAX_INDEX_SHUTTLE DO
 		positions.pickup[i].X := 0.480 + COS(DINT_TO_REAL(i - 1) * (180/6) * brmPI/180.0) * 0.360;
-		positions.pickup[i].Y := 0.480 + SIN(DINT_TO_REAL(i - 1) * (180/6) * brmPI/180.0) * 0.360;	
+		positions.pickup[i].Y := 0.310 + SIN(DINT_TO_REAL(i - 1) * (180/6) * brmPI/180.0) * 0.360;	
 	END_FOR
+	
+	// Simple shuffle
+	// ---------------------------------------------------------------------------------------
+	FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
+		IF i < 4 THEN
+			positions.shuffle_simple[i].X := 0.120 + i * 0.240;
+			positions.shuffle_simple[i].Y := 3 * 0.240;	
+		ELSE
+			positions.shuffle_simple[i].X := 0.300 + (i MOD 4) * 0.120;
+			positions.shuffle_simple[i].Y := 0.120;	
+		END_IF;  
+	END_FOR;
+	
+	// Kongo lines
+	// ---------------------------------------------------------------------------------------
+	FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
+		IF i < 4 THEN
+			positions.kongo_lines[i].X := 0.120 + 0.240;
+			positions.kongo_lines[i].Y := 0.060 + i * 0.240;	
+		ELSE
+			positions.kongo_lines[i].X := 2 * 0.240 + 0.120;
+			positions.kongo_lines[i].Y := 0.180 + (i MOD 4) * 0.240;	
+		END_IF;  
+	END_FOR;
 	
 END_ACTION
 
@@ -253,12 +277,11 @@ ACTION acShuttleStatusPolling :
 				shuttles[shuttleStatus.index].status.isValid := TRUE;
 				shuttles[shuttleStatus.index].status.state := fb.ShGetInfo.ShuttleInfo.State;
 				shuttleStatus.index := shuttleStatus.index + 1;
-				
+						
 			ELSIF fb.ShGetInfo.Error THEN
-				brsmemset(ADR(shuttles[i].status), 0, SIZEOF(shuttles[i].status));
+				brsmemset(ADR(shuttles[shuttleStatus.index].status), 0, SIZEOF(shuttles[shuttleStatus.index].status));
 				shuttleStatus.index := shuttleStatus.index + 1;	
-			END_IF;
-			 
+			END_IF;			 
 	END_CASE;
 	
 	IF shuttleStatus.index > gMAX_INDEX_SHUTTLE THEN
@@ -282,14 +305,20 @@ ACTION acMoveQueueStatusHandling:
 	
 	IF NOT queueStatus.executing THEN
 		queueStatus.allDone := FALSE;
+		queueStatus.allAcknowledge := FALSE;
 		queueStatus.error := FALSE;
 	ELSE
 		queueStatus.allDone := TRUE;
+		queueStatus.allAcknowledge := TRUE;
 		queueStatus.error := FALSE;
 
 		FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
 			IF fb.MoveQueue[i].Execute AND (NOT fb.MoveQueue[i].Done) THEN
 				queueStatus.allDone := FALSE;
+			END_IF;
+			
+			IF fb.MoveQueue[i].Execute AND (NOT fb.MoveQueue[i].Acknowledge) THEN
+				queueStatus.allAcknowledge := FALSE;
 			END_IF;
 			
 			IF fb.MoveQueue[i].Execute AND fb.MoveQueue[i].Error THEN

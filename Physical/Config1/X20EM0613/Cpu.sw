@@ -14,7 +14,7 @@
   <TaskClass Name="Cyclic#6" />
   <TaskClass Name="Cyclic#7" />
   <TaskClass Name="Cyclic#8">
-    <Task Name="RWS" Source="RWS.prg" Memory="UserROM" Language="IEC" Debugging="true" />
+    <Task Name="Robot" Source="Robot.Robot.prg" Memory="UserROM" Language="IEC" Debugging="true" />
   </TaskClass>
   <NcDataObjects>
     <NcDataObject Name="McDriveLog" Source="" Memory="UserROM" Language="Binary" />

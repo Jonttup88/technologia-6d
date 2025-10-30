@@ -7,6 +7,5 @@ END_VAR
 VAR
 	gShuttleList : ARRAY[0..gMAX_INDEX_SHUTTLE] OF gShuttleListType; (*Global shuttle list*)
 	gShuttles : ARRAY[0..7] OF McAcp6DShPositionType;
-	gRobot : gRobotTyp;
 END_VAR
 (**)
