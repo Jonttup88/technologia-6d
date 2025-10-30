@@ -22,6 +22,9 @@ TYPE
 		ShGetInfo : MC_BR_ShGetInfo_Acp6D;
 		virtualShCreate : MC_BR_VirtualShCreate_Acp6D;
 		assemblyGetVirtualSh : MC_BR_AsmGetVirtualSh_Acp6D;
+		virMoveInPlane : ARRAY[0..gMAX_INDEX_SHUTTLE_VIRTUAL]OF MC_BR_MoveInPlane_Acp6D;
+		virMoveArc : ARRAY[0..gMAX_INDEX_SHUTTLE_VIRTUAL]OF MC_BR_MoveArc_Acp6D;
+		brfiSunPlanet : ARRAY[0..gMAX_INDEX_SHUTTLE_VIRTUAL]OF brfiSunPlanet;
 	END_STRUCT;
 	Acp6DHmiType : 	STRUCT 
 		isRunning : BOOL;
@@ -46,6 +49,7 @@ TYPE
 		assemblyGetShuttles : BOOL;
 		assemblyGetNextShuttle : BOOL;
 		cyclicModeRequest : Acp6DCyclicModeEnum;
+		sunPlanetEnable : ARRAY[0..gMAX_INDEX_SHUTTLE_VIRTUAL]OF BOOL;
 	END_STRUCT;
 	Acp6DSubstateActionsType : 	STRUCT 
 		assemblyPowerOff : BOOL;
@@ -55,6 +59,8 @@ TYPE
 		createShuttleVirtual : BOOL;
 		moveInPlaneAsync : BOOL;
 		delay : BOOL;
+		virMoveInPlane : ARRAY[0..gMAX_INDEX_SHUTTLE_VIRTUAL]OF BOOL;
+		virMoveArc : ARRAY[0..gMAX_INDEX_SHUTTLE_VIRTUAL]OF BOOL;
 	END_STRUCT;
 	Acp6DTablePositionType : 	STRUCT 
 		home : ARRAY[0..gMAX_INDEX_SHUTTLE]OF McAcp6DShPositionType;
@@ -66,6 +72,10 @@ TYPE
 		dance : ARRAY[0..gMAX_INDEX_SHUTTLE]OF McAcp6DShPositionType;
 		shuffle_simple : ARRAY[0..gMAX_INDEX_SHUTTLE]OF McAcp6DShPositionType;
 		kongo_lines : ARRAY[0..gMAX_INDEX_SHUTTLE]OF McAcp6DShPositionType;
+		_L : ARRAY[0..gMAX_INDEX_SHUTTLE]OF McAcp6DShPositionType;
+		_O : ARRAY[0..gMAX_INDEX_SHUTTLE]OF McAcp6DShPositionType;
+		_S : ARRAY[0..gMAX_INDEX_SHUTTLE]OF McAcp6DShPositionType;
+		_E : ARRAY[0..gMAX_INDEX_SHUTTLE]OF McAcp6DShPositionType;
 	END_STRUCT;
 END_TYPE
 

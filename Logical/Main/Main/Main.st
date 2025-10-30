@@ -30,7 +30,7 @@ PROGRAM _CYCLIC
 				0:
 					task.StateInfo := 'Wait robot communication';
 					// ---------------------------------------------------------------------------------
-					IF gRobot.Output.Status.CommunicationOk AND gRobot.Output.Status.RobReady THEN
+					IF (gRobot.Output.Status.CommunicationOk AND gRobot.Output.Status.RobReady) OR task.IsSimulated THEN
 						task.SubState := 10;	
 					END_IF;
 				
@@ -39,11 +39,18 @@ PROGRAM _CYCLIC
 					// ---------------------------------------------------------------------------------		
 					local.actions.substate.robHome := TRUE;
 					
-					IF gRobot.Output.Status.RobPhaseDone THEN
+					IF gRobot.Output.Status.RobPhaseDone OR task.IsSimulated THEN
 						task.SubState := 20;
 					END_IF;
 					
 				20:
+					task.StateInfo := 'Wait 6D controller to startup';
+					// ---------------------------------------------------------------------------------			
+					IF gAcp6D.Output.Status.Initialized THEN
+						task.SubState := 30;
+					END_IF;
+					
+				30:
 					task.StateInfo := '6D Shuttles to home';
 					// ---------------------------------------------------------------------------------			
 					local.actions.substate.br6dHome := TRUE;
@@ -116,14 +123,7 @@ PROGRAM _CYCLIC
 					IF gRobot.Output.Status.CommandDone THEN
 						task.SubState := 10;
 					END_IF;
-					
-				10:
-					task.StateInfo := 'Wait 6D controller to startup';
-					// ---------------------------------------------------------------------------------			
-					IF gAcp6D.Output.Status.Initialized THEN
-						task.SubState := 20;
-					END_IF;
-				
+
 				20:
 					task.StateInfo := '6D Shuttles to home';
 					// ---------------------------------------------------------------------------------			

@@ -16,7 +16,7 @@ END_PROGRAM
 
 PROGRAM _CYCLIC
 	(* Insert code here *)
-	count := brfiShuttleSelect(ADR(shuttles), ADR(selection), X0, Y0, X1, Y1);
+	count := brfiShuttleSelect(ADR(shuttles), ADR(selection), X0, Y0, X1, Y1, TRUE);
 	
 //	IF point1.x = point2.x THEN
 //		slope := 0;

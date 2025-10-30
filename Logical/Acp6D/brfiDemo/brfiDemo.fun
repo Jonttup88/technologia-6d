@@ -22,6 +22,7 @@ FUNCTION brfiShuttleSelect : DINT
 		Y0 : REAL;
 		X1 : REAL;
 		Y1 : REAL;
+		byX : BOOL;
 	END_VAR
 	VAR
 		i : DINT;
@@ -61,6 +62,18 @@ FUNCTION brfiSortCompare : BOOL
 	END_VAR
 END_FUNCTION
 
+FUNCTION brfiSortCompareY : BOOL
+	VAR_INPUT
+		A : brfiShuttleSelectionType;
+		B : brfiShuttleSelectionType;
+		AscendingX : BOOL;
+		AscendingY : BOOL;
+	END_VAR
+	VAR
+		isEqualX : BOOL;
+	END_VAR
+END_FUNCTION
+
 FUNCTION brfiToRAD : REAL
 	VAR_INPUT
 		degrees : REAL;
@@ -74,7 +87,7 @@ FUNCTION brfiToDEG : REAL
 END_FUNCTION
 (**)
 
-{REDUND_ERROR} FUNCTION_BLOCK brfi6DMoveQueue (* *) (*$GROUP=User,$CAT=User,$GROUPICON=User.png,$CATICON=User.png*)
+{REDUND_ERROR} {REDUND_UNREPLICABLE} FUNCTION_BLOCK brfi6DMoveQueue (* *) (*$GROUP=User,$CAT=User,$GROUPICON=User.png,$CATICON=User.png*)
 	VAR_INPUT
 		Shuttle : REFERENCE TO Mc6DShuttleType;
 		Execute : {REDUND_UNREPLICABLE} BOOL;
@@ -95,7 +108,8 @@ END_FUNCTION
 		refAllCommandsDone : REFERENCE TO BOOL;
 		state : {REDUND_UNREPLICABLE} brfi6DMoveQueueStateEnum;
 		subState : {REDUND_UNREPLICABLE} DINT;
-		onStateEntry : BOOL;
+		dummyDone : {REDUND_UNREPLICABLE} BOOL;
+		onStateEntry : {REDUND_UNREPLICABLE} BOOL;
 		fb : {REDUND_UNREPLICABLE} brfi6DMoveQueueFbType;
 		actions : {REDUND_UNREPLICABLE} brfi6DMoveQueueActionsType;
 		cmd : {REDUND_UNREPLICABLE} brfi6DMoveQueueExecuteType;

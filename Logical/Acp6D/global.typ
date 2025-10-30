@@ -23,6 +23,7 @@ TYPE
 		ACP6D_STOP_ALL,
 		ACP6D_FORCE_RESET,
 		ACP6D_VICTORY,
+		ACP6D_LOSE,
 		ACP6D_ANIMATE,
 		ACP6D_DEMO
 		);
@@ -36,6 +37,7 @@ TYPE
 		ForceReset : BOOL;
 		StopAll : BOOL;
 		Victory : BOOL;
+		Lose : BOOL;
 		Animate : BOOL;
 		MoveTo : Acp6DMoveToCommandType;
 		FindPayload : BOOL;
