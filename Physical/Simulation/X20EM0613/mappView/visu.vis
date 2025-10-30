@@ -5,17 +5,17 @@
     <Page refId="page_MainPage" />
     <Page refId="page_configPage" />
     <Page refId="page_weight" />
-    <Page refId="page_gamePage" />
+    <Page refId="page_gameSelectMode" />
     <Page refId="page_zone" />
     <Page refId="page_stereotype" />
     <Page refId="page_teach" />
     <Page refId="page_0" />
     <Page refId="page_1" />
-    <Page refId="page_gamePage1" />
-    <Page refId="page_gamePage2" />
-    <Page refId="page_gamePage3" />
-    <Page refId="page_gamePage4" />
-    <Page refId="page_gamePage5" />
+    <Page refId="page_gameMonitor" />
+    <Page refId="page_gameSelect4" />
+    <Page refId="page_gameSelect8" />
+    <Page refId="page_gameWin" />
+    <Page refId="page_gameLose" />
   </Pages>
   <Navigations />
   <BindingsSets>

@@ -1,0 +1,16 @@
+VAR CONSTANT
+	MEASUREMENT_COUNT : DINT := 10;
+	MAX_NUM_SHUTTLE : DINT := 8; (*Maximum numer of shuttles on the system*)
+	MAX_NUM_SHUTTLE_VIRTUAL : DINT := 2; (*Maximum numer of shuttles on the system*)
+	MAX_NUM_TARGETS : DINT := 20; (*Maximum numer of shuttles on the system*)
+	SHUFFLE_SEQUENCE_LEN : DINT := 16;
+END_VAR
+(**)
+VAR CONSTANT
+	gMAX_INDEX_SHUTTLE : DINT := MAX_NUM_SHUTTLE - 1; (*Maximum index for a shuttles on the system*)
+	gMAX_INDEX_SHUTTLE_VIRTUAL : DINT := MAX_NUM_SHUTTLE_VIRTUAL - 1; (*Maximum index for a shuttles on the system*)
+	gMAX_INDEX_TARGETS : DINT := MAX_NUM_TARGETS - 1; (*Maximum index for a shuttles on the system*)
+	gMAX_INDEX_MEASUREMENT : DINT := MEASUREMENT_COUNT - 1;
+	gMAX_INDEX_SHUFFLE : DINT := SHUFFLE_SEQUENCE_LEN - 1;
+END_VAR
+(**)

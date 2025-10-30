@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Soft Snap Dasharray Rectangle</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	overflow:hidden;
+  }
+  svg {
+    touch-action: none;
+  }
+  rect {
+    cursor: move;
+  }
+  .ribbon-button:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  } text{
+  -webkit-touch-callout: none;
+  -webkit-user-select:none;
+  -khtml-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  -o-user-select:none;
+  user-select:none;
+}
+</style>
+</head>
+<body>
+
+<svg id="zoneSvg" width="800" height="800" viewBox="0 0 400 400"
+     xmlns="http://www.w3.org/2000/svg">
+  <!-- 240×240 background segment -->
+  <rect id="bgRect" x="80" y="80" width="240.5" height="240.5" rx="3.75" ry="3.75"
+        fill="#fbfbfb" stroke="black" stroke-width="3"/>
+	<text style="fill:#020202;font-family:Calibri;font-size:20px;display: block;alignment-baseline: hanging;" x="90" y="90" alignment-baseline="hanging">X</text>
+	<g id="myStereotype">
+	
+	</g>
+  <!-- 120×120 shuttle -->
+  <rect id="shuttle" x="140" y="140" width="120" height="120" 
+        fill="rgba(127,127,127,0.3)" rx="24" ry="24" stroke-width="3" stroke="black"/>
+		<text style="fill:#020202;font-family:Calibri;font-size:10px;display: block;alignment-baseline: hanging;" x="150" y="150" stroke="black">ID</text>
+</svg>
+
+<script>
+(() => {
+  const svg = document.getElementById("zoneSvg");
+  const bg = document.getElementById("bgRect").getBBox();
+  const shuttle = document.getElementById("shuttle").getBBox();
+
+  const SEG_X = bg.x, SEG_Y = bg.y, SEG_W = bg.width, SEG_H = bg.height;
+  const SH_X = shuttle.x, SH_Y = shuttle.y, SH_W = shuttle.width, SH_H = shuttle.height;
+
+  let rect = null, ribbon = null, action = null;
+  let start = { x: 0, y: 0 };
+  let rectBox = {};
+  let moveDistance = 0; // total pointer movement in pixels
+  const EDGE_SIZE = 3;
+  const GRID_SIZE = 5;
+  const MIN_SIZE = 20;
+  const SNAP_THRESHOLD = GRID_SIZE * 10; // must move ~50px before snapping
+
+  // --- Screen → SVG coordinate conversion ---
+  const getPointerSVGCoords = (e) => {
+    const p = svg.createSVGPoint();
+    if (e.touches && e.touches.length) {
+      p.x = e.touches[0].clientX;
+      p.y = e.touches[0].clientY;
+    } else {
+      p.x = e.clientX;
+      p.y = e.clientY;
+    }
+    return p.matrixTransform(svg.getScreenCTM().inverse());
+  };
+
+  const snap = v => Math.round(v / GRID_SIZE) * GRID_SIZE;
+
+  // --- Create dynamic dashed rectangle on double click ---
+  svg.addEventListener("dblclick", () => {
+    rect?.remove();
+    ribbon?.remove();
+
+    rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    rect.setAttribute("x", SH_X);
+    rect.setAttribute("y", SH_Y);
+    rect.setAttribute("width", SH_W);
+    rect.setAttribute("height", SH_H);
+    rect.setAttribute("rx", 8);
+    rect.setAttribute("ry", 8);
+    rect.setAttribute("stroke", "blue");
+    rect.setAttribute("stroke-width", "3");
+    rect.setAttribute("stroke-dasharray", "10");
+    rect.setAttribute("fill", "rgba(0,0,255,0.15)");
+    svg.appendChild(rect);
+
+    createRibbon();
+    positionRibbon();
+  });
+
+  // --- Ribbon UI ---
+  function createRibbon() {
+    ribbon = document.createElementNS("http://www.w3.org/2000/svg", "g");
+
+    const bg = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    bg.setAttribute("width", 140);
+    bg.setAttribute("height", 50);
+    bg.setAttribute("rx", 8);
+    bg.setAttribute("ry", 8);
+    bg.setAttribute("fill", "rgba(127,127,127,0.7)");
+    bg.setAttribute("stroke", "rgba(173,255,47,0.6)");
+    bg.setAttribute("stroke-width", 2);
+    ribbon.appendChild(bg);
+
+    // ✔ button
+    const check = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    check.setAttribute("x", 45);
+    check.setAttribute("y", 33);
+    check.setAttribute("fill", "lime");
+    check.setAttribute("font-size", "28");
+    check.textContent = "✔";
+    check.classList.add("ribbon-button");
+    check.addEventListener("click", () => {
+      var width = parseFloat(rect.getAttribute('width'));
+	  var height = parseFloat(rect.getAttribute('height'));
+	  var x = parseFloat(rect.getAttribute('x'));
+	  var y = parseFloat(rect.getAttribute('y'));
+	  if (rect) { rect.remove(); rect = null; }
+      if (ribbon) { ribbon.remove(); ribbon = null; }
+	  var negX = parseInt(-60-(140-x))/1000;
+	  var posX = parseInt(60+(x+width-260))/1000;
+	  var negY = parseInt(-60-(y+height-260))/1000;
+	  var posY = parseInt(60+(140-y))/1000;
+	  
+	  doSend(`{"cmd":"write","parameter":[{"variable":"gFeatureDemo.newStereotypeData.XOffsetNeg","value":"${negX}"},{"variable":"gFeatureDemo.newStereotypeData.XOffsetPos","value":"${posX}"},{"variable":"gFeatureDemo.newStereotypeData.YOffsetNeg","value":"${negY}"},{"variable":"gFeatureDemo.newStereotypeData.YOffsetPos","value":"${posY}"},{"variable":"gFeatureDemo.Cmd.newStereotype","value":"1"}]}`);
+    });
+    ribbon.appendChild(check);
+
+    // 🗑 delete button
+    const del = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    del.setAttribute("x", 90);
+    del.setAttribute("y", 33);
+    del.setAttribute("fill", "red");
+    del.setAttribute("font-size", "26");
+    del.textContent = "🗑";
+    del.classList.add("ribbon-button");
+    del.addEventListener("click", () => {
+      if (rect) { rect.remove(); rect = null; }
+      if (ribbon) { ribbon.remove(); ribbon = null; }
+    });
+    ribbon.appendChild(del);
+
+    svg.appendChild(ribbon);
+  }
+
+  // --- Position the ribbon above or below ---
+  function positionRibbon() {
+    if (!rect || !ribbon) return;
+    const x = parseFloat(rect.getAttribute("x"));
+    const y = parseFloat(rect.getAttribute("y"));
+    const w = parseFloat(rect.getAttribute("width"));
+    const h = parseFloat(rect.getAttribute("height"));
+    let ribbonY = y - 60;
+    if (y < SEG_Y + 40) ribbonY = y + h + 10;
+    ribbon.setAttribute("transform", `translate(${x + w / 2 - 70}, ${ribbonY})`);
+  }
+
+  // --- Resize Handling ---
+  function onDown(e) {
+    if (!rect) return;
+    const { x, y } = getPointerSVGCoords(e);
+    rectBox = rect.getBBox();
+
+    const nearRight = Math.abs(x - (rectBox.x + rectBox.width)) < EDGE_SIZE;
+    const nearBottom = Math.abs(y - (rectBox.y + rectBox.height)) < EDGE_SIZE;
+    const nearLeft = Math.abs(x - rectBox.x) < EDGE_SIZE;
+    const nearTop = Math.abs(y - rectBox.y) < EDGE_SIZE;
+
+    if (nearRight || nearBottom || nearLeft || nearTop) {
+      action = "resize";
+      start = { x, y, nearRight, nearBottom, nearLeft, nearTop };
+      moveDistance = 0;
+      e.preventDefault();
+      window.addEventListener("mousemove", onMove);
+      window.addEventListener("mouseup", onUp);
+      window.addEventListener("touchmove", onMove, { passive: false });
+      window.addEventListener("touchend", onUp);
+    }
+  }
+
+  function onMove(e) {
+    if (!action || !rect) return;
+    const { x, y } = getPointerSVGCoords(e);
+    const dx = x - start.x;
+    const dy = y - start.y;
+    moveDistance += Math.sqrt(dx * dx + dy * dy); // accumulate movement distance
+
+    let oldX = parseFloat(rect.getAttribute("x"));
+    let oldY = parseFloat(rect.getAttribute("y"));
+    let oldW = parseFloat(rect.getAttribute("width"));
+    let oldH = parseFloat(rect.getAttribute("height"));
+
+    let newX = oldX, newY = oldY, newW = oldW, newH = oldH;
+
+    const snapNow = moveDistance >= SNAP_THRESHOLD;
+
+    const adjust = (val) => snapNow ? snap(val) : val;
+
+    if (start.nearRight) newW = Math.max(MIN_SIZE, adjust(oldW + dx));
+    if (start.nearBottom) newH = Math.max(MIN_SIZE, adjust(oldH + dy));
+    if (start.nearLeft) {
+      newX = adjust(oldX + dx);
+      newW = Math.max(MIN_SIZE, adjust(oldW - dx));
+      if (newW <= MIN_SIZE) newX = oldX + oldW - MIN_SIZE;
+    }
+    if (start.nearTop) {
+      newY = adjust(oldY + dy);
+      newH = Math.max(MIN_SIZE, adjust(oldH - dy));
+      if (newH <= MIN_SIZE) newY = oldY + oldH - MIN_SIZE;
+    }
+
+    // Clamp inside 240×240 segment
+    if (newX < SEG_X) { newW -= SEG_X - newX; newX = SEG_X; }
+    if (newY < SEG_Y) { newH -= SEG_Y - newY; newY = SEG_Y; }
+    if (newX + newW > SEG_X + SEG_W) newW = SEG_X + SEG_W - newX;
+    if (newY + newH > SEG_Y + SEG_H) newH = SEG_Y + SEG_H - newY;
+
+    // Stay outside shuttle
+    if (newY > SH_Y) newY = SH_Y;
+    if (newX > SH_X) newX = SH_X;
+    if (newY + newH < SH_Y + SH_H) newH = SH_Y + SH_H - newY;
+    if (newX + newW < SH_X + SH_W) newW = SH_X + SH_W - newX;
+
+    rect.setAttribute("x", newX);
+    rect.setAttribute("y", newY);
+    rect.setAttribute("width", newW);
+    rect.setAttribute("height", newH);
+
+    positionRibbon();
+  }
+
+  function onUp() {
+    action = null;
+    moveDistance = 0;
+    window.removeEventListener("mousemove", onMove);
+    window.removeEventListener("mouseup", onUp);
+    window.removeEventListener("touchmove", onMove);
+    window.removeEventListener("touchend", onUp);
+  }
+
+  svg.addEventListener("mousedown", onDown);
+  svg.addEventListener("touchstart", onDown, { passive: false });
+})();
+
+
+
+
+    const wsUri = "ws://"+window.location.hostname+":8889";
+    const websocket = new WebSocket(wsUri);
+
+    websocket.onopen = (e) => {
+      writeToScreen("CONNECTED");
+	  const text = '{"cmd":"monitor","pvName":"gHMI.Stereotype.Size"}';
+
+      text && doSend(text);
+    };
+
+    websocket.onclose = (e) => {
+      writeToScreen("DISCONNECTED");
+    };
+
+    websocket.onmessage = (e) => {
+	  var receivedData = JSON.parse(e.data);
+	  if(receivedData.status == "valueChanged")
+	  {
+		for(var i = 0; i < receivedData.data.length; ++i)
+		{
+			if(receivedData.data[i]["Sim.Robots"])
+			{
+				//read robot data
+				callMyRobotFunction(receivedData.data[i]["Sim.Robots"]);
+			}
+			else if(receivedData.data[i]["Sim.Arrays"])
+			{
+				//do somthing with array data
+				callMyArrayFunction(receivedData.data[i]["Sim.Arrays"]);
+			}
+			else
+			{
+				var myStereotype = document.getElementById("myStereotype");
+				var XOffsetNeg = parseFloat(receivedData.data[i]["gHMI.Stereotype.Size"]["XOffsetNeg"])*1000;
+				var XOffsetPos = parseFloat(receivedData.data[i]["gHMI.Stereotype.Size"]["XOffsetPos"])*1000;
+				var YOffsetNeg = parseFloat(receivedData.data[i]["gHMI.Stereotype.Size"]["YOffsetNeg"])*1000;
+				var YOffsetPos = parseFloat(receivedData.data[i]["gHMI.Stereotype.Size"]["YOffsetPos"])*1000;
+				if(XOffsetNeg)
+				{
+					myStereotype.innerHTML = `
+						<rect x="${(XOffsetNeg+200)}" y="${(200-YOffsetPos)}" width="${(XOffsetPos-XOffsetNeg)}" height="${(YOffsetPos-YOffsetNeg)}" rx="8" ry="8" stroke="lightblue" stroke-width="3" stroke-dasharray="10" fill="rgba(0,0,255,0.15)" id="stereotype"></rect>
+					 `;
+					 
+				 }
+			}
+		}
+	  }
+    };
+
+    websocket.onerror = (e) => {
+      
+    };
+
+    function doSend(message) {
+      websocket.send(message);
+    }
+
+    function writeToScreen(message) {
+    }
+
+
+</script>
+
+</body>
+</html>

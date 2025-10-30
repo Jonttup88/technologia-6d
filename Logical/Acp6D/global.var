@@ -1,0 +1,3 @@
+VAR
+    gAcp6D : Acp6DType := (0);
+END_VAR

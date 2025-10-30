@@ -31,14 +31,14 @@
             <ResultHandler condition="result = 2">
               <Action>
                 <Target xsi:type="clientSystem.Action">
-                  <Method xsi:type="clientSystem.Action.Navigate" pageId="page_gamePage3" />
+                  <Method xsi:type="clientSystem.Action.Navigate" pageId="page_gameSelect8" />
                 </Target>
               </Action>
             </ResultHandler>
             <ResultHandler condition="result = 1">
               <Action>
                 <Target xsi:type="clientSystem.Action">
-                  <Method xsi:type="clientSystem.Action.Navigate" pageId="page_gamePage2" />
+                  <Method xsi:type="clientSystem.Action.Navigate" pageId="page_gameSelect4" />
                 </Target>
               </Action>
             </ResultHandler>
@@ -57,14 +57,40 @@
             <ResultHandler condition="newValue = result">
               <Action>
                 <Target xsi:type="clientSystem.Action">
-                  <Method xsi:type="clientSystem.Action.Navigate" pageId="page_gamePage4" />
+                  <Method xsi:type="clientSystem.Action.Navigate" pageId="page_gameWin" />
                 </Target>
               </Action>
             </ResultHandler>
             <ResultHandler condition="NOT (newValue = result)">
               <Action>
                 <Target xsi:type="clientSystem.Action">
-                  <Method xsi:type="clientSystem.Action.Navigate" pageId="page_gamePage5" />
+                  <Method xsi:type="clientSystem.Action.Navigate" pageId="page_gameLose" />
+                </Target>
+              </Action>
+            </ResultHandler>
+          </Result>
+        </Action>
+      </EventHandler>
+    </EventBinding>
+    <EventBinding id="EventBinding_6">
+      <Source xsi:type="opcUa.Event" refId="::AsGlobalPV:gHMI.Game.OpenGamePage" event="ValueChanged" />
+      <EventHandler condition="newValue">
+        <Action>
+          <ReadTarget xsi:type="opcUa.NodeAction.Read" refId="::AsGlobalPV:gHMI.Game.Mode">
+            <Method xsi:type="opcUa.NodeAction.GetValue" />
+          </ReadTarget>
+          <Result>
+            <ResultHandler condition="result &gt; 0">
+              <Action>
+                <Target xsi:type="clientSystem.Action">
+                  <Method xsi:type="clientSystem.Action.Navigate" pageId="page_gameMonitor" />
+                </Target>
+              </Action>
+            </ResultHandler>
+            <ResultHandler condition="result = 0">
+              <Action>
+                <Target xsi:type="clientSystem.Action">
+                  <Method xsi:type="clientSystem.Action.Navigate" pageId="page_gameSelectMode" />
                 </Target>
               </Action>
             </ResultHandler>

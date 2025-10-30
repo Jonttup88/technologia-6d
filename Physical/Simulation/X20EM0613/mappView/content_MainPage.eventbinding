@@ -45,9 +45,41 @@
       <Source xsi:type="widgets.brease.RadioButton.Event" contentRefId="content_MainPage" widgetRefId="RadioButton4" event="Click" />
       <EventHandler>
         <Action>
-          <Target xsi:type="clientSystem.Action">
-            <Method xsi:type="clientSystem.Action.Navigate" pageId="page_gamePage" />
-          </Target>
+          <ReadTarget xsi:type="opcUa.NodeAction.Read" refId="::AsGlobalPV:gHMI.Game.Mode">
+            <Method xsi:type="opcUa.NodeAction.GetValue" />
+          </ReadTarget>
+          <Result>
+            <ResultHandler condition="result &gt; 0">
+              <Action>
+                <Target xsi:type="clientSystem.Action">
+                  <Method xsi:type="clientSystem.Action.Navigate" pageId="page_gameMonitor" />
+                </Target>
+              </Action>
+            </ResultHandler>
+            <ResultHandler condition="result = 0">
+              <Action>
+                <ReadTarget xsi:type="opcUa.NodeAction.Read" refId="::AsGlobalPV:gHMI.Status.AllowPlay">
+                  <Method xsi:type="opcUa.NodeAction.GetValue" />
+                </ReadTarget>
+                <Result>
+                  <ResultHandler condition="result">
+                    <Action>
+                      <Target xsi:type="clientSystem.Action">
+                        <Method xsi:type="clientSystem.Action.Navigate" pageId="page_gameSelectMode" />
+                      </Target>
+                    </Action>
+                  </ResultHandler>
+                  <ResultHandler condition="NOT result">
+                    <Action>
+                      <Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:gHMI.Game.GameRequested">
+                        <Method xsi:type="opcUa.NodeAction.SetValueBool" value="true" />
+                      </Target>
+                    </Action>
+                  </ResultHandler>
+                </Result>
+              </Action>
+            </ResultHandler>
+          </Result>
         </Action>
       </EventHandler>
     </EventBinding>

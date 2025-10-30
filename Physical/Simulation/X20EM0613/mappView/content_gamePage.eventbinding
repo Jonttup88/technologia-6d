@@ -13,7 +13,7 @@
       <EventHandler>
         <Action>
           <Target xsi:type="clientSystem.Action">
-            <Method xsi:type="clientSystem.Action.Navigate" pageId="page_gamePage1" />
+            <Method xsi:type="clientSystem.Action.Navigate" pageId="page_gameMonitor" />
           </Target>
         </Action>
       </EventHandler>
@@ -32,7 +32,7 @@
           <Step order="1">
             <Action>
               <Target xsi:type="clientSystem.Action">
-                <Method xsi:type="clientSystem.Action.Navigate" pageId="page_gamePage1" />
+                <Method xsi:type="clientSystem.Action.Navigate" pageId="page_gameMonitor" />
               </Target>
             </Action>
           </Step>

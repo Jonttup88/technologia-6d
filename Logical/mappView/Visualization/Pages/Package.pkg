@@ -6,14 +6,14 @@
     <Object Type="Package">ConfigPage</Object>
     <Object Type="Package">MainPage</Object>
     <Object Type="Package">page_weight</Object>
-    <Object Type="Package">page_gamePage</Object>
+    <Object Type="Package">page_gameSelectMode</Object>
     <Object Type="Package">page_zone</Object>
     <Object Type="Package">page_stereotype</Object>
     <Object Type="Package">page_teach</Object>
-    <Object Type="Package">page_gamePage1</Object>
-    <Object Type="Package">page_gamePage2</Object>
-    <Object Type="Package">page_gamePage3</Object>
-    <Object Type="Package">page_gamePage4</Object>
-    <Object Type="Package">page_gamePage5</Object>
+    <Object Type="Package">page_gameMonitor</Object>
+    <Object Type="Package">page_gameSelect4</Object>
+    <Object Type="Package">page_gameSelect8</Object>
+    <Object Type="Package">page_gameWin</Object>
+    <Object Type="Package">page_gameLose</Object>
   </Objects>
 </Package>

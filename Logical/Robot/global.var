@@ -1,0 +1,3 @@
+VAR
+    gRobot : RobotType := (0);
+END_VAR

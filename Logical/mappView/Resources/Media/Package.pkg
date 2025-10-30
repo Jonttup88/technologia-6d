@@ -42,5 +42,6 @@
     <Object Type="File">AutoCycleIcon.svg</Object>
     <Object Type="File">AntiSloshIcon.svg</Object>
     <Object Type="File">Status_Blue.png</Object>
+    <Object Type="Package">web</Object>
   </Objects>
 </Package>

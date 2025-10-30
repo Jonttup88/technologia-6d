@@ -1,0 +1,50 @@
+VAR
+	refMoveQueue : REFERENCE TO brfi6DMoveQueue;
+	task : REFERENCE TO Acp6DType;
+	local : Acp6DLocalType;
+	fb : Acp6DFbType;
+	hmi : Acp6DHmiType;
+	i : DINT;
+	x : DINT;
+	no_command : Acp6DInputCommandType;
+	shuttle : REFERENCE TO Acp6dShuttleType;
+	commandQueue : ARRAY[0..gMAX_INDEX_TARGETS] OF brfi6DMoveQueueCommandType;
+	cyclic : Acp6DCyclicChannelsType;
+	queueStatus : Acp6DMoveQueueStatusType;
+	shuttleStatus : Acp6DShuttleStatusPollType;
+	moveQueueParamDefault : brfi6DMoveQueueParamType;
+	moveQueueParamTask : brfi6DMoveQueueParamType;
+	shuffle : Acp6DShuffleType;
+	selected1 : ARRAY[0..gMAX_INDEX_SHUTTLE] OF brfiShuttleSelectionType;
+	selected2 : ARRAY[0..gMAX_INDEX_SHUTTLE] OF brfiShuttleSelectionType;
+	random : Acp6DRandomType;
+END_VAR
+(**)
+(*ACOPOS 6D*)
+VAR
+	shuttles : ARRAY[0..gMAX_INDEX_SHUTTLE] OF Acp6dShuttleType; (*Global shuttle list*)
+	shuttlesVirtual : ARRAY[0..gMAX_INDEX_SHUTTLE_VIRTUAL] OF Mc6DShuttleType; (*Global shuttle list*)
+	positions : Acp6DTablePositionType;
+	test : brfiSunPlanet;
+END_VAR
+(*FEATURES*)
+VAR
+	FeatureShuttles : ARRAY[0..7] OF FeatureShuttle_typ;
+	original : ARRAY[0..7] OF INT := [0,1,2,3,4,5,6,7];
+	shuffled1 : ARRAY[0..7] OF INT;
+	shuffled : ARRAY[0..7] OF INT;
+	count : USINT := 0;
+	j : INT;
+	counter : USINT;
+	ready : BOOL;
+	z : INT;
+	nextIndex : DINT;
+	minValue : INT;
+	index : DINT;
+END_VAR
+(*HMI*)
+VAR
+	TON_ResetPLC : TON;
+	R_TRIG_0 : R_TRIG;
+	R_TRIG_1 : R_TRIG;
+END_VAR

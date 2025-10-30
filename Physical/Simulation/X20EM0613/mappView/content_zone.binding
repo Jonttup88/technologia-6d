@@ -13,5 +13,9 @@
 <Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ActivateZone" attribute="value" />
 <Target xsi:type="brease" contentRefId="content_zone" widgetRefId="ToggleButton1" attribute="value" />
 </Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.Status.AllowStop" attribute="value" />
+<Target xsi:type="brease" contentRefId="content_zone" widgetRefId="ToggleButton1" attribute="enable" />
+</Binding>
 </Bindings>
 </BindingsSet>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?AutomationStudio FileVersion="4.9"?>
+<Package Version="1.0.0" xmlns="http://br-automation.co.at/AS/Package">
+  <Objects>
+    <Object Type="File">global.var</Object>
+    <Object Type="File">global.typ</Object>
+    <Object Type="Program" Language="IEC">Robot</Object>
+  </Objects>
+</Package>

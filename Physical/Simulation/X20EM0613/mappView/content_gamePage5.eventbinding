@@ -15,7 +15,7 @@
           <Step order="1">
             <Action>
               <Target xsi:type="clientSystem.Action">
-                <Method xsi:type="clientSystem.Action.Navigate" pageId="page_gamePage" />
+                <Method xsi:type="clientSystem.Action.Navigate" pageId="page_gameSelectMode" />
               </Target>
             </Action>
           </Step>

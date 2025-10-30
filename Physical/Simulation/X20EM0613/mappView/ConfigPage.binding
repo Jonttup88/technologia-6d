@@ -1,14 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BindingsSet id="ConfigPage" xmlns="http://www.br-automation.com/iat2015/binding/engineering/v2" xmlns:bt="http://www.br-automation.com/iat2015/bindingListTypes/engineering/v2" xmlns:be="http://www.br-automation.com/iat2015/bindingListEmbedded/engineering/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Bindings>
-<Binding mode="twoWay">
-<Source xsi:type="opcUa" refId="::AsGlobalPV:gMain.Par.Velocity" attribute="value" />
-<Target xsi:type="brease" contentRefId="ConfigPage" widgetRefId="inputWaitTime1" attribute="value" />
-</Binding>
-<Binding mode="twoWay">
-<Source xsi:type="opcUa" refId="::AsGlobalPV:gMain.Par.Acceleration" attribute="value" />
-<Target xsi:type="brease" contentRefId="ConfigPage" widgetRefId="inputWaitTime2" attribute="value" />
-</Binding>
+
+
 
 <Binding mode="twoWay">
 <Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.General.ResetButton" attribute="value" />
@@ -37,6 +31,18 @@
 <Binding mode="twoWay">
 <Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.Status.Error" attribute="value" />
 <Target xsi:type="brease" contentRefId="ConfigPage" widgetRefId="ImageList4" attribute="selectedIndex" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.Status.AllowPlay" attribute="value" />
+<Target xsi:type="brease" contentRefId="ConfigPage" widgetRefId="MomentaryPushButton1" attribute="enable" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.Status.AllowStop" attribute="value" />
+<Target xsi:type="brease" contentRefId="ConfigPage" widgetRefId="MomentaryPushButton3" attribute="enable" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.General.ResetPLC" attribute="value" />
+<Target xsi:type="brease" contentRefId="ConfigPage" widgetRefId="MomentaryPushButton12" attribute="value" />
 </Binding>
 </Bindings>
 </BindingsSet>

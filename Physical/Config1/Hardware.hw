@@ -43,6 +43,7 @@
       <Parameter ID="Mode" Value="Manual" />
       <Parameter ID="InternetAddress" Value="192.168.125.201" />
       <Parameter ID="SubnetMask" Value="255.255.255.0" />
+      <Parameter ID="ActivateSnmp" Value="2" />
     </Connector>
     <Parameter ID="ConfigurationID" Value="Teknologia25_Config1" />
     <Parameter ID="TimerDeviceType" Value="EPLX2X" />

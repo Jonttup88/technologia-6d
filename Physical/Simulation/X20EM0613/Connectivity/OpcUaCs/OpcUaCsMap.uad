@@ -9,9 +9,7 @@
   </Aliases>
   <Module Name="&lt;Default&gt;">
     <GlobalVariables Name="Global Variables">
-      <Variable Name="gShuttles" RecursiveEnable="2" MinimumSamplingInterval="Timer4" />
       <Variable Name="gAssembly6D_1" RecursiveEnable="2" />
-      <Variable Name="gMain" RecursiveEnable="2" />
       <Variable Name="gHMI">
         <Variable Name="ZoneDataProvider" />
         <Variable Name="ZoneDataIndex" />
