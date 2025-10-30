@@ -28,11 +28,19 @@ ACTION HmiAction:
 	gHMI.Status.AllowPlay := (task.State = ACP6D_IDLE);
 	gHMI.Status.AllowStop := gFeatureDemo.Active;
 	
-	
+	//
+	IF gHMI.Game.NewGame OR gHMI.Game.ExitGame THEN
+		brsmemset(ADR(gHMI.Game),0,SIZEOF(gHMI.Game));
+	END_IF;	
 	
 	IF gHMI.Game.GameRequested AND gHMI.Status.AllowPlay THEN
 		gHMI.Game.GameRequested := FALSE;
 		gHMI.Game.OpenGamePage := TRUE;
+	END_IF;
+	
+	
+	IF gHMI.Game.GameFinished THEN
+		gHMI.Game.EndUserSelection := gHMI.Game.Selection;
 	END_IF;
 	
 	

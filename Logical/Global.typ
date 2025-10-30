@@ -57,6 +57,7 @@ TYPE
 		Position : McAcp6DShPositionType;
 		Payload : REAL;
 		StoreOffset : BOOL;
+		NoMoveAllowed : BOOL;
 	END_STRUCT;
 	HMI_Stereotype_typ : 	STRUCT 
 		Size : McAcp6DPayloadSizeType;
@@ -130,6 +131,8 @@ TYPE
 		Mode : USINT;
 		Selection : USINT;
 		CorrectShuttle : USINT;
+		EndUserSelection : USINT;
+		GameShuffleFinished : BOOL;
 		GameFinished : BOOL;
 		NewGame : BOOL;
 		ExitGame : BOOL;

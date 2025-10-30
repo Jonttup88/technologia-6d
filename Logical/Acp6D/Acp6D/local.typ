@@ -155,6 +155,7 @@ TYPE
 		MoveArc : MC_BR_MoveArc_Acp6D;
 		MoveShortAxis : MC_BR_MoveShortAxis_Acp6D;
 		RotaryMotion : MC_BR_RotaryMotion_Acp6D;
+		TON_1 : TON;
 		TON_0 : TON;
 		Recover : MC_BR_ShRecover_Acp6D;
 		Payload : MC_BR_ShGetPayload_Acp6D;

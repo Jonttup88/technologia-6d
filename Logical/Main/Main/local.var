@@ -1,6 +1,10 @@
 VAR
-  task : REFERENCE TO MainType;
-  local : MainLocalType;
-    fb : MainFbType;
-  hmi : MainHmiType;
+	task : REFERENCE TO MainType;
+	local : MainLocalType;
+	fb : MainFbType;
+	hmi : MainHmiType;
+END_VAR
+(*JKI addition*)
+VAR
+	R_TRIG_0 : R_TRIG;
 END_VAR
