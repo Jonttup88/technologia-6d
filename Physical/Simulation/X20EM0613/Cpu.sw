@@ -61,7 +61,8 @@
     <LibraryObject Name="AsBrMath" Source="" Memory="UserROM" Language="Binary" Debugging="true" />
     <LibraryObject Name="ArSsl" Source="" Memory="UserROM" Language="Binary" Debugging="true" />
     <LibraryObject Name="strUtil" Source="Libraries.strUtil.lby" Memory="UserROM" Language="ANSIC" Debugging="true" />
-    <LibraryObject Name="comUtil" Source="Libraries.comUtil.lby" Memory="UserROM" Language="ANSIC" AdditionalLibraryDirectories="\Logical\Libraries\comUtil\IA32\" AdditionalLibraries="AR" Debugging="true" />
+    <LibraryObject Name="comUtil" Source="Libraries.comUtil.lby" Memory="UserROM" Language="ANSIC"
+      AdditionalLibraryDirectories="\Logical\Libraries\comUtil\IA32\" AdditionalLibraries="AR" Debugging="true" />
     <LibraryObject Name="AsTCP" Source="Libraries.AsTCP.lby" Memory="UserROM" Language="binary" Debugging="true" />
     <LibraryObject Name="brdkMU" Source="" Memory="UserROM" Language="Binary" Debugging="true" />
     <LibraryObject Name="MTFilter" Source="" Memory="UserROM" Language="Binary" Debugging="true" />

@@ -15,7 +15,12 @@ PROGRAM _CYCLIC
     // =================================================================================================================
 	task ACCESS ADR(gMain);
 
-
+	R_TRIG_0.CLK := (gHMI.Game.Mode > 0);
+	R_TRIG_0;
+	
+	IF R_TRIG_0.Q THEN
+		task.Input.Command.StartGame := TRUE;
+	END_IF;
 	// Inputs
 	// =================================================================================================================
 	IF NOT task.Input.Force THEN
@@ -105,6 +110,8 @@ PROGRAM _CYCLIC
 				task.State := MAIN_RESET;
 				
 			ELSIF task.Input.Command.StartGame THEN
+				task.Input.Command.StartGame := FALSE; // dummy - reset caller
+			
 				task.State := MAIN_GAME;
 					
 				//			ELSIF task.Input.Command. THEN
