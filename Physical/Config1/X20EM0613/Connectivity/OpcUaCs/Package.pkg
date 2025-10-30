@@ -4,6 +4,6 @@
   <Objects>
     <Object Type="File">UaCsConfig.uacfg</Object>
     <Object Type="File">UaDvConfig.uadcfg</Object>
-    <Object Type="File">OpcUaCsMap.uad</Object>
+    <Object Type="File" Reference="true">\Physical\Simulation\X20EM0613\Connectivity\OpcUaCs\OpcUaCsMap.uad</Object>
   </Objects>
 </Package>
