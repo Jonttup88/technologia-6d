@@ -13,8 +13,11 @@ VAR CONSTANT
 END_VAR
 (*Global Control Variable*)
 VAR
-	gMain1 : gMainType; (*Global control variable*)
+	gMain : gMainType; (*Global control variable*)
 	gShuttleList : ARRAY[0..MAX_INDEX_SHUTTLE] OF gShuttleListType; (*Global shuttle list*)
 	gShuttles : ARRAY[0..7] OF McAcp6DShPositionType;
 	gRobot : gRobotTyp;
+	gHMI : gHMI_typ;
+	gZones : ARRAY[0..49] OF HMI_Zone_typ;
+	gFeatureDemo : gFeatureDemo_typ;
 END_VAR

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?AutomationStudio FileVersion="4.9"?>
+<Package xmlns="http://br-automation.co.at/AS/Package">
+  <Objects>
+    <Object Type="File">ArrowLeft.svg</Object>
+    <Object Type="File">camera.svg</Object>
+    <Object Type="File">debug.log</Object>
+    <Object Type="File">Home.svg</Object>
+    <Object Type="File">pause.svg</Object>
+    <Object Type="File">playButton.svg</Object>
+    <Object Type="File">power.png</Object>
+    <Object Type="File">Reset.svg</Object>
+    <Object Type="File">settingsButton.png</Object>
+    <Object Type="File">zone.svg</Object>
+    <Object Type="File">stop.svg</Object>
+    <Object Type="File">gAssembly6D_1.svg</Object>
+    <Object Type="File">6D.jpg</Object>
+  </Objects>
+</Package>

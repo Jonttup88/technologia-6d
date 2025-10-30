@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<StylesSet id="brease" xmlns="http://www.br-automation.com/iat2015/stylesset/engineering/v1">
+  	<Styles refId="BuRThemeDefaultStyles" />
+	<Styles refId="BuRThemeSystemStyles" />
+	<Styles refId="BuRThemeButtonStyles" />
+	<Styles refId="BuRThemeCommonStyles" />
+	<Styles refId="BuRThemeContainerStyles" />
+	<Styles refId="BuRThemeNumericStyles" />
+	<Styles refId="BuRThemeLabelTextsStyles" />
+	<Styles refId="BuRThemeGraphicStyles" />
+	<Styles refId="BuRThemeChartStyles" />
+	<Styles refId="BuRThemeSequencerStyles" />
+	<Styles refId="BuRThemeListStyles" />
+</StylesSet>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BindingsSet id="content_zone" xmlns="http://www.br-automation.com/iat2015/binding/engineering/v2" xmlns:bt="http://www.br-automation.com/iat2015/bindingListTypes/engineering/v2" xmlns:be="http://www.br-automation.com/iat2015/bindingListEmbedded/engineering/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Bindings>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ZoneDataIndex" attribute="value" />
+<Target xsi:type="brease" contentRefId="content_zone" widgetRefId="ListBox1" attribute="selectedIndex" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ZoneDataProvider" attribute="value" />
+<Target xsi:type="brease" contentRefId="content_zone" widgetRefId="ListBox1" attribute="dataProvider" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.ActivateZone" attribute="value" />
+<Target xsi:type="brease" contentRefId="content_zone" widgetRefId="ToggleButton1" attribute="value" />
+</Binding>
+</Bindings>
+</BindingsSet>

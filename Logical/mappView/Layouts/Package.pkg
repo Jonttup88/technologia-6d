@@ -4,5 +4,7 @@
   <Objects>
     <Object Type="File">Landscape16_9.layout</Object>
     <Object Type="File">layout_phone.layout</Object>
+    <Object Type="File">layoutWeightVisu.layout</Object>
+    <Object Type="File">landscape16_9_0.layout</Object>
   </Objects>
 </Package>

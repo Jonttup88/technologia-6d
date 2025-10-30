@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?AutomationStudio FileVersion="4.9"?>
+<Library Version="1.0.4" SubType="ANSIC" xmlns="http://br-automation.co.at/AS/Library">
+  <Files>
+    <File>comUtil.fun</File>
+    <File>Types.typ</File>
+    <File>ws_server.c</File>
+    <File>utf8.c</File>
+    <File>utf8.h</File>
+    <File>sha1.c</File>
+    <File>sha1.h</File>
+    <File>base64.h</File>
+    <File>handshake.c</File>
+    <File>ws.h</File>
+    <File>base64.c</File>
+    <File>heapsize.cpp</File>
+    <File>parson.c</File>
+    <File>parson.h</File>
+    <File>pvValues.c</File>
+    <File>pvElements.c</File>
+    <File>rtkBase.h</File>
+    <File>rtkTypes.h</File>
+    <File>main.c</File>
+    <File>rtkTask.h</File>
+    <File>targetModelInfo.h</File>
+    <File>bootModeApi.h</File>
+    <File>arexport.h</File>
+    <File>arState.h</File>
+    <File>Variables.var</File>
+    <File>PLC_var_info.c</File>
+  </Files>
+  <Dependencies>
+    <Dependency ObjectName="AsTCP" />
+    <Dependency ObjectName="standard" />
+    <Dependency ObjectName="sys_lib" />
+    <Dependency ObjectName="AsBrStr" />
+  </Dependencies>
+</Library>

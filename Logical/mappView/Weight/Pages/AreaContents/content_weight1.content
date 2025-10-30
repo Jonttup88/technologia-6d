@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Content id="content_weight1" guid="87e34240-bdd5-4aa1-98ea-a330e7be9178" height="1000" width="1600" xmlns="http://www.br-automation.com/iat2015/contentDefinition/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Widgets>
+    <Widget xsi:type="widgets.brease.NumericOutput" id="NumericOutput1" top="160" left="200" width="1237" height="519" zIndex="0" format="{'metric':{'decimalPlaces':0,'minimumIntegerDigits':1},'imperial':{'decimalPlaces':0,'minimumIntegerDigits':1},'imperial-us':{'decimalPlaces':0,'minimumIntegerDigits':1}}" unit="{'metric':'GRM','imperial':'GRM','imperial-us':'GRM'}" unitAlign="right" unitWidth="100" borderColor="rgba(85, 85, 85, 0)" textAlign="center" fontSize="262px" unitFontSize="100px" />
+    <Widget xsi:type="widgets.brease.ToggleButton" id="ToggleButton1" top="680" left="600" width="276" height="228" zIndex="1" image="Media/WeightIcon.svg" imageAlign="top" mouseDownImage="Media/WeightIcon.svg" />
+  </Widgets>
+</Content>

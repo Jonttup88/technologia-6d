@@ -54,11 +54,6 @@ VAR
 	counter : USINT;
 	shIndex : INT;
 	jkiFeatureDemo : BOOL;
-	MC_BR_ShGroupCoupleCtrl_Acp6D_0 : MC_BR_ShGroupCoupleCtrl_Acp6D;
-	MC_BR_ShGroupDelete_Acp6D_0 : MC_BR_ShGroupDelete_Acp6D;
-	MC_BR_ShGroupCreate_Acp6D_0 : MC_BR_ShGroupCreate_Acp6D;
-	MC_BR_ShGroupAddShuttle_Acp6D_0 : MC_BR_ShGroupAddShuttle_Acp6D;
-	MC_BR_MoveShortAxis_Acp6D_0 : MC_BR_MoveShortAxis_Acp6D;
 	FeatureShuttles : ARRAY[0..7] OF FeatureShuttle_typ;
 	ready : BOOL;
 	R_TRIG_0 : R_TRIG;
@@ -76,5 +71,11 @@ VAR
 	jkiTestPayload : BOOL;
 	weightOffsets : ARRAY[0..7] OF Weight_data_typ;
 	cubeID : UINT;
+	nextIndex : DINT;
 	tempDone : BOOL;
+	jsonTest : BOOL;
+	my6Ddata : Motion6D_data_typ;
+	myStringData : STRING[500];
+	TON_WaitPageChange : TON;
+	TON_Reset : TON;
 END_VAR

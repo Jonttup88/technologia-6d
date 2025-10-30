@@ -1,0 +1,243 @@
+<svg id="zoneSvg" xmlns="http://www.w3.org/2000/svg"
+     width="920" height="900"
+     viewBox="-3.75 -323.75 327.5 327.5"
+     preserveAspectRatio="xMidYMid meet"
+     color-interpolation-filters="sRGB">
+
+<style>
+  svg {
+    fill:none;
+    fill-rule:evenodd;
+    font-size:12px;
+    overflow:visible;
+    stroke-linecap:square;
+    stroke-miterlimit:3;
+    touch-action:none;
+  }
+  .segment.power-off {fill:#555;}
+  .segment.power-on {fill:#fbfbfb;}
+  rect {cursor:move;}
+  .ribbon-button:hover {opacity:0.8;cursor:pointer;}
+  text {
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+  }
+</style>
+
+<defs>
+  <clipPath id="segment-240x240-clipPath">
+    <rect width="240.5" height="240.5" rx="3.75" ry="3.75"/>
+  </clipPath>
+</defs>
+
+<g id="gAssembly6D_1" class="assembly">
+  <g id="Layout6D_1" class="layout" grid-size="240">
+    <g id="segment-16" class="segment segment-size-240x240 power-on"
+       segment-name-unique="Asm1Segment16" segment-id="16"
+       transform="translate(40 -280)">
+      <g>
+        <rect width="240" height="240" rx="3.75" ry="3.75"/>
+      </g>
+      <text x="10" y="10" alignment-baseline="hanging">X</text>
+    </g>
+  </g>
+
+  <g id="myPreviewZones"></g>
+  <g id="myZones"></g>
+</g>
+
+<script><![CDATA[
+(() => {
+  const svg = document.getElementById("zoneSvg");
+  const parentGroup = document.querySelector("#segment-16"); // append rect here
+  const GRID_SIZE = 5;
+  const EDGE_SIZE = 10;
+  let rect = null;
+  let ribbon = null;
+  let action = null;
+  let offset = { x: 0, y: 0 };
+  let start = { x: 0, y: 0 };
+  let rectBox = {};
+
+  const getPointer = (e) => e.touches ? e.touches[0] : e;
+  const snap = (val) => Math.round(val / GRID_SIZE) * GRID_SIZE;
+
+  // ---- Create rect on double click ----
+  svg.addEventListener("dblclick", (e) => {
+    const p = getPointer(e);
+    const svgRect = svg.getBoundingClientRect();
+    const x = p.clientX - svgRect.left;
+    const y = p.clientY - svgRect.top;
+
+    // remove old ones
+    if (rect) {
+      rect.remove();
+      ribbon?.remove();
+    }
+
+    rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    rect.setAttribute("x", 57);
+    rect.setAttribute("y", 57);
+    rect.setAttribute("width", snap(120));
+    rect.setAttribute("height", snap(120));
+    rect.setAttribute("stroke", "blue");
+    rect.setAttribute("stroke-width", "3");
+    rect.setAttribute("stroke-dasharray", "10");
+    rect.setAttribute("fill", "rgba(0,0,255,0.7)");
+    rect.setAttribute("rx", "4");
+    rect.setAttribute("ry", "4");
+
+    parentGroup.appendChild(rect);
+    createRibbon();
+    positionRibbon();
+  });
+
+  // ---- Create Ribbon UI ----
+  function createRibbon() {
+    ribbon = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    ribbon.id = "ribbon";
+
+    const bg = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    bg.setAttribute("width", 100);
+    bg.setAttribute("height", 40);
+    bg.setAttribute("rx", 8);
+    bg.setAttribute("ry", 8);
+    bg.setAttribute("fill", "rgba(127,127,127,0.5)");
+    bg.setAttribute("stroke", "rgba(173,255,47,0.6)");
+    bg.setAttribute("stroke-width", 2);
+    ribbon.appendChild(bg);
+
+    const check = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    check.setAttribute("x", 28);
+    check.setAttribute("y", 26);
+    check.setAttribute("fill", "lime");
+    check.setAttribute("font-size", "24");
+    check.textContent = "✔";
+    check.classList.add("ribbon-button");
+    check.addEventListener("click", applyRect);
+    ribbon.appendChild(check);
+
+    const del = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    del.setAttribute("x", 68);
+    del.setAttribute("y", 26);
+    del.setAttribute("fill", "red");
+    del.setAttribute("font-size", "24");
+    del.textContent = "🗑";
+    del.classList.add("ribbon-button");
+    del.addEventListener("click", deleteRect);
+    ribbon.appendChild(del);
+
+    parentGroup.appendChild(ribbon);
+  }
+
+  function positionRibbon() {
+    if (!rect || !ribbon) return;
+    const x = parseFloat(rect.getAttribute("x"));
+    const y = parseFloat(rect.getAttribute("y"));
+    const width = parseFloat(rect.getAttribute("width"));
+    const height = parseFloat(rect.getAttribute("height"));
+    const svgHeight = parseFloat(svg.getAttribute("height"));
+    let ribbonY = y - 50;
+    if (y < 60) ribbonY = y + height + 10;
+    if (ribbonY + 40 > svgHeight) ribbonY = svgHeight - 50;
+    ribbon.setAttribute("transform", `translate(${x + width / 2 - 50}, ${ribbonY})`);
+  }
+
+  function applyRect() {
+    if (!rect) return;
+    const topRight = {
+      x: (parseFloat(rect.getAttribute("x")) + parseFloat(rect.getAttribute("width"))) / 1000,
+      y: (960 - parseFloat(rect.getAttribute("y"))) / 1000,
+    };
+    const bottomLeft = {
+      x: parseFloat(rect.getAttribute("x")) / 1000,
+      y: (960 - parseFloat(rect.getAttribute("y")) - parseFloat(rect.getAttribute("height"))) / 1000,
+    };
+    console.log(topRight, bottomLeft);
+
+    rect.remove();
+    ribbon?.remove();
+    rect = null;
+    ribbon = null;
+
+    doSend(`{"cmd":"write","parameter":[
+      {"variable":"Program:newData.BottomLeft.X","value":"${bottomLeft.x}"},
+      {"variable":"Program:newData.BottomLeft.Y","value":"${bottomLeft.y}"},
+      {"variable":"Program:newData.TopRight.X","value":"${topRight.x}"},
+      {"variable":"Program:newData.TopRight.Y","value":"${topRight.y}"},
+      {"variable":"Program:createZone","value":"1"}
+    ]}`);
+  }
+
+  function deleteRect() {
+    rect?.remove();
+    ribbon?.remove();
+    rect = null;
+    ribbon = null;
+  }
+
+  // ---- Interaction handling ----
+  function onDown(e) {
+    if (!rect) return;
+    const p = getPointer(e);
+    const svgRect = svg.getBoundingClientRect();
+    const x = p.clientX - svgRect.left;
+    const y = p.clientY - svgRect.top;
+    rectBox = rect.getBBox();
+
+    const nearRight = Math.abs(x - (rectBox.x + rectBox.width)) < EDGE_SIZE;
+    const nearBottom = Math.abs(y - (rectBox.y + rectBox.height)) < EDGE_SIZE;
+    const nearLeft = Math.abs(x - rectBox.x) < EDGE_SIZE;
+    const nearTop = Math.abs(y - rectBox.y) < EDGE_SIZE;
+
+    if (nearRight || nearBottom || nearLeft || nearTop) {
+      action = "resize";
+      start = { x, y };
+    } else if (
+      x >= rectBox.x && x <= rectBox.x + rectBox.width &&
+      y >= rectBox.y && y <= rectBox.y + rectBox.height
+    ) {
+      action = "move";
+      offset.x = x - rectBox.x;
+      offset.y = y - rectBox.y;
+    } else return;
+
+    e.preventDefault();
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+  }
+
+  function onMove(e) {
+    if (!action || !rect) return;
+    e.preventDefault();
+    const p = getPointer(e);
+    const svgRect = svg.getBoundingClientRect();
+    const x = p.clientX - svgRect.left;
+    const y = p.clientY - svgRect.top;
+
+    if (action === "move") {
+      rect.setAttribute("x", snap(x - offset.x));
+      rect.setAttribute("y", snap(y - offset.y));
+    } else if (action === "resize") {
+      const newW = Math.max(20, rectBox.width + (x - start.x));
+      const newH = Math.max(20, rectBox.height + (y - start.y));
+      rect.setAttribute("width", snap(newW));
+      rect.setAttribute("height", snap(newH));
+    }
+    positionRibbon();
+  }
+
+  function onUp() {
+    action = null;
+    window.removeEventListener("mousemove", onMove);
+    window.removeEventListener("mouseup", onUp);
+  }
+
+  svg.addEventListener("mousedown", onDown);
+})();
+]]></script>
+
+<!-- (Your WebSocket section remains unchanged below) -->
+</svg>

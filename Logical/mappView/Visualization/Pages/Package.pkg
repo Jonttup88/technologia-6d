@@ -5,17 +5,15 @@
     <Object Type="Package" Description="AreaContents">AreaContents</Object>
     <Object Type="Package">ConfigPage</Object>
     <Object Type="Package">MainPage</Object>
-    <Object Type="Package">PhonePage</Object>
-    <Object Type="Package">PhonePage2</Object>
-    <Object Type="Package">page_PrivacyNotice</Object>
-    <Object Type="Package">page_weightPage</Object>
+    <Object Type="Package">page_weight</Object>
     <Object Type="Package">page_gamePage</Object>
-    <Object Type="Package">page_digitalTwin</Object>
-    <Object Type="Package">page_conveyor</Object>
-    <Object Type="Package">page_workStation</Object>
-    <Object Type="Package">page_danfoss</Object>
-    <Object Type="Package">page_fixture</Object>
+    <Object Type="Package">page_zone</Object>
+    <Object Type="Package">page_stereotype</Object>
     <Object Type="Package">page_teach</Object>
-    <Object Type="Package">formatChangePage</Object>
+    <Object Type="Package">page_gamePage1</Object>
+    <Object Type="Package">page_gamePage2</Object>
+    <Object Type="Package">page_gamePage3</Object>
+    <Object Type="Package">page_gamePage4</Object>
+    <Object Type="Package">page_gamePage5</Object>
   </Objects>
 </Package>

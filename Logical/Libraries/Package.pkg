@@ -28,5 +28,9 @@
     <Object Type="Library" Language="Binary" Description="This mechatronics library contains function blocks for filtering and basic signal processing.">MTFilter</Object>
     <Object Type="Library" Language="binary" Description="This mechatronics library contains different system datatypes and general error numbers.">MTTypes</Object>
     <Object Type="Library" Language="Binary" Description="This library is used to calculate matrices, vectors and systems of linear equations.">MTLinAlg</Object>
+    <Object Type="Library" Language="binary" Description="This library contains FBKs for exchanging data packets via datagram sockets (UDP).">AsUDP</Object>
+    <Object Type="Library" Language="binary" Description="This library contains FBKs for exchanging data (data stream) via stream sockets (TCP).">AsTCP</Object>
+    <Object Type="Library" Language="ANSIC">comUtil</Object>
+    <Object Type="Library" Language="ANSIC">strUtil</Object>
   </Objects>
 </Package>

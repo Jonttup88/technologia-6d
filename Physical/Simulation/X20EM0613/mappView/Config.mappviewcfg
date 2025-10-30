@@ -8,11 +8,13 @@
       </Selector>
       <Property ID="MaxClientConnections" Value="100" />
       <Property ID="MpUserXUserPreferences" Value="FALSE" />
-      <Selector ID="StartupUser" Value="StartupUserForcedLogin" />
+      <Selector ID="StartupUser" Value="StartupUserAnonymousToken" />
       <Group ID="TcpProxyConf">
         <Selector ID="InsecureMode" Value="1" />
       </Group>
-      <Group ID="FileDeviceWhitelist" />
+      <Group ID="FileDeviceWhitelist">
+        <Property ID="FileDeviceName[1]" Value="6DData" />
+      </Group>
       <Group ID="DiagnosticPageConf">
         <Selector ID="DiagnosticPageSelection" Value="2">
           <Property ID="DiagnosticPageRole[1]" Value="Everyone" />

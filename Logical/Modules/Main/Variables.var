@@ -1,7 +1,0 @@
-VAR
-	gMain : gMain_typ;
-	modeSelector : USINT;
-END_VAR
-VAR CONSTANT
-	NUM_SHUTTLES : USINT := 3; (*4[0..3]*)
-END_VAR

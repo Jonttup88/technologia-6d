@@ -34,6 +34,7 @@ TYPE
 		TON_0 : TON;
 		Recover : MC_BR_ShRecover_Acp6D;
 		Payload : MC_BR_ShGetPayload_Acp6D;
+		StereoTypeAssign : MC_BR_ShStereotypeAssign_Acp6D;
 	END_STRUCT;
 	FeatureParams_typ : 	STRUCT 
 		UseTime : BOOL;

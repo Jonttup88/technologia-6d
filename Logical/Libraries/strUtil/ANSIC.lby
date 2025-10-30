@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?AutomationStudio FileVersion="4.9"?>
+<Library SubType="ANSIC" xmlns="http://br-automation.co.at/AS/Library">
+  <Files>
+    <File>strUtil.fun</File>
+    <File>jsonTo6Ddata.c</File>
+    <File>parson.c</File>
+    <File>parson.h</File>
+    <File>Types.typ</File>
+  </Files>
+</Library>

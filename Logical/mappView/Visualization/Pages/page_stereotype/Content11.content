@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Content id="Content11" guid="d8e966a0-ed4f-4048-bfd2-31a2044cf9c7" height="1000" width="1360" xmlns="http://www.br-automation.com/iat2015/contentDefinition/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Widgets>
+    <Widget xsi:type="widgets.brease.Label" id="Label14" top="70" left="0" width="1360" height="120" zIndex="0" text="Stereotype" textAlign="center" fontSize="90px" />
+    <Widget xsi:type="widgets.brease.WebViewer" id="WebViewer1" top="180" left="160" width="879" height="799" zIndex="1" path="stereotype.html" port="8087" borderColor="rgba(154, 154, 154, 0)" />
+    <Widget xsi:type="widgets.brease.Joystick" id="Joystick1" top="460" left="1080" zIndex="2" />
+  </Widgets>
+</Content>

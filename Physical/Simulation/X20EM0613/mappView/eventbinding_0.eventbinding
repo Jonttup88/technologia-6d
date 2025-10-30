@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EventBindingSet id="eventbinding_0" xmlns="http://www.br-automation.com/iat2014/eventbinding/v2" xmlns:types="http://www.br-automation.com/iat2015/widgetTypes/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Bindings>
+    <EventBinding id="EventBinding_1">
+      <Source xsi:type="opcUa.Event" refId="::AsGlobalPV:gFeatureDemo.Active" event="ValueChanged" />
+      <EventHandler>
+        <Action>
+          <ReadTarget xsi:type="session.VariableAction.Read" refId="visuNum">
+            <Method xsi:type="session.VariableAction.GetValue" />
+          </ReadTarget>
+          <Result>
+            <ResultHandler condition="result = 2">
+              <Action>
+                <Target xsi:type="clientSystem.Action">
+                  <Method xsi:type="clientSystem.Action.Navigate" pageId="page_weight" />
+                </Target>
+              </Action>
+            </ResultHandler>
+          </Result>
+        </Action>
+      </EventHandler>
+    </EventBinding>
+    <EventBinding id="EventBinding_4">
+      <Source xsi:type="opcUa.Event" refId="::AsGlobalPV:gHMI.Game.GameFinished" event="ValueChanged" />
+      <EventHandler condition="newValue">
+        <Action>
+          <ReadTarget xsi:type="opcUa.NodeAction.Read" refId="::AsGlobalPV:gHMI.Game.Mode">
+            <Method xsi:type="opcUa.NodeAction.GetValue" />
+          </ReadTarget>
+          <Result>
+            <ResultHandler condition="result = 2">
+              <Action>
+                <Target xsi:type="clientSystem.Action">
+                  <Method xsi:type="clientSystem.Action.Navigate" pageId="page_gamePage3" />
+                </Target>
+              </Action>
+            </ResultHandler>
+            <ResultHandler condition="result = 1">
+              <Action>
+                <Target xsi:type="clientSystem.Action">
+                  <Method xsi:type="clientSystem.Action.Navigate" pageId="page_gamePage2" />
+                </Target>
+              </Action>
+            </ResultHandler>
+          </Result>
+        </Action>
+      </EventHandler>
+    </EventBinding>
+    <EventBinding id="EventBinding_5">
+      <Source xsi:type="opcUa.Event" refId="::AsGlobalPV:gHMI.Game.Selection" event="ValueChanged" />
+      <EventHandler condition="newValue &gt; 0">
+        <Action>
+          <ReadTarget xsi:type="opcUa.NodeAction.Read" refId="::AsGlobalPV:gHMI.Game.CorrectShuttle">
+            <Method xsi:type="opcUa.NodeAction.GetValue" />
+          </ReadTarget>
+          <Result>
+            <ResultHandler condition="newValue = result">
+              <Action>
+                <Target xsi:type="clientSystem.Action">
+                  <Method xsi:type="clientSystem.Action.Navigate" pageId="page_gamePage4" />
+                </Target>
+              </Action>
+            </ResultHandler>
+            <ResultHandler condition="NOT (newValue = result)">
+              <Action>
+                <Target xsi:type="clientSystem.Action">
+                  <Method xsi:type="clientSystem.Action.Navigate" pageId="page_gamePage5" />
+                </Target>
+              </Action>
+            </ResultHandler>
+          </Result>
+        </Action>
+      </EventHandler>
+    </EventBinding>
+  </Bindings>
+</EventBindingSet>

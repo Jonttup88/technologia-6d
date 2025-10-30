@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<vdef:Visualization id="visu1" autoUpdate="true" xmlns:vdef="http://www.br-automation.com/iat2015/visualizationDefinition/v2">
+  <StartPage pageRefId="page_configPage" />
+  <Pages>
+    <Page refId="page_MainPage" />
+    <Page refId="page_configPage" />
+    <Page refId="page_weightPage" />
+    <Page refId="page_gamePage" />
+    <Page refId="page_digitalTwin" />
+    <Page refId="page_zone" />
+    <Page refId="page_workStation" />
+    <Page refId="page_danfoss" />
+    <Page refId="page_fixture" />
+    <Page refId="page_teach" />
+    <Page refId="page_formatChange" />
+  </Pages>
+  <Navigations />
+  <BindingsSets>
+    <BindingsSet refId="ConfigPage" />
+    <BindingsSet refId="content_zone" />
+  </BindingsSets>
+  <EventBindingsSets>
+    <EventBindingsSet refId="content_MainPage" />
+  </EventBindingsSets>
+  <EventScriptsSets />
+  <Dialogs />
+  <Contents preCache="all" />
+  <SnippetsSets />
+  <VariablesSets />
+  <ExpressionsSets />
+  <Configurations>
+    <Configuration key="activityCount" value="false" />
+    <Configuration key="watchdog" value="20000" />
+    <Configuration key="bootLogo" value="Media/bootlogo.png" />
+    <Configuration key="bootColor" value="#FFFFFF" />
+    <Configuration key="bootProgressBar" value="true" />
+    <Configuration key="zoom" value="false" />
+    <Gestures>
+      <!--<SystemGesture1 touchPoints="2" />
+		  <SystemGesture2 touchPoints="2" />
+		  <SystemGesture3 touchPoints="2" />-->
+    </Gestures>
+    <VirtualKeyboards>
+      <!--<InputProcessing onKeyDown="true" />-->
+    </VirtualKeyboards>
+  </Configurations>
+</vdef:Visualization>

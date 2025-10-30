@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<vdef:Visualization id="visu" autoUpdate="true" xmlns:vdef="http://www.br-automation.com/iat2015/visualizationDefinition/v2">
+  <StartPage pageRefId="page_configPage" />
+  <Pages>
+    <Page refId="page_MainPage" />
+    <Page refId="page_configPage" />
+    <Page refId="page_weight" />
+    <Page refId="page_gamePage" />
+    <Page refId="page_zone" />
+    <Page refId="page_stereotype" />
+    <Page refId="page_teach" />
+    <Page refId="page_0" />
+    <Page refId="page_1" />
+    <Page refId="page_gamePage1" />
+    <Page refId="page_gamePage2" />
+    <Page refId="page_gamePage3" />
+    <Page refId="page_gamePage4" />
+    <Page refId="page_gamePage5" />
+  </Pages>
+  <Navigations />
+  <BindingsSets>
+    <BindingsSet refId="ConfigPage" />
+    <BindingsSet refId="content_zone" />
+    <BindingsSet refId="content_weight" />
+    <BindingsSet refId="content_teach" />
+  </BindingsSets>
+  <EventBindingsSets>
+    <EventBindingsSet refId="content_MainPage" />
+    <EventBindingsSet refId="eventbinding_0" />
+    <EventBindingsSet refId="NavigationContent" />
+    <EventBindingsSet refId="eventbinding_2" />
+    <EventBindingsSet refId="content_gamePage" />
+    <EventBindingsSet refId="content_gamePage2" />
+    <EventBindingsSet refId="content_gamePage3" />
+    <EventBindingsSet refId="content_gamePage4" />
+    <EventBindingsSet refId="content_gamePage5" />
+  </EventBindingsSets>
+  <EventScriptsSets />
+  <Dialogs />
+  <Contents preCache="all">
+    <Content refId="content_teach" />
+    <Content refId="content_logo1" />
+    <Content refId="content_weight1" />
+    <Content refId="content_gamePage1" />
+    <Content refId="content_gamePage2" />
+    <Content refId="content_gamePage3" />
+    <Content refId="content_gamePage4" />
+    <Content refId="content_gamePage5" />
+  </Contents>
+  <SnippetsSets />
+  <VariablesSets>
+    <VariablesSet refId="vars" />
+  </VariablesSets>
+  <ExpressionsSets />
+  <StartTheme themeRefId="BuRTheme" />
+  <Themes>
+    <Theme refId="BuRTheme" />
+  </Themes>
+  <Configurations>
+    <Configuration key="activityCount" value="false" />
+    <Configuration key="watchdog" value="20000" />
+    <Configuration key="bootLogo" value="Media/bootlogo.png" />
+    <Configuration key="bootColor" value="#FFFFFF" />
+    <Configuration key="bootProgressBar" value="false" />
+    <Configuration key="zoom" value="true" />
+    <Gestures>
+      <!--<SystemGesture1 touchPoints="2" />
+		  <SystemGesture2 touchPoints="2" />
+		  <SystemGesture3 touchPoints="2" />-->
+    </Gestures>
+    <VirtualKeyboards>
+      <!--<InputProcessing onKeyDown="true" />-->
+    </VirtualKeyboards>
+  </Configurations>
+</vdef:Visualization>

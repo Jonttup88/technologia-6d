@@ -1,0 +1,120 @@
+<svg id="gAssembly6D_1-svg" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" color-interpolation-filters="sRGB" width="960" height="900" viewBox="-3.750000 -963.750000 967.500000 967.500000">
+ <style>svg{fill:none; fill-rule:evenodd; font-size:12px; overflow:visible; stroke-linecap:square; stroke-miterlimit:3;}.segment.power-off {fill:#555555;}.segment.power-on {fill:rgba(127,127,127,0.3);}.segment.error {fill:#cb0000;}.segment.homing {fill:#c8c8c8;}.segment.stopping {fill:#666666;}.segment &gt; g &gt; rect {stroke:#666666;stroke-linecap:round;stroke-linejoin:round;stroke-width:3.750000;}.segment-cls-1,.segment-cls-2{stroke-width:7.500000 !important;}.segment-cls-2{fill:#666666;}.segment-cls-3{clip-path:url(#segment-clippath);stroke:#666666;}.segment &gt; text {fill:#020202;font-family:Calibri;font-size:2em;display: block;alignment-baseline: hanging;}</style>
+ <defs>
+  <clipPath id="segment-240x240-clipPath">
+   <rect class="segment-cls-2" width="240.5" height="240.5" rx="3.75" ry="3.75"/>
+  </clipPath>
+  <clipPath id="segment-480x120-clipPath">
+   <rect class="segment-cls-2" width="480.5" height="120.5" rx="3.75" ry="3.75"/>
+  </clipPath>
+  <clipPath id="segment-120x480-clipPath">
+   <rect class="segment-cls-2" width="120.5" height="480.5" rx="3.75" ry="3.75"/>
+  </clipPath>
+  <clipPath id="segment-320x320-clipPath">
+   <rect class="segment-cls-2" width="320.5" height="320.5" rx="3.75" ry="3.75"/>
+  </clipPath>
+ </defs>
+ <g id="gAssembly6D_1" class="assembly">
+  <g id="Layout6D_1" class="layout" grid-size="240">
+   <g id="segment-1" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment1" segment-id="1" master="true" position-x="0" position-y="0" position-x-mm="0" position-y-mm="0" transform="translate(0 -240)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">1</text>
+   </g>
+   <g id="segment-2" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment2" segment-id="2" master="false" position-x="0" position-y="1" position-x-mm="0" position-y-mm="240" transform="translate(0 -480)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">2</text>
+   </g>
+   <g id="segment-3" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment3" segment-id="3" master="false" position-x="0" position-y="2" position-x-mm="0" position-y-mm="480" transform="translate(0 -720)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">3</text>
+   </g>
+   <g id="segment-4" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment4" segment-id="4" master="false" position-x="0" position-y="3" position-x-mm="0" position-y-mm="720" transform="translate(0 -960)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">4</text>
+   </g>
+   <g id="segment-5" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment5" segment-id="5" master="false" position-x="1" position-y="0" position-x-mm="240" position-y-mm="0" transform="translate(240 -240)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">5</text>
+   </g>
+   <g id="segment-6" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment6" segment-id="6" master="false" position-x="1" position-y="1" position-x-mm="240" position-y-mm="240" transform="translate(240 -480)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">6</text>
+   </g>
+   <g id="segment-7" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment7" segment-id="7" master="false" position-x="1" position-y="2" position-x-mm="240" position-y-mm="480" transform="translate(240 -720)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">7</text>
+   </g>
+   <g id="segment-8" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment8" segment-id="8" master="false" position-x="1" position-y="3" position-x-mm="240" position-y-mm="720" transform="translate(240 -960)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">8</text>
+   </g>
+   <g id="segment-9" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment9" segment-id="9" master="false" position-x="2" position-y="0" position-x-mm="480" position-y-mm="0" transform="translate(480 -240)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">9</text>
+   </g>
+   <g id="segment-10" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment10" segment-id="10" master="false" position-x="2" position-y="1" position-x-mm="480" position-y-mm="240" transform="translate(480 -480)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">10</text>
+   </g>
+   <g id="segment-11" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment11" segment-id="11" master="false" position-x="2" position-y="2" position-x-mm="480" position-y-mm="480" transform="translate(480 -720)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">11</text>
+   </g>
+   <g id="segment-12" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment12" segment-id="12" master="false" position-x="2" position-y="3" position-x-mm="480" position-y-mm="720" transform="translate(480 -960)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">12</text>
+   </g>
+   <g id="segment-13" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment13" segment-id="13" master="false" position-x="3" position-y="0" position-x-mm="720" position-y-mm="0" transform="translate(720 -240)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">13</text>
+   </g>
+   <g id="segment-14" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment14" segment-id="14" master="false" position-x="3" position-y="1" position-x-mm="720" position-y-mm="240" transform="translate(720 -480)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">14</text>
+   </g>
+   <g id="segment-15" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment15" segment-id="15" master="false" position-x="3" position-y="2" position-x-mm="720" position-y-mm="480" transform="translate(720 -720)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">15</text>
+   </g>
+   <g id="segment-16" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment16" segment-id="16" master="false" position-x="3" position-y="3" position-x-mm="720" position-y-mm="720" transform="translate(720 -960)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">16</text>
+   </g>
+  </g>
+  <g class="zones"/>
+  <g class="power-sectors"/>
+  <g class="shuttles"/>
+ </g>
+</svg>

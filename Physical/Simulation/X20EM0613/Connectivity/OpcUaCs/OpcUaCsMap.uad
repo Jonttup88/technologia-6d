@@ -12,6 +12,24 @@
       <Variable Name="gShuttles" RecursiveEnable="2" MinimumSamplingInterval="Timer4" />
       <Variable Name="gAssembly6D_1" RecursiveEnable="2" />
       <Variable Name="gMain" RecursiveEnable="2" />
+      <Variable Name="gHMI">
+        <Variable Name="ZoneDataProvider" />
+        <Variable Name="ZoneDataIndex" />
+        <Variable Name="ActivateZone" />
+        <Variable Name="Weight">
+          <Variable Name="Payload" />
+          <Variable Name="StoreOffset" />
+        </Variable>
+        <Variable Name="General" RecursiveEnable="2" />
+        <Variable Name="Status" RecursiveEnable="2" />
+        <Variable Name="Teach">
+          <Variable Name="update" />
+        </Variable>
+        <Variable Name="Game" RecursiveEnable="2" />
+      </Variable>
+      <Variable Name="gFeatureDemo">
+        <Variable Name="Active" />
+      </Variable>
     </GlobalVariables>
   </Module>
 </OpcUaSource>

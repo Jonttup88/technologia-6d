@@ -4,6 +4,6 @@
   <Objects>
     <Object Type="File" Description="Page description">ConfigPage.page</Object>
     <Object Type="File">ContentOld.content</Object>
-    <Object Type="File">content_configPage.content</Object>
+    <Object Type="File">ConfigPage.content</Object>
   </Objects>
 </Package>

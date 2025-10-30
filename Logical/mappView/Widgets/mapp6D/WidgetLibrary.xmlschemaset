@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SchemaCatalog xmlns="http://schemas.microsoft.com/xsd/catalog">
+	<Schema href="Assembly6D/meta/Assembly6D.xsd" targetNamespace="http://www.br-automation.com/iat2015/contentDefinition/v2" />
+	<Schema href="Assembly6DGroup/meta/Assembly6DGroup.xsd" targetNamespace="http://www.br-automation.com/iat2015/contentDefinition/v2" />
+	<Schema href="OpcUaNodeBindingEventManager/meta/OpcUaNodeBindingEventManager.xsd" targetNamespace="http://www.br-automation.com/iat2015/contentDefinition/v2" />
+</SchemaCatalog>
