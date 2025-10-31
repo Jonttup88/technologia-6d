@@ -27,6 +27,7 @@
       </Variable>
       <Variable Name="gFeatureDemo">
         <Variable Name="Active" />
+        <Variable Name="Addition" RecursiveEnable="2" />
       </Variable>
     </GlobalVariables>
   </Module>

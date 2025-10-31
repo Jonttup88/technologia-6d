@@ -80,6 +80,7 @@ TYPE
 		FB : gFeatureFB_typ;
 		Cmd : gFeatureDemoCmds_typ;
 		Int : gFeatureInternal_typ;
+		Addition : gFeatureDemoAddition_typ;
 	END_STRUCT;
 	gFeatureDemoCmds_typ : 	STRUCT 
 		newZone : BOOL;
@@ -138,5 +139,11 @@ TYPE
 		ExitGame : BOOL;
 		GameRequested : BOOL;
 		OpenGamePage : BOOL;
+		GameState : USINT;
+	END_STRUCT;
+	gFeatureDemoAddition_typ : 	STRUCT 
+		Levitate : BOOL;
+		Rotate : BOOL;
+		New_Member : USINT;
 	END_STRUCT;
 END_TYPE

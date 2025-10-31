@@ -9,6 +9,7 @@
   <Navigations />
   <BindingsSets>
     <BindingsSet refId="content_weight1" />
+    <BindingsSet refId="content_MainPage" />
   </BindingsSets>
   <EventBindingsSets>
     <EventBindingsSet refId="eventbinding_1" />

@@ -24,6 +24,7 @@
     <BindingsSet refId="content_zone" />
     <BindingsSet refId="content_weight" />
     <BindingsSet refId="content_teach" />
+    <BindingsSet refId="content_MainPage" />
   </BindingsSets>
   <EventBindingsSets>
     <EventBindingsSet refId="content_MainPage" />

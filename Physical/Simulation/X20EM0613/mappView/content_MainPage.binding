@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BindingsSet id="content_MainPage" xmlns="http://www.br-automation.com/iat2015/binding/engineering/v2" xmlns:bt="http://www.br-automation.com/iat2015/bindingListTypes/engineering/v2" xmlns:be="http://www.br-automation.com/iat2015/bindingListEmbedded/engineering/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Bindings>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.Status.AllowStop" attribute="value" />
+<Target xsi:type="brease" contentRefId="content_MainPage" widgetRefId="RadioButton8" attribute="enable" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.Status.AllowStop" attribute="value" />
+<Target xsi:type="brease" contentRefId="content_MainPage" widgetRefId="RadioButton5" attribute="enable" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.Status.AllowStop" attribute="value" />
+<Target xsi:type="brease" contentRefId="content_MainPage" widgetRefId="RadioButton6" attribute="enable" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.Status.AllowStop" attribute="value" />
+<Target xsi:type="brease" contentRefId="content_MainPage" widgetRefId="RadioButton7" attribute="enable" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.Status.AllowStop" attribute="value" />
+<Target xsi:type="brease" contentRefId="content_MainPage" widgetRefId="RadioButton2" attribute="enable" />
+</Binding>
+
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.Status.AllowStop" attribute="value" />
+<Target xsi:type="brease" contentRefId="content_MainPage" widgetRefId="ToggleButton1" attribute="enable" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gFeatureDemo.Addition.Levitate" attribute="value" />
+<Target xsi:type="brease" contentRefId="content_MainPage" widgetRefId="ToggleButton1" attribute="value" />
+</Binding>
+</Bindings>
+</BindingsSet>
