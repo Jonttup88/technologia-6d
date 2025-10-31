@@ -53,6 +53,7 @@ TYPE
 		CommunicationOk : BOOL;
 		CommandDone : BOOL;
 		CommandError : BOOL;
+		HardResetDone : BOOL;
 		RobReady : BOOL;
 		RobPhaseDone : BOOL;
 		RobError : BOOL;
