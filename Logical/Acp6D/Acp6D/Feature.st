@@ -12,6 +12,8 @@ ACTION FeatureAction:
 			
 			FeatureShuttles[i].master := FALSE;
 			FeatureShuttles[i].subState := 0;
+			FeatureShuttles[i].counter := 0;
+			FeatureShuttles[i].counter1 := 0;
 			FeatureShuttles[0].demoState := 0; // group movement
 			FeatureShuttles[1].demoState := 10; // Top right corner movement
 			FeatureShuttles[2].demoState := 20; // precision movement
@@ -22,9 +24,13 @@ ACTION FeatureAction:
 			FeatureShuttles[5].demoState := 30; // Top right corner movement
 			FeatureShuttles[6].demoState := 40; // Top right corner movement
 			FeatureShuttles[7].demoState := 50; // Rotary motion demo
+			FOR z := 0 TO 7 DO
+				IF DINT_TO_UINT(i+1) = shuttles[z].ID THEN
+					brsmemcpy(ADR(FeatureShuttles[i].Shuttle),ADR(shuttles[z]),SIZEOF(shuttles[0]));
+					EXIT;
+				END_IF;
+			END_FOR;
 			
-			brsmemcpy(ADR(FeatureShuttles[i].Shuttle),ADR(shuttles[i]),SIZEOF(shuttles[0]));
-		
 		END_FOR;
 	END_IF;
 	
@@ -388,8 +394,8 @@ ACTION FeatureAction:
 									
 									2:
 										FeatureShuttles[i].FB.MoveInPlane.Shuttle := ADR(FeatureShuttles[i].Shuttle.Ref);
-										FeatureShuttles[i].FB.MoveInPlane.Parameters.Position.X := 0.12;
-										FeatureShuttles[i].FB.MoveInPlane.Parameters.Position.Y := 0.059;
+										FeatureShuttles[i].FB.MoveInPlane.Parameters.Position.Y := 0.12;
+										FeatureShuttles[i].FB.MoveInPlane.Parameters.Position.X := 0.059;
 										FeatureShuttles[i].FB.MoveInPlane.Parameters.Mode := mcACP6D_MOVE_ABSOLUTE;
 										FeatureShuttles[i].FB.MoveInPlane.Parameters.Path := mcACP6D_PATH_DIRECT;
 										FeatureShuttles[i].FB.MoveInPlane.Parameters.Acceleration := 0.1;
@@ -502,35 +508,9 @@ ACTION FeatureAction:
 									
 										IF FeatureShuttles[i].FB.Payload.Done THEN
 											//FeatureShuttles[i].Parameters.PayloadOffset := FeatureShuttles[i].FB.Payload.Payload;
-											gHMI.Weight.Payload := FeatureShuttles[i].FB.Payload.Payload - FeatureShuttles[i].Parameters.PayloadOffset;
+											gHMI.Weight.Payload := (FeatureShuttles[i].FB.Payload.Payload - FeatureShuttles[i].Parameters.PayloadOffset)*1000;
 											FeatureShuttles[i].FB.Payload.Execute := FALSE;
 											FeatureShuttles[i].FB.Payload;
-											FeatureShuttles[i].subState := 2;
-										END_IF;
-										
-									2:
-										FeatureShuttles[i].FB.MoveShortAxis.Shuttle := ADR(FeatureShuttles[i].Shuttle.Ref);
-										brsmemset(ADR(FeatureShuttles[i].FB.MoveShortAxis.Parameters.Position),0,SIZEOF(FeatureShuttles[i].FB.MoveShortAxis.Parameters.Position));
-										FeatureShuttles[i].FB.MoveShortAxis.Parameters.Position.Z := 0.004;
-										FeatureShuttles[i].FB.MoveShortAxis.Parameters.Velocity.Z := 0.002;
-										FeatureShuttles[i].FB.MoveShortAxis.Execute := TRUE;
-										FeatureShuttles[i].FB.MoveShortAxis;
-										IF FeatureShuttles[i].FB.MoveShortAxis.Done THEN
-											FeatureShuttles[i].FB.MoveShortAxis.Execute := FALSE;
-											FeatureShuttles[i].FB.MoveShortAxis;
-											FeatureShuttles[i].subState := 3;
-										END_IF;
-											
-									3:
-										FeatureShuttles[i].FB.MoveShortAxis.Shuttle := ADR(FeatureShuttles[i].Shuttle.Ref);
-										brsmemset(ADR(FeatureShuttles[i].FB.MoveShortAxis.Parameters.Position),0,SIZEOF(FeatureShuttles[i].FB.MoveShortAxis.Parameters.Position));
-										FeatureShuttles[i].FB.MoveShortAxis.Parameters.Position.Z := 0.001;
-										FeatureShuttles[i].FB.MoveShortAxis.Parameters.Velocity.Z := 0.002;
-										FeatureShuttles[i].FB.MoveShortAxis.Execute := TRUE;
-										FeatureShuttles[i].FB.MoveShortAxis;
-										IF FeatureShuttles[i].FB.MoveShortAxis.Done THEN
-											FeatureShuttles[i].FB.MoveShortAxis.Execute := FALSE;
-											FeatureShuttles[i].FB.MoveShortAxis;
 											FeatureShuttles[i].subState := 1;
 										END_IF;
 										
@@ -546,24 +526,9 @@ ACTION FeatureAction:
 											FeatureShuttles[i].Parameters.PayloadOffset := FeatureShuttles[i].FB.Payload.Payload;
 											FeatureShuttles[i].FB.Payload.Execute := FALSE;
 											FeatureShuttles[i].FB.Payload;
-											FeatureShuttles[i].subState := 11;
+											FeatureShuttles[i].subState := 1;
 										END_IF;
 											
-									
-									11:
-										
-										FeatureShuttles[i].FB.TON_0.IN := TRUE;
-										FeatureShuttles[i].FB.TON_0.PT := TIME#100ms;
-										FeatureShuttles[i].FB.TON_0;
-									
-										IF FeatureShuttles[i].FB.TON_0.Q THEN
-											FeatureShuttles[i].FB.TON_0.IN := FALSE;
-											FeatureShuttles[i].FB.TON_0;
-											
-											FeatureShuttles[i].subState := 3;
-										END_IF;
-										
-										
 									15:
 										FeatureShuttles[i].FB.MoveShortAxis.Shuttle := ADR(FeatureShuttles[i].Shuttle.Ref);
 										brsmemset(ADR(FeatureShuttles[i].FB.MoveShortAxis.Parameters.Position),0,SIZEOF(FeatureShuttles[i].FB.MoveShortAxis.Parameters.Position));
@@ -1213,6 +1178,10 @@ ACTION FeatureAction:
 											FeatureShuttles[i].FB.MoveArc.Execute := FALSE;
 											FeatureShuttles[i].FB.MoveArc;
 											FeatureShuttles[i].subState := 6;
+										ELSIF FeatureShuttles[i].FB.MoveArc.Error THEN
+											FeatureShuttles[i].FB.MoveArc.Execute := FALSE;
+											FeatureShuttles[i].FB.MoveArc;
+											FeatureShuttles[i].subState := 6;
 										END_IF;
 										
 									6:
@@ -1277,7 +1246,7 @@ ACTION FeatureAction:
 									0:
 										brsmemset(ADR(gHMI.Data),0,SIZEOF(gHMI.Data));
 										IF gHMI.Teach.moveString = '' THEN
-											brsstrcpy(ADR(gHMI.Teach.moveString),ADR('[[{"x":60,"y":900,"type":0},{"x":60,"y":300,"type":0},{"x":180,"y":300,"type":0},{"x":180,"y":420,"type":0},{"x":60,"y":420,"type":0},{"x":60,"y":540,"type":0},{"x":180,"y":540,"type":0},{"x":180,"y":660,"type":0},{"x":60,"y":660,"type":0},{"x":60,"y":780,"type":0},{"x":600,"y":840,"type":0}]]'));
+											brsstrcpy(ADR(gHMI.Teach.moveString),ADR('[[{"x":480,"y":780,"type":0},{"x":480,"y":900,"type":0},{"x":660,"y":780,"type":0},{"x":660,"y":900,"type":0},{"x":600,"y":840,"type":0}]]'));
 										END_IF;
 										jsonTo6Ddata(ADR(gHMI.Teach.moveString),gHMI.Data);
 										FeatureShuttles[i].counter := 0;
@@ -1375,7 +1344,11 @@ ACTION FeatureAction:
 							gFeatureDemo.Cmd.StopDemo := FALSE;
 							gFeatureDemo.featureDemoState := 3;
 						ELSE
-							gFeatureDemo.featureDemoState := 0;
+							IF gFeatureDemo.Addition.Levitate THEN
+								gFeatureDemo.featureDemoState := 10;
+							ELSE
+								gFeatureDemo.featureDemoState := 0;
+							END_IF;
 						END_IF;
 					END_IF;
 					
@@ -1409,8 +1382,8 @@ ACTION FeatureAction:
 					gFeatureDemo.Active := FALSE; // end demo
 					gFeatureDemo.Int.zoneReset := FALSE;
 				ELSIF gFeatureDemo.FB.MoveInPlaneAsync.Error AND gFeatureDemo.FB.MoveInPlaneAsync.ErrorID = -1065803776 THEN
-					gFeatureDemo.featureDemoState := 5;
-					gFeatureDemo.FB.MoveInPlaneAsync.Execute := FALSE;
+					//gFeatureDemo.featureDemoState := 5;
+					//gFeatureDemo.FB.MoveInPlaneAsync.Execute := FALSE;
 					gFeatureDemo.FB.MoveInPlaneAsync;
 				END_IF;
 				
@@ -1435,6 +1408,151 @@ ACTION FeatureAction:
 					gFeatureDemo.FB.PowerOn;
 					gFeatureDemo.featureDemoState := 4;
 					gFeatureDemo.FB.MoveInPlaneAsync.Execute := TRUE;
+				END_IF;
+			
+			
+			10:
+				MoveToExtraFeaturePosition;
+				gFeatureDemo.FB.MoveInPlaneAsync.Assembly := ADR(gAssembly6D_1);
+				gFeatureDemo.FB.MoveInPlaneAsync.Execute := TRUE;
+				gFeatureDemo.FB.MoveInPlaneAsync.Parameters.Velocity := 1;
+				gFeatureDemo.FB.MoveInPlaneAsync.Parameters.Acceleration := 10;
+				gFeatureDemo.featureDemoState := 11;
+			
+			11:
+				gFeatureDemo.FB.MoveInPlaneAsync;
+				IF gFeatureDemo.FB.MoveInPlaneAsync.Done THEN
+					gFeatureDemo.FB.MoveInPlaneAsync.Execute := FALSE;
+					gFeatureDemo.FB.MoveInPlaneAsync;
+					gFeatureDemo.featureDemoState := 12;
+					FOR z := 0 TO 7 DO
+						FeatureShuttles[z].subState := 0;
+					END_FOR;
+
+				END_IF;
+			
+			12:
+				ready := TRUE;
+				FOR z := 0 TO 6 DO
+					CASE FeatureShuttles[z].subState OF
+						0:
+							FeatureShuttles[z].FB.WaitCmd.Shuttle := ADR(FeatureShuttles[z].Shuttle.Ref);
+							FeatureShuttles[z].FB.WaitCmd.TriggerXID := FeatureShuttles[7].Shuttle.ID;
+							FeatureShuttles[z].FB.WaitCmd.Execute := TRUE;
+							FeatureShuttles[z].FB.WaitCmd;
+						
+							IF FeatureShuttles[z].FB.WaitCmd.Done OR FeatureShuttles[z].FB.WaitCmd.Acknowledge THEN
+								FeatureShuttles[z].FB.WaitCmd.Execute := FALSE;
+								FeatureShuttles[z].FB.WaitCmd;
+								FeatureShuttles[z].subState := 1;
+							END_IF;
+						
+						1:
+							FeatureShuttles[z].FB.Levitate.Shuttle := ADR(FeatureShuttles[z].Shuttle.Ref);
+							FeatureShuttles[z].FB.Levitate.Parameters.Speed := 1;
+							FeatureShuttles[z].FB.Levitate.Parameters.Level := mcACP6D_LEVEL_LAND;
+							FeatureShuttles[z].FB.Levitate.Execute := TRUE;
+							FeatureShuttles[z].FB.Levitate;
+						
+							IF FeatureShuttles[z].FB.Levitate.Acknowledge THEN
+								FeatureShuttles[z].FB.Levitate.Execute := FALSE;
+								FeatureShuttles[z].FB.Levitate;
+								FeatureShuttles[z].subState := 2;
+							END_IF;
+					END_CASE;
+					
+					IF FeatureShuttles[z].subState < 2 THEN
+						ready := FALSE;
+					END_IF;
+				END_FOR;
+			
+				
+				IF ready THEN
+					FeatureShuttles[7].FB.Levitate.Shuttle := ADR(FeatureShuttles[z].Shuttle.Ref);
+					FeatureShuttles[7].FB.Levitate.Parameters.Speed := 1;
+					FeatureShuttles[7].FB.Levitate.Parameters.Level := mcACP6D_LEVEL_LAND;
+					FeatureShuttles[7].FB.Levitate.Execute := TRUE;
+					FeatureShuttles[7].FB.Levitate;
+						
+					IF FeatureShuttles[7].FB.Levitate.Acknowledge THEN
+						FeatureShuttles[7].FB.Levitate.Execute := FALSE;
+						FeatureShuttles[7].FB.Levitate;
+						FOR z := 0 TO 7 DO
+							FeatureShuttles[z].subState := 0;
+						END_FOR;
+						gFeatureDemo.featureDemoState := 13;
+					END_IF;
+				END_IF;
+			
+			13:
+				IF gFeatureDemo.Cmd.StopDemo OR NOT gFeatureDemo.Addition.Levitate THEN
+					gFeatureDemo.Addition.Levitate := FALSE;
+					FOR z := 0 TO 7 DO
+						FeatureShuttles[z].subState := 0;
+					END_FOR;
+					gFeatureDemo.featureDemoState := 14;
+				END_IF;
+			
+			14:
+				ready := TRUE;
+				FOR z := 0 TO 6 DO
+					CASE FeatureShuttles[z].subState OF
+						0:
+							FeatureShuttles[z].FB.WaitCmd.Shuttle := ADR(FeatureShuttles[z].Shuttle.Ref);
+							FeatureShuttles[z].FB.WaitCmd.TriggerXID := FeatureShuttles[7].Shuttle.ID;
+							FeatureShuttles[z].FB.WaitCmd.Execute := TRUE;
+							FeatureShuttles[z].FB.WaitCmd;
+						
+							IF FeatureShuttles[z].FB.WaitCmd.Done OR FeatureShuttles[z].FB.WaitCmd.Acknowledge THEN
+								FeatureShuttles[z].FB.WaitCmd.Execute := FALSE;
+								FeatureShuttles[z].FB.WaitCmd;
+								FeatureShuttles[z].subState := 1;
+							END_IF;
+						
+						1:
+							FeatureShuttles[z].FB.Levitate.Shuttle := ADR(FeatureShuttles[z].Shuttle.Ref);
+							FeatureShuttles[z].FB.Levitate.Parameters.Speed := 1;
+							FeatureShuttles[z].FB.Levitate.Parameters.Level := mcACP6D_LEVEL_LEVITATE;
+							FeatureShuttles[z].FB.Levitate.Execute := TRUE;
+							FeatureShuttles[z].FB.Levitate;
+						
+							IF FeatureShuttles[z].FB.Levitate.Acknowledge THEN
+								FeatureShuttles[z].FB.Levitate.Execute := FALSE;
+								FeatureShuttles[z].FB.Levitate;
+								FeatureShuttles[z].subState := 2;
+							END_IF;
+					END_CASE;
+					
+					IF FeatureShuttles[z].subState < 2 THEN
+						ready := FALSE;
+					END_IF;
+				END_FOR;
+			
+				
+				IF ready THEN
+					FeatureShuttles[7].FB.Levitate.Shuttle := ADR(FeatureShuttles[z].Shuttle.Ref);
+					FeatureShuttles[7].FB.Levitate.Parameters.Speed := 1;
+					FeatureShuttles[7].FB.Levitate.Parameters.Level := mcACP6D_LEVEL_LEVITATE;
+					FeatureShuttles[7].FB.Levitate.Execute := TRUE;
+					FeatureShuttles[7].FB.Levitate;
+						
+					IF FeatureShuttles[7].FB.Levitate.Acknowledge THEN
+						FeatureShuttles[7].FB.Levitate.Execute := FALSE;
+						FeatureShuttles[7].FB.Levitate;
+						FOR z := 0 TO 7 DO
+							FeatureShuttles[z].subState := 0;
+						END_FOR;
+						gFeatureDemo.featureDemoState := 15;
+					END_IF;
+				END_IF;
+			
+			15:
+				IF gFeatureDemo.Cmd.StopDemo THEN
+					gFeatureDemo.featureDemoState := 0;
+					gFeatureDemo.Active := FALSE; // end demo
+					gFeatureDemo.Int.zoneReset := FALSE;
+				ELSE
+					gFeatureDemo.featureDemoState := 0;
 				END_IF;
 			
 		END_CASE;	
@@ -1479,61 +1597,60 @@ ACTION MoveToFeaturePosition:
 
 	FOR i := 0 TO 7 DO
 		gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[FeatureShuttles[i].runningFeature].Shuttle := ADR(FeatureShuttles[i].Shuttle.Ref);
-		
 		CASE FeatureShuttles[i].runningFeature OF
-			
 			0:
-		
 				gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[0].X		:= 0.12;
 				gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[0].Y		:= 0.12;
-				
 			1:
-				
-				gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[1].X		:= 0.360;
-				gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[1].Y		:= 0.120;
-			
+				gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[1].Y		:= 0.600;
+				gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[1].X		:= 0.120;
 			2:
-				gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[2].X		:= 0.600;
 				gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[2].Y		:= 0.120;
-			
+				gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[2].X		:= 0.600;
 			3:
-				
-				gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[3].X		:= 0.720;
 				gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[3].Y		:= 0.120;
-				
+				gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[3].X		:= 0.720;
 			4:
-				
-				gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[4].X		:= 0.840;
 				gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[4].Y		:= 0.120;
-				
+				gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[4].X		:= 0.840;
 			5:
-				
 				gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[5].X		:= 0.600;
 				gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[5].Y		:= 0.600;
-				
 			6:
-				
 				gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[6].X		:= 0.840;
 				gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[6].Y		:= 0.840;
-				
 			7:
-				
 				gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[7].X		:= 0.600;
 				gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[7].Y		:= 0.840;
 				
 		END_CASE;
-		
-		
-		
+	END_FOR;
+END_ACTION
+
+ACTION MoveToExtraFeaturePosition: 
+
+	FOR i := 0 TO 7 DO
+		gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[i].Shuttle := ADR(FeatureShuttles[i].Shuttle.Ref);
+		gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[0].X		:= 0.12;
+		gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[0].Y		:= 0.12;
+		gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[1].X		:= 0.120;
+		gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[1].Y		:= 0.840;
+		gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[2].X		:= 0.360;
+		gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[2].Y		:= 0.600;
+		gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[3].X		:= 0.360;
+		gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[3].Y		:= 0.360;
+		gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[4].X		:= 0.600;
+		gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[4].Y		:= 0.600;
+		gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[5].X		:= 0.600;
+		gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[5].Y		:= 0.360;
+		gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[6].X		:= 0.840;
+		gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[6].Y		:= 0.840;
+		gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[7].X		:= 0.840;
+		gFeatureDemo.FB.MoveInPlaneAsync.Parameters.AsyncPar[7].Y		:= 0.120;
 		
 	END_FOR;
-
-	
-
-		
-	
-	
 END_ACTION
+
 
 
 ACTION MoveToLoadPosition: 

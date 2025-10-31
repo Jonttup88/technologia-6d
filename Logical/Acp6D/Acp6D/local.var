@@ -47,4 +47,5 @@ VAR
 	TON_ResetPLC : TON;
 	R_TRIG_0 : R_TRIG;
 	R_TRIG_1 : R_TRIG;
+	gFeatureDemoState : INT;
 END_VAR
