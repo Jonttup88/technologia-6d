@@ -169,6 +169,8 @@ TYPE
 		Recover : MC_BR_ShRecover_Acp6D;
 		Payload : MC_BR_ShGetPayload_Acp6D;
 		StereoTypeAssign : MC_BR_ShStereotypeAssign_Acp6D;
+		WaitCmd : MC_BR_ShWaitCmdLb_Acp6D;
+		Levitate : MC_BR_ShLevitation_Acp6D;
 	END_STRUCT;
 	FeatureParams_typ : 	STRUCT 
 		UseTime : BOOL;
