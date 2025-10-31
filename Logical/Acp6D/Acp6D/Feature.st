@@ -510,36 +510,13 @@ ACTION FeatureAction:
 										IF FeatureShuttles[i].FB.Payload.Done THEN
 											//FeatureShuttles[i].Parameters.PayloadOffset := FeatureShuttles[i].FB.Payload.Payload;
 											gHMI.Weight.Payload := (FeatureShuttles[i].FB.Payload.Payload - FeatureShuttles[i].Parameters.PayloadOffset)*1000;
+											gHMI.Weight.Payload := (FeatureShuttles[i].FB.Payload.Payload - FeatureShuttles[i].Parameters.PayloadOffset)*1000;
 											FeatureShuttles[i].FB.Payload.Execute := FALSE;
 											FeatureShuttles[i].FB.Payload;
-											FeatureShuttles[i].subState := 2;
-										END_IF;
-										
-									2:
-										FeatureShuttles[i].FB.MoveShortAxis.Shuttle := ADR(FeatureShuttles[i].Shuttle.Ref);
-										brsmemset(ADR(FeatureShuttles[i].FB.MoveShortAxis.Parameters.Position),0,SIZEOF(FeatureShuttles[i].FB.MoveShortAxis.Parameters.Position));
-										FeatureShuttles[i].FB.MoveShortAxis.Parameters.Position.Z := 0.004;
-										FeatureShuttles[i].FB.MoveShortAxis.Parameters.Velocity.Z := 0.002;
-										FeatureShuttles[i].FB.MoveShortAxis.Execute := TRUE;
-										FeatureShuttles[i].FB.MoveShortAxis;
-										IF FeatureShuttles[i].FB.MoveShortAxis.Done THEN
-											FeatureShuttles[i].FB.MoveShortAxis.Execute := FALSE;
-											FeatureShuttles[i].FB.MoveShortAxis;
-											FeatureShuttles[i].subState := 3;
-										END_IF;
-											
-									3:
-										FeatureShuttles[i].FB.MoveShortAxis.Shuttle := ADR(FeatureShuttles[i].Shuttle.Ref);
-										brsmemset(ADR(FeatureShuttles[i].FB.MoveShortAxis.Parameters.Position),0,SIZEOF(FeatureShuttles[i].FB.MoveShortAxis.Parameters.Position));
-										FeatureShuttles[i].FB.MoveShortAxis.Parameters.Position.Z := 0.001;
-										FeatureShuttles[i].FB.MoveShortAxis.Parameters.Velocity.Z := 0.002;
-										FeatureShuttles[i].FB.MoveShortAxis.Execute := TRUE;
-										FeatureShuttles[i].FB.MoveShortAxis;
-										IF FeatureShuttles[i].FB.MoveShortAxis.Done THEN
-											FeatureShuttles[i].FB.MoveShortAxis.Execute := FALSE;
-											FeatureShuttles[i].FB.MoveShortAxis;
 											FeatureShuttles[i].subState := 1;
 										END_IF;
+										
+									
 										
 									
 									10:
@@ -553,23 +530,9 @@ ACTION FeatureAction:
 											FeatureShuttles[i].Parameters.PayloadOffset := FeatureShuttles[i].FB.Payload.Payload;
 											FeatureShuttles[i].FB.Payload.Execute := FALSE;
 											FeatureShuttles[i].FB.Payload;
-											FeatureShuttles[i].subState := 11;
+											FeatureShuttles[i].subState := 1;
 										END_IF;
 											
-									
-									11:
-										
-										FeatureShuttles[i].FB.TON_0.IN := TRUE;
-										FeatureShuttles[i].FB.TON_0.PT := TIME#100ms;
-										FeatureShuttles[i].FB.TON_0;
-									
-										IF FeatureShuttles[i].FB.TON_0.Q THEN
-											FeatureShuttles[i].FB.TON_0.IN := FALSE;
-											FeatureShuttles[i].FB.TON_0;
-											
-											FeatureShuttles[i].subState := 3;
-										END_IF;
-										
 										
 									15:
 										FeatureShuttles[i].FB.MoveShortAxis.Shuttle := ADR(FeatureShuttles[i].Shuttle.Ref);
@@ -1288,7 +1251,7 @@ ACTION FeatureAction:
 									0:
 										brsmemset(ADR(gHMI.Data),0,SIZEOF(gHMI.Data));
 										IF gHMI.Teach.moveString = '' THEN
-											brsstrcpy(ADR(gHMI.Teach.moveString),ADR('[[{"x":480,"y":780,"type":0},{"x":480,"y":900,"type":0},{"x":660,"y":780,"type":0},{"x":660,"y":900,"type":0},{"x":600,"y":840,"type":0}]]'));
+											brsstrcpy(ADR(gHMI.Teach.moveString),ADR('[[{"x":60,"y":900,"type":0},{"x":60,"y":780,"type":0},{"x":180,"y":900,"type":0},{"x":300,"y":780,"type":0},{"x":180,"y":780,"type":0},{"x":300,"y":900,"type":0},{"x":420,"y":780,"type":0},{"x":420,"y":900,"type":0},{"x":600,"y":840,"type":0}]]'));
 										END_IF;
 										jsonTo6Ddata(ADR(gHMI.Teach.moveString),gHMI.Data);
 										FeatureShuttles[i].counter := 0;
