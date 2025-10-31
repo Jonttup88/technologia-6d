@@ -14,6 +14,7 @@ VAR
 	shuttleStatus : Acp6DShuttleStatusPollType;
 	moveQueueParamDefault : brfi6DMoveQueueParamType;
 	moveQueueParamTask : brfi6DMoveQueueParamType;
+	moveInPlaneParamDefault : {REDUND_UNREPLICABLE} Acp6DMoveInPlaneParType;
 	shuffle : Acp6DShuffleType;
 	selected1 : ARRAY[0..gMAX_INDEX_SHUTTLE] OF brfiShuttleSelectionType;
 	selected2 : ARRAY[0..gMAX_INDEX_SHUTTLE] OF brfiShuttleSelectionType;
@@ -25,7 +26,6 @@ VAR
 	shuttles : ARRAY[0..gMAX_INDEX_SHUTTLE] OF Acp6dShuttleType; (*Global shuttle list*)
 	shuttlesVirtual : ARRAY[0..gMAX_INDEX_SHUTTLE_VIRTUAL] OF Mc6DShuttleType; (*Global shuttle list*)
 	positions : Acp6DTablePositionType;
-	test : brfiSunPlanet;
 END_VAR
 (*FEATURES*)
 VAR

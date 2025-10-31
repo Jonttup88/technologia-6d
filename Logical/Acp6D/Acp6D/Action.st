@@ -130,25 +130,18 @@ ACTION acInitializePositions:
 
 	positions._S[0].X := 0.36;
 	positions._S[0].Y := 0.24;
-
 	positions._S[1].X := 0.54;
 	positions._S[1].Y := 0.24;
-
 	positions._S[2].X := 0.635;
 	positions._S[2].Y := 0.365;
-
 	positions._S[3].X := 0.53;
 	positions._S[3].Y := 0.485;
-
 	positions._S[4].X := 0.38;
 	positions._S[4].Y := 0.485;
-
 	positions._S[5].X := 0.305;	
 	positions._S[5].Y := 0.61;
-
 	positions._S[6].X := 0.41;
 	positions._S[6].Y := 0.73;
-
 	positions._S[7].X := 0.60;
 	positions._S[7].Y := 0.73;
 
@@ -168,6 +161,64 @@ ACTION acInitializePositions:
 	positions._E[6].Y := 0.24 + 4 * 0.12;
 	positions._E[7].X := 2 * 0.24;
 	positions._E[7].Y := 0.24 + 2 * 0.12;
+	
+	
+	positions._I[0].X := 0.48;
+	positions._I[0].Y := 0.30;
+	positions._I[1].X := 0.36;
+	positions._I[1].Y := 0.30;
+	positions._I[2].X := 0.60;
+	positions._I[2].Y := 0.30;
+	positions._I[3].X := 0.48;
+	positions._I[3].Y := 0.66;
+	positions._I[4].X := 0.36;
+	positions._I[4].Y := 0.66;
+	positions._I[5].X := 0.60;	
+	positions._I[5].Y := 0.66;
+	positions._I[6].X := 0.48;
+	positions._I[6].Y := 0.42;
+	positions._I[7].X := 0.48;
+	positions._I[7].Y := 0.54;
+
+	positions._N[0].X := 0.30;
+	positions._N[0].Y := 0.30;
+	positions._N[1].X := 0.30;
+	positions._N[1].Y := 0.48;
+	positions._N[2].X := 0.30;
+	positions._N[2].Y := 0.66;
+	positions._N[3].X := 0.42;
+	positions._N[3].Y := 0.54;
+	positions._N[4].X := 0.54;
+	positions._N[4].Y := 0.42;
+	positions._N[5].X := 0.66;	
+	positions._N[5].Y := 0.30;
+	positions._N[6].X := 0.66;
+	positions._N[6].Y := 0.48;
+	positions._N[7].X := 0.66;
+	positions._N[7].Y := 0.66;
+
+	positions._W[0].X := 0.24;
+	positions._W[0].Y := 0.96 - 0.66;
+
+	positions._W[1].X := 0.29;
+	positions._W[1].Y := 0.96 - 0.48;
+
+	positions._W[2].X := 0.34;
+	positions._W[2].Y := 0.96 - 0.30;
+
+	positions._W[3].X := 0.42;
+	positions._W[3].Y := 0.96 - 0.42;
+	positions._W[4].X := 0.54;
+	positions._W[4].Y := 0.96 - 0.42;
+
+	positions._W[5].X := 0.62;	
+	positions._W[5].Y := 0.96 - 0.30;
+
+	positions._W[6].X := 0.67;
+	positions._W[6].Y := 0.96 - 0.48;
+
+	positions._W[7].X := 0.72;
+	positions._W[7].Y := 0.96 - 0.66;
 END_ACTION
 
 ACTION acClearTargetQueues :

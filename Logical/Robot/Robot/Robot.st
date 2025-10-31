@@ -77,6 +77,8 @@ PROGRAM _CYCLIC
 		ROBOT_IDLE:
 			task.StateInfo := 'Ready for commands';
 			// ---------------------------------------------------------------------------------
+			local.actions.state.ready_for_next_command := TRUE;
+			
 			IF task.Input.Command.Home THEN
 				task.Input.RobCommandNum := 1;
 				task.State := ROBOT_CMD_NORMAL;
@@ -118,7 +120,7 @@ PROGRAM _CYCLIC
 				10:
 					task.StateInfo := 'Wait robot to complete';
 					// ---------------------------------------------------------------------------------
-					IF task.Output.Status.RobPhaseDone THEN
+					IF task.Output.Status.RobPhaseDone AND (task.Output.Status.RobPhaseNum = task.Input.RobCommandNum) THEN
 						task.SubState := 20;
 					END_IF;
 				
@@ -137,6 +139,13 @@ PROGRAM _CYCLIC
 						task.State := ROBOT_COMMAND_DONE;
 					ELSIF fb.BrAbbRwsVariable_write.Error THEN
 						task.State := ROBOT_COMMAND_ERROR;
+					END_IF;
+				
+				30:
+					task.StateInfo := 'Wait robot to be ready again';
+					// ---------------------------------------------------------------------------------
+					IF task.Output.Status.RobReady AND (NOT task.Output.Status.RobPhaseDone) THEN
+						task.State := ROBOT_COMMAND_DONE;
 					END_IF;
 			END_CASE;
 			
@@ -195,7 +204,7 @@ PROGRAM _CYCLIC
 				30:
 					task.StateInfo := 'Wait robot to complete';
 					// ---------------------------------------------------------------------------------
-					IF task.Output.Status.RobPhaseDone THEN
+					IF task.Output.Status.RobPhaseDone AND (task.Output.Status.RobPhaseNum = task.Input.RobCommandNum) THEN
 						task.SubState := 40;
 					END_IF;
 				
@@ -211,15 +220,28 @@ PROGRAM _CYCLIC
 					local.actions.substate.write := TRUE;
 					
 					IF fb.BrAbbRwsVariable_write.Done THEN
-						task.State := ROBOT_COMMAND_DONE;
+						task.SubState := 50;
 					ELSIF fb.BrAbbRwsVariable_write.Error THEN
 						task.State := ROBOT_COMMAND_ERROR;
+					END_IF;
+				
+				50:
+					task.StateInfo := 'Wait robot to be ready again';
+					// ---------------------------------------------------------------------------------
+					IF task.Output.Status.RobReady AND (NOT task.Output.Status.RobPhaseDone) THEN
+						task.State := ROBOT_COMMAND_DONE;
 					END_IF;
 			END_CASE;
 			
 		ROBOT_COMMAND_DONE:
 			task.StateInfo := 'Command done';
 			// ---------------------------------------------------------------------------------
+//			local.actions.substate.delay := TRUE;
+//			
+//			IF fb.TON_DoneDelay.Q THEN
+//	  			local.actions.substate.command_done := TRUE;
+//			END_IF;
+			
 			local.actions.substate.command_done := TRUE;
 			
 			IF brsmemcmp(ADR(task.Input.Command), ADR(no_command), SIZEOF(no_command)) = 0 THEN
@@ -422,12 +444,17 @@ PROGRAM _CYCLIC
 	fb.BrAbbRwsVariable_write.ErrorReset := local.actions.substate.write_reset;
 	fb.BrAbbRwsVariable_write();
 	
+	fb.TON_DoneDelay.IN := local.actions.substate.delay;
+	fb.TON_DoneDelay.PT := T#1s;
+	fb.TON_DoneDelay();
 
     // Task outputs
     // =================================================================================================================
 	task.Output.Status.CommandDone := local.actions.substate.command_done;
 	task.Output.Status.CommandError := local.actions.substate.command_error;
-
+	task.Output.Status.ReadyForNextCommand := local.actions.state.ready_for_next_command;
+	
+	
 END_PROGRAM
 	
 PROGRAM _EXIT

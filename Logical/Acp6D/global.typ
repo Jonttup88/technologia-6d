@@ -22,8 +22,9 @@ TYPE
 		ACP6D_SHUFFLE_CIRCULAR,
 		ACP6D_STOP_ALL,
 		ACP6D_FORCE_RESET,
-		ACP6D_VICTORY,
+		ACP6D_WIN,
 		ACP6D_LOSE,
+		ACP6D_DANCE,
 		ACP6D_ANIMATE,
 		ACP6D_DEMO
 		);
@@ -36,8 +37,9 @@ TYPE
 		Reinitialize : BOOL;
 		ForceReset : BOOL;
 		StopAll : BOOL;
-		Victory : BOOL;
-		Lose : BOOL;
+		SpellWin : BOOL;
+		SpellLose : BOOL;
+		Dance : BOOL;
 		Animate : BOOL;
 		MoveTo : Acp6DMoveToCommandType;
 		FindPayload : BOOL;

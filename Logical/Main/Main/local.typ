@@ -31,8 +31,9 @@ TYPE
 		br6dSelectShuttle : BOOL;
 		br6dSimpleShuffle : BOOL;
 		br6dcircularShuffle : BOOL;
-		br6dWinDance : BOOL;
-		br6dLoseDance : BOOL;
+		br6dSpellWin : BOOL;
+		br6dSpellLose : BOOL;
+		br6dDance : BOOL;
 	END_STRUCT;
 	MainHmiType : 	STRUCT 
 		isRunning : BOOL;

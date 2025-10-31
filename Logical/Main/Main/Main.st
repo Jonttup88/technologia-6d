@@ -15,12 +15,12 @@ PROGRAM _CYCLIC
     // =================================================================================================================
 	task ACCESS ADR(gMain);
 
-	R_TRIG_0.CLK := (gHMI.Game.Mode > 0);
-	R_TRIG_0;
-	
-	IF R_TRIG_0.Q THEN
-		task.Input.Command.StartGame := TRUE;
-	END_IF;
+//	R_TRIG_0.CLK := (gHMI.Game.Mode > 0);
+//	R_TRIG_0;
+//	
+//	IF R_TRIG_0.Q THEN
+//		task.Input.Command.StartGame := TRUE;
+//	END_IF;
 	// Inputs
 	// =================================================================================================================
 	IF NOT task.Input.Force THEN
@@ -85,7 +85,7 @@ PROGRAM _CYCLIC
 					END_IF;
 					
 				20:
-					task.StateInfo := '6D Shuttles to home';
+					task.StateInfo := 'Wait 6D assmebly to reset';
 					// ---------------------------------------------------------------------------------			
 					local.actions.substate.br6dReset := TRUE;
 					
@@ -109,7 +109,8 @@ PROGRAM _CYCLIC
 			IF task.Input.Command.Reset THEN
 				task.State := MAIN_RESET;
 				
-			ELSIF task.Input.Command.StartGame THEN
+			ELSIF task.Input.Command.StartGame OR gHMI.Game.Mode > 0 THEN
+				task.Input.GameMode := gHMI.Game.Mode;
 				task.Input.Command.StartGame := FALSE; // dummy - reset caller
 			
 				task.State := MAIN_GAME;
@@ -128,7 +129,7 @@ PROGRAM _CYCLIC
 					local.actions.substate.robHome := TRUE;
 					
 					IF gRobot.Output.Status.CommandDone THEN
-						task.SubState := 10;
+						task.SubState := 20;
 					END_IF;
 
 				20:
@@ -157,16 +158,31 @@ PROGRAM _CYCLIC
 					local.actions.substate.robPickup := TRUE;
 					
 					IF gRobot.Output.Status.CommandDone THEN
+						task.SubState := 120;
+					END_IF;
+					
+				120:
+					task.StateInfo := 'Wait robot to be ready for next command';
+					// ---------------------------------------------------------------------------------			
+					IF gRobot.Output.Status.ReadyForNextCommand THEN
 						task.SubState := 200;
 					END_IF;
 				
 				200:
 					task.StateInfo := 'Shuffle';
-					// ---------------------------------------------------------------------------------			
-					local.actions.substate.br6dSimpleShuffle := TRUE;
+					// ---------------------------------------------------------------------------------
+					CASE task.Input.GameMode OF
+						1:
+							local.actions.substate.br6dSimpleShuffle := TRUE;	
+						2:
+		  					local.actions.substate.br6dcircularShuffle := TRUE;
+					END_CASE;
 					
-					IF gAcp6D.Output.Status.CommandDone THEN
+					local.actions.substate.robDance := TRUE;
+					
+					IF gAcp6D.Output.Status.CommandDone AND gRobot.Output.Status.CommandDone THEN
 						task.SubState := 210;
+						gHMI.Game.GameShuffleFinished := TRUE;
 					END_IF;
 				
 				210:
@@ -186,6 +202,7 @@ PROGRAM _CYCLIC
 					local.actions.substate.robPickup := TRUE;
 					
 					IF gRobot.Output.Status.CommandDone THEN
+						gHMI.Game.GameFinished := TRUE;
 						IF gAcp6D.Output.ShuttleUserSelected.index = gAcp6D.Output.ShuttleWithPayload.index THEN
 							// WIN!!
 							task.SubState := 300;
@@ -195,7 +212,49 @@ PROGRAM _CYCLIC
 						END_IF;
 					END_IF;
 				
+					
+				300: 
+					task.StateInfo := 'Wait robot to be ready for next command';
+					// ---------------------------------------------------------------------------------			
+					IF gRobot.Output.Status.ReadyForNextCommand THEN
+						task.SubState := 310;
+					END_IF;
+					
+				310: 
+					task.StateInfo := 'Wait robot to be ready for next command';
+					// ---------------------------------------------------------------------------------			
+					local.actions.substate.robGetPrize := TRUE;
+					local.actions.substate.br6dSpellWin := TRUE;
+					
+					IF gRobot.Output.Status.CommandDone AND gAcp6D.Output.Status.CommandDone THEN
+						task.SubState := 320;
+					END_IF;
+				
+				320:
+					task.StateInfo := 'Wait robot to be ready for next command';
+					// ---------------------------------------------------------------------------------			
+					IF gRobot.Output.Status.ReadyForNextCommand THEN
+						task.SubState := 330;
+					END_IF;
+					
+				330: 
+					task.StateInfo := 'Wait robot to be ready for next command';
+					// ---------------------------------------------------------------------------------			
+					local.actions.substate.robGivePrize := TRUE;
+					
+					IF gRobot.Output.Status.CommandDone THEN
+						task.SubState := 1000;
+					END_IF;
+				
+					
 				400: 
+					task.StateInfo := 'Wait robot to be ready for next command';
+					// ---------------------------------------------------------------------------------			
+					IF gRobot.Output.Status.ReadyForNextCommand THEN
+						task.SubState := 410;
+					END_IF;
+					
+				410: 
 					task.StateInfo := 'Robot pickup cup from payload shuttle';
 					// ---------------------------------------------------------------------------------			
 					gRobot.Input.RobTargetX := gAcp6D.Output.ShuttleWithPayload.X;
@@ -203,16 +262,25 @@ PROGRAM _CYCLIC
 					local.actions.substate.robPickup := TRUE;
 					
 					IF gRobot.Output.Status.CommandDone THEN
-						task.SubState := 420;
+						task.SubState := 500;
 					END_IF;
 				
 				420: 
 					task.StateInfo := 'Robot pickup cup from payload shuttle';
 					// ---------------------------------------------------------------------------------			
-					local.actions.substate.robHome := TRUE;
-					local.actions.substate.br6dHome := TRUE;
+					local.actions.substate.br6dSpellLose := TRUE;
 					
-					IF gRobot.Output.Status.CommandDone AND gAcp6D.Output.Status.CommandDone THEN
+					IF gAcp6D.Output.Status.CommandDone THEN
+						task.SubState := 1000;
+					END_IF;
+				
+				1000: 
+					task.StateInfo := 'Game end';
+					// ---------------------------------------------------------------------------------			
+					local.actions.substate.br6dHome := TRUE;
+					gHMI.Game.Mode := 0;
+					
+					IF gAcp6D.Output.Status.CommandDone THEN
 						task.State := MAIN_IDLE;
 					END_IF;
 			END_CASE;
@@ -249,9 +317,7 @@ PROGRAM _CYCLIC
 		task.StateInfo := '';  
 	END_IF;
 
-	brsmemset(ADR(task.Input.Command), 0, SIZEOF((task.Input.Command)));
 
-    
 	// Function calls
 	// =================================================================================================================
 	// fb.FUNCTION_NAME.Enable := local.actions.executeFunction;
@@ -269,9 +335,10 @@ PROGRAM _CYCLIC
 	task.Output.Command.br6dFindPayload := local.actions.substate.br6dFindPayload;
 	task.Output.Command.br6dSimpleShuffle := local.actions.substate.br6dSimpleShuffle;
 	task.Output.Command.br6dcircularShuffle := local.actions.substate.br6dcircularShuffle;
-	task.Output.Command.br6dWinDance := local.actions.substate.br6dWinDance;
-	task.Output.Command.br6dLoseDance := local.actions.substate.br6dLoseDance;
+	task.Output.Command.br6dSpellWin := local.actions.substate.br6dSpellWin;
+	task.Output.Command.br6dSpellLose := local.actions.substate.br6dSpellLose;
 	task.Output.Command.br6dSelectShuttle := local.actions.substate.br6dSelectShuttle;
+	task.Output.Command.br6dDance := local.actions.substate.br6dDance;
 	
 END_PROGRAM
 	

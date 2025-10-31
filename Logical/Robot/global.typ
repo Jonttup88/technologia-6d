@@ -60,6 +60,7 @@ TYPE
 		RobRapidState : BrAbbRwsStateRapidStateEnum;
 		RobMotorState : BrAbbRwsStateMotorStateEnum;
 		RobActiveMode : BrAbbRwsStateActiveModeEnum;
+		ReadyForNextCommand : BOOL;
 	END_STRUCT;
 	RobotOutputType : 	STRUCT 
 		Command : RobotOutputCommandType;

@@ -7,6 +7,7 @@ TYPE
 		BrAbbRwsGetState_0 : BrAbbRwsGetState;
 		TON_RobState : TON;
 		TON_ReadDelay : TON;
+		TON_DoneDelay : TON;
 	END_STRUCT;
 	RobotLocalType : 	STRUCT 
 		lastState : DINT;
@@ -27,13 +28,14 @@ TYPE
 		task_action : BOOL;
 	END_STRUCT;
 	RobotStateActionsType : 	STRUCT 
-		state_action : BOOL;
+		ready_for_next_command : BOOL;
 	END_STRUCT;
 	RobotSubstateActionsType : 	STRUCT 
 		command_done : BOOL;
 		command_error : BOOL;
 		write : BOOL;
 		write_reset : BOOL;
+		delay : BOOL;
 	END_STRUCT;
 	RobotHmiType : 	STRUCT 
 		isRunning : BOOL;

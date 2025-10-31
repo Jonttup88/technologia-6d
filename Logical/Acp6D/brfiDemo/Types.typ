@@ -1,7 +1,7 @@
 
 TYPE
 	brfiShuttleSelectionType : 	STRUCT 
-		ID : DINT;
+		ID : UINT;
 		index : DINT;
 		x : REAL;
 		y : REAL;

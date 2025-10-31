@@ -20,7 +20,6 @@ TYPE
 	MainDifficultyLevelEnum : 
 		(
 		DIFFICULTY_EASY,
-		DIFFICULTY_NORMAL,
 		DIFFICULTY_HARD
 		);
 END_TYPE
@@ -40,6 +39,7 @@ TYPE
 		Force : BOOL;
 		Command : MainInputCommandType;
 		Status : MainInputStatusType;
+		GameMode : DINT;
 	END_STRUCT;
 END_TYPE
 
@@ -47,14 +47,8 @@ END_TYPE
 
 TYPE
 	MainOutputStatusCmdAllowedType : 	STRUCT 
-		Start : BOOL;
-		Stop : BOOL;
+		StartGame : BOOL;
 		Reset : BOOL;
-		SetModeDemo : BOOL;
-		SetModeGame : BOOL;
-		SetDifficultyEasy : BOOL;
-		SetDifficultyNormal : BOOL;
-		SetDifficultyHard : BOOL;
 	END_STRUCT;
 	MainOutputCommandType : 	STRUCT 
 		robHome : BOOL;
@@ -68,12 +62,12 @@ TYPE
 		br6dSelectShuttle : BOOL;
 		br6dSimpleShuffle : BOOL;
 		br6dcircularShuffle : BOOL;
-		br6dWinDance : BOOL;
-		br6dLoseDance : BOOL;
+		br6dDance : BOOL;
+		br6dSpellLose : BOOL;
+		br6dSpellWin : BOOL;
 	END_STRUCT;
 	MainOutputStatusType : 	STRUCT 
 		CommandAllowed : MainOutputStatusCmdAllowedType;
-		DifficultyLevel : MainDifficultyLevelEnum;
 	END_STRUCT;
 	MainOutputType : 	STRUCT 
 		Command : MainOutputCommandType;

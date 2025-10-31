@@ -41,6 +41,7 @@ TYPE
 		executing : BOOL;
 		selectedCount : DINT;
 		virtualShuttleCount : DINT;
+		wordStep : DINT;
 	END_STRUCT;
 	Acp6DTaskActionsType : 	STRUCT 
 		dummy : BOOL;
@@ -76,6 +77,9 @@ TYPE
 		_O : ARRAY[0..gMAX_INDEX_SHUTTLE]OF McAcp6DShPositionType;
 		_S : ARRAY[0..gMAX_INDEX_SHUTTLE]OF McAcp6DShPositionType;
 		_E : ARRAY[0..gMAX_INDEX_SHUTTLE]OF McAcp6DShPositionType;
+		_W : ARRAY[0..gMAX_INDEX_SHUTTLE]OF McAcp6DShPositionType;
+		_I : ARRAY[0..gMAX_INDEX_SHUTTLE]OF McAcp6DShPositionType;
+		_N : ARRAY[0..gMAX_INDEX_SHUTTLE]OF McAcp6DShPositionType;
 	END_STRUCT;
 END_TYPE
 
@@ -109,6 +113,10 @@ TYPE
 		error : BOOL;
 		errorID : DINT;
 	END_STRUCT;
+	Acp6DMoveInPlaneParType : 	STRUCT 
+		Velocity : REAL;
+		Acceleration : REAL;
+	END_STRUCT;
 END_TYPE
 
 (**)
@@ -128,6 +136,7 @@ TYPE
 		angle : REAL;
 		step : DINT;
 		sequence : ARRAY[0..gMAX_INDEX_SHUFFLE]OF DINT;
+		radius : REAL;
 	END_STRUCT;
 	Acp6DRandomType : 	STRUCT 
 		delaysIndex : DINT;
