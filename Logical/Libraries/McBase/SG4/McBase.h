@@ -1,6 +1,6 @@
 /* Automation Studio generated header file */
 /* Do not edit ! */
-/* McBase 6.2.0 */
+/* McBase 6.3.0 */
 
 #ifndef _MCBASE_
 #define _MCBASE_
@@ -9,7 +9,7 @@ extern "C"
 {
 #endif
 #ifndef _McBase_VERSION
-#define _McBase_VERSION 6.2.0
+#define _McBase_VERSION 6.3.0
 #endif
 
 #include <bur/plctypes.h>
@@ -234,6 +234,7 @@ typedef enum McCfgTypeEnum
 	mcCFG_PROC_TRAK_MON = 1604,
 	mcCFG_TRK_PATH = 1700,
 	mcCFG_TRK_PATH_SCN = 1701,
+	mcCFG_TRK_PATH_AUT_CRT_COND = 1702,
 	mcCFG_PICK_CORE = 2100,
 	mcCFG_PICK_REG = 2110,
 	mcCFG_PICK_REG_SCN = 2111,
@@ -382,6 +383,7 @@ typedef enum McCfgTypeEnum
 	mcCFG_AXGRP_FEAT_REV_MOVE = 21125,
 	mcCFG_AXGRP_FEAT_TRK = 21126,
 	mcCFG_AXGRP_FEAT_PIPE_CUT = 21127,
+	mcCFG_AXGRP_FEAT_TRKFRM_SEL = 21128,
 	mcCFG_ASM = 31000,
 	mcCFG_ASM_COGG_COMP = 31001,
 	mcCFG_ASM_ELONG_COMP = 31002,
@@ -495,8 +497,8 @@ typedef enum McMMCLogSelUseSupSubcEEnum
 } McMMCLogSelUseSupSubcEEnum;
 
 typedef enum McMMCMcAcpDrvPLKCycPerParIDEnum
-{	mcMMCMPCPP_ONE = 1,
-	mcMMCMPCPP_TWO = 2
+{	mcMMCMPCPP_TWO = 2,
+	mcMMCMPCPP_ONE = 1
 } McMMCMcAcpDrvPLKCycPerParIDEnum;
 
 typedef enum McMcMMCDiSnEnum
@@ -711,6 +713,11 @@ typedef enum McPPTAcpTrakPtBarrFunEnum
 {	mcPPTAPBF_OFF = 0,
 	mcPPTAPBF_ON = 1
 } McPPTAcpTrakPtBarrFunEnum;
+
+typedef enum McPPTAcpTrakPtShStopPosEnum
+{	mcPPTASPSP_EXT = 0,
+	mcPPTASPSP_CTR_PT = 1
+} McPPTAcpTrakPtShStopPosEnum;
 
 typedef enum McPPTAcpTrakPtPPMMonEnum
 {	mcPPTAcpTrakPtPPMMon_OFF = 0,
@@ -1356,8 +1363,13 @@ typedef struct McCfgCamLstType
 {	struct McCfgUnboundedArrayType Row;
 } McCfgCamLstType;
 
+typedef struct McPPTAcpTrakPtBarrFunOnType
+{	enum McPPTAcpTrakPtShStopPosEnum ShuttleStopPosition;
+} McPPTAcpTrakPtBarrFunOnType;
+
 typedef struct McPPTAcpTrakPtBarrFunType
 {	enum McPPTAcpTrakPtBarrFunEnum Type;
+	struct McPPTAcpTrakPtBarrFunOnType On;
 } McPPTAcpTrakPtBarrFunType;
 
 typedef struct McPPTAcpTrakPtPPMMonShTrgType

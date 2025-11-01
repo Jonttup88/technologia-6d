@@ -27,8 +27,8 @@ PROGRAM _CYCLIC
 
 	END_IF
 
-	IF task.Input.Command.Reset OR gHMI.General.ResetButton THEN
-		task.Input.Command.Reset := FALSE;
+	IF task.Input.Command.HardReset OR gHMI.General.ResetButton THEN
+		task.Input.Command.HardReset := FALSE;
 		task.State := MAIN_HARD_RESET;
 	END_IF
 	
@@ -82,10 +82,11 @@ PROGRAM _CYCLIC
 					task.StateInfo := 'Force 6D task to idle';
 					// ---------------------------------------------------------------------------------		
 					gAcp6D.State := ACP6D_IDLE;
+					brsmemset(ADR(gFeatureDemo), 0, SIZEOF(gFeatureDemo));
 					task.SubState := 20;
 				
 				20:
-					task.StateInfo := 'Force 6D task to idle';
+					task.StateInfo := '';
 					// ---------------------------------------------------------------------------------		
 					gAcp6D.State := ACP6D_IDLE;
 					task.SubState := 30;

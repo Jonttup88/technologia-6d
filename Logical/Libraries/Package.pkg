@@ -29,8 +29,8 @@
     <Object Type="Library" Language="binary" Description="This library contains FBKs for exchanging data (data stream) via stream sockets (TCP).">AsTCP</Object>
     <Object Type="Library" Language="ANSIC">comUtil</Object>
     <Object Type="Library" Language="ANSIC">strUtil</Object>
-    <Object Type="Library" Language="binary" Description="[mapp 6D] ACOPOS 6D library">McAcp6D</Object>
     <Object Type="Library" Language="binary" Description="[mapp Motion] Base library">McBase</Object>
     <Object Type="Library" Language="Binary" Description="Core library for mapp components">MpBase</Object>
+    <Object Type="Library" Language="binary" Description="[mapp 6D] ACOPOS 6D library">McAcp6D</Object>
   </Objects>
 </Package>

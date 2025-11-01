@@ -180,7 +180,7 @@ PROGRAM _CYCLIC
 			
 			END_CASE;
 		
-		ACP6D_RESET:
+		//ACP6D_RESET:
 			
 			
 		ACP6D_IDLE:	

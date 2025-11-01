@@ -21,5 +21,6 @@
     <Object Type="File" Reference="true">\Physical\Simulation\X20EM0613\mappView\OpcUaServer.uaserver</Object>
     <Object Type="File" Reference="true">\Physical\Simulation\X20EM0613\mappView\visu.vis</Object>
     <Object Type="File" Reference="true">\Physical\Simulation\X20EM0613\mappView\visWeight.vis</Object>
+    <Object Type="File" Reference="true">\Physical\Simulation\X20EM0613\mappView\content_MainPage.binding</Object>
   </Objects>
 </Package>
