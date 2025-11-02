@@ -24,6 +24,9 @@
           <Variable Name="update" />
         </Variable>
         <Variable Name="Game" RecursiveEnable="2" />
+        <Variable Name="Force">
+          <Variable Name="mode" />
+        </Variable>
       </Variable>
       <Variable Name="gFeatureDemo">
         <Variable Name="Active" />

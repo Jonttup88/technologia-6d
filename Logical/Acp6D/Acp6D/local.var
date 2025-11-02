@@ -48,4 +48,5 @@ VAR
 	R_TRIG_0 : R_TRIG;
 	R_TRIG_1 : R_TRIG;
 	gFeatureDemoState : INT;
+	error : BOOL;
 END_VAR

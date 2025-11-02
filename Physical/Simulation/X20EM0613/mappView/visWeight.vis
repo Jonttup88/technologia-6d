@@ -5,6 +5,7 @@
     <Page refId="page_0" />
     <Page refId="page_1" />
     <Page refId="page_gameWaitReveal" />
+    <Page refId="page_force" />
   </Pages>
   <Navigations />
   <BindingsSets>
@@ -15,11 +16,13 @@
     <EventBindingsSet refId="eventbinding_1" />
     <EventBindingsSet refId="content_gamePage4" />
     <EventBindingsSet refId="content_gamePage5" />
+    <EventBindingsSet refId="Content7" />
   </EventBindingsSets>
   <EventScriptsSets />
   <Dialogs />
   <Contents preCache="all">
     <Content refId="content_gamePage6" />
+    <Content refId="Content7" />
   </Contents>
   <SnippetsSets />
   <VariablesSets />

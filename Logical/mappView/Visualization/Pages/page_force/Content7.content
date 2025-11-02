@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Content id="Content7" guid="0fb3ac55-eb3a-471d-9cc5-aa322444401b" height="1000" width="1360" xmlns="http://www.br-automation.com/iat2015/contentDefinition/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Widgets>
+    <Widget xsi:type="widgets.brease.Button" id="Button1" top="240" left="100" width="280" height="400" zIndex="0" image="Media/ForceXMode.svg" />
+    <Widget xsi:type="widgets.brease.Button" id="Button2" top="240" left="540" width="280" height="400" zIndex="1" image="Media/ForceYMode.svg" />
+    <Widget xsi:type="widgets.brease.Button" id="Button3" top="240" left="980" width="280" height="400" zIndex="2" image="Media/ForceXYMode.svg" />
+    <Widget xsi:type="widgets.brease.Label" id="Label1" top="80" left="200" width="140" height="120" zIndex="3" text="X" fontSize="72px" />
+    <Widget xsi:type="widgets.brease.Label" id="Label2" top="80" left="640" width="140" height="120" zIndex="4" text="Y" fontSize="72px" />
+    <Widget xsi:type="widgets.brease.Label" id="Label3" top="80" left="1080" width="140" height="120" zIndex="5" text="XY" fontSize="72px" />
+  </Widgets>
+</Content>

@@ -1,0 +1,1783 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="gAssembly6D_1-svg" xml:space="preserve" color-interpolation-filters="sRGB" width="1080" height="380" viewBox="-50 -970 770 250" oncontextmenu="return false;">
+ <style>svg{fill:none; fill-rule:evenodd; font-size:12px; overflow:visible; stroke-linecap:square; stroke-miterlimit:3;}.segment.power-off {fill:#555555;}.segment.power-on {fill:#fbfbfb;}.segment.error {fill:#cb0000;}.segment.homing {fill:#c8c8c8;}.segment.stopping {fill:#666666;}.segment &gt; g &gt; rect {stroke:#666666;stroke-linecap:round;stroke-linejoin:round;stroke-width:3.750000;}.segment-cls-1,.segment-cls-2{stroke-width:7.500000 !important;}.segment-cls-2{fill:#666666;}.segment-cls-3{clip-path:url(#segment-clippath);stroke:#666666;}.segment &gt; text {fill:#020202;font-family:Calibri;font-size:2em;display: block;alignment-baseline: hanging;}  svg {
+    touch-action: none;
+  }
+  rect {
+    cursor: move;
+  }
+  .ribbon-button:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+  text{
+  -webkit-touch-callout: none;
+  -webkit-user-select:none;
+  -khtml-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  -o-user-select:none;
+  user-select:none;
+} .shuttle &gt; g &gt; rect {stroke:black;stroke-linecap:round;stroke-linejoin:round;stroke-width:5.0000;fill:lightgray;} .shuttle.warning &gt; g &gt; rect {fill:yellow;} .shuttle.error &gt; g &gt; rect {fill:red;} .shuttle.disabled &gt; g &gt; rect {fill:gray;} .shuttle.discovering &gt; g &gt; rect {fill:darkorange;}  .small {font: 15px sans-serif;color:black;stroke:black;fill:black;-webkit-user-select: none; -ms-user-select: none; user-select: none;} .shuttle{ cursor:pointer} .shuttle:active &gt; g &gt; rect {fill:lightblue;} .shuttle.temp &gt; g &gt; rect {fill:rgba(127,127,127,0.1);stroke:rgba(0,0,0,0.1);stroke-dasharray:20;} .shuttle.temp.active &gt; g &gt; rect {fill:rgba(127,0,0,0.1);}</style>
+ <defs>
+  <clipPath id="segment_240x240-clipPath">
+   <rect class="segment-cls-2" width="240.5" height="240.5" rx="3.75" ry="3.75"/>
+  </clipPath>
+  <clipPath id="segment_480x120-clipPath">
+   <rect class="segment-cls-2" width="480.5" height="120.5" rx="3.75" ry="3.75"/>
+  </clipPath>
+  <clipPath id="segment_120x480-clipPath">
+   <rect class="segment-cls-2" width="120.5" height="480.5" rx="3.75" ry="3.75"/>
+  </clipPath>
+  <clipPath id="segment_320x320-clipPath">
+   <rect class="segment-cls-2" width="320.5" height="320.5" rx="3.75" ry="3.75"/>
+  </clipPath>
+ </defs>
+ <g id="gAssembly6D_1" class="assembly">
+  <g id="Layout6D_1" class="layout" grid-size="240">
+  <g xmlns="http://www.w3.org/2000/svg" id="segments">
+    <g id="segment-1" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment1" segment-id="1" master="true" position-x="0" position-y="0" position-x-mm="0" position-y-mm="0" transform="translate(0 -240)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">1</text>
+   </g>
+   <g id="segment-2" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment2" segment-id="2" master="false" position-x="0" position-y="1" position-x-mm="0" position-y-mm="240" transform="translate(0 -480)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">2</text>
+   </g>
+   <g id="segment-3" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment3" segment-id="3" master="false" position-x="0" position-y="2" position-x-mm="0" position-y-mm="480" transform="translate(0 -720)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">3</text>
+   </g>
+   <g id="segment-4" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment4" segment-id="4" master="false" position-x="0" position-y="3" position-x-mm="0" position-y-mm="720" transform="translate(0 -960)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">4</text>
+   </g>
+   <g id="segment-5" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment5" segment-id="5" master="false" position-x="1" position-y="0" position-x-mm="240" position-y-mm="0" transform="translate(240 -240)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">5</text>
+   </g>
+   <g id="segment-6" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment6" segment-id="6" master="false" position-x="1" position-y="1" position-x-mm="240" position-y-mm="240" transform="translate(240 -480)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">6</text>
+   </g>
+   <g id="segment-7" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment7" segment-id="7" master="false" position-x="1" position-y="2" position-x-mm="240" position-y-mm="480" transform="translate(240 -720)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">7</text>
+   </g>
+   <g id="segment-8" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment8" segment-id="8" master="false" position-x="1" position-y="3" position-x-mm="240" position-y-mm="720" transform="translate(240 -960)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">8</text>
+   </g>
+   <g id="segment-9" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment9" segment-id="9" master="false" position-x="2" position-y="0" position-x-mm="480" position-y-mm="0" transform="translate(480 -240)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">9</text>
+   </g>
+   <g id="segment-10" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment10" segment-id="10" master="false" position-x="2" position-y="1" position-x-mm="480" position-y-mm="240" transform="translate(480 -480)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">10</text>
+   </g>
+   <g id="segment-11" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment11" segment-id="11" master="false" position-x="2" position-y="2" position-x-mm="480" position-y-mm="480" transform="translate(480 -720)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">11</text>
+   </g>
+   <g id="segment-12" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment12" segment-id="12" master="false" position-x="2" position-y="3" position-x-mm="480" position-y-mm="720" transform="translate(480 -960)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">12</text>
+   </g>
+   <g id="segment-13" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment13" segment-id="13" master="false" position-x="3" position-y="0" position-x-mm="720" position-y-mm="0" transform="translate(720 -240)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">13</text>
+   </g>
+   <g id="segment-14" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment14" segment-id="14" master="false" position-x="3" position-y="1" position-x-mm="720" position-y-mm="240" transform="translate(720 -480)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">14</text>
+   </g>
+   <g id="segment-15" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment15" segment-id="15" master="false" position-x="3" position-y="2" position-x-mm="720" position-y-mm="480" transform="translate(720 -720)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">15</text>
+   </g>
+   <g id="segment-16" class="segment segment-size-240x240 power-on" segment-name-unique="Asm1Segment16" segment-id="16" master="false" position-x="3" position-y="3" position-x-mm="720" position-y-mm="720" transform="translate(720 -960)">
+    <g>
+     <rect width="240" height="240" rx="3.75" ry="3.75"/>
+    </g>
+    <text class="text-segment-name" x="10" y="10" alignment-baseline="hanging">16</text>
+   </g>
+   
+  </g>
+  <g xmlns="http://www.w3.org/2000/svg" id="myDynamicData"><g id="shuttle_0" class="shuttle" transform="translate(540 -900)">
+	<g transform="translate(4.875 4.875) rotate(0 57 57)">
+		<rect x="0" y="0" width="114" height="114" rx="15" ry="15"/>
+		<text x="10" y="25" data-attr="id" class="small">id</text>
+		<text x="70" y="25" data-attr="Status" text-anchor="middle" class="small">status</text>
+		<text x="7.5" y="55" data-attr="X" class="small">X: 600</text>
+		<text x="60" y="55" data-attr="Y" class="small">Y: 840</text>
+		<text x="7.5" y="75" data-attr="Z" class="small">Z: 1.0</text>
+		<text x="60" y="75" data-attr="RX" class="small">RX: 0</text>
+		<text x="7.5" y="95" data-attr="RY" class="small">RY: 0</text>
+		<text x="60" y="95" data-attr="RZ" class="small">RZ: 0</text>
+	</g>
+	</g>
+
+	<g id="shuttle_0_999" onmousedown="newWayPoint(event)" data-id="0" class="shuttle temp path_shuttle_0" transform="translate(360 -840)" data-x="420" data-y="780">
+					<g transform="translate(4.875 4.875) rotate(0 57 57)">
+						<rect x="0" y="0" width="114" height="114" rx="15" ry="15"/>
+						<text x="10" y="25" data-attr="id" class="small">id</text>
+						<text x="70" y="25" data-attr="Status" text-anchor="middle" class="small">status</text>
+						<text x="7.5" y="55" data-attr="X" class="small">X: 420</text>
+						<text x="60" y="55" data-attr="Y" class="small">Y: 780</text>
+						<text x="7.5" y="75" data-attr="Z" class="small">Z: 1.0</text>
+						<text x="60" y="75" data-attr="RX" class="small">RX: 0</text>
+						<text x="7.5" y="95" data-attr="RY" class="small">RY: 0</text>
+						<text x="60" y="95" data-attr="RZ" class="small">RZ: 0</text>
+					</g>
+				   </g><path class="path_0 path_shuttle_0" d="M600 -840 l-180 60" stroke="red" fill="none" stroke-dasharray="10"/></g>
+  <text x="10" y="25" id="positionText" class="small" data-x="720" data-y="840">720.00 mm, 840.00 mm</text></g>
+ </g>
+ 
+ <script>//<![CDATA[
+	
+	var ip = window.location.hostname;
+var wsUri = "ws://"+ip+":8889";
+var output;
+var connected = false;
+var index = 0;
+
+var r = 45;
+var activeShuttle = -1;
+var snapActive = true;
+var rounding = true;
+var activeWayPoint = -1;
+var activeWayPointElement = null;
+var follow = {id:0,index:-1};
+var trace = {id:0,color:"green"};
+var followShuttle = true;
+var offsetValue = {x:0,y:0};
+var stopSending = true;
+var wayPointList = [];
+var msgCount = 0;
+var movePointOnly = false;
+var shuttles = [];
+var mouseStartPosition = {x: 0, y: 0};
+var mousePosition = {x: 0, y: 0};
+var viewboxStartPosition = {x: 0, y: -960};
+var viewboxPosition = {x: 0, y: -960};
+var viewboxSize = {x: 1000, y: 1000};
+var viewboxScale = 1.0;
+var mouseStartPos = null;
+var mouseEndPos = null;
+var bur6D = {};
+var panInterval = null;
+var panDir = {x:0,y:0};  
+
+var initPos = {x: 600, y: 840};
+
+// Find your root SVG element
+var svg = document.querySelector('svg');
+// Create an SVGPoint for future math
+var pt = svg.createSVGPoint();
+
+
+initTouchToMouse(svg);
+
+svg.addEventListener("dblclick", () => {
+	document.getElementById('myDynamicData').innerHTML = '';
+	
+	shuttles = [];
+	shuttles.push({id:(i+1),x:initPos.x,y:initPos.y,z:1,rz:0,ry:0,rx:0,MovementDone:true,wayPointList: []});
+	activeWayPoint = -1;
+	var newTargetX = 0;
+	var newTargetY = 0;
+	
+	document.getElementById('myDynamicData').insertAdjacentHTML('beforeend', `<g id="shuttle_0" class="shuttle" transform="translate(${(shuttles[shuttles.length-1].x-60)} ${(shuttles[shuttles.length-1].y+60)*(-1)})">
+	<g transform="translate(4.875 4.875) rotate(${shuttles[shuttles.length-1].rz*(-1)} 57 57)">
+		<rect x="0" y="0" width="114" height="114" rx="15" ry="15"/>
+		<text x="10" y="25" data-attr="id" class="small">id</text>
+		<text x="70" y="25" data-attr="Status" text-anchor="middle" class="small">status</text>
+		<text x="7.5" y="55" data-attr="X" class="small">X: ${Math.round(shuttles[shuttles.length-1].x)}</text>
+		<text x="60" y="55" data-attr="Y" class="small">Y: ${Math.round(shuttles[shuttles.length-1].y)}</text>
+		<text x="7.5" y="75" data-attr="Z" class="small">Z: ${parseFloat(shuttles[shuttles.length-1].z).toFixed(1)}</text>
+		<text x="60" y="75" data-attr="RX" class="small">RX: ${Math.round(shuttles[shuttles.length-1].rz)}</text>
+		<text x="7.5" y="95" data-attr="RY" class="small">RY: ${Math.round(0)}</text>
+		<text x="60" y="95" data-attr="RZ" class="small">RZ: ${Math.ceil(0)}</text>
+	</g>
+	</g>
+
+	`);
+	initShuttleFunctions();
+});
+
+// Get point in global SVG space
+function cursorPoint(evt){
+	pt.x = evt.clientX; pt.y = evt.clientY;
+	var retVal = pt.matrixTransform(svg.getScreenCTM().inverse());
+	retVal.x += offsetValue.x;
+	retVal.y += offsetValue.y;
+	return retVal;
+}
+	
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+       // Typical action to be performed when the document is ready:
+	   var segments = document.getElementById('segments');
+	   segments.innerHTML = '';
+	   var seg = JSON.parse(xhttp.responseText);
+	   var minY = 0;
+	   var maxX = 0;
+	   for(var i = 0; i < seg.layout.segments.length; ++i)
+	   {
+		if(minY > (-240*(seg.layout.segments[i].y+1)))
+		{
+			minY = (-240*(seg.layout.segments[i].y+1));
+		}
+		if(maxX < (240*seg.layout.segments[i].x+1));
+		{
+			maxX = (240*seg.layout.segments[i].x+1);
+		}
+		 segments.innerHTML += `<g id="segment_${i}" class="segment power-off" transform="translate(${240*seg.layout.segments[i].x} -${240*(seg.layout.segments[i].y+1)})" segment-id="${i+1}" position-x="${seg.layout.segments[i].x}" position-y="${seg.layout.segments[i].y}" master="${seg.layout.segments[i].IsMaster}">
+		<rect x="1.875" y="1.875" width="240" height="240" rx="3.75" ry="3.75"/>
+	   </g>`;
+	   }
+	   maxX += 240;
+	   document.getElementById('gAssembly6D_1-svg').setAttribute('viewBox',`0 ${minY} ${maxX} ${(minY-80)*(-1)}`);
+	   
+    }
+};
+xhttp.open("GET", "http://"+ip+":8087/conf6d.cgi?cmd=read", true);
+xhttp.send();
+	
+	
+if(localStorage)
+{
+	bur6D = JSON.parse(localStorage.getItem('bur6D'));
+	if(bur6D)
+	{
+		console.log("B&R 6D session loaded.");
+	}
+}
+
+function setLocalStorage()
+{
+	localStorage.setItem("bur6D",JSON.stringify(bur6D));
+}
+	
+	
+function setviewbox()
+{
+  var vp = {x: 0, y: 0};
+  var vs = {x: 0, y: 0};
+  
+  vp.x = viewboxPosition.x;
+  vp.y = viewboxPosition.y;
+  
+  vs.x = viewboxSize.x * viewboxScale;
+  vs.y = viewboxSize.y * viewboxScale;
+
+  shape = document.querySelector("svg");
+  shape.setAttribute("viewBox", 0 + " " + vp.y + " " + vs.x + " " + vs.y);
+}
+	
+
+function panFunction()
+{
+	var tempX = offsetValue.x + panDir.x*20;
+	if(tempX < -100)
+	{
+		tempX = -100;
+	}
+	else if(tempX > 3000)
+	{
+		tempX = 3000;
+	}
+	document.getElementById('Layout6D_1').setAttribute('transform',`translate(${(tempX)*(-1)} 0)`);
+	offsetValue.x = tempX;
+}
+	
+  window["init"] = function()
+  {
+    //output = document.getElementById("output");
+    testWebSocket();
+  }
+  
+  document.getElementById('myDynamicData').parentElement.innerHTML += `<text x="10" y="${25}" id="positionText" class="small"></text>`;
+  
+  document.getElementById('myDynamicData').parentElement.addEventListener('mousemove',function(e){
+	 
+		var loc = cursorPoint(e);
+		if(e.target)
+		{
+			if(e.target.parentElement)
+			{
+				var id = e.target.parentElement.getAttribute('id');
+				if(id)
+				{
+					mouseEndPos = {x:e.clientX,y:e.clientY};
+					if(mouseStartPos != null)
+					{
+						if(mouseEndPos.x != mouseStartPos.x)
+						{
+							panDir.x = ((mouseEndPos.x - mouseStartPos.x)/Math.abs(mouseEndPos.x - mouseStartPos.x));
+						}
+						
+						if(mouseEndPos.y != mouseStartPos.y)
+						{
+							panDir.y = ((mouseEndPos.y - mouseStartPos.y)/Math.abs(mouseEndPos.y - mouseStartPos.y));
+						}
+					}
+				}
+			}
+		}
+		
+		
+		var y = loc.y*(-1);
+		var x = loc.x;
+		
+		if(snapActive)
+		{
+			x = Math.round(x/60)*60;
+			y = Math.round(y/60)*60;
+		}
+		
+		mousePosition.x = x;
+		mousePosition.y = y;
+		
+		document.getElementById('positionText').innerHTML = `${parseFloat(x).toFixed(2)} mm, ${parseFloat(y).toFixed(2)} mm`;
+		document.getElementById('positionText').setAttribute('data-x',x);
+		document.getElementById('positionText').setAttribute('data-y',y);
+		
+	
+		if(activeShuttle != -1)
+		{
+			updatePathView(activeShuttle);
+		}
+		else if(activeWayPoint != -1)
+		{
+			var elId = activeWayPointElement.getAttribute('data-id');
+			console.log(elId);
+			updatePathView(parseInt(elId),true);
+		}
+		
+		
+  });
+  
+  function removePaths(id)
+  {
+	 var paths = document.getElementsByClassName('path_'+id);
+	 while(paths.length > 0)
+	 {
+		paths[0].parentElement.removeChild(paths[0]);
+	   paths = document.getElementsByClassName('path_'+id);
+	}
+  }
+  
+   function removeCircles(index,wp)
+  {
+	 var paths = document.getElementsByClassName('circle_'+index+'_'+wp);
+	 while(paths.length > 0)
+	 {
+		paths[0].parentElement.removeChild(paths[0]);
+		paths = document.getElementsByClassName('circle_'+index+'_'+wp);
+	  }
+   
+  }
+  
+  function newWayPoint(event)
+  {
+	if(event.buttons == 2)
+	{
+		var myShuttle = event.target.parentElement.parentElement;
+		activeShuttle = myShuttle.getAttribute('data-id');
+	}
+	else
+	{
+		var myShuttle = event.target.parentElement.parentElement;
+		activeShuttle = 999;
+		updatePathView(parseInt(myShuttle.getAttribute('data-id')));
+	}
+	var contextmenu = document.getElementById('contextmenu');
+	if(contextmenu)
+	{
+		contextmenu.parentElement.removeChild(contextmenu);
+	}
+  }
+  
+
+  function testWebSocket()
+  {
+    websocket = new WebSocket(wsUri);
+    websocket.onopen = function(evt) { onOpen(evt) };
+    websocket.onclose = function(evt) { onClose(evt) };
+    websocket.onmessage = function(evt) { onMessage(evt) };
+    websocket.onerror = function(evt) { onError(evt) };
+  }
+
+  function onOpen(evt)
+  {
+    //doSend("WebSocket rocks");
+	connected = true;
+	doSend('{"cmd":"monitor","pvName":"gHMI.Teach"}');
+  }
+
+  function onClose(evt)
+  {
+	connected = false;
+  }
+  
+  // sticky scroll
+  // https://stackoverflow.com/questions/58401288/position-sticky-svg-element-contained-inside-div-with-overflow
+  
+  
+  var movementType = 1;
+  
+  
+	function initShuttleFunctions()
+	{
+		var index = 0;
+		while(document.getElementById('shuttle_'+index))
+		{
+			var shuttle = document.getElementById('shuttle_'+index);
+			shuttle.addEventListener('mousedown', function(event) {
+				activeShuttle = parseInt(this.getAttribute('id').split('_')[1]);
+			});
+			index++;
+		}
+		
+		document.getElementsByTagName('svg')[0].setAttribute('oncontextmenu','return false;');
+		/*
+		window.addEventListener("wheel", function(e)
+		{
+			var scale = (e.deltaY < 0) ? 0.8 : 1.2;
+  
+		  if ((viewboxScale * scale < 8.) && (viewboxScale * scale > 1./256.))
+		  {  
+			
+			viewboxPosition.x = (mousePosition.x - 1000) * scale;
+			viewboxPosition.y = 960 * (-1);
+			viewboxScale *= scale;
+		  
+			setviewbox();
+		  }
+		});
+		*/
+		window.addEventListener('mousedown',function(event){
+			if(event.target)
+				{
+					if(event.target.parentElement)
+					{
+						var id = event.target.parentElement.getAttribute('id');
+						if(id)
+						{
+							mouseStartPos = {x:event.clientX,y:event.clientY};
+							//panInterval = window.setInterval(panFunction,10);
+						}
+						else
+						{
+							mouseStartPos = null;
+						}
+					}
+				}
+				else
+				{
+					mouseStartPos = null;
+				}
+			});
+		
+		window.addEventListener('mouseup',function(event){
+			mouseStartPos = null;
+			if(panInterval != null)
+			{
+				window.clearInterval(panInterval);
+				panInterval = null;
+			}
+			if((activeShuttle > -1) && (activeWayPoint == -1))
+			{
+				var shuttle = document.getElementById('shuttle_'+activeShuttle+'_999');
+				if(shuttle)
+				{
+					var x = parseFloat(document.getElementById('positionText').getAttribute('data-x'));
+					var y = parseFloat(document.getElementById('positionText').getAttribute('data-y'));
+					
+					shuttle.setAttribute('transform',`translate(${x-60} ${(y+60)*(-1)})`);
+					shuttle.children[0].children[3].innerHTML = `X: ${Math.round(x)}`;
+					shuttle.children[0].children[4].innerHTML = `Y: ${Math.round(y)}`;
+					
+				}	
+			
+			}
+			else
+			{
+				
+			}
+			
+			var elements = document.getElementsByClassName('active');
+			while(elements.length > 0)
+			{
+				elements[0].classList.remove('active');
+				elements = document.getElementsByClassName('active');
+			}
+			
+			// reset shuttle info
+			activeShuttle = -1;
+			activeWayPoint = -1;
+			
+		});
+	}
+	
+
+
+function createData(moveString)
+{
+	document.getElementById('myDynamicData').innerHTML = '';
+	moveString = moveString.replaceAll('\'','"');
+	var data = JSON.parse(moveString);
+	console.log(data[0]);
+	shuttles = [];
+	shuttles.push({id:(i+1),x:initPos.x,y:initPos.y,z:1,rz:0,ry:0,rx:0,MovementDone:true,wayPointList: []});
+	activeWayPoint = -1;
+	var newTargetX = 0;
+	var newTargetY = 0;
+	
+	document.getElementById('myDynamicData').insertAdjacentHTML('beforeend', `<g id="shuttle_0" class="shuttle" transform="translate(${(shuttles[shuttles.length-1].x-60)} ${(shuttles[shuttles.length-1].y+60)*(-1)})">
+	<g transform="translate(4.875 4.875) rotate(${shuttles[shuttles.length-1].rz*(-1)} 57 57)">
+		<rect x="0" y="0" width="114" height="114" rx="15" ry="15"/>
+		<text x="10" y="25" data-attr="id" class="small">id</text>
+		<text x="70" y="25" data-attr="Status" text-anchor="middle" class="small">status</text>
+		<text x="7.5" y="55" data-attr="X" class="small">X: ${Math.round(shuttles[shuttles.length-1].x)}</text>
+		<text x="60" y="55" data-attr="Y" class="small">Y: ${Math.round(shuttles[shuttles.length-1].y)}</text>
+		<text x="7.5" y="75" data-attr="Z" class="small">Z: ${parseFloat(shuttles[shuttles.length-1].z).toFixed(1)}</text>
+		<text x="60" y="75" data-attr="RX" class="small">RX: ${Math.round(shuttles[shuttles.length-1].rz)}</text>
+		<text x="7.5" y="95" data-attr="RY" class="small">RY: ${Math.round(0)}</text>
+		<text x="60" y="95" data-attr="RZ" class="small">RZ: ${Math.ceil(0)}</text>
+	</g>
+	</g>
+
+	`);
+	
+	for(var j = 0; j < data[0].length-1; ++j)
+	{
+		
+		activeShuttle = 0;
+		var x = data[0][j].x;
+		var y = data[0][j].y;
+			shuttles[0].wayPointList.push(data[0][j]);
+	document.getElementById('myDynamicData').insertAdjacentHTML('beforeend', `<g data-id="${activeShuttle}" data-wp-index="${activeShuttle}_${shuttles[activeShuttle].wayPointList.length-1}"  class="shuttle temp path_shuttle_${activeShuttle}" onmousedown="redefineWayPoint(event)"  transform="translate(${x-60} ${(y+60)*(-1)})" data-wp-start-x="${x}" data-wp-start-y="${y}" data-wp-end-x="${x}" data-wp-end-y="${y}">
+			<g transform="translate(4.875 4.875) rotate(0 57 57)">
+				<rect x="0" y="0" width="114" height="114" rx="15" ry="15"/>
+				<text x="10" y="25" data-attr="id" class="small">id</text>
+				<text x="70" y="25" data-attr="Status" text-anchor="middle" class="small">status</text>
+				<text x="7.5" y="55" data-attr="X" class="small">X: ${Math.round(x)}</text>
+				<text x="60" y="55" data-attr="Y" class="small">Y: ${Math.round(y)}</text>
+				<text x="7.5" y="75" data-attr="Z" class="small">Z: ${parseFloat(shuttles[0].z).toFixed(1)}</text>
+				<text x="60" y="75" data-attr="RX" class="small">RX: ${Math.round(shuttles[0].rx)}</text>
+				<text x="7.5" y="95" data-attr="RY" class="small">RY: ${Math.round(shuttles[0].ry)}</text>
+				<text x="60" y="95" data-attr="RZ" class="small">RZ: ${Math.ceil(shuttles[0].rz)}</text>
+			</g>
+		   </g>`);
+	}
+	
+	activeShuttle = 0;
+	updatePathView(0,false,true,data[0][data[0].length-1].x,data[0][data[0].length-1].y);
+	updatePathView(0,false,true,data[0][data[0].length-1].x,data[0][data[0].length-1].y);
+	activeShuttle = 0;
+	//updatePathView(0,false,true,data[0][data[0].length-1].x,data[0][data[0].length-1].y);
+	
+	activeShuttle = -1;
+	
+	var myShuttle = document.getElementById('shuttle_0');
+	myShuttle.classList.remove("warning");
+	myShuttle.classList.remove("error");
+	myShuttle.classList.remove("disabled");
+	myShuttle.classList.remove("discovering");
+	myShuttle.classList.add("disabled");
+
+	initShuttleFunctions();
+}
+
+function customInit()
+{
+	shuttles.push({id:(i+1),x:60,y:60,z:1,rz:0,ry:0,rx:0,MovementDone:true,wayPointList: []});
+				
+	myDynamicData.innerHTML += `<g id="shuttle_0" class="shuttle" transform="translate(${(shuttles[shuttles.length-1].x-60)} ${(shuttles[shuttles.length-1].y+60)*(-1)})">
+	<g transform="translate(4.875 4.875) rotate(${shuttles[shuttles.length-1].rz*(-1)} 57 57)">
+		<rect x="0" y="0" width="114" height="114" rx="15" ry="15"/>
+		<text x="10" y="25" data-attr="id" class="small">id</text>
+		<text x="70" y="25" data-attr="Status" text-anchor="middle" class="small">status</text>
+		<text x="7.5" y="55" data-attr="X" class="small">X: ${Math.round(shuttles[shuttles.length-1].x)}</text>
+		<text x="60" y="55" data-attr="Y" class="small">Y: ${Math.round(shuttles[shuttles.length-1].y)}</text>
+		<text x="7.5" y="75" data-attr="Z" class="small">Z: ${parseFloat(shuttles[shuttles.length-1].z).toFixed(1)}</text>
+		<text x="60" y="75" data-attr="RX" class="small">RX: ${Math.round(shuttles[shuttles.length-1].rz)}</text>
+		<text x="7.5" y="95" data-attr="RY" class="small">RY: ${Math.round(0)}</text>
+		<text x="60" y="95" data-attr="RZ" class="small">RZ: ${Math.ceil(0)}</text>
+	</g>
+	</g>
+
+	`;
+	var myShuttle = document.getElementById('shuttle_0');
+	myShuttle.classList.remove("warning");
+	myShuttle.classList.remove("error");
+	myShuttle.classList.remove("disabled");
+	myShuttle.classList.remove("discovering");
+	myShuttle.classList.add("disabled");
+
+	initShuttleFunctions();
+}
+
+
+function simulateMouseEvent(event, simulatedType) {
+  if (event.touches.length > 1) return; // ignore multi-touch
+  
+  const touch = event.changedTouches[0];
+  const simulatedEvent = new MouseEvent(simulatedType, {
+    bubbles: true,
+    cancelable: true,
+    view: window,
+    screenX: touch.screenX,
+    screenY: touch.screenY,
+    clientX: touch.clientX,
+    clientY: touch.clientY,
+    button: 0,
+  });
+  
+  touch.target.dispatchEvent(simulatedEvent);
+}
+
+function initTouchToMouse(element) {
+  element.addEventListener("touchstart", function(e) {
+    simulateMouseEvent(e, "mousedown");
+  }, { passive: false });
+
+  element.addEventListener("touchmove", function(e) {
+    simulateMouseEvent(e, "mousemove");
+  }, { passive: false });
+
+  element.addEventListener("touchend", function(e) {
+    simulateMouseEvent(e, "mouseup");
+  }, { passive: false });
+}
+
+  function onMessage(evt)
+  {
+	if(evt.data == '')
+	{
+		return;
+	}
+	
+	let str = evt.data;
+
+// Use a regex to find everything between [[ and ]]
+let result = str.replace(/\[\[(.*?)\]\]/g, (match, inner) => {
+  // Replace " with ' only inside the [[...]] content
+  const replaced = inner.replace(/"/g, "'");
+  return `[[${replaced}]]`;
+});
+
+	console.log("was");
+	window["myData"] = JSON.parse(result);
+	
+	var myDynamicData = document.getElementById('myDynamicData');
+	console.log(myData.data[0]["gHMI.Teach.moveString"]);
+	
+	if(myData.data[0]["gHMI.Teach"])
+	{
+		if(!(myData.data[0]["gHMI.Teach"]["update"] == "true"))
+		{
+			createData(myData.data[0]["gHMI.Teach"]["moveString"]);
+		}
+		else
+		{
+			var sendData = sendMove(0);
+			console.log(sendData);
+			let result = sendData.replace(/\[\[(.*?)\]\]/g, (match, inner) => {
+  // Replace " with ' only inside the [[...]] content
+  const replaced = inner.replace(/"/g, "'");
+  return `[[${replaced}]]`;
+});
+			doSend(`{"cmd":"write","parameter":[{"variable":"gHMI.Teach.moveString","value":"${result}"},{"variable":"gHMI.Teach.update","value":"0"}]}`);
+		}
+		
+	}
+	console.log("jee");
+}
+
+  function onError(evt)
+  {
+  }
+
+  function doSend(message)
+  {
+    websocket.send(message);
+  }
+
+  function writeToScreen(message)
+  {
+    var pre = document.createElement("p");
+    pre.style.wordWrap = "break-word";
+    pre.innerHTML = message;
+    //output.appendChild(pre);
+  }
+
+  window.addEventListener("load", init, false);
+  
+  function removePathElements(index)
+  {
+	var elements = document.getElementsByClassName('path_shuttle_'+index);
+	 while(elements.length > 0)
+	 {
+		elements[0].parentElement.removeChild(elements[0]);
+		elements = document.getElementsByClassName('path_shuttle_'+index);
+	  }
+  }
+  
+  function updatePathView(id=0,skip=false,noMouse=false,newX=0,newY=0)
+  {
+	var x = noMouse ? newX : mousePosition.x;
+	var y = noMouse ?  newY: mousePosition.y;
+	if(skip)
+	{
+		var shuttle_999 = document.getElementById('shuttle_'+id+'_999');
+		x = parseFloat(shuttle_999.getAttribute('data-x'));
+		y = parseFloat(shuttle_999.getAttribute('data-y'));
+	}
+	if(activeWayPoint != -1)
+	{
+		activeShuttle = id;
+	}
+	var moveContextMenu = false;
+	
+	if(activeShuttle >= 0)
+	{
+		if(activeShuttle < 999)
+		{
+			var X = shuttles[0].x;
+			var Y = shuttles[0].y;
+			var startX = X;
+			var startY = Y;
+			var origoX = X;
+			var origoY = Y;
+			var shuttle = document.getElementById('shuttle_'+activeShuttle+'_999');
+			if(activeWayPoint != -1)
+			{
+				shuttle = document.querySelectorAll('[data-wp-index="'+activeShuttle+'_'+activeWayPoint+'"]')[0];
+				shuttles[activeShuttle].wayPointList[activeWayPoint].x = x;
+				shuttles[activeShuttle].wayPointList[activeWayPoint].y = y;
+				//moveContextMenu = true;
+			}
+			
+			if(shuttle)
+			{
+				shuttle.setAttribute('transform',`translate(${x-60} ${(y+60)*(-1)})`);
+				shuttle.setAttribute('data-x',x);
+				shuttle.setAttribute('data-y',y);
+			
+				var contextmenu = document.getElementById('contextmenu');
+				if(contextmenu && moveContextMenu)
+				{
+					var angle = parseFloat(shuttle.getAttribute('data-wp-angle'));
+					var addValue = 115;
+					if(angle > 180)
+					{
+						addValue *= (-1);
+					}
+					contextmenu.setAttribute('transform',`translate(${x-60+addValue} ${(y+60-5)*(-1)})`);
+				}
+				
+				shuttle.children[0].children[3].innerHTML = `X: ${Math.round(x)}`;
+				shuttle.children[0].children[4].innerHTML = `Y: ${Math.round(y)}`;
+				
+				var origX = x;
+				var origY = y;
+				if(activeWayPoint != -1)
+				{
+					var myShuttle = document.getElementById('shuttle_'+id+'_999');
+					origX = myShuttle.getAttribute('data-x');
+					origY = myShuttle.getAttribute('data-y');
+				}
+				
+				removePaths(id);
+				if(shuttles[activeShuttle].wayPointList.length > 0)
+				{
+					for(var i = 0; i < shuttles[activeShuttle].wayPointList.length; ++i)
+					{
+						if(i == 0)
+						{
+							x = shuttles[activeShuttle].wayPointList[i].x;
+							y = shuttles[activeShuttle].wayPointList[i].y;
+						}
+						else
+						{
+							x = shuttles[activeShuttle].wayPointList[i].x;
+							y = shuttles[activeShuttle].wayPointList[i].y;
+							X = shuttles[activeShuttle].wayPointList[i-1].x;
+							Y = shuttles[activeShuttle].wayPointList[i-1].y;
+							
+							startX = X;
+							startY = Y;
+					   }
+					   var notLast = (i < (shuttles[activeShuttle].wayPointList.length-1));
+					   if(!(shuttles[activeShuttle].wayPointList[i].type == 1))
+					   {
+							if((i-1) >= 0)
+							{
+								if(shuttles[activeShuttle].wayPointList[i-1].type == 1)
+								{
+									var wp = document.querySelectorAll('[data-wp-index="'+activeShuttle+'_'+(i-1)+'"]')[0];
+									if(wp)
+									{
+										var endPoint = {x:wp.getAttribute('data-wp-end-x'),y:wp.getAttribute('data-wp-end-y')};
+										X = endPoint.x;
+										Y = endPoint.y;
+									}
+								}
+							}
+					   
+							if((shuttles[activeShuttle].wayPointList[i].type == 0) || (shuttles[activeShuttle].wayPointList[i].type == 15))
+						   {
+							
+							document.getElementById('myDynamicData').insertAdjacentHTML('beforeend', `<path class="path_${activeShuttle} path_shuttle_${activeShuttle}" d="M${X} ${Y*(-1)} l${x-X} ${(y-Y)*(-1)}" stroke="red" fill="none" stroke-dasharray="10"/>`);
+						   }
+					   }
+					   
+					   if(notLast)
+					   {
+						x = shuttles[activeShuttle].wayPointList[i+1].x;
+						y = shuttles[activeShuttle].wayPointList[i+1].y;
+					   }
+					   else
+					   {
+						x = origX;
+						y = origY;
+					   }
+					   
+					   
+					   // draw rounding 
+						var v1 = {x:shuttles[activeShuttle].wayPointList[i].x-startX,y:shuttles[activeShuttle].wayPointList[i].y-startY};
+						
+						var v2 = {x:x-shuttles[activeShuttle].wayPointList[i].x,y:y-shuttles[activeShuttle].wayPointList[i].y};
+					
+						var v3 = {x:shuttles[activeShuttle].wayPointList[i].x-startX,y:shuttles[activeShuttle].wayPointList[i].y-startY};
+						
+						var v4 = {x:shuttles[activeShuttle].wayPointList[i].x-x,y:shuttles[activeShuttle].wayPointList[i].y-y};
+						var l3 = Math.sqrt(v3.x**2+v3.y**2);
+						var l4 = Math.sqrt(v4.x**2+v4.y**2);
+						if(l4 == 0)
+						{
+							l4 = 1;
+						}
+						if(l3 == 0)
+						{
+							l3 = 1;
+						}
+						v3.x /= l3;
+						v3.y /= l3;
+						v4.x /= l4;
+						v4.y /= l4;
+						var a = {x:v3.x,y:v3.y};
+						var b = {x:v4.x,y:v4.y};
+						
+						//https://stackoverflow.com/questions/21483999/using-atan2-to-find-angle-between-two-vectors
+						var angle = (Math.atan2(a.y, a.x) - Math.atan2(b.y, b.x))*180/Math.PI;
+						if(angle < 0)
+						{
+							angle += 360;
+						}
+						
+						var p1 = {x:v1.y,y:-v1.x};
+						
+						var p2 = {x:v2.y,y:-v2.x};
+						
+						
+						
+						if(angle <= 180)
+						{
+							p1.x *= (-1);
+							p1.y *= (-1);
+							p2.x *= (-1);
+							p2.y *= (-1);
+						}
+						
+						if(parseFloat((angle % 180).toFixed(2)) == 0 || true)
+						{
+							shuttles[activeShuttle].wayPointList[i].type = 0;
+							//continue;
+						}
+						
+						var l1 = Math.sqrt(v1.x**2+v1.y**2);
+						var l2 = Math.sqrt(v2.x**2+v2.y**2);
+						p1.x /= l1;
+						p1.y /= l1;
+						p2.x /= l2;
+						p2.y /= l2;
+						p1.x *= shuttles[activeShuttle].wayPointList[i].r;
+						p1.y *= shuttles[activeShuttle].wayPointList[i].r;
+						p2.x *= shuttles[activeShuttle].wayPointList[i].r;
+						p2.y *= shuttles[activeShuttle].wayPointList[i].r;
+						v1.x /= l1;
+						v1.y /= l1;
+						v2.x /= l2;
+						v2.y /= l2;
+						
+						var t34 = {x:v3.x-v4.x,y:v3.y-v4.y};
+						var p21 = {x:p2.x-p1.x,y:p2.y-p1.y};
+						
+						var t = 0;
+						t = p21.x/t34.x;
+						
+						var temp = {x:shuttles[activeShuttle].wayPointList[i].x+(t*v3.x+p1.x),y:shuttles[activeShuttle].wayPointList[i].y+(t*v3.y+p1.y)};
+						
+						if(!isNaN(temp.x))
+						{
+							
+							removeCircles(activeShuttle,i);
+							
+							var startPoint = {x:t*v3.x+shuttles[activeShuttle].wayPointList[i].x,y:(t*v3.y+shuttles[activeShuttle].wayPointList[i].y)};
+							var endPoint = {x:t*v4.x+shuttles[activeShuttle].wayPointList[i].x,y:(t*v4.y+shuttles[activeShuttle].wayPointList[i].y)};
+							if(shuttles[activeShuttle].wayPointList[i].debug)
+							{
+								document.getElementById('myDynamicData').insertAdjacentHTML('beforeend', `<circle class="circle_${activeShuttle}_${i}" cx="${temp.x}" cy="${temp.y*(-1)}" r="5" fill="none" stroke="blue" />`);
+								document.getElementById('myDynamicData').insertAdjacentHTML('beforeend', `<circle class="circle_${activeShuttle}_${i}" cx="${temp.x}" cy="${temp.y*(-1)}" r="${shuttles[activeShuttle].wayPointList[i].r}" fill="none" stroke="blue" />`);
+								//start point 
+								document.getElementById('myDynamicData').insertAdjacentHTML('beforeend', `<circle class="circle_${activeShuttle}_${i}" cx="${startPoint.x}" cy="${-startPoint.y}" r="5" fill="blue" />`);
+								document.getElementById('myDynamicData').insertAdjacentHTML('beforeend', `<circle class="circle_${activeShuttle}_${i}" cx="${endPoint.x}" cy="${-endPoint.y}" r="5" fill="blue" />`);
+							}
+							var wp = document.querySelectorAll('[data-wp-index="'+activeShuttle+'_'+i+'"]')[0];
+							
+							if(wp)
+							{
+								wp.setAttribute('data-wp-start-x',startPoint.x);
+								wp.setAttribute('data-wp-start-y',startPoint.y);
+								wp.setAttribute('data-wp-end-x',endPoint.x);
+								wp.setAttribute('data-wp-end-y',endPoint.y);
+								wp.setAttribute('data-wp-angle',angle);
+							}
+						}
+					   
+				   }
+				   
+					//draw ending line
+					X = startX;
+					Y = startY;
+					x = origX;
+					y = origY;
+						for(var i = 0; i < shuttles[activeShuttle].wayPointList.length; ++i)
+						{
+							var wp = document.querySelectorAll('[data-wp-index="'+activeShuttle+'_'+i+'"]')[0];
+							if(wp)
+							{
+								var startPoint = {x:wp.getAttribute('data-wp-start-x'),y:wp.getAttribute('data-wp-start-y')};
+								var endPoint = {x:wp.getAttribute('data-wp-end-x'),y:wp.getAttribute('data-wp-end-y')};
+								var angle = wp.getAttribute('data-wp-angle');
+								if(endPoint.x == null)
+								{
+									continue;
+								}
+								var xt = endPoint.x;
+								var yt = endPoint.y; 
+								var endX = origX;
+								var endY = origY;
+								
+								x = startPoint.x;
+								y = startPoint.y;
+								if(i == 0)
+								{
+									X = origoX;
+									Y = origoY;
+								}
+								else
+								{
+									var tempWp = document.querySelectorAll('[data-wp-index="'+activeShuttle+'_'+(i-1)+'"]')[0];
+									if(tempWp && (shuttles[activeShuttle].wayPointList[i-1].type == 1))
+									{
+										X = tempWp.getAttribute('data-wp-end-x');
+										Y = tempWp.getAttribute('data-wp-end-y');
+									}
+									else
+									{
+										X = shuttles[activeShuttle].wayPointList[i-1].x;
+										Y = shuttles[activeShuttle].wayPointList[i-1].y;
+									}
+								}
+								if(shuttles[activeShuttle].wayPointList[i].type == 1)
+								{
+									document.getElementById('myDynamicData').insertAdjacentHTML('beforeend', `<path class="path_${activeShuttle} path_shuttle_${activeShuttle}" d="M${X} ${Y*(-1)} l${x-X} ${(y-Y)*(-1)} A${shuttles[activeShuttle].wayPointList[i].r} ${shuttles[activeShuttle].wayPointList[i].r} ${(angle < 180) ? '1 0 0' : '0 0 1'} ${xt} ${yt*(-1)}" stroke="red" fill="none" stroke-dasharray="10"/>`);
+								
+								}
+							}
+						}
+						if(shuttles[activeShuttle].wayPointList.length > 0)
+						{
+							var wp = document.querySelectorAll(`[data-wp-index="${activeShuttle}_${(shuttles[activeShuttle].wayPointList.length-1)}"]`)[0];
+							if(wp)
+							{
+								var endPoint = {x:wp.getAttribute('data-wp-end-x'),y:wp.getAttribute('data-wp-end-y')};
+								
+								if(endPoint.x == null)
+									{
+										return;
+									}
+								if(shuttles[activeShuttle].wayPointList[shuttles[activeShuttle].wayPointList.length-1].type == 1)
+								{
+									document.getElementById('myDynamicData').insertAdjacentHTML('beforeend', `<path class="path_${activeShuttle} path_shuttle_${activeShuttle}" d="M${endPoint.x} ${endPoint.y*(-1)} L${origX} ${origY*(-1)}" stroke="red" fill="none" stroke-dasharray="10"/>`);
+								}
+							}	
+						}
+							
+							
+							
+						var myShuttle = document.getElementById('shuttle_'+id+'_999');
+						
+						if(myShuttle)
+						{
+							X = shuttles[activeShuttle].wayPointList[shuttles[activeShuttle].wayPointList.length-1].x;
+							Y = shuttles[activeShuttle].wayPointList[shuttles[activeShuttle].wayPointList.length-1].y;
+							
+							x = myShuttle.getAttribute('data-x');
+							y = myShuttle.getAttribute('data-y');
+							
+							if(shuttles[activeShuttle].wayPointList[shuttles[activeShuttle].wayPointList.length-1].type == 1)
+							{
+								var wp = document.querySelectorAll('[data-wp-index="'+activeShuttle+'_'+(shuttles[activeShuttle].wayPointList.length-1)+'"]')[0];
+								if(wp)
+								{
+									var endPoint = {x:wp.getAttribute('data-wp-end-x'),y:wp.getAttribute('data-wp-end-y')};
+									X = endPoint.x;
+									Y = endPoint.y;
+									if(X == null)
+									{
+										return;
+									}
+								}
+							}
+							
+							
+							//if(movementType == 0)
+						   {
+								document.getElementById('myDynamicData').insertAdjacentHTML('beforeend', `<path class="path_${activeShuttle} path_shuttle_${activeShuttle}" d="M${X} ${Y*(-1)} l${x-X} ${(y-Y)*(-1)}" stroke="red" fill="none" stroke-dasharray="10"/>`);
+						   }
+						}
+					
+					
+				  }
+				  else
+				  {
+					
+					 //if(movementType == 0)
+					   {
+						document.getElementById('myDynamicData').insertAdjacentHTML('beforeend', `<path class="path_${activeShuttle} path_shuttle_${activeShuttle}" d="M${X} ${Y*(-1)} l${x-X} ${(y-Y)*(-1)}" stroke="red" fill="none" stroke-dasharray="10"/>`);
+					   }
+				  }
+			}
+			else
+			{
+			document.getElementById('myDynamicData').insertAdjacentHTML('beforeend', `<g id="shuttle_${activeShuttle}_999" onmousedown="newWayPoint(event)" data-id="${activeShuttle}"  class="shuttle temp path_shuttle_${activeShuttle}" transform="translate(${x-60} ${(y+60)*(-1)})">
+					<g transform="translate(4.875 4.875) rotate(0 57 57)">
+						<rect x="0" y="0" width="114" height="114" rx="15" ry="15"/>
+						<text x="10" y="25" data-attr="id" class="small">id</text>
+						<text x="70" y="25" data-attr="Status" text-anchor="middle" class="small">status</text>
+						<text x="7.5" y="55" data-attr="X" class="small">X: ${Math.round(x)}</text>
+						<text x="60" y="55" data-attr="Y" class="small">Y: ${Math.round(y)}</text>
+						<text x="7.5" y="75" data-attr="Z" class="small">Z: ${parseFloat(shuttles[0].z).toFixed(1)}</text>
+						<text x="60" y="75" data-attr="RX" class="small">RX: ${Math.round(shuttles[0].rx)}</text>
+						<text x="7.5" y="95" data-attr="RY" class="small">RY: ${Math.round(shuttles[0].ry)}</text>
+						<text x="60" y="95" data-attr="RZ" class="small">RZ: ${Math.ceil(shuttles[0].rz)}</text>
+					</g>
+				   </g>`);
+				  
+			}
+		
+		}
+		else
+		{
+			activeShuttle = id;
+			shuttles[activeShuttle].wayPointList.push({x:x,y:y,type:movementType,r:r,debug:false,dwell:0,angle:0});
+			document.getElementById('myDynamicData').insertAdjacentHTML('beforeend', `<g data-id="${activeShuttle}" data-wp-index="${activeShuttle}_${shuttles[activeShuttle].wayPointList.length-1}"  class="shuttle temp path_shuttle_${activeShuttle}" onmousedown="redefineWayPoint(event)" transform="translate(${x-60} ${(y+60)*(-1)})">
+					<g transform="translate(4.875 4.875) rotate(0 57 57)">
+						<rect x="0" y="0" width="114" height="114" rx="15" ry="15"/>
+						<text x="10" y="25" data-attr="id" class="small">id</text>
+						<text x="70" y="25" data-attr="Status" text-anchor="middle" class="small">status</text>
+						<text x="7.5" y="55" data-attr="X" class="small">X: ${Math.round(x)}</text>
+						<text x="60" y="55" data-attr="Y" class="small">Y: ${Math.round(y)}</text>
+						<text x="7.5" y="75" data-attr="Z" class="small">Z: ${parseFloat(shuttles[0].z).toFixed(1)}</text>
+						<text x="60" y="75" data-attr="RX" class="small">RX: ${Math.round(shuttles[0].rx)}</text>
+						<text x="7.5" y="95" data-attr="RY" class="small">RY: ${Math.round(shuttles[0].ry)}</text>
+						<text x="60" y="95" data-attr="RZ" class="small">RZ: ${Math.ceil(shuttles[0].rz)}</text>
+					</g>
+				   </g>`);
+		}
+	}
+  }
+  
+  
+  
+  function setShuttlePosition(id,shuttle)
+	{
+		var myShuttle = document.getElementById('shuttle_'+id);
+
+		if(myShuttle)
+		{
+			myShuttle.setAttribute('transform','translate('+(shuttle.x-0.13)+' '+(shuttle.y-0.035)+')'+'rotate('+shuttle.rz+' 0.13 0.035)');
+			//console.log(myShuttle);
+			var circles = myShuttle.querySelectorAll('circle');
+			var style1 = 'display:none';
+			if(shuttle.stack1 == "true")
+			{
+				style1 = 'display:block';
+			}
+			circles[1].setAttribute('style',style1);
+			var style2 = 'display:none';
+			if(shuttle.stack2 == "true")
+			{
+				style2 = 'display:block';
+			}
+			circles[0].setAttribute('style',style2);
+			var style3 = 'display:none';
+			if(shuttle.stack3 == "true")
+			{
+				style3 = 'display:block';
+			}
+			circles[2].setAttribute('style',style3);
+		}
+		else
+		{
+			var svg = document.getElementById('myDynamicData');
+			svg.setAttribute('transform','scale(1 -1)');
+			var tempShuttle = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+			tempShuttle.setAttribute('id','shuttle_'+id);
+
+			var tempRect1 = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+			tempRect1.setAttribute('height',0.07);
+			tempRect1.setAttribute('width',0.26);
+			tempRect1.setAttribute('rx',0.01);
+			tempRect1.setAttribute('fill','rgb(127,127,127)');
+			tempShuttle.appendChild(tempRect1);
+			
+			for(var i = 0; i < 3; ++i)
+			{
+				var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+				circle.setAttribute('r',0.0325);
+				if(i > 1)
+				{
+					circle.setAttribute('cx',0.13+0.09);
+				}
+				else
+				{
+					circle.setAttribute('cx',0.13-0.09*i);
+				}
+				circle.setAttribute('cy',0.035);
+				circle.setAttribute('stroke','none');
+				circle.setAttribute('fill','yellow');
+				tempShuttle.appendChild(circle);
+			}
+			
+			tempShuttle.setAttribute('transform','rotate('+shuttle.rz+' 0.13 0.035) '+'translate('+(shuttle.x-0.13)+' '+(shuttle.y-0.035)+')');
+			
+			svg.appendChild(tempShuttle);
+		}
+
+	}
+
+	
+	function changeRadius(element)
+	{
+		var index = element.getAttribute('data-index');
+		var indexId = parseInt(index.split('_')[0]);
+		var indexWp = parseInt(index.split('_')[1]);
+		shuttles[indexId].wayPointList[indexWp].r = parseFloat(element.value);
+		activeShuttle = indexId;
+		updatePathView(activeShuttle,true);
+		activeShuttle = -1;
+	}
+	
+	function changeAngle(element)
+	{
+		var index = element.getAttribute('data-index');
+		var indexId = parseInt(index.split('_')[0]);
+		var indexWp = parseInt(index.split('_')[1]);
+		shuttles[indexId].wayPointList[indexWp].angle = parseFloat(element.value)*Math.PI/180;
+	}
+	
+	function changeRotary(element)
+	{
+		var index = element.getAttribute('data-index');
+		var indexId = parseInt(index.split('_')[0]);
+		var indexWp = parseInt(index.split('_')[1]);
+		shuttles[indexId].wayPointList[indexWp].type = ((element.checked) ? 15 : 0);
+		activeShuttle = indexId;
+		updatePathView(activeShuttle,true);
+		activeShuttle = -1;
+	}
+	
+	function changeDwell(element)
+	{
+		var index = element.getAttribute('data-index');
+		var indexId = parseInt(index.split('_')[0]);
+		var indexWp = parseInt(index.split('_')[1]);
+		shuttles[indexId].wayPointList[indexWp].dwell = parseFloat(element.value);
+	}
+	
+	
+	function changeType(element)
+	{
+		var index = element.getAttribute('data-index');
+		var indexId = parseInt(index.split('_')[0]);
+		var indexWp = parseInt(index.split('_')[1]);
+		shuttles[indexId].wayPointList[indexWp].type = ((element.checked) ? 1 : 0);
+		activeShuttle = indexId;
+		updatePathView(activeShuttle,true);
+		activeShuttle = -1;
+	}
+	
+	function changeDebug(element)
+	{
+		var index = element.getAttribute('data-index');
+		var indexId = parseInt(index.split('_')[0]);
+		var indexWp = parseInt(index.split('_')[1]);
+		shuttles[indexId].wayPointList[indexWp].debug = element.checked;
+		activeShuttle = indexId;
+		updatePathView(activeShuttle,true);
+		activeShuttle = -1;
+	}
+	
+	function trashClicked(element)
+	{
+		var contextmenu = document.getElementById('contextmenu');
+		if(contextmenu)
+		{
+			contextmenu.parentElement.removeChild(contextmenu);
+		}
+		
+		var index = element.getAttribute('data-wp-id');
+		var indexId = parseInt(index.split('_')[0]);
+		var indexWp = parseInt(index.split('_')[1]);
+		
+		var wp = document.querySelectorAll('[data-wp-index="'+indexId+'_'+indexWp+'"]')[0];
+		if(wp)
+		{
+			wp.parentElement.removeChild(wp);
+		}
+		if(shuttles[indexId].wayPointList[indexWp].debug)
+		{
+			removeCircles(indexId,indexWp);
+		}
+		for(var i = (indexWp+1); i < shuttles[indexId].wayPointList.length; ++i)
+		{
+			var wp = document.querySelectorAll('[data-wp-index="'+indexId+'_'+i+'"]')[0];
+			if(wp)
+			{
+				wp.setAttribute('data-wp-index',indexId+'_'+(i-1));
+			}
+		}
+		shuttles[indexId].wayPointList.splice(indexWp,1);
+		
+		activeShuttle = indexId;
+		updatePathView(indexId,true);
+		activeShuttle = -1;
+	}
+	
+	function closeContextMenu(element)
+	{
+		var index = element.getAttribute('data-wp-id');
+		var indexId = parseInt(index.split('_')[0]);
+		var indexWp = parseInt(index.split('_')[1]);
+		
+		var shuttle = document.querySelectorAll('[data-wp-index="'+indexId+'_'+indexWp+'"]')[0];
+		if(shuttle)
+		{
+			shuttle.classList.remove("active");
+		}
+	
+	
+		var contextmenu = document.getElementById('contextmenu');
+		if(contextmenu)
+		{
+			contextmenu.parentElement.removeChild(contextmenu);
+		}
+	}
+	
+	
+	function redefineWayPoint(event)
+	{
+		var shuttle = event.target.parentElement.parentElement;
+		var index = shuttle.getAttribute('data-wp-index');
+		var indexId = parseInt(index.split('_')[0]);
+		var indexWp = parseInt(index.split('_')[1]);
+		activeWayPointElement = event.target.parentElement.parentElement;
+		
+		
+		if(event.buttons == 2)
+		{
+		/*
+			var contextmenu = document.getElementById('contextmenu');
+			if(contextmenu)
+			{
+				contextmenu.parentElement.removeChild(contextmenu);
+			}
+			if(index)
+			{
+				shuttle.classList.add("active");
+			}
+			var loc = cursorPoint(event);
+	
+			var contextData = `<g id="contextmenu" transform="translate(${loc.x-offsetValue.x+5} ${loc.y-114/2})"><rect x="0" y="0" width="114" height="165" rx="5" ry="5" fill="white" stroke="black" stroke-width="2"/><foreignObject x="5" y="10" width="114" height="165">
+			
+  <div xmlns="http://www.w3.org/1999/xhtml" style="padding:0 0" class="small">
+  <label  for="moveType">Rounding:</label>
+  <input type="checkbox" id="moveType" name="moveType" value="Bike" ${(shuttles[indexId].wayPointList[indexWp].type == 1) ? 'checked="true"' : ''} onclick="changeType(this)" data-index="${index}" /><br/>
+  <label for="quantity">Radius:</label>
+  <input type="number" id="quantity" name="quantity" min="10" max="200" value="${shuttles[indexId].wayPointList[indexWp].r}" style="width:40px" data-index="${index}" onchange="changeRadius(this)"/><br/>
+  <label  for="debug">Debug:</label>
+  <input type="checkbox" id="debug" name="debug" value="Bike" ${(shuttles[indexId].wayPointList[indexWp].debug) ? 'checked="true"' : ''} onclick="changeDebug(this)" data-index="${index}" /><br/>
+  <label  for="dwell">Dwell:</label>
+  <input type="number" id="dwell" name="dwell" min="0" max="10000" value="${shuttles[indexId].wayPointList[indexWp].dwell}" style="width:40px" data-index="${index}" onchange="changeDwell(this)"/><br/>
+  <label  for="rotary1">Rotary:</label>
+  <input type="checkbox" id="rotary1" name="rotary1" value="Bike" ${(shuttles[indexId].wayPointList[indexWp].type == 15) ? 'checked="true"' : ''} onclick="changeRotary(this)" data-index="${index}" /><br/>
+  <label  for="angle">Angle:</label>
+  <input type="number" id="angle" name="angle" min="0" max="10000" value="${parseFloat(shuttles[indexId].wayPointList[indexWp].angle*180/Math.PI).toFixed(1)}" style="width:40px" data-index="${index}" onchange="changeAngle(this)"/><br/>
+	</div>
+  </foreignObject><foreignObject x="5" y="135" width="32" height="32"><button xmlns="http://www.w3.org/1999/xhtml" style="font-size:20px" data-wp-id="${index}" onclick="trashClicked(this)"><i class="fa fa-trash-o"></i></button></foreignObject> <foreignObject x="80" y="135" width="32" height="30"><button xmlns="http://www.w3.org/1999/xhtml" style="height:30px;font-size:20px; padding: 0 0;width:32px;" data-wp-id="${index}" onclick="closeContextMenu(this)"><i class="fa fa-window-close-o"></i></button></foreignObject></g>`;
+			
+			shuttle.ownerSVGElement.insertAdjacentHTML('beforeend', contextData);
+			*/
+		}
+		else
+		{
+			if(index)
+			{
+				activeWayPoint = indexWp;
+				shuttle.classList.add("active");
+			}
+			else
+			{
+				activeWayPoint = -1;
+			}
+		}
+	}
+	
+  
+	function sendMove(id)
+	{
+		var moveData = [];
+		if(id == 0)
+		{
+		
+			for(var i = 0; i < shuttles.length; ++i)
+			{
+				var returnVal = tempSendMove(parseInt(shuttles[i].id));
+				if(returnVal)
+				{
+					moveData.push(JSON.parse(returnVal));
+				}
+			}			
+		}
+		else
+		{
+		
+			var returnVal = tempSendMove(parseInt(id));
+			if(returnVal)
+			{
+				moveData.push(JSON.parse(returnVal));
+			}
+		}
+		var data = {cmd:"move",parameter:moveData};
+		if(moveData.length > 0)
+		{
+			return JSON.stringify(moveData);
+			//doSend(JSON.stringify(data));
+		}
+	}
+	
+	function tempSendMove(id,save = false)
+	{
+		
+		var shuttleIndex = getActiveShuttleIndexFromID(id);
+		var tempShuttle = document.getElementById('shuttle_'+shuttleIndex+'_999');
+		console.log('shuttle_'+shuttleIndex+'_999');
+		if(tempShuttle)
+		{
+			var x = parseInt(tempShuttle.children[0].children[3].innerHTML.split(' ')[1]);
+			var y = parseInt(tempShuttle.children[0].children[4].innerHTML.split(' ')[1]);
+			var endTarget = {x:x,y:y};
+			var index = parseInt(tempShuttle.getAttribute('data-id'));
+			
+			
+			var origoX = shuttles[index].x;
+			var origoY = shuttles[index].y;
+			
+			var moveList = [];
+			for(var i = 0; i < shuttles[shuttleIndex].wayPointList.length; ++i)
+			{
+				var wp = document.querySelectorAll('[data-wp-index="'+index+'_'+i+'"]')[0];
+				if(wp)
+				{
+					var startPoint = {x:wp.getAttribute('data-wp-start-x'),y:wp.getAttribute('data-wp-start-y')};
+					var endPoint = {x:wp.getAttribute('data-wp-end-x'),y:wp.getAttribute('data-wp-end-y')};
+					var angle = wp.getAttribute('data-wp-angle');
+					
+					var xt = endPoint.x;
+					var yt = endPoint.y; 
+					
+					if((shuttles[shuttleIndex].wayPointList[i].type == 0) || (shuttles[shuttleIndex].wayPointList[i].type == 15))
+					{
+						startPoint.x = shuttles[shuttleIndex].wayPointList[i].x;
+						startPoint.y = shuttles[shuttleIndex].wayPointList[i].y;
+					}
+					
+					
+					x = startPoint.x;
+					y = startPoint.y;
+					if(i == 0)
+					{
+						X = origoX;
+						Y = origoY;
+					}
+					else
+					{
+						var tempWp = document.querySelectorAll('[data-wp-index="'+index+'_'+(i-1)+'"]')[0];
+						if(tempWp && (shuttles[shuttleIndex].wayPointList[i-1].type == 1))
+						{
+							X = tempWp.getAttribute('data-wp-end-x');
+							Y = tempWp.getAttribute('data-wp-end-y');
+						}
+						else
+						{
+							X = shuttles[shuttleIndex].wayPointList[i-1].x;
+							Y = shuttles[shuttleIndex].wayPointList[i-1].y;
+						}
+					}
+					
+					if(shuttles[shuttleIndex].wayPointList[i].dwell != 0)
+					{
+						moveList.push({x:parseFloat((shuttles[shuttleIndex].wayPointList[i].x).toFixed(6)),y:parseFloat((shuttles[shuttleIndex].wayPointList[i].y).toFixed(6)),type:10,dwell:shuttles[shuttleIndex].wayPointList[i].dwell});
+					}
+					else
+					{
+						if(shuttles[shuttleIndex].wayPointList[i].type == 1)
+						{
+							if((parseFloat((x).toFixed(6)) != parseFloat((X).toFixed(6))) || (parseFloat((y).toFixed(6)) != parseFloat((Y).toFixed(6))))
+							{
+								moveList.push({x:parseFloat((x).toFixed(6)),y:parseFloat((y).toFixed(6)),type:5});
+							}
+							if((angle != 180) && (angle != 0))
+							{
+								moveList.push({x:parseFloat((xt).toFixed(6)),y:parseFloat((yt).toFixed(6)),r:shuttles[shuttleIndex].wayPointList[i].r,dir:((angle < 180) ? 1 : 0),type:shuttles[shuttleIndex].wayPointList[i].type});
+							}
+						}
+						else if(shuttles[shuttleIndex].wayPointList[i].type == 15)
+						{
+							moveList.push({x:parseFloat((x).toFixed(6)),y:parseFloat((y).toFixed(6)),type:15,angle:shuttles[shuttleIndex].wayPointList[i].angle});
+						}	
+						else
+						{	
+							moveList.push({x:parseFloat((x).toFixed(6)),y:parseFloat((y).toFixed(6)),type:0});
+						}
+					}
+					
+					
+				}
+			}
+			
+			moveList.push({x:endTarget.x,y:endTarget.y,type:0});
+			if((moveList[moveList.length-1].x != 600) || (moveList[moveList.length-1].y != 840))
+			{
+				moveList.push({x:600,y:840,type:0});
+			}
+			var data = {cmd:"move",parameter:{data:{value:moveList},count:{value:moveList.length}}};
+			
+			for(var i = 0; i < moveList.length; ++i)
+			{
+				//document.getElementById('myDynamicData').insertAdjacentHTML('beforeend', `<circle cx="${moveList[i].x}" cy="${moveList[i].y*(-1)*1000}" r="5" fill="blue" />`);
+			}
+			if(save)
+			{
+				return JSON.stringify(data.parameter);
+			}
+			else
+			{
+				//doSend(JSON.stringify(data));
+			}
+			//return JSON.stringify(data);
+			return JSON.stringify(moveList);
+		}
+	}
+	
+	
+	function sendMovePath(id,i)
+	{
+		var index = getActiveShuttleIndexFromID(id);
+		doSend(JSON.stringify(shuttles[index].saved[i]));
+	}
+	
+	// path finding A*
+	// https://briangrinstead.com/blog/astar-search-algorithm-in-javascript/
+	
+
+function setAndExeExecutionArray(id,data)
+{
+	var index = getActiveShuttleIndexFromID(id);
+	/*
+	if(!shuttles[index]["executionArray"])
+	{
+		shuttles[index]["executionArray"] = [];
+	}
+	*/
+	shuttles[index]["executionArray"] = JSON.parse(JSON.stringify(data));
+	sendMovePath(id,shuttles[index].executionArray[0]);
+}
+
+
+//
+var width = -1;
+var height = -1; 
+var segments = document.getElementById('segments');
+const regex = /\(([^)]+)\)/; // get data between ($500) --> result[1] = $500
+for(var i = 0; i < segments.children.length; ++i)
+{
+	var data = segments.children[i].getAttribute('transform').match(regex)[1].split(' ');
+	var x = (parseInt(data[0])/240);
+	var y = (parseInt(data[1])*(-1)-240)/240;
+	
+	if(x > width)
+	{
+		width = x;
+	}
+	if(y > height)
+	{
+		height = y;
+	}
+}
+height += 1;
+width += 1;
+
+//document.querySelector('svg').setAttribute('viewBox',`0 -${height*240} ${width*240+20} ${height*240+40}`)
+
+//console.log(width,height);
+
+
+
+var emptyGrid = [];
+for(var i = 0; i < width*2; ++i)
+{
+	var subArray = [];
+	for(var j = 0; j < height*2; ++j)
+	{
+		subArray.push(0);
+	}
+	emptyGrid.push(subArray);
+}
+for(var i = 0; i < segments.children.length; ++i)
+{
+	var data = segments.children[i].getAttribute('transform').match(regex)[1].split(' ');
+	var x = parseInt(parseInt(data[0])/240);
+	var y = parseInt((parseInt(data[1])*(-1)-240)/240);
+	
+	emptyGrid[x*2][y*2] = 1;
+	emptyGrid[x*2][y*2+1] = 1;
+	emptyGrid[x*2+1][y*2] = 1;
+	emptyGrid[x*2+1][y*2+1] = 1;
+}
+//console.log(emptyGrid);
+
+function addShuttlesToGrid(id)
+{
+	var grid = JSON.parse(JSON.stringify(emptyGrid));
+	
+	for(var i = 0; i < myData["gShuttles"].length; ++i)
+	{
+		if(((i+1)!= id))
+		{
+			var x1 = parseFloat(myData["gShuttles"][i].X)*1000;
+			var y1 = parseFloat(myData["gShuttles"][i].Y)*1000;
+			x = Math.round((x1-60)/120);
+			y = Math.round((y1-60)/120);
+			grid[x][y] = 0;
+		}
+	}
+	return grid;
+}
+
+function savePath(id)
+{
+	var index = getActiveShuttleIndexFromID(id);
+	if(!shuttles[index]["saved"])
+	{
+		shuttles[index]["saved"] = [];
+	}
+	shuttles[index]["saved"].push(JSON.parse(tempSendMove(id,true)));
+}
+
+
+function createWayPoints(id)
+{
+	activeShuttle = getActiveShuttleIndexFromID(id);
+	for(var i = 0; i < shuttles[activeShuttle].wayPointList.length; ++i)
+	{
+		var x = shuttles[activeShuttle].wayPointList[i].x;
+		var y = shuttles[activeShuttle].wayPointList[i].y;
+		document.getElementById('myDynamicData').insertAdjacentHTML('beforeend', `<g data-id="${activeShuttle}" data-wp-index="${activeShuttle}_${i}"  class="shuttle temp path_shuttle_${activeShuttle}" onmousedown="redefineWayPoint(event)" transform="translate(${x-60} ${(y+60)*(-1)})">
+					<g transform="translate(4.875 4.875) rotate(0 57 57)">
+						<rect x="0" y="0" width="114" height="114" rx="15" ry="15"/>
+						<text x="10" y="25" data-attr="id" class="small">id</text>
+						<text x="70" y="25" data-attr="Status" text-anchor="middle" class="small">status</text>
+						<text x="7.5" y="55" data-attr="X" class="small">X: ${Math.round(x)}</text>
+						<text x="60" y="55" data-attr="Y" class="small">Y: ${Math.round(y)}</text>
+						<text x="7.5" y="75" data-attr="Z" class="small">Z: ${parseFloat(shuttles[0].z).toFixed(1)}</text>
+						<text x="60" y="75" data-attr="RX" class="small">RX: ${Math.round(shuttles[0].Rx)}</text>
+						<text x="7.5" y="95" data-attr="RY" class="small">RY: ${Math.round(shuttles[0].Ry)}</text>
+						<text x="60" y="95" data-attr="RZ" class="small">RZ: ${Math.ceil(shuttles[0].Rz)}</text>
+					</g>
+				   </g>`);
+	}
+}
+
+function getActiveShuttleIndexFromID(id)
+{
+	for(var i = 0; i < shuttles.length; ++i)
+	{
+		if(shuttles[i].id != '0')
+		{
+			if(id == shuttles[i].id)
+			{
+				return i;
+			}
+		}
+	}
+}
+
+function pathPlanning(id,end)
+{
+	activeShuttle = getActiveShuttleIndexFromID(id);
+	var grid = addShuttlesToGrid(id);
+	console.log(id);
+	var graph = new Graph(grid);
+	var x = Math.round((parseFloat(myData.gShuttles[activeShuttle].X)*1000-60)/120);
+	var y = Math.round((parseFloat(myData.gShuttles[activeShuttle].Y)*1000-60)/120);
+	var x1 = Math.round((end.x-60)/120);
+	var y1 = Math.round((end.y-60)/120);
+	var p1 = graph.grid[x][y];
+	var p2 = graph.grid[x1][y1];
+	var result = astar.search(graph, p1, p2);
+	var prevDx = 0
+	var prevDy = 0;
+	var prevX = 0;
+	var prevY = 0;
+	var dy = 0;
+	var dx = 0;
+	for(var i = 0; i < result.length; ++i)
+	{
+		var x = result[i].x*120+60;
+		var y = result[i].y*120+60;
+		if(i > 0)
+		{
+			dx = result[i].x - result[i-1].x;
+			dy = result[i].y - result[i-1].y;
+		}
+		else
+		{
+			dx = 0;
+			dy = 0;
+		}
+		if((dx != prevDx) || (dy != prevDy))
+		{
+			{
+				x = result[i-1].x*120+60;
+				y = result[i-1].y*120+60;
+				shuttles[activeShuttle].wayPointList.push({x:x,y:y,type:0,r:r,debug:false,dwell:0,angle:0});
+				/*
+				document.getElementById('myDynamicData').insertAdjacentHTML('beforeend', `<g  class="shuttle temp path_shuttle_${activeShuttle}" transform="translate(${x-60} ${(y+60)*(-1)})">
+							<g transform="translate(4.875 4.875) rotate(0 57 57)">
+								<rect x="0" y="0" width="114" height="114" rx="15" ry="15"/>
+								<text x="10" y="25" data-attr="id" class="small">id</text>
+								<text x="70" y="25" data-attr="Status" text-anchor="middle" class="small">${shuttles[0].State == 0
+				? 'Undetected'
+				: shuttles[0].State == 1
+				? 'Discovering'
+				: shuttles[0].State == 2
+				? 'Landed'
+				: shuttles[0].State == 3
+				? 'Idle'
+				: shuttles[0].State == 4
+				? 'Disabled'
+				: shuttles[0].State == 5
+				? 'Motion'
+				: shuttles[0].State == 6
+				? 'Wait'
+				: shuttles[0].State == 7
+				? 'Stopping'
+				: shuttles[0].State == 8
+				? 'Obstacle'
+				: shuttles[0].State == 9
+				? 'Hold'
+				: shuttles[0].State == 10
+				? 'Stopped'
+				: shuttles[0].State == 14
+				? 'Error':'unknown'}</text>
+								<text x="7.5" y="55" data-attr="X" class="small">X: ${Math.round(x)}</text>
+								<text x="60" y="55" data-attr="Y" class="small">Y: ${Math.round(y)}</text>
+								<text x="7.5" y="75" data-attr="Z" class="small">Z: ${parseFloat(shuttles[0].z).toFixed(1)}</text>
+								<text x="60" y="75" data-attr="RX" class="small">RX: ${Math.round(shuttles[0].Rx)}</text>
+								<text x="7.5" y="95" data-attr="RY" class="small">RY: ${Math.round(shuttles[0].Ry)}</text>
+								<text x="60" y="95" data-attr="RZ" class="small">RZ: ${Math.ceil(shuttles[0].Rz)}</text>
+							</g>
+						   </g>`); */
+			}
+		}
+		prevDx = dx;
+		prevDy = dy;
+		prevX = x;
+		prevY = y;
+	}
+	x = end.x;
+	y = end.y;
+	console.log(end);
+	activeShuttle = getActiveShuttleIndexFromID(id);
+	document.getElementById('myDynamicData').insertAdjacentHTML('beforeend', `<g id="shuttle_${activeShuttle}_999" data-x="${x}" data-y="${y}"  onmousedown="newWayPoint(event)" data-id="${activeShuttle}"  class="shuttle temp path_shuttle_${activeShuttle}" transform="translate(${x-60} ${(y+60)*(-1)})">
+					<g transform="translate(4.875 4.875) rotate(0 57 57)">
+						<rect x="0" y="0" width="114" height="114" rx="15" ry="15"/>
+						<text x="10" y="25" data-attr="id" class="small">id</text>
+						<text x="70" y="25" data-attr="Status" text-anchor="middle" class="small">status</text>
+						<text x="7.5" y="55" data-attr="X" class="small">X: ${Math.round(x)}</text>
+						<text x="60" y="55" data-attr="Y" class="small">Y: ${Math.round(y)}</text>
+						<text x="7.5" y="75" data-attr="Z" class="small">Z: ${parseFloat(shuttles[0].z).toFixed(1)}</text>
+						<text x="60" y="75" data-attr="RX" class="small">RX: ${Math.round(shuttles[0].Rx)}</text>
+						<text x="7.5" y="95" data-attr="RY" class="small">RY: ${Math.round(shuttles[0].Ry)}</text>
+						<text x="60" y="95" data-attr="RZ" class="small">RZ: ${Math.ceil(shuttles[0].Rz)}</text>
+					</g>
+				   </g>`);
+	createWayPoints(id);
+	activeShuttle = getActiveShuttleIndexFromID(id);
+	console.log(activeShuttle);
+	updatePathView(activeShuttle,true);
+	activeShuttle = -1;
+	return result;
+}
+    //]]>
+    </script>
+</svg>
