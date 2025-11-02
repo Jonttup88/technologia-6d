@@ -318,7 +318,7 @@ FUNCTION_BLOCK brfi6DMoveQueue
 					// ------------------------------------------------------------------------------------------------------------
 					IF onStateEntry THEN
 						fb.RotaryMotionSpin.Parameters := refCommand.spin;
-						fb.RotaryMotionSpin.Parameters.Velocity := SEL(refCommand.spin.Velocity > 0, Parameters.velocity_rotary, refCommand.spin.Velocity);
+						fb.RotaryMotionSpin.Parameters.Velocity := refCommand.spin.Velocity;
 						fb.RotaryMotionSpin.Parameters.Acceleration := SEL(refCommand.spin.Acceleration > 0, Parameters.acceleration_rotary, refCommand.spin.Acceleration);
 					END_IF;
 					

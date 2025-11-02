@@ -41,23 +41,14 @@ ACTION acInitializePositions:
 	END_FOR;
 	
 	// ---------------------------------------------------------------------------------------
-	positions.dance[0].X := 0 * 0.24 + 0.12;
-	positions.dance[0].Y := 0 * 0.24 + 0.12;
-	positions.dance[1].X := 3 * 0.24 + 0.12;
-	positions.dance[1].Y := 0 * 0.24 + 0.12;
-	positions.dance[2].X := 0 * 0.24 + 0.12;
-	positions.dance[2].Y := 3 * 0.24 + 0.12;
-	positions.dance[3].X := 3 * 0.24 + 0.12;
-	positions.dance[3].Y := 3 * 0.24 + 0.12;
-	
-	positions.dance[4].X := 1 * 0.24 + 0.12;
-	positions.dance[4].Y := 1 * 0.24 + 0.12;
-	positions.dance[5].X := 1 * 0.24 + 0.12;
-	positions.dance[5].Y := 2 * 0.24 + 0.12;
-	positions.dance[6].X := 2 * 0.24 + 0.12;
-	positions.dance[6].Y := 1 * 0.24 + 0.12;
-	positions.dance[7].X := 2 * 0.24 + 0.12;
-	positions.dance[7].Y := 2 * 0.24 + 0.12;
+	FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
+		positions.dance[i].X := 0.12 + (i MOD 4) * 0.24;
+		IF i < 4 THEN
+			positions.dance[i].Y := 0.120;
+		ELSE
+			positions.dance[i].Y := 0.360;
+		END_IF;
+	END_FOR;
 	
 	// ---------------------------------------------------------------------------------------
 	positions.pickup[0].X := 0.480;
@@ -393,7 +384,7 @@ ACTION acShuttleStatusPolling :
 		10:
 			// ---------------------------------------------------------------------------------
 			fb.ShGetInfo.Execute := FALSE;
-			shuttleStatus.state := 20;
+			shuttleStatus.state := 200;
 			
 		20:
 			// ---------------------------------------------------------------------------------
