@@ -15,7 +15,8 @@ TYPE
 		MAIN_DEMO,
 		MAIN_GAME,
 		MAIN_ERROR,
-		MAIN_RESET
+		MAIN_RESET,
+		MAIN_HARD_RESET
 		);
 	MainDifficultyLevelEnum : 
 		(
@@ -28,7 +29,7 @@ END_TYPE
 
 TYPE
 	MainInputCommandType : 	STRUCT 
-		Reset : BOOL;
+		HardReset : BOOL;
 		StartGame : BOOL;
 		ReleasePrize : BOOL;
 	END_STRUCT;

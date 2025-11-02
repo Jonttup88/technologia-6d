@@ -51,6 +51,7 @@ TYPE
 		assemblyGetNextShuttle : BOOL;
 		cyclicModeRequest : Acp6DCyclicModeEnum;
 		sunPlanetEnable : ARRAY[0..gMAX_INDEX_SHUTTLE_VIRTUAL]OF BOOL;
+		readyForCommands : BOOL;
 	END_STRUCT;
 	Acp6DSubstateActionsType : 	STRUCT 
 		assemblyPowerOff : BOOL;

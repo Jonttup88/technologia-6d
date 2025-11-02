@@ -78,6 +78,7 @@ TYPE
 		Initialized : BOOL;
 		CommandDone : BOOL;
 		DemoModeActive : BOOL;
+		ReadyForCommands : BOOL;
 	END_STRUCT;
 	Acp6DOutputType : 	STRUCT 
 		Status : Acp6DOutputStatusType;

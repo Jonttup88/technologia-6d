@@ -179,10 +179,14 @@ PROGRAM _CYCLIC
 				// ---------------------------------------------------------------------------------
 			
 			END_CASE;
-				
+		
+		//ACP6D_RESET:
+			
+			
 		ACP6D_IDLE:	
 			task.StateInfo := 'Waiting for command';
 			task.Output.Status.Initialized := TRUE;
+			local.actions.state.readyForCommands := TRUE;
 			
 			IF task.Input.Command.Reinitialize THEN
 				task.State := ACP6D_INITIALIZE;
@@ -1970,6 +1974,8 @@ PROGRAM _CYCLIC
 	task.Output.ShuttleWithPayload.X := shuttles[task.Output.ShuttleWithPayload.index].position.value.X;
 	task.Output.ShuttleWithPayload.Y := shuttles[task.Output.ShuttleWithPayload.index].position.value.Y;
 
+	task.Output.Status.ReadyForCommands := local.actions.state.readyForCommands;
+	
 END_PROGRAM
 	
 PROGRAM _EXIT

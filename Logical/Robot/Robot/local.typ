@@ -36,6 +36,7 @@ TYPE
 		write : BOOL;
 		write_reset : BOOL;
 		delay : BOOL;
+		hard_reset_done : BOOL;
 	END_STRUCT;
 	RobotHmiType : 	STRUCT 
 		isRunning : BOOL;

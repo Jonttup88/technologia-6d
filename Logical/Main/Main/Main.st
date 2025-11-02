@@ -27,6 +27,11 @@ PROGRAM _CYCLIC
 
 	END_IF
 
+	IF task.Input.Command.HardReset OR gHMI.General.ResetButton THEN
+		task.Input.Command.HardReset := FALSE;
+		task.State := MAIN_HARD_RESET;
+	END_IF
+	
 	// Task state machine
 	// =================================================================================================================
 	CASE task.State OF
@@ -65,6 +70,27 @@ PROGRAM _CYCLIC
 					END_IF;
 			END_CASE;
 
+		MAIN_HARD_RESET:
+			CASE task.SubState OF
+				0:
+					task.StateInfo := 'Force robot task to idle';
+					// ---------------------------------------------------------------------------------
+					gRobot.State := ROBOT_IDLE;
+					task.SubState := 10;
+					
+				10:
+					task.StateInfo := 'Force 6D task to idle';
+					// ---------------------------------------------------------------------------------		
+					gAcp6D.State := ACP6D_IDLE;
+					brsmemset(ADR(gFeatureDemo), 0, SIZEOF(gFeatureDemo));
+					task.SubState := 20;
+				
+				20:
+					task.StateInfo := '';
+					// ---------------------------------------------------------------------------------		
+					gAcp6D.State := ACP6D_IDLE;
+					task.SubState := 30;
+			END_CASE;
 
 		MAIN_RESET:
 			CASE task.SubState OF
@@ -105,19 +131,11 @@ PROGRAM _CYCLIC
 			
 		MAIN_IDLE:
 			task.StateInfo := 'Waiting for command';
-			// ---------------------------------------------------------------------------------
-			IF task.Input.Command.Reset THEN
-				task.State := MAIN_RESET;
-				
-			ELSIF task.Input.Command.StartGame OR gHMI.Game.Mode > 0 THEN
+			// ---------------------------------------------------------------------------------	
+			IF task.Input.Command.StartGame OR gHMI.Game.Mode > 0 THEN
 				task.Input.GameMode := gHMI.Game.Mode;
 				task.Input.Command.StartGame := FALSE; // dummy - reset caller
-			
-				task.State := MAIN_GAME;
-					
-				//			ELSIF task.Input.Command. THEN
-				//				task.State := MAIN_;
-				//	  
+				task.State := MAIN_GAME;	  
 			END_IF;
 
 			
@@ -262,7 +280,7 @@ PROGRAM _CYCLIC
 					local.actions.substate.robPickup := TRUE;
 					
 					IF gRobot.Output.Status.CommandDone THEN
-						task.SubState := 500;
+						task.SubState := 420;
 					END_IF;
 				
 				420: 

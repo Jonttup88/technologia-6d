@@ -44,8 +44,8 @@ PROGRAM _CYCLIC
 	END_IF
 	
 	task.Error.Active := fb.BrAbbRwsCore_0.Error OR fb.BrAbbRwsGetState_0.Error;
-
-    // Task state machine
+	
+	// Task state machine
     // =================================================================================================================
     CASE task.State OF
         ROBOT_INITIALIZE:
@@ -73,7 +73,7 @@ PROGRAM _CYCLIC
 						task.SubState := 30;
 					END_IF;
 			END_CASE;
-		
+				
 		ROBOT_IDLE:
 			task.StateInfo := 'Ready for commands';
 			// ---------------------------------------------------------------------------------
@@ -235,13 +235,7 @@ PROGRAM _CYCLIC
 			
 		ROBOT_COMMAND_DONE:
 			task.StateInfo := 'Command done';
-			// ---------------------------------------------------------------------------------
-//			local.actions.substate.delay := TRUE;
-//			
-//			IF fb.TON_DoneDelay.Q THEN
-//	  			local.actions.substate.command_done := TRUE;
-//			END_IF;
-			
+			// ---------------------------------------------------------------------------------			
 			local.actions.substate.command_done := TRUE;
 			
 			IF brsmemcmp(ADR(task.Input.Command), ADR(no_command), SIZEOF(no_command)) = 0 THEN
@@ -310,7 +304,7 @@ PROGRAM _CYCLIC
 		10:
 			// ---------------------------------------------------------------------------------
 			fb.TON_ReadDelay.IN := TRUE;
-			fb.TON_ReadDelay.PT := T#20ms;
+			fb.TON_ReadDelay.PT := T#0ms;
 		
 			IF local.readRobotValues = FALSE THEN
 				task.robReadState := 0;
