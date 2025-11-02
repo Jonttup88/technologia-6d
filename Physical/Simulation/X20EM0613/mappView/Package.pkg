@@ -22,5 +22,6 @@
     <Object Type="File">content_gamePage4.eventbinding</Object>
     <Object Type="File">content_gamePage5.eventbinding</Object>
     <Object Type="File">content_MainPage.binding</Object>
+    <Object Type="File">Content7.eventbinding</Object>
   </Objects>
 </Package>

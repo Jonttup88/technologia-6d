@@ -16,5 +16,6 @@
     <Object Type="Package">page_gameWin</Object>
     <Object Type="Package">page_gameLose</Object>
     <Object Type="Package">page_gameWaitReveal</Object>
+    <Object Type="Package">page_force</Object>
   </Objects>
 </Package>

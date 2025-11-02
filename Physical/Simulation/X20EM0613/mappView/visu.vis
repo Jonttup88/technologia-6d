@@ -17,6 +17,7 @@
     <Page refId="page_gameWin" />
     <Page refId="page_gameLose" />
     <Page refId="page_gameWaitReveal" />
+    <Page refId="page_force" />
   </Pages>
   <Navigations />
   <BindingsSets>
@@ -36,6 +37,7 @@
     <EventBindingsSet refId="content_gamePage3" />
     <EventBindingsSet refId="content_gamePage4" />
     <EventBindingsSet refId="content_gamePage5" />
+    <EventBindingsSet refId="Content7" />
   </EventBindingsSets>
   <EventScriptsSets />
   <Dialogs />
@@ -49,6 +51,7 @@
     <Content refId="content_gamePage4" />
     <Content refId="content_gamePage5" />
     <Content refId="content_gamePage6" />
+    <Content refId="Content7" />
   </Contents>
   <SnippetsSets />
   <VariablesSets>

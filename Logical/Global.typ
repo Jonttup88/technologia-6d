@@ -37,6 +37,7 @@ TYPE
 		Status : HMI_status_typ;
 		Data : Motion6D_data_typ;
 		Game : HMI_game_typ;
+		Force : HMI_force_typ;
 	END_STRUCT;
 	HMI_Shuttle_pos_typ : 	STRUCT 
 		X : REAL;
@@ -104,6 +105,7 @@ TYPE
 		StopAll : MC_BR_AsmStop_Acp6D;
 		PowerOff : MC_BR_AsmPowerOff_Acp6D;
 		PowerOn : MC_BR_AsmPowerOn_Acp6D;
+		TON_0 : TON;
 	END_STRUCT;
 	gFeatureInternal_typ : 	STRUCT 
 		ready : BOOL;
@@ -112,6 +114,7 @@ TYPE
 		tempSTR : STRING[20];
 		tempSTR1 : STRING[20];
 		zoneReset : BOOL;
+		FirstRun : BOOL;
 	END_STRUCT;
 	HMI_general_typ : 	STRUCT 
 		PlayButton : BOOL;
@@ -127,6 +130,7 @@ TYPE
 		Error : USINT;
 		AllowPlay : BOOL;
 		AllowStop : BOOL;
+		AllowReset : BOOL;
 	END_STRUCT;
 	HMI_game_typ : 	STRUCT 
 		Mode : USINT;
@@ -144,6 +148,10 @@ TYPE
 	gFeatureDemoAddition_typ : 	STRUCT 
 		Levitate : BOOL;
 		Rotate : BOOL;
-		New_Member : USINT;
+		Force : BOOL;
+	END_STRUCT;
+	HMI_force_typ : 	STRUCT 
+		mode : USINT;
+		prevMode : USINT;
 	END_STRUCT;
 END_TYPE

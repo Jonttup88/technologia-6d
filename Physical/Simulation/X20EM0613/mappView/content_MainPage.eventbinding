@@ -83,5 +83,15 @@
         </Action>
       </EventHandler>
     </EventBinding>
+    <EventBinding id="content_MainPage.ToggleSwitch2.ValueChanged">
+      <Source xsi:type="widgets.brease.ToggleSwitch.Event" contentRefId="content_MainPage" widgetRefId="ToggleSwitch2" event="ValueChanged" />
+      <EventHandler condition="newValue">
+        <Action>
+          <Target xsi:type="clientSystem.Action">
+            <Method xsi:type="clientSystem.Action.Navigate" pageId="page_force" />
+          </Target>
+        </Action>
+      </EventHandler>
+    </EventBinding>
   </Bindings>
 </EventBindingSet>

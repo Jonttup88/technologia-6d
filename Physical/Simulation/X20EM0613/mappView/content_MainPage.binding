@@ -13,22 +13,29 @@
 <Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.Status.AllowStop" attribute="value" />
 <Target xsi:type="brease" contentRefId="content_MainPage" widgetRefId="RadioButton6" attribute="enable" />
 </Binding>
-<Binding mode="twoWay">
-<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.Status.AllowStop" attribute="value" />
-<Target xsi:type="brease" contentRefId="content_MainPage" widgetRefId="RadioButton7" attribute="enable" />
-</Binding>
+
 <Binding mode="twoWay">
 <Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.Status.AllowStop" attribute="value" />
 <Target xsi:type="brease" contentRefId="content_MainPage" widgetRefId="RadioButton2" attribute="enable" />
 </Binding>
 
-<Binding mode="twoWay">
-<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.Status.AllowStop" attribute="value" />
-<Target xsi:type="brease" contentRefId="content_MainPage" widgetRefId="ToggleButton1" attribute="enable" />
-</Binding>
+
+
 <Binding mode="twoWay">
 <Source xsi:type="opcUa" refId="::AsGlobalPV:gFeatureDemo.Addition.Levitate" attribute="value" />
-<Target xsi:type="brease" contentRefId="content_MainPage" widgetRefId="ToggleButton1" attribute="value" />
+<Target xsi:type="brease" contentRefId="content_MainPage" widgetRefId="ToggleSwitch1" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.Status.AllowStop" attribute="value" />
+<Target xsi:type="brease" contentRefId="content_MainPage" widgetRefId="ToggleSwitch1" attribute="enable" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gFeatureDemo.Addition.Force" attribute="value" />
+<Target xsi:type="brease" contentRefId="content_MainPage" widgetRefId="ToggleSwitch2" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.Status.AllowStop" attribute="value" />
+<Target xsi:type="brease" contentRefId="content_MainPage" widgetRefId="ToggleSwitch2" attribute="enable" />
 </Binding>
 </Bindings>
 </BindingsSet>
