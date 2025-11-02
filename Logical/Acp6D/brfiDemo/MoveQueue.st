@@ -6,6 +6,7 @@ FUNCTION_BLOCK brfi6DMoveQueue
 		IF internal.initialized THEN
 			brsmemset(ADR(internal), 0, SIZEOF(internal));
 			brsmemset(ADR(actions), 0, SIZEOF(actions));
+			subState := 0;
 		END_IF
 		state := brfi6DMOVEQUEUE_DISABLED;
 	END_IF
@@ -19,12 +20,13 @@ FUNCTION_BLOCK brfi6DMoveQueue
 			// ------------------------------------------------------
 			IF Execute THEN
 				internal.initialized := TRUE;
-				dummyDone := TRUE;
-				refAllCommandsDone ACCESS ADR(dummyDone);
+				//dummyDone := TRUE;
+				//refAllCommandsDone ACCESS ADR(0);
 				brsmemset(ADR(FailedCommand), 0, SIZEOF(FailedCommand));
 				brsmemset(ADR(cmd), 0, SIZEOF(cmd));
 				FailedCommandIndex := -1;
 				ErrorID := 0;
+				internal.queueEmpty := TRUE;
 				state := brfi6DMOVEQUEUE_RUN;
 			END_IF;
 				
@@ -44,15 +46,13 @@ FUNCTION_BLOCK brfi6DMoveQueue
 					
 				100:	
 					// Find next target that has masked axes
-					// ------------------------------------------------------
-					IF internal.i > gMAX_INDEX_TARGETS THEN
-						state := brfi6DMOVEQUEUE_DONE;
-					END_IF;
-					
+					// ------------------------------------------------------					
 					WHILE internal.i <= gMAX_INDEX_TARGETS DO
 						refCommand ACCESS ADR(Commands[internal.i]);
 				
 						IF refCommand.mask > 0 THEN
+							internal.queueEmpty := FALSE;
+							
 							// Select movement type based on the AxisMask for the target
 							IF refCommand.mask <= 3 THEN
 								cmd.moveInPlane := FALSE;
@@ -90,6 +90,14 @@ FUNCTION_BLOCK brfi6DMoveQueue
 				
 						internal.i := internal.i + 1;
 					END_WHILE;
+					
+					IF internal.i > gMAX_INDEX_TARGETS THEN
+						IF internal.queueEmpty THEN
+							state := brfi6DMOVEQUEUE_DONE;
+						ELSE
+							state := brfi6DMOVEQUEUE_ACKNOWLEDGE;
+						END_IF;
+					END_IF;
 					
 				200:
 					// ------------------------------------------------------------------------------------------------------------
@@ -347,7 +355,7 @@ FUNCTION_BLOCK brfi6DMoveQueue
 			END_CASE;
 
 
-		brfi6DMOVEQUEUE_DONE:	
+		brfi6DMOVEQUEUE_ACKNOWLEDGE:	
 			// 
 			// ------------------------------------------------------
 			actions.acknowledge := TRUE;
@@ -356,11 +364,20 @@ FUNCTION_BLOCK brfi6DMoveQueue
 			// no valid commands and nothing was queued to 6D controller. 
 			// Otherwise wait for the last called function block to finish to indicate shuttles has
 			// executed all of its queued commands			
-			IF ADR(refAllCommandsDone) = 0 THEN
-				actions.done := TRUE;
-			ELSE
-				actions.done := refAllCommandsDone;
+//			IF ADR(refAllCommandsDone) = 0 THEN
+//				actions.done := TRUE;
+//			ELSE
+//				actions.done := refAllCommandsDone;
+			//			END_IF;
+			
+			IF refAllCommandsDone THEN
+	  			state := brfi6DMOVEQUEUE_DONE;
 			END_IF;
+			
+		brfi6DMOVEQUEUE_DONE:	
+			// 
+			// ------------------------------------------------------
+			actions.done := TRUE;
 			
 		brfi6DMOVEQUEUE_ERROR:	
 			// 

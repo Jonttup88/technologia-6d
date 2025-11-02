@@ -29,6 +29,7 @@ TYPE
 		GetCandy : BOOL;
 		GiveCandy : BOOL;
 		Dance : BOOL;
+		HardReset : BOOL;
 	END_STRUCT;
 	RobotInputStatusType : 	STRUCT 
 		SetupComplete : BOOL;

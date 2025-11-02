@@ -16,6 +16,7 @@ TYPE
 		(
 		brfi6DMOVEQUEUE_DISABLED,
 		brfi6DMOVEQUEUE_RUN,
+		brfi6DMOVEQUEUE_ACKNOWLEDGE,
 		brfi6DMOVEQUEUE_DONE,
 		brfi6DMOVEQUEUE_ERROR
 		);
@@ -43,6 +44,7 @@ TYPE
 		dy : REAL;
 		radius : REAL;
 		angle : REAL;
+		queueEmpty : BOOL;
 	END_STRUCT;
 	brfi6DMoveQueueActionsType : 	STRUCT 
 		acknowledge : BOOL;

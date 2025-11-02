@@ -1,6 +1,6 @@
 /* Automation Studio generated header file */
 /* Do not edit ! */
-/* McBase 6.3.0 */
+/* McBase 6.0.0 */
 
 #ifndef _MCBASE_
 #define _MCBASE_
@@ -9,7 +9,7 @@ extern "C"
 {
 #endif
 #ifndef _McBase_VERSION
-#define _McBase_VERSION 6.3.0
+#define _McBase_VERSION 6.0.0
 #endif
 
 #include <bur/plctypes.h>
@@ -229,12 +229,8 @@ typedef enum McCfgTypeEnum
 	mcCFG_LIMSET_ROT = 1412,
 	mcCFG_CAMLST = 1500,
 	mcCFG_PROC_POINT = 1601,
-	mcCFG_PROC_TRAK_POS = 1602,
-	mcCFG_PROC_TRAK_BARRIER = 1603,
-	mcCFG_PROC_TRAK_MON = 1604,
 	mcCFG_TRK_PATH = 1700,
 	mcCFG_TRK_PATH_SCN = 1701,
-	mcCFG_TRK_PATH_AUT_CRT_COND = 1702,
 	mcCFG_PICK_CORE = 2100,
 	mcCFG_PICK_REG = 2110,
 	mcCFG_PICK_REG_SCN = 2111,
@@ -297,8 +293,6 @@ typedef enum McCfgTypeEnum
 	mcCFG_ACP_EXT_ENC_AX_HOME = 11074,
 	mcCFG_AX_FEAT_A_IN = 11103,
 	mcCFG_AX_FEAT_ACP_PAR_TBL = 11104,
-	mcCFG_AX_FEAT_ACP_SPT_CHART = 11105,
-	mcCFG_ACP_SPT_CHART = 11120,
 	mcCFG_PURE_V_AX = 12000,
 	mcCFG_PURE_V_AX_REF = 12011,
 	mcCFG_PURE_V_AX_HOME = 12012,
@@ -315,12 +309,6 @@ typedef enum McCfgTypeEnum
 	mcCFG_PURE_V_AX_SIM = 12023,
 	mcCFG_PURE_V_AX_MOD = 12024,
 	mcCFG_PURE_V_AX_ZERO_VIB_FLTR = 12025,
-	mcCFG_PURE_V_AX_ENC_SET = 12116,
-	mcCFG_PURE_V_AX_POS_ACT_VAL = 12126,
-	mcCFG_PURE_V_AX_STAT_IN_DS402 = 12121,
-	mcCFG_PURE_V_AX_CTRL_OUT_DS402C = 12122,
-	mcCFG_PURE_V_AX_CTRL_OUT_DS402V = 12132,
-	mcCFG_PURE_V_AX_VEL_ACT_VAL = 12136,
 	mcCFG_STP_AX = 13000,
 	mcCFG_STP_AX_REF = 13011,
 	mcCFG_STP_AX_MECH_ELM = 13012,
@@ -360,7 +348,6 @@ typedef enum McCfgTypeEnum
 	mcCFG_AXGRP_FEAT_COMP = 21102,
 	mcCFG_AXGRP_FEAT_CDC = 21103,
 	mcCFG_AXGRP_FEAT_FF = 21104,
-	mcCFG_AXGRP_FEAT_FF_M = 21204,
 	mcCFG_AXGRP_FEAT_FRM_HIER_STD = 21105,
 	mcCFG_AXGRP_FEAT_FRM_HIER_CUS = 21106,
 	mcCFG_AXGRP_FEAT_JOG = 21107,
@@ -383,7 +370,6 @@ typedef enum McCfgTypeEnum
 	mcCFG_AXGRP_FEAT_REV_MOVE = 21125,
 	mcCFG_AXGRP_FEAT_TRK = 21126,
 	mcCFG_AXGRP_FEAT_PIPE_CUT = 21127,
-	mcCFG_AXGRP_FEAT_TRKFRM_SEL = 21128,
 	mcCFG_ASM = 31000,
 	mcCFG_ASM_COGG_COMP = 31001,
 	mcCFG_ASM_ELONG_COMP = 31002,
@@ -404,15 +390,12 @@ typedef enum McCfgTypeEnum
 	mcCFG_ASM_FEAT_EX_SEG = 31106,
 	mcCFG_ASM_FEAT_SH_SHP_REG = 31107,
 	mcCFG_ASM_FEAT_SEG_GRP = 31108,
-	mcCFG_ASM_FEAT_SNAP = 31109,
 	mcCFG_SEC = 31300,
 	mcCFG_SEC_COMP = 31301,
 	mcCFG_SEC_SUB = 31302,
-	mcCFG_SEC_COMP_POS = 31303,
 	mcCFG_SH_STEREO_TYP = 31400,
 	mcCFG_SH_JERK_FILT = 31401,
 	mcCFG_SH_STATE_TRANS = 31402,
-	mcCFG_SH_ZERO_VIB_FILTER = 31403,
 	mcCFG_SEG = 31500,
 	mcCFG_MS_CUS_STD = 50001,
 	mcCFG_MS_2AX_CNC_XY = 51201,
@@ -424,7 +407,6 @@ typedef enum McCfgTypeEnum
 	mcCFG_MS_4AX_CNC_XYZB = 51401,
 	mcCFG_MS_4AX_CNC_XYZC = 51402,
 	mcCFG_MS_5AX_CNC_XYZBA = 51502,
-	mcCFG_MS_5AX_CNC_XYZBC = 51503,
 	mcCFG_MS_5AX_CNC_XYZCA = 51504,
 	mcCFG_MS_6AX_CNC_ZXYBCA = 51603,
 	mcCFG_MS_4AX_SCARA_A = 52041,
@@ -457,11 +439,6 @@ typedef enum McMMCPECOAEnum
 {	mcMMCPECOA_NOT_USE = 0,
 	mcMMCPECOA_USE = 1
 } McMMCPECOAEnum;
-
-typedef enum McMMCProcSymMulEnum
-{	mcMMCPSM_NOT_USE = 0,
-	mcMMCPSM_USE = 1
-} McMMCProcSymMulEnum;
 
 typedef enum McMMCLogSelEnum
 {	mcMMCLS_NOT_USE = 0,
@@ -497,24 +474,9 @@ typedef enum McMMCLogSelUseSupSubcEEnum
 } McMMCLogSelUseSupSubcEEnum;
 
 typedef enum McMMCMcAcpDrvPLKCycPerParIDEnum
-{	mcMMCMPCPP_TWO = 2,
-	mcMMCMPCPP_ONE = 1
+{	mcMMCMPCPP_ONE = 1,
+	mcMMCMPCPP_TWO = 2
 } McMMCMcAcpDrvPLKCycPerParIDEnum;
-
-typedef enum McMcMMCDiSnEnum
-{	mcMMCDS_NOT_USE = 0,
-	mcMMCDS_USE = 1
-} McMcMMCDiSnEnum;
-
-typedef enum McMcMMCDiSnUseFCompressionEnum
-{	mcMMCDSUFC_NOT_USE = 0,
-	mcMMCDSUFC_USE = 1
-} McMcMMCDiSnUseFCompressionEnum;
-
-typedef enum McMcMMCDiSnUseFLimEnum
-{	mcMMCDSUFL_NOT_USE = 0,
-	mcMMCDSUFL_USE = 1
-} McMcMMCDiSnUseFLimEnum;
 
 typedef enum McOHGCSOTypEnum
 {	mcOHGCSOT_CMPT = 0,
@@ -713,11 +675,6 @@ typedef enum McPPTAcpTrakPtBarrFunEnum
 {	mcPPTAPBF_OFF = 0,
 	mcPPTAPBF_ON = 1
 } McPPTAcpTrakPtBarrFunEnum;
-
-typedef enum McPPTAcpTrakPtShStopPosEnum
-{	mcPPTASPSP_EXT = 0,
-	mcPPTASPSP_CTR_PT = 1
-} McPPTAcpTrakPtShStopPosEnum;
 
 typedef enum McPPTAcpTrakPtPPMMonEnum
 {	mcPPTAcpTrakPtPPMMon_OFF = 0,
@@ -924,14 +881,9 @@ typedef struct McMMCProcExpCompOrdType
 {	struct McMMCPECOAType Axis;
 } McMMCProcExpCompOrdType;
 
-typedef struct McMMCProcSymMulType
-{	enum McMMCProcSymMulEnum Type;
-} McMMCProcSymMulType;
-
 typedef struct McMMCProcType
 {	enum McMMCProcProcTskCEnum ProcessingTaskClass;
 	struct McMMCProcExpCompOrdType ExplicitComputationOrder;
-	struct McMMCProcSymMulType SymmetricMultiprocessing;
 } McMMCProcType;
 
 typedef struct McMMCLogSelUseAdmCmdSelType
@@ -988,45 +940,10 @@ typedef struct McMMCMcAcpDrvType
 {	enum McMMCMcAcpDrvPLKCycPerParIDEnum POWERLINKCyclesPerParID;
 } McMMCMcAcpDrvType;
 
-typedef struct McMcMMCDiSnUseFCompressionType
-{	enum McMcMMCDiSnUseFCompressionEnum Type;
-} McMcMMCDiSnUseFCompressionType;
-
-typedef struct McMcMMCDiSnUseFLimUseType
-{	unsigned long MaximumSize;
-	unsigned long MaximumNumberOfSnapshots;
-} McMcMMCDiSnUseFLimUseType;
-
-typedef struct McMcMMCDiSnUseFLimType
-{	enum McMcMMCDiSnUseFLimEnum Type;
-	struct McMcMMCDiSnUseFLimUseType Used;
-} McMcMMCDiSnUseFLimType;
-
-typedef struct McMcMMCDiSnUseFType
-{	plcstring FileDevice[251];
-	plcstring DirectoryName[251];
-	struct McMcMMCDiSnUseFCompressionType Compression;
-	struct McMcMMCDiSnUseFLimType Limits;
-} McMcMMCDiSnUseFType;
-
-typedef struct McMcMMCDiSnUseType
-{	struct McMcMMCDiSnUseFType Files;
-} McMcMMCDiSnUseType;
-
-typedef struct McMcMMCDiSnType
-{	enum McMcMMCDiSnEnum Type;
-	struct McMcMMCDiSnUseType Used;
-} McMcMMCDiSnType;
-
-typedef struct McMMCDiagnosticsType
-{	struct McMcMMCDiSnType Snapshot;
-} McMMCDiagnosticsType;
-
 typedef struct McCfgMMCfgType
 {	struct McMMCProcType Processing;
 	struct McMMCLogType Logger;
 	struct McMMCMcAcpDrvType McAcpDrv;
-	struct McMMCDiagnosticsType Diagnostics;
 } McCfgMMCfgType;
 
 typedef struct McCfgTransXYZType
@@ -1363,13 +1280,8 @@ typedef struct McCfgCamLstType
 {	struct McCfgUnboundedArrayType Row;
 } McCfgCamLstType;
 
-typedef struct McPPTAcpTrakPtBarrFunOnType
-{	enum McPPTAcpTrakPtShStopPosEnum ShuttleStopPosition;
-} McPPTAcpTrakPtBarrFunOnType;
-
 typedef struct McPPTAcpTrakPtBarrFunType
 {	enum McPPTAcpTrakPtBarrFunEnum Type;
-	struct McPPTAcpTrakPtBarrFunOnType On;
 } McPPTAcpTrakPtBarrFunType;
 
 typedef struct McPPTAcpTrakPtPPMMonShTrgType
@@ -1399,21 +1311,6 @@ typedef struct McPPTypType
 typedef struct McCfgProcPointType
 {	struct McPPTypType Type;
 } McCfgProcPointType;
-
-typedef struct McCfgProcPtTrakPosType
-{	struct McCfgReferenceType SectorReference;
-	double Position;
-	enum McPPTAcpTrakPtPosRelToEnum PositionRelativeTo;
-	unsigned short TriggerEventBufferSize;
-} McCfgProcPtTrakPosType;
-
-typedef struct McCfgProcPtTrakBarrierType
-{	struct McPPTAcpTrakPtBarrFunType BarrierFunctionality;
-} McCfgProcPtTrakBarrierType;
-
-typedef struct McCfgProcPtTrakMonType
-{	struct McPPTAcpTrakPtPPMMonType ThroughputMonitor;
-} McCfgProcPtTrakMonType;
 
 typedef struct McCfgExtLimRefType
 {	struct McCfgReferenceType LimitReference;

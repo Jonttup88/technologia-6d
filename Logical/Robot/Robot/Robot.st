@@ -19,8 +19,8 @@ PROGRAM _INIT
 		fb.BrAbbRwsCore_0.Parameters.ServerIP := '192.168.125.1';
 	END_IF;
 	
-	fb.BrAbbRwsVariable_read.Parameters.Module := 'TeknologiaDemo25';
-	fb.BrAbbRwsVariable_read.Parameters.Task := 'T_ROB1';
+	fb.BrAbbRwsVariable_poll.Parameters.Module := 'TeknologiaDemo25';
+	fb.BrAbbRwsVariable_poll.Parameters.Task := 'T_ROB1';
 	fb.BrAbbRwsVariable_write.Parameters.Module := 'TeknologiaDemo25';
 	fb.BrAbbRwsVariable_write.Parameters.Task := 'T_ROB1';
 	
@@ -45,6 +45,12 @@ PROGRAM _CYCLIC
 	
 	task.Error.Active := fb.BrAbbRwsCore_0.Error OR fb.BrAbbRwsGetState_0.Error;
 	
+	IF gRobot.Input.Command.HardReset THEN
+		gRobot.Input.Command.HardReset := FALSE;
+		task.State := ROBOT_IDLE;
+		task.SubState := 0;
+	END_IF;
+	
 	// Task state machine
     // =================================================================================================================
     CASE task.State OF
@@ -64,7 +70,7 @@ PROGRAM _CYCLIC
 					IF fb.BrAbbRwsCore_0.Active THEN
 						task.State := ROBOT_IDLE;	
 						fb.BrAbbRwsGetState_0.Ident := fb.BrAbbRwsCore_0.Ident;	
-						fb.BrAbbRwsVariable_read.Ident := fb.BrAbbRwsCore_0.Ident;	
+						fb.BrAbbRwsVariable_poll.Ident := fb.BrAbbRwsCore_0.Ident;	
 						fb.BrAbbRwsVariable_write.Ident := fb.BrAbbRwsCore_0.Ident;	
 						local.readRobotValues := TRUE;
 						fb.BrAbbRwsVariable_write.Enable := TRUE;
@@ -121,35 +127,10 @@ PROGRAM _CYCLIC
 					task.StateInfo := 'Wait robot to complete';
 					// ---------------------------------------------------------------------------------
 					IF task.Output.Status.RobPhaseDone AND (task.Output.Status.RobPhaseNum = task.Input.RobCommandNum) THEN
-						task.SubState := 20;
-					END_IF;
-				
-				20:
-					task.StateInfo := 'Reset robot command';
-					// ---------------------------------------------------------------------------------
-					task.Input.RobCommandNum := 0;
-					
-					fb.BrAbbRwsVariable_write.Parameters.Variable := 'nAcoposCmd';
-					fb.BrAbbRwsVariable_write.Value.DataAdress := ADR(task.Input.RobCommandNum);
-					fb.BrAbbRwsVariable_write.Value.DataType := BR_ABB_RWS_VAR_NUM;
-					
-					local.actions.substate.write := TRUE;
-					
-					IF fb.BrAbbRwsVariable_write.Done THEN
-						task.State := ROBOT_COMMAND_DONE;
-					ELSIF fb.BrAbbRwsVariable_write.Error THEN
-						task.State := ROBOT_COMMAND_ERROR;
-					END_IF;
-				
-				30:
-					task.StateInfo := 'Wait robot to be ready again';
-					// ---------------------------------------------------------------------------------
-					IF task.Output.Status.RobReady AND (NOT task.Output.Status.RobPhaseDone) THEN
 						task.State := ROBOT_COMMAND_DONE;
 					END_IF;
 			END_CASE;
-			
-			
+				
 		ROBOT_CMD_TARGET:
 			CASE task.SubState OF
 				0:
@@ -205,11 +186,14 @@ PROGRAM _CYCLIC
 					task.StateInfo := 'Wait robot to complete';
 					// ---------------------------------------------------------------------------------
 					IF task.Output.Status.RobPhaseDone AND (task.Output.Status.RobPhaseNum = task.Input.RobCommandNum) THEN
-						task.SubState := 40;
+						task.State := ROBOT_COMMAND_DONE;
 					END_IF;
-				
-				40:
-					task.StateInfo := 'Reset robot command';
+			END_CASE;
+			
+		ROBOT_COMMAND_DONE:
+			CASE task.SubState OF
+				0:
+					task.StateInfo := 'Write robot nAcoposCmd to 0';
 					// ---------------------------------------------------------------------------------
 					task.Input.RobCommandNum := 0;
 					
@@ -220,29 +204,28 @@ PROGRAM _CYCLIC
 					local.actions.substate.write := TRUE;
 					
 					IF fb.BrAbbRwsVariable_write.Done THEN
-						task.SubState := 50;
+						task.SubState := 10;
 					ELSIF fb.BrAbbRwsVariable_write.Error THEN
 						task.State := ROBOT_COMMAND_ERROR;
 					END_IF;
-				
-				50:
-					task.StateInfo := 'Wait robot to be ready again';
-					// ---------------------------------------------------------------------------------
-					IF task.Output.Status.RobReady AND (NOT task.Output.Status.RobPhaseDone) THEN
-						task.State := ROBOT_COMMAND_DONE;
+					
+				10:
+					task.StateInfo := 'Waiting robot to indicate it is idle again';
+					// ---------------------------------------------------------------------------------	
+					IF task.Output.Status.RobReady AND (NOT task.Output.Status.RobPhaseDone) AND (task.Input.RobCommandNum = 0) THEN
+						task.SubState := 20;
+					END_IF;
+		  
+				20:
+					task.StateInfo := 'Command done - waiting command input reset';
+					// ---------------------------------------------------------------------------------		
+					local.actions.substate.command_done := TRUE;
+			
+					IF brsmemcmp(ADR(task.Input.Command), ADR(no_command), SIZEOF(no_command)) = 0 THEN
+						task.State := ROBOT_IDLE;
 					END_IF;
 			END_CASE;
 			
-		ROBOT_COMMAND_DONE:
-			task.StateInfo := 'Command done';
-			// ---------------------------------------------------------------------------------			
-			local.actions.substate.command_done := TRUE;
-			
-			IF brsmemcmp(ADR(task.Input.Command), ADR(no_command), SIZEOF(no_command)) = 0 THEN
-				task.State := ROBOT_IDLE;
-			END_IF;
-			
-		
 		ROBOT_COMMAND_ERROR:
 			task.StateInfo := 'Command error';
 			// ---------------------------------------------------------------------------------
@@ -292,9 +275,9 @@ PROGRAM _CYCLIC
 			// ---------------------------------------------------------------------------------
 			IF local.readRobotValues THEN
 				fb.BrAbbRwsGetState_0.Enable := TRUE;
-				fb.BrAbbRwsVariable_read.Enable := TRUE;
+				fb.BrAbbRwsVariable_poll.Enable := TRUE;
 				
-				IF fb.BrAbbRwsGetState_0.Active AND fb.BrAbbRwsVariable_read.Active THEN
+				IF fb.BrAbbRwsGetState_0.Active AND fb.BrAbbRwsVariable_poll.Active THEN
 					
 					task.robReadState := 10;
 					local.robReadNum := 0;
@@ -322,7 +305,7 @@ PROGRAM _CYCLIC
 			task.Output.Status.CommunicationOk := FALSE;
 			
 			fb.BrAbbRwsGetState_0.Enable := FALSE;
-			fb.BrAbbRwsVariable_read.Enable := FALSE;
+			fb.BrAbbRwsVariable_poll.Enable := FALSE;
 			
 			IF fb.TON_ReadDelay.Q THEN
 				fb.TON_ReadDelay.IN := FALSE;
@@ -363,53 +346,53 @@ PROGRAM _CYCLIC
 		
 		101:
 			// ---------------------------------------------------------------------------------
-			fb.BrAbbRwsVariable_read.Parameters.Variable := 'bRobotPhaseDone';
-			fb.BrAbbRwsVariable_read.Value.DataAdress := ADR(gRobot.Output.Status.RobPhaseDone);
-			fb.BrAbbRwsVariable_read.Value.DataType := BR_ABB_RWS_VAR_BOOL;
-			fb.BrAbbRwsVariable_read.GetValue := TRUE;
+			fb.BrAbbRwsVariable_poll.Parameters.Variable := 'bRobotPhaseDone';
+			fb.BrAbbRwsVariable_poll.Value.DataAdress := ADR(gRobot.Output.Status.RobPhaseDone);
+			fb.BrAbbRwsVariable_poll.Value.DataType := BR_ABB_RWS_VAR_BOOL;
+			fb.BrAbbRwsVariable_poll.GetValue := TRUE;
 			
-			IF fb.BrAbbRwsVariable_read.Done THEN
+			IF fb.BrAbbRwsVariable_poll.Done THEN
 				task.robReadState := 10;
-			ELSIF fb.BrAbbRwsVariable_read.Error THEN
+			ELSIF fb.BrAbbRwsVariable_poll.Error THEN
 				task.robReadState := 50;
 			END_IF;
 			
 		102:
 			// ---------------------------------------------------------------------------------
-			fb.BrAbbRwsVariable_read.Parameters.Variable := 'bRobotReady';
-			fb.BrAbbRwsVariable_read.Value.DataAdress := ADR(gRobot.Output.Status.RobReady);
-			fb.BrAbbRwsVariable_read.Value.DataType := BR_ABB_RWS_VAR_BOOL;
-			fb.BrAbbRwsVariable_read.GetValue := TRUE;
+			fb.BrAbbRwsVariable_poll.Parameters.Variable := 'bRobotReady';
+			fb.BrAbbRwsVariable_poll.Value.DataAdress := ADR(gRobot.Output.Status.RobReady);
+			fb.BrAbbRwsVariable_poll.Value.DataType := BR_ABB_RWS_VAR_BOOL;
+			fb.BrAbbRwsVariable_poll.GetValue := TRUE;
 			
-			IF fb.BrAbbRwsVariable_read.Done THEN
+			IF fb.BrAbbRwsVariable_poll.Done THEN
 				task.robReadState := 10;
-			ELSIF fb.BrAbbRwsVariable_read.Error THEN
+			ELSIF fb.BrAbbRwsVariable_poll.Error THEN
 				task.robReadState := 50;
 			END_IF;
 			
 		103:
 			// ---------------------------------------------------------------------------------
-			fb.BrAbbRwsVariable_read.Parameters.Variable := 'bRobotError';
-			fb.BrAbbRwsVariable_read.Value.DataAdress := ADR(gRobot.Output.Status.RobError);
-			fb.BrAbbRwsVariable_read.Value.DataType := BR_ABB_RWS_VAR_BOOL;
-			fb.BrAbbRwsVariable_read.GetValue := TRUE;
+			fb.BrAbbRwsVariable_poll.Parameters.Variable := 'bRobotError';
+			fb.BrAbbRwsVariable_poll.Value.DataAdress := ADR(gRobot.Output.Status.RobError);
+			fb.BrAbbRwsVariable_poll.Value.DataType := BR_ABB_RWS_VAR_BOOL;
+			fb.BrAbbRwsVariable_poll.GetValue := TRUE;
 			
-			IF fb.BrAbbRwsVariable_read.Done THEN
+			IF fb.BrAbbRwsVariable_poll.Done THEN
 				task.robReadState := 10;
-			ELSIF fb.BrAbbRwsVariable_read.Error THEN
+			ELSIF fb.BrAbbRwsVariable_poll.Error THEN
 				task.robReadState := 50;
 			END_IF;
 			
 		104:
 			// ---------------------------------------------------------------------------------
-			fb.BrAbbRwsVariable_read.Parameters.Variable := 'nRobotPhase';
-			fb.BrAbbRwsVariable_read.Value.DataAdress := ADR(gRobot.Output.Status.RobPhaseNum);
-			fb.BrAbbRwsVariable_read.Value.DataType := BR_ABB_RWS_VAR_NUM;
-			fb.BrAbbRwsVariable_read.GetValue := TRUE;
+			fb.BrAbbRwsVariable_poll.Parameters.Variable := 'nRobotPhase';
+			fb.BrAbbRwsVariable_poll.Value.DataAdress := ADR(gRobot.Output.Status.RobPhaseNum);
+			fb.BrAbbRwsVariable_poll.Value.DataType := BR_ABB_RWS_VAR_NUM;
+			fb.BrAbbRwsVariable_poll.GetValue := TRUE;
 			
-			IF fb.BrAbbRwsVariable_read.Done THEN
+			IF fb.BrAbbRwsVariable_poll.Done THEN
 				task.robReadState := 1000;
-			ELSIF fb.BrAbbRwsVariable_read.Error THEN
+			ELSIF fb.BrAbbRwsVariable_poll.Error THEN
 				task.robReadState := 50;
 			END_IF;
 		
@@ -421,9 +404,9 @@ PROGRAM _CYCLIC
 	IF task.robReadState <> local.robReadStateLast THEN
 		local.robReadStateLast := task.robReadState;
 		fb.BrAbbRwsGetState_0.GetState := FALSE;
-		fb.BrAbbRwsVariable_read.GetValue := FALSE;
-		fb.BrAbbRwsVariable_read.SetValue := FALSE;
-		fb.BrAbbRwsVariable_read.SetValue := FALSE;
+		fb.BrAbbRwsVariable_poll.GetValue := FALSE;
+		fb.BrAbbRwsVariable_poll.SetValue := FALSE;
+		fb.BrAbbRwsVariable_poll.SetValue := FALSE;
 	END_IF;
 	
 	
@@ -432,8 +415,14 @@ PROGRAM _CYCLIC
     fb.BrAbbRwsCore_0();
 	fb.TON_ReadDelay();
 	fb.BrAbbRwsGetState_0();
+	fb.BrAbbRwsVariable_poll();
+	
+	fb.BrAbbRwsVariable_read.Enable := local.actions.substate.rws_read;
+	fb.BrAbbRwsVariable_read.GetValue := TRUE;
+	fb.BrAbbRwsVariable_read.SetValue := TRUE;
 	fb.BrAbbRwsVariable_read();
 	
+	fb.BrAbbRwsVariable_write.GetValue := FALSE;
 	fb.BrAbbRwsVariable_write.SetValue := local.actions.substate.write;
 	fb.BrAbbRwsVariable_write.ErrorReset := local.actions.substate.write_reset;
 	fb.BrAbbRwsVariable_write();
@@ -457,8 +446,8 @@ PROGRAM _EXIT
 //		fb.BrAbbRwsGetState_0(Enable := FALSE);
 //	END_WHILE
 //		
-//	WHILE fb.BrAbbRwsVariable_read.Active DO
-//		fb.BrAbbRwsVariable_read(Enable := FALSE);
+//	WHILE fb.BrAbbRwsVariable_poll.Active DO
+//		fb.BrAbbRwsVariable_poll(Enable := FALSE);
 //	END_WHILE
 //	
 //	task.robReadState := 100;

@@ -22,6 +22,7 @@ TYPE
 		ACP6D_SHUFFLE_CIRCULAR,
 		ACP6D_STOP_ALL,
 		ACP6D_FORCE_RESET,
+		ACP6D_HARD_RESET,
 		ACP6D_WIN,
 		ACP6D_LOSE,
 		ACP6D_DANCE,
@@ -36,6 +37,7 @@ TYPE
 	Acp6DInputCommandType : 	STRUCT 
 		Reinitialize : BOOL;
 		ForceReset : BOOL;
+		HardReset : BOOL;
 		StopAll : BOOL;
 		SpellWin : BOOL;
 		SpellLose : BOOL;

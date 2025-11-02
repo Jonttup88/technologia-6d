@@ -8,6 +8,7 @@ VAR
 	x : DINT;
 	no_command : Acp6DInputCommandType;
 	shuttle : REFERENCE TO Acp6dShuttleType;
+	shuttle2 : REFERENCE TO Acp6dShuttleType;
 	commandQueue : ARRAY[0..gMAX_INDEX_TARGETS] OF brfi6DMoveQueueCommandType;
 	cyclic : Acp6DCyclicChannelsType;
 	queueStatus : Acp6DMoveQueueStatusType;
@@ -16,6 +17,7 @@ VAR
 	moveQueueParamTask : brfi6DMoveQueueParamType;
 	moveInPlaneParamDefault : {REDUND_UNREPLICABLE} Acp6DMoveInPlaneParType;
 	shuffle : Acp6DShuffleType;
+	shuffleCircular : Acp6DShuffleCircularType;
 	selected1 : ARRAY[0..gMAX_INDEX_SHUTTLE] OF brfiShuttleSelectionType;
 	selected2 : ARRAY[0..gMAX_INDEX_SHUTTLE] OF brfiShuttleSelectionType;
 	random : Acp6DRandomType;

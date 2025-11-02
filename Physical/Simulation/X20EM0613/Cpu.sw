@@ -68,8 +68,8 @@
     <LibraryObject Name="comUtil" Source="Libraries.comUtil.lby" Memory="UserROM" Language="ANSIC" AdditionalLibraryDirectories="\Logical\Libraries\comUtil\IA32\" AdditionalLibraries="AR" Debugging="true" />
     <LibraryObject Name="strUtil" Source="Libraries.strUtil.lby" Memory="UserROM" Language="ANSIC" Debugging="true" />
     <LibraryObject Name="brfiDemo" Source="Acp6D.brfiDemo.lby" Memory="UserROM" Language="IEC" Debugging="true" />
+    <LibraryObject Name="McAcp6D" Source="Libraries.McAcp6D.lby" Memory="UserROM" Language="binary" Debugging="true" />
     <LibraryObject Name="McBase" Source="Libraries.McBase.lby" Memory="UserROM" Language="binary" Debugging="true" />
     <LibraryObject Name="MpBase" Source="Libraries.MpBase.lby" Memory="UserROM" Language="Binary" Debugging="true" />
-    <LibraryObject Name="McAcp6D" Source="Libraries.McAcp6D.lby" Memory="UserROM" Language="binary" Debugging="true" />
   </Libraries>
 </SwConfiguration>

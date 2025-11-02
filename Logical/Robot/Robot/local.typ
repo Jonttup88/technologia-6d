@@ -3,6 +3,7 @@ TYPE
 	RobotFbType : 	STRUCT 
 		BrAbbRwsCore_0 : BrAbbRwsCore;
 		BrAbbRwsVariable_read : BrAbbRwsVariable;
+		BrAbbRwsVariable_poll : BrAbbRwsVariable;
 		BrAbbRwsVariable_write : BrAbbRwsVariable;
 		BrAbbRwsGetState_0 : BrAbbRwsGetState;
 		TON_RobState : TON;
@@ -37,6 +38,7 @@ TYPE
 		write_reset : BOOL;
 		delay : BOOL;
 		hard_reset_done : BOOL;
+		rws_read : BOOL;
 	END_STRUCT;
 	RobotHmiType : 	STRUCT 
 		isRunning : BOOL;

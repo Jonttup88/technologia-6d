@@ -28,14 +28,13 @@
     <Parameter ID="OutputCurrentLimitTime" Value="20" />
     <Parameter ID="ConfigOutputState" Value="on" />
   </Module>
-  <Module Name="8FLM01.0000.00I-1" Type="8FLM01.0000.00I-1" Version="1.0.0.1" NodeNumber="239">
+  <Module Name="8FLM01.0000.00I-1" Type="8FLM01.0000.00I-1" Version="1.0.0.2">
     <Connection Connector="PLK1" TargetModule="X20EM0613" TargetConnector="IF3">
       <Cable Type="PowerlinkCable" Length="10" Version="1.0.0.3" />
     </Connection>
     <Connection Connector="PLK2" TargetModule="8B0C0320HW00.B00-1" TargetConnector="PLK1">
       <Cable Type="PowerlinkCable" Length="10" Version="1.0.0.3" />
     </Connection>
-    <Parameter ID="Supervision" Value="off" />
   </Module>
   <Module Name="X20EM0613" Type="X20EM0613" Version="1.1.1.0">
     <Connector Name="IF2">
@@ -46,6 +45,7 @@
       <Parameter ID="ActivateSnmp" Value="2" />
     </Connector>
     <Parameter ID="ConfigurationID" Value="Teknologia25_Config1" />
+    <Parameter ID="Simulation" Value="1" />
     <Parameter ID="TimerDeviceType" Value="EPLX2X" />
     <Parameter ID="TimerDevice" Value="X20EM0613.IF3" />
     <Parameter ID="TaskClassIdleTime" Value="2000" />

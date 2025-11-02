@@ -33,13 +33,12 @@ PROGRAM _INIT
 	fb.MoveInPlaneAsync.Parameters.Velocity := moveInPlaneParamDefault.Velocity;
 	fb.MoveInPlaneAsync.Parameters.Acceleration := moveInPlaneParamDefault.Acceleration;
 	
-	// pelisekvenssi loppuun
-	// HMIlle statustietoja taskeista
-	// stressitestaus shuffleille 
 	// Victory dance logiikka soundwave -> z-aalto aalto -> vanhoihin asemmin -> keskellï¿½ spin ja z pomppuja -> kehï¿½llï¿½ arc movella kiertoradalle ja muutamak ierros ympï¿½ri -> paririviin keinahtelemaan ja kumartamaan pelaajalle
 	// animate kaikki paitsi jjolla kuorma
-	// Circular shuffle tuunaus
-	// Move in sync default parameters
+	// Random järjestys select shuttle rynnäkköön
+	// Find payloadiin pari pomppua lisää
+	// circle shuffleen palkkivaiheeseen synkronointi
+	
 	
 END_PROGRAM
 	
@@ -64,9 +63,42 @@ PROGRAM _CYCLIC
 		task.Input.Command.Dance := gMain.Output.Command.br6dDance;
 	END_IF
 
+	
+	IF task.Input.Command.HardReset THEN
+		task.Input.Command.HardReset := FALSE;
+		task.State := ACP6D_HARD_RESET;
+		task.SubState := 0;
+	END_IF;
+	
 	// Task state machine
 	// =================================================================================================================
 	CASE task.State OF
+		ACP6D_HARD_RESET:
+			CASE task.SubState OF
+				0:
+					task.StateInfo := 'Hard reset';
+					// ---------------------------------------------------------------------------------
+					brsmemset(ADR(gFeatureDemo), 0, SIZEOF(gFeatureDemo));
+					IF task.Output.AssemblyInfo.AssemblyState <> mcACP6D_ERRORSTOP THEN
+						task.SubState := 10;
+					ELSE
+	  					task.SubState := 20;
+					END_IF;
+					
+				10:
+					task.StateInfo := 'Reset assembly errors';
+					// ---------------------------------------------------------------------------------
+					local.actions.substate.assemblyReset := TRUE;
+					IF task.Output.AssemblyInfo.AssemblyState <> mcACP6D_ERRORSTOP THEN
+						brsmemset(ADR(task.Error), 0, SIZEOF(task.Error));
+					END_IF;
+				
+				20:
+					task.StateInfo := 'Reinitialize 6D system';
+					// ---------------------------------------------------------------------------------
+					task.State := ACP6D_INITIALIZE;
+			END_CASE;
+		
 		ACP6D_INITIALIZE:
 			CASE task.SubState OF
 				0:
@@ -185,6 +217,7 @@ PROGRAM _CYCLIC
 			
 		ACP6D_IDLE:	
 			task.StateInfo := 'Waiting for command';
+			task.SubState := 0;
 			task.Output.Status.Initialized := TRUE;
 			local.actions.state.readyForCommands := TRUE;
 			
@@ -1265,7 +1298,7 @@ PROGRAM _CYCLIC
 					local.actions.substate.moveInPlaneAsync := TRUE;
 						
 					IF fb.MoveInPlaneAsync.Done THEN
-						task.SubState := 100;
+						task.SubState := 200;
 					ELSIF fb.MoveInPlaneAsync.Error THEN
 						task.Error.Code := fb.MoveInPlaneAsync.ErrorID;	
 						task.State := ACP6D_COMMAND_ERROR;
@@ -1396,7 +1429,7 @@ PROGRAM _CYCLIC
 					END_IF;
 				
 				210:
-					task.StateInfo := 'Move shuttles to start position';
+					task.StateInfo := 'Back and forth movement along the line';
 					// ---------------------------------------------------------------------------------
 					IF task.OnStateEntry THEN						
 						brfiShuttleSelect(ADR(shuttles), ADR(selected1), 0, 0, 2 * 0.240, 1, FALSE);
@@ -1483,7 +1516,7 @@ PROGRAM _CYCLIC
 					END_IF;
 				
 				220:
-					task.StateInfo := 'Move shuttles';
+					task.StateInfo := 'Spread shuttles further apart from kongo line';
 					// ---------------------------------------------------------------------------------
 					IF task.OnStateEntry THEN						
 						brfiShuttleSelect(ADR(shuttles), ADR(selected1), 0, 0, 4 * 0.240, 2 * 0.240, FALSE);
@@ -1520,77 +1553,66 @@ PROGRAM _CYCLIC
 					END_IF;
 				
 				230:
-					task.StateInfo := 'Move shuttles';
+					task.StateInfo := 'Move shuttles to sun planet formations';
 					// ---------------------------------------------------------------------------------
 					IF task.OnStateEntry THEN						
 						brfiShuttleSelect(ADR(shuttles), ADR(selected1), 0, 0, 4 * 0.240, 2 * 0.240, FALSE);
 						brfiShuttleSelect(ADR(shuttles), ADR(selected2), 0, 2 * 0.240, 1, 1, FALSE);
 					
+						// Group 1
 						AddCommand6D_waitCmdLb(ADR(commandQueue), shuttles[selected1[0].index].ID, mcACP6D_SH_WAIT_CMDLB_START, 0, mcACP6D_SH_WAIT_CMDLB_REGULAR);
 						
 						fb.MoveQueue[selected1[1].index].Commands := commandQueue;
 						fb.MoveQueue[selected1[2].index].Commands := commandQueue;
 						fb.MoveQueue[selected1[3].index].Commands := commandQueue;
 						
-						//AddCommand6D_xy(ADR(fb.MoveQueue[selected1[0].index].Commands), sX + sY, 0.720, 0.1, 0, 0, 0, pathDIRECT, 0, mcACP6D_MOVE_ABSOLUTE); 
+						AddCommand6D_xy(ADR(fb.MoveQueue[selected1[0].index].Commands), sX + sY, 0.720, 0.1, 0, 0, 0, pathDIRECT, 0, mcACP6D_MOVE_ABSOLUTE); 
 						AddCommand6D_xy(ADR(fb.MoveQueue[selected1[1].index].Commands), sX + sY, 0.58, 0.24, 0, 0, 0, pathDIRECT, 0, mcACP6D_MOVE_ABSOLUTE); 
 						AddCommand6D_xy(ADR(fb.MoveQueue[selected1[2].index].Commands), sX + sY, 0.860, 0.24, 0, 0, 0, pathDIRECT, 0, mcACP6D_MOVE_ABSOLUTE); 
 						AddCommand6D_xy(ADR(fb.MoveQueue[selected1[3].index].Commands), sX + sY, 0.720, 0.380, 0, 0, 0, pathDIRECT, 0, mcACP6D_MOVE_ABSOLUTE);
 						
 						brsmemset(ADR(commandQueue), 0, SIZEOF(commandQueue));
+						
+						// Group 2
 						AddCommand6D_waitCmdLb(ADR(commandQueue), shuttles[selected2[0].index].ID, mcACP6D_SH_WAIT_CMDLB_START, 0, mcACP6D_SH_WAIT_CMDLB_REGULAR);
 						
 						fb.MoveQueue[selected2[1].index].Commands := commandQueue;
 						fb.MoveQueue[selected2[2].index].Commands := commandQueue;
 						fb.MoveQueue[selected2[3].index].Commands := commandQueue;
 						
+						AddCommand6D_xy(ADR(fb.MoveQueue[selected2[0].index].Commands), sX + sY, 0.240, 0.580, 0, 0, 0, pathDIRECT, 0, mcACP6D_MOVE_ABSOLUTE); 
 						AddCommand6D_xy(ADR(fb.MoveQueue[selected2[1].index].Commands), sX + sY, 0.380, 0.24 * 3, 0, 0, 0, pathDIRECT, 0, mcACP6D_MOVE_ABSOLUTE); 
 						AddCommand6D_xy(ADR(fb.MoveQueue[selected2[2].index].Commands), sX + sY, 0.100, 3*0.240, 0, 0, 0, pathDIRECT, 0, mcACP6D_MOVE_ABSOLUTE); 
 						AddCommand6D_xy(ADR(fb.MoveQueue[selected2[3].index].Commands), sX + sY, 0.24, 4 * 0.24 - 0.100, 0, 0, 0, pathDIRECT, 0, mcACP6D_MOVE_ABSOLUTE);
 						
-						
-						FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
-							shuttles[i].command.moveQueue := TRUE;
-						END_FOR;
-						
-					END_IF
-					
-					IF queueStatus.allAcknowledge THEN
-						task.SubState := 240;
-					ELSIF queueStatus.error THEN
-						task.Error.Code := queueStatus.errorID;	
-						task.State := ACP6D_COMMAND_ERROR;
-					END_IF;
-				
-				240:
-					task.StateInfo := 'Move shuttles';
-					// ---------------------------------------------------------------------------------
-					IF task.OnStateEntry THEN						
-						brfiShuttleSelect(ADR(shuttles), ADR(selected1), 0, 0, 4 * 0.240, 2 * 0.240, FALSE);
-						brfiShuttleSelect(ADR(shuttles), ADR(selected2), 0, 2 * 0.240, 1, 1, FALSE);
-						
-						AddCommand6D_xy(ADR(fb.MoveQueue[selected1[0].index].Commands), sX + sY, 0.720, 0.1, 0, 0, 0, pathDIRECT, 0, mcACP6D_MOVE_ABSOLUTE); 
-						AddCommand6D_xy(ADR(fb.MoveQueue[selected2[0].index].Commands), sX + sY, 0.240, 0.580, 0, 0, 0, pathDIRECT, 0, mcACP6D_MOVE_ABSOLUTE); 
-
+						// Move virtual shuttles to the starting positions
 						fb.virMoveInPlane[0].Parameters.Acceleration := 20;
 						fb.virMoveInPlane[0].Parameters.Velocity := 2;
 						fb.virMoveInPlane[0].Parameters.Position.X := 3 * 0.24;
 						fb.virMoveInPlane[0].Parameters.Position.Y := 0.24;
 						
-						local.actions.substate.virMoveInPlane[0] := TRUE;
-						
 						fb.virMoveInPlane[1].Parameters.Acceleration := 20;
 						fb.virMoveInPlane[1].Parameters.Velocity := 2;
 						fb.virMoveInPlane[1].Parameters.Position.X := 0.24;
 						fb.virMoveInPlane[1].Parameters.Position.Y := 3 * 0.24;
-						
-						local.actions.substate.virMoveInPlane[1] := TRUE;
-						
-						FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
-							shuttles[i].command.moveQueue := TRUE;
-						END_FOR;
-						
 					END_IF
+					
+					local.actions.substate.virMoveInPlane[0] := TRUE;
+					local.actions.substate.virMoveInPlane[1] := TRUE;
+					
+					shuttles[selected1[1].index].command.moveQueue := TRUE;
+					shuttles[selected1[2].index].command.moveQueue := TRUE;
+					shuttles[selected1[3].index].command.moveQueue := TRUE;
+					
+					shuttles[selected2[1].index].command.moveQueue := TRUE;
+					shuttles[selected2[2].index].command.moveQueue := TRUE;
+					shuttles[selected2[3].index].command.moveQueue := TRUE;
+					
+					IF queueStatus.allAcknowledge THEN
+						// initiate movement now that all other shuttles have their command queues prepared
+						shuttles[selected1[0].index].command.moveQueue := TRUE;
+						shuttles[selected2[0].index].command.moveQueue := TRUE;
+					END_IF;
 					
 					IF queueStatus.allDone AND fb.virMoveInPlane[0].Done AND fb.virMoveInPlane[1].Done THEN
 						task.SubState := 300;
@@ -1599,8 +1621,45 @@ PROGRAM _CYCLIC
 						task.State := ACP6D_COMMAND_ERROR;
 					END_IF;
 				
+//				240:
+//					task.StateInfo := 'Move shuttles';
+//					// ---------------------------------------------------------------------------------
+//					IF task.OnStateEntry THEN						
+//						brfiShuttleSelect(ADR(shuttles), ADR(selected1), 0, 0, 4 * 0.240, 2 * 0.240, FALSE);
+//						brfiShuttleSelect(ADR(shuttles), ADR(selected2), 0, 2 * 0.240, 1, 1, FALSE);
+//						
+//						AddCommand6D_xy(ADR(fb.MoveQueue[selected1[0].index].Commands), sX + sY, 0.720, 0.1, 0, 0, 0, pathDIRECT, 0, mcACP6D_MOVE_ABSOLUTE); 
+//						AddCommand6D_xy(ADR(fb.MoveQueue[selected2[0].index].Commands), sX + sY, 0.240, 0.580, 0, 0, 0, pathDIRECT, 0, mcACP6D_MOVE_ABSOLUTE); 
+//
+//						fb.virMoveInPlane[0].Parameters.Acceleration := 20;
+//						fb.virMoveInPlane[0].Parameters.Velocity := 2;
+//						fb.virMoveInPlane[0].Parameters.Position.X := 3 * 0.24;
+//						fb.virMoveInPlane[0].Parameters.Position.Y := 0.24;
+//						
+//						local.actions.substate.virMoveInPlane[0] := TRUE;
+//						
+//						fb.virMoveInPlane[1].Parameters.Acceleration := 20;
+//						fb.virMoveInPlane[1].Parameters.Velocity := 2;
+//						fb.virMoveInPlane[1].Parameters.Position.X := 0.24;
+//						fb.virMoveInPlane[1].Parameters.Position.Y := 3 * 0.24;
+//						
+//						local.actions.substate.virMoveInPlane[1] := TRUE;
+//						
+//						FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
+//						
+//						END_FOR;
+//						
+//					END_IF
+//					
+//					IF queueStatus.allDone AND fb.virMoveInPlane[0].Done AND fb.virMoveInPlane[1].Done THEN
+//						task.SubState := 300;
+//					ELSIF queueStatus.error THEN
+//						task.Error.Code := queueStatus.errorID;	
+//						task.State := ACP6D_COMMAND_ERROR;
+//					END_IF;
+				
 				300:
-					task.StateInfo := 'Create sun planet 1';
+					task.StateInfo := 'Create sun planet groups';
 					// ---------------------------------------------------------------------------------
 					IF task.OnStateEntry THEN						
 						brfiShuttleSelect(ADR(shuttles), ADR(selected1), 0, 0, 4 * 0.240, 2 * 0.240, FALSE);
@@ -1623,15 +1682,268 @@ PROGRAM _CYCLIC
 					local.actions.state.sunPlanetEnable[1] := TRUE;
 					
 					IF fb.brfiSunPlanet[0].Active AND fb.brfiSunPlanet[1].Active THEN
-						task.SubState := 400;
+						task.SubState := 310;
 					ELSIF fb.brfiSunPlanet[0].Error THEN
 						local.actions.state.sunPlanetEnable[0] := FALSE;
 					ELSIF fb.brfiSunPlanet[1].Error THEN
 						local.actions.state.sunPlanetEnable[1] := FALSE;
 					END_IF;
+					
+				310:
+					task.StateInfo := 'Move sun planets to orbiting start positions';
+					// ---------------------------------------------------------------------------------
+					IF task.OnStateEntry THEN
+						brfiShuttleSelect(ADR(shuttles), ADR(selected1), 0, 0, 4 * 0.240, 2 * 0.240, FALSE);
+						brfiShuttleSelect(ADR(shuttles), ADR(selected2), 0, 2 * 0.240, 1, 1, FALSE);
+						
+						// Group 1
+						brsmemset(ADR(commandQueue), 0, SIZEOF(commandQueue));
+						AddCommand6D_waitCmdLb(ADR(commandQueue), 100, mcACP6D_SH_WAIT_CMDLB_START, 0, mcACP6D_SH_WAIT_CMDLB_REGULAR);
+						AddCommand6D_arcAngularCW(ADR(commandQueue), 0, 0, brmPI/2 * 3, 1.0, 15.0, 0, mcACP6D_MOVE_ABSOLUTE);  
+						
+						fb.MoveQueue[selected1[0].index].Commands := commandQueue;	
+						fb.MoveQueue[selected1[1].index].Commands := commandQueue;
+						fb.MoveQueue[selected1[2].index].Commands := commandQueue;
+						fb.MoveQueue[selected1[3].index].Commands := commandQueue;	
+						
+						// Group 2
+						brsmemset(ADR(commandQueue), 0, SIZEOF(commandQueue));
+						AddCommand6D_waitCmdLb(ADR(commandQueue), 101, mcACP6D_SH_WAIT_CMDLB_START, 0, mcACP6D_SH_WAIT_CMDLB_REGULAR);
+						AddCommand6D_arcAngularCW(ADR(commandQueue), 0, 0, brmPI/2 * 3, 1.0, 15.0, 0, mcACP6D_MOVE_ABSOLUTE);  
+						
+						fb.MoveQueue[selected2[0].index].Commands := commandQueue;	
+						fb.MoveQueue[selected2[1].index].Commands := commandQueue;
+						fb.MoveQueue[selected2[2].index].Commands := commandQueue;
+						fb.MoveQueue[selected2[3].index].Commands := commandQueue;
+						
+						// Virtual shuttles (sun shuttles) move to start position
+						fb.virMoveInPlane[0].Parameters.Acceleration := 5;
+						fb.virMoveInPlane[0].Parameters.Velocity := 0.5;
+						fb.virMoveInPlane[0].Parameters.Position.X := 3 * 0.24 + 0.010;
+						fb.virMoveInPlane[0].Parameters.Position.Y := 2 * 0.24;
+						
+						fb.virMoveInPlane[1].Parameters.Acceleration := 5;
+						fb.virMoveInPlane[1].Parameters.Velocity := 0.5;
+						fb.virMoveInPlane[1].Parameters.Position.X := 0.24 - 0.010;
+						fb.virMoveInPlane[1].Parameters.Position.Y := 2 * 0.24;
+					END_IF
+					
+					FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
+						shuttles[i].command.moveQueue := TRUE;
+					END_FOR;
 
+					IF queueStatus.allAcknowledge THEN
+						local.actions.substate.virMoveInPlane[0] := TRUE;
+						local.actions.substate.virMoveInPlane[1] := TRUE;
+					END_IF
+					
+					
+					IF queueStatus.allDone AND fb.virMoveInPlane[0].Done AND fb.virMoveInPlane[1].Done THEN
+						
+						task.SubState := 400;
+					ELSIF queueStatus.error THEN
+						task.Error.Code := queueStatus.errorID;	
+						task.State := ACP6D_COMMAND_ERROR;
+					END_IF;
+
+					
 				400:
-					task.StateInfo := 'Move shuttles';
+					task.StateInfo := 'Circular shuffler - Initialize';
+					// ---------------------------------------------------------------------------------
+					brsmemset(ADR(shuffleCircular), 0, SIZEOF(shuffleCircular));
+					task.SubState := 410;
+					
+
+				410:
+					task.StateInfo := 'Circular shuffler - Check if done';
+					// ---------------------------------------------------------------------------------
+					IF shuffleCircular.step < 5 THEN
+						task.SubState := 420;
+						shuffleCircular.step := shuffleCircular.step + 1;
+					ELSE
+						// shuffle done
+						task.SubState := 1000;
+					END_IF;
+	
+				420:
+					task.StateInfo := 'Circular shuffler - Swap middle shuttles';
+					// ---------------------------------------------------------------------------------
+					IF task.OnStateEntry THEN
+						brfiShuttleSelect(ADR(shuttles), ADR(selected1), 0.320, 0.280, 0.640, 0.680, (shuffleCircular.step MOD 2) = 1);
+						shuttle ACCESS ADR(shuttles[selected1[0].index]);
+						shuttle2 ACCESS ADR(shuttles[selected1[1].index]);
+						
+						AddCommand6D_waitCmdLb(ADR(fb.MoveQueue[shuttle2.index].Commands), shuttle.ID, mcACP6D_SH_WAIT_CMDLB_START, 0, mcACP6D_SH_WAIT_CMDLB_REGULAR);
+						AddCommand6D_arcAngularCW(ADR(fb.MoveQueue[shuttle2.index].Commands), 0.48, 0.48, brmPI, 1.5, 15.0, 0, mcACP6D_MOVE_ABSOLUTE);  
+						
+						AddCommand6D_arcAngularCW(ADR(fb.MoveQueue[shuttle.index].Commands), 0.48, 0.48, brmPI, 1.5, 15.0, 0, mcACP6D_MOVE_ABSOLUTE); 
+						
+						brsmemset(ADR(commandQueue), 0, SIZEOF(commandQueue));
+						AddCommand6D_xy(ADR(commandQueue), sX, 0.0005, 0.000, 0, 0, 0, pathDIRECT, 0, mcACP6D_MOVE_RELATIVE); 
+						AddCommand6D_xy(ADR(commandQueue), sX, -0.0005, 0.000, 0, 0, 0, pathDIRECT, 0, mcACP6D_MOVE_RELATIVE); 
+						
+						FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
+							IF shuttles[i].ID <> shuttle.ID AND shuttles[i].ID <> shuttle2.ID THEN
+	  							fb.MoveQueue[i].Commands := commandQueue;	
+							END_IF;
+						END_FOR;
+						
+					END_IF
+					
+					local.actions.state.sunPlanetEnable[0] := FALSE;
+					local.actions.state.sunPlanetEnable[1] := FALSE;
+					
+					// Queue commands after sun planet has been disabled
+					IF (NOT fb.brfiSunPlanet[0].Active) AND (NOT fb.brfiSunPlanet[1].Active) THEN
+						shuttle2.command.moveQueue := TRUE;
+					END_IF;
+					
+					IF queueStatus.allAcknowledge THEN
+						FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
+							shuttles[i].command.moveQueue := TRUE;
+						END_FOR;
+					END_IF;
+					
+					IF queueStatus.allDone THEN
+						task.SubState := 430;
+					ELSIF queueStatus.error THEN
+						task.Error.Code := queueStatus.errorID;	
+						task.State := ACP6D_COMMAND_ERROR;
+					END_IF;	
+					
+				430:
+					task.StateInfo := 'Recreate sun planet groups after shuttle swap';
+					// ---------------------------------------------------------------------------------
+					IF task.OnStateEntry THEN												
+						
+						// Replace swapped shuttle with the new one group 1
+						FOR i := 0 TO 3 DO
+							IF fb.brfiSunPlanet[0].PlanetShuttles[i].controlif = shuttle.Ref.controlif THEN
+	 							fb.brfiSunPlanet[0].PlanetShuttles[i] := shuttle2.Ref;
+								EXIT;
+							ELSIF fb.brfiSunPlanet[0].PlanetShuttles[i].controlif = shuttle2.Ref.controlif THEN
+								fb.brfiSunPlanet[0].PlanetShuttles[i] := shuttle.Ref;
+								EXIT;
+							END_IF;
+						END_FOR;
+						
+						// Replace swapped shuttle with the new one group 2
+						FOR i := 0 TO 3 DO
+							IF fb.brfiSunPlanet[1].PlanetShuttles[i].controlif = shuttle.Ref.controlif THEN
+								fb.brfiSunPlanet[1].PlanetShuttles[i] := shuttle2.Ref;
+								EXIT;
+							ELSIF fb.brfiSunPlanet[1].PlanetShuttles[i].controlif = shuttle2.Ref.controlif THEN
+								fb.brfiSunPlanet[1].PlanetShuttles[i] := shuttle.Ref;
+								EXIT;
+							END_IF;
+						END_FOR;						
+					END_IF
+					
+					local.actions.state.sunPlanetEnable[0] := TRUE;
+					local.actions.state.sunPlanetEnable[1] := TRUE;
+					local.actions.substate.assemblyStop := TRUE;
+					
+					IF fb.brfiSunPlanet[0].Active AND fb.brfiSunPlanet[1].Active AND fb.assemblyStop.Done THEN
+						task.SubState := 440;
+					ELSIF fb.brfiSunPlanet[0].Error THEN
+						local.actions.state.sunPlanetEnable[0] := FALSE;
+					ELSIF fb.brfiSunPlanet[1].Error THEN
+						local.actions.state.sunPlanetEnable[1] := FALSE;
+					END_IF;
+	
+				440:
+					task.StateInfo := 'Arc move sun planet groups around the table center';
+					// ---------------------------------------------------------------------------------
+					IF task.OnStateEntry THEN
+						brsmemset(ADR(selected1), 0, SIZEOF(selected1));
+						brsmemset(ADR(selected2), 0, SIZEOF(selected2));
+						
+						// Use sun planet shuttle list to get shuttle references for each group 
+						// Group 1
+						FOR i := 0 TO 3 DO
+							FOR x := 0 TO gMAX_INDEX_SHUTTLE DO
+								IF fb.brfiSunPlanet[0].PlanetShuttles[i].controlif = shuttles[x].Ref.controlif THEN
+									selected1[i].index := shuttles[x].index;
+									selected1[i].ID := shuttles[x].ID;
+									EXIT;
+								END_IF;
+							END_FOR;
+						END_FOR;
+						
+						brsmemset(ADR(commandQueue), 0, SIZEOF(commandQueue));
+						AddCommand6D_waitCmdLb(ADR(commandQueue), 100, mcACP6D_SH_WAIT_CMDLB_START, 0, mcACP6D_SH_WAIT_CMDLB_REGULAR);
+						AddCommand6D_arcAngularCW(ADR(commandQueue), 0, 0, brmPI/2 * 19, 1.0, 15.0, 0, mcACP6D_MOVE_ABSOLUTE);  
+						
+						fb.MoveQueue[selected1[0].index].Commands := commandQueue;	
+						fb.MoveQueue[selected1[1].index].Commands := commandQueue;
+						fb.MoveQueue[selected1[2].index].Commands := commandQueue;
+						fb.MoveQueue[selected1[3].index].Commands := commandQueue;
+											
+						// Group 2
+						FOR i := 0 TO 3 DO
+							FOR x := 0 TO gMAX_INDEX_SHUTTLE DO
+								IF fb.brfiSunPlanet[1].PlanetShuttles[i].controlif = shuttles[x].Ref.controlif THEN
+									selected2[i].index := shuttles[x].index;
+									selected2[i].ID := shuttles[x].ID;
+									EXIT;
+								END_IF;
+							END_FOR;
+						END_FOR;
+						
+						brsmemset(ADR(commandQueue), 0, SIZEOF(commandQueue));
+						AddCommand6D_waitCmdLb(ADR(commandQueue), 101, mcACP6D_SH_WAIT_CMDLB_START, 0, mcACP6D_SH_WAIT_CMDLB_REGULAR);
+						AddCommand6D_arcAngularCW(ADR(commandQueue), 0, 0, brmPI/2 * 19, 1.0, 15.0, 0, mcACP6D_MOVE_ABSOLUTE);  
+						
+						fb.MoveQueue[selected2[0].index].Commands := commandQueue;	
+						fb.MoveQueue[selected2[1].index].Commands := commandQueue;
+						fb.MoveQueue[selected2[2].index].Commands := commandQueue;
+						fb.MoveQueue[selected2[3].index].Commands := commandQueue;	
+					END_IF
+					
+					FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
+						shuttles[i].command.moveQueue := TRUE;
+					END_FOR;
+					
+					IF queueStatus.allAcknowledge THEN
+						task.SubState := 450;
+					ELSIF queueStatus.error THEN
+						task.Error.Code := queueStatus.errorID;	
+						task.State := ACP6D_COMMAND_ERROR;
+					END_IF;	
+				
+				450:
+					task.StateInfo := 'Arc move sun planet groups around the table center';
+					// ---------------------------------------------------------------------------------
+					IF task.OnStateEntry THEN
+						// Arc commands for the virtual shuttles (sun shuttles) of both groups
+						fb.virMoveArc[0].Parameters.Acceleration := 5;
+						fb.virMoveArc[0].Parameters.Velocity := 0.5;
+						fb.virMoveArc[0].Parameters.Direction :=  mcACP6D_ARC_COUNTER_CLOCKWISE;
+						fb.virMoveArc[0].Parameters.Option :=  mcACP6D_ARC_ANGULAR;
+						fb.virMoveArc[0].Parameters.Angular.Center.X := 0.48;
+						fb.virMoveArc[0].Parameters.Angular.Center.Y := 0.48;
+						fb.virMoveArc[0].Parameters.Angular.Angle := brmPI/2 * 5;
+						
+						fb.virMoveArc[1].Parameters := fb.virMoveArc[0].Parameters;
+						fb.virMoveArc[1].CommandLabel := 0;
+					END_IF
+					
+					local.actions.substate.virMoveArc[0] := TRUE;
+					local.actions.substate.virMoveArc[1] := TRUE;
+					
+					IF fb.virMoveArc[0].Done AND fb.virMoveArc[1].Done AND shuttleStatus.allIdle THEN
+						task.SubState := 410;
+					ELSIF fb.virMoveArc[0].Error THEN
+						task.Error.Code := fb.virMoveArc[0].ErrorID;	
+						task.State := ACP6D_COMMAND_ERROR;
+					ELSIF fb.virMoveArc[1].Error THEN
+						task.Error.Code := fb.virMoveArc[1].ErrorID;	
+						task.State := ACP6D_COMMAND_ERROR;
+					END_IF;	
+					
+					
+				4000:
+					task.StateInfo := 'Circular shuffler - Check if done';
 					// ---------------------------------------------------------------------------------
 					IF task.OnStateEntry THEN
 						brfiShuttleSelect(ADR(shuttles), ADR(selected1), 0, 0, 4 * 0.240, 2 * 0.240, FALSE);
@@ -1669,7 +1981,7 @@ PROGRAM _CYCLIC
 					END_IF;
 
 						
-				410:
+				4100:
 					IF task.OnStateEntry THEN						
 						brfiShuttleSelect(ADR(shuttles), ADR(selected1), 0, 0, 4 * 0.240, 2 * 0.240, FALSE);
 						brfiShuttleSelect(ADR(shuttles), ADR(selected2), 0, 2 * 0.240, 1, 1, FALSE);
@@ -1704,7 +2016,7 @@ PROGRAM _CYCLIC
 						task.State := ACP6D_COMMAND_ERROR;
 					END_IF;
 					
-				420:
+				4200:
 					task.StateInfo := 'Move shuttles';
 					// ---------------------------------------------------------------------------------
 					IF task.OnStateEntry THEN						
@@ -1933,6 +2245,9 @@ PROGRAM _CYCLIC
 		fb.brfiSunPlanet[i].Enable := local.actions.state.sunPlanetEnable[i];
 		fb.brfiSunPlanet[i]();
 	END_FOR;
+	
+	fb.virShWaitCmdLb.Execute := local.actions.substate.virWaitCmdLb;
+	fb.virShWaitCmdLb();
 	
 	// 6D Cyclic channel handling
 	// =================================================================================================================

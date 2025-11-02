@@ -392,6 +392,11 @@ ACTION acShuttleStatusPolling :
 		
 		10:
 			// ---------------------------------------------------------------------------------
+			fb.ShGetInfo.Execute := FALSE;
+			shuttleStatus.state := 20;
+			
+		20:
+			// ---------------------------------------------------------------------------------
 			CASE task.Output.AssemblyInfo.AssemblyState OF
 				mcACP6D_INVALID_CONFIGURATION:
 				mcACP6D_STARTUP:
@@ -404,11 +409,13 @@ ACTION acShuttleStatusPolling :
 				shuttles[shuttleStatus.index].status.isValid := TRUE;
 				shuttles[shuttleStatus.index].status.state := fb.ShGetInfo.ShuttleInfo.State;
 				shuttleStatus.index := shuttleStatus.index + 1;
+				shuttleStatus.state := 10;
 						
 			ELSIF fb.ShGetInfo.Error THEN
 				brsmemset(ADR(shuttles[shuttleStatus.index].status), 0, SIZEOF(shuttles[shuttleStatus.index].status));
 				shuttleStatus.index := shuttleStatus.index + 1;	
-			END_IF;			 
+				shuttleStatus.state := 10;
+			END_IF;	
 	END_CASE;
 	
 	IF shuttleStatus.index > gMAX_INDEX_SHUTTLE THEN

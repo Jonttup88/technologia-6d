@@ -29,7 +29,10 @@ PROGRAM _CYCLIC
 
 	IF task.Input.Command.HardReset OR gHMI.General.ResetButton THEN
 		task.Input.Command.HardReset := FALSE;
-		task.State := MAIN_HARD_RESET;
+		IF task.State <> MAIN_HARD_RESET THEN
+			task.State := MAIN_HARD_RESET;
+			task.SubState := 0;	  
+		END_IF;
 	END_IF
 	
 	// Task state machine
@@ -75,21 +78,15 @@ PROGRAM _CYCLIC
 				0:
 					task.StateInfo := 'Force robot task to idle';
 					// ---------------------------------------------------------------------------------
-					gRobot.State := ROBOT_IDLE;
+					gRobot.Input.Command.HardReset := TRUE;
+					gAcp6D.Input.Command.HardReset := TRUE;	
 					task.SubState := 10;
 					
-				10:
-					task.StateInfo := 'Force 6D task to idle';
+					task.StateInfo := 'Wait tasks to finish reset procedures';
 					// ---------------------------------------------------------------------------------		
-					gAcp6D.State := ACP6D_IDLE;
-					brsmemset(ADR(gFeatureDemo), 0, SIZEOF(gFeatureDemo));
-					task.SubState := 20;
-				
-				20:
-					task.StateInfo := '';
-					// ---------------------------------------------------------------------------------		
-					gAcp6D.State := ACP6D_IDLE;
-					task.SubState := 30;
+					IF gAcp6D.Output.Status.ReadyForCommands AND gRobot.Output.Status.ReadyForNextCommand THEN
+						task.State := MAIN_IDLE;
+					END_IF;
 			END_CASE;
 
 		MAIN_RESET:
@@ -239,7 +236,7 @@ PROGRAM _CYCLIC
 					END_IF;
 					
 				310: 
-					task.StateInfo := 'Wait robot to be ready for next command';
+					task.StateInfo := 'Get prize with robot and spell WIN with 6D';
 					// ---------------------------------------------------------------------------------			
 					local.actions.substate.robGetPrize := TRUE;
 					local.actions.substate.br6dSpellWin := TRUE;
@@ -256,14 +253,13 @@ PROGRAM _CYCLIC
 					END_IF;
 					
 				330: 
-					task.StateInfo := 'Wait robot to be ready for next command';
+					task.StateInfo := 'Give prize to the winning player with robot';
 					// ---------------------------------------------------------------------------------			
 					local.actions.substate.robGivePrize := TRUE;
 					
 					IF gRobot.Output.Status.CommandDone THEN
 						task.SubState := 1000;
 					END_IF;
-				
 					
 				400: 
 					task.StateInfo := 'Wait robot to be ready for next command';

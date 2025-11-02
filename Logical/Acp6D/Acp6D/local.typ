@@ -24,6 +24,7 @@ TYPE
 		assemblyGetVirtualSh : MC_BR_AsmGetVirtualSh_Acp6D;
 		virMoveInPlane : ARRAY[0..gMAX_INDEX_SHUTTLE_VIRTUAL]OF MC_BR_MoveInPlane_Acp6D;
 		virMoveArc : ARRAY[0..gMAX_INDEX_SHUTTLE_VIRTUAL]OF MC_BR_MoveArc_Acp6D;
+		virShWaitCmdLb : MC_BR_ShWaitCmdLb_Acp6D;
 		brfiSunPlanet : ARRAY[0..gMAX_INDEX_SHUTTLE_VIRTUAL]OF brfiSunPlanet;
 	END_STRUCT;
 	Acp6DHmiType : 	STRUCT 
@@ -63,6 +64,7 @@ TYPE
 		delay : BOOL;
 		virMoveInPlane : ARRAY[0..gMAX_INDEX_SHUTTLE_VIRTUAL]OF BOOL;
 		virMoveArc : ARRAY[0..gMAX_INDEX_SHUTTLE_VIRTUAL]OF BOOL;
+		virWaitCmdLb : BOOL;
 	END_STRUCT;
 	Acp6DTablePositionType : 	STRUCT 
 		home : ARRAY[0..gMAX_INDEX_SHUTTLE]OF McAcp6DShPositionType;
@@ -138,6 +140,11 @@ TYPE
 		step : DINT;
 		sequence : ARRAY[0..gMAX_INDEX_SHUFFLE]OF DINT;
 		radius : REAL;
+	END_STRUCT;
+	Acp6DShuffleCircularType : 	STRUCT 
+		randNum : DINT;
+		step : DINT;
+		stepCount : DINT;
 	END_STRUCT;
 	Acp6DRandomType : 	STRUCT 
 		delaysIndex : DINT;
