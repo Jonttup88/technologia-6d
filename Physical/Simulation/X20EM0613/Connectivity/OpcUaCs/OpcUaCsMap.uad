@@ -32,6 +32,26 @@
         <Variable Name="Active" />
         <Variable Name="Addition" RecursiveEnable="2" />
       </Variable>
+      <Variable Name="gMain">
+        <Variable Name="StateInfo" />
+        <Variable Name="Input">
+          <Variable Name="WinPrizeFromEasyGame" />
+        </Variable>
+      </Variable>
+      <Variable Name="gRobot">
+        <Variable Name="StateInfo" />
+      </Variable>
+      <Variable Name="gAcp6D">
+        <Variable Name="StateInfo" />
+        <Variable Name="Error">
+          <Variable Name="Acknowledge" />
+        </Variable>
+      </Variable>
     </GlobalVariables>
+    <Task Name="Main">
+      <Variable Name="task">
+        <Variable Name="StateInfo" />
+      </Variable>
+    </Task>
   </Module>
 </OpcUaSource>

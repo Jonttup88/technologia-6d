@@ -28,7 +28,7 @@
     <Parameter ID="OutputCurrentLimitTime" Value="20" />
     <Parameter ID="ConfigOutputState" Value="on" />
   </Module>
-  <Module Name="8FLM01.0000.00I-1" Type="8FLM01.0000.00I-1" Version="1.0.0.2" NodeNumber="239">
+  <Module Name="8FLM01.0000.00I-1" Type="8FLM01.0000.00I-1" Version="1.0.0.1" NodeNumber="239">
     <Connection Connector="PLK1" TargetModule="X20EM0613" TargetConnector="IF3">
       <Cable Type="PowerlinkCable" Length="10" Version="1.0.0.3" />
     </Connection>

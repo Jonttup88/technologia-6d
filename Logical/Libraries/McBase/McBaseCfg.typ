@@ -16,8 +16,12 @@ TYPE
 		mcCFG_LIMSET_ROT := 1412, (*Associated with data type McCfgLimSetRotType*)
 		mcCFG_CAMLST := 1500, (*Associated with data type McCfgCamLstType*)
 		mcCFG_PROC_POINT := 1601, (*Associated with data type McCfgProcPointType*)
+		mcCFG_PROC_TRAK_POS := 1602, (*Associated with data type McCfgProcPtTrakPosType*)
+		mcCFG_PROC_TRAK_BARRIER := 1603, (*Associated with data type McCfgProcPtTrakBarrierType*)
+		mcCFG_PROC_TRAK_MON := 1604, (*Associated with data type McCfgProcPtTrakMonType*)
 		mcCFG_TRK_PATH := 1700, (*Associated with data type McCfgTrkPathType*)
 		mcCFG_TRK_PATH_SCN := 1701, (*Associated with data type McCfgTrkPathScnType*)
+		mcCFG_TRK_PATH_AUT_CRT_COND := 1702, (*Associated with data type McCfgTrkPathAutCrtCondType*)
 		mcCFG_PICK_CORE := 2100, (*Associated with data type MpCfgPickCoreType*)
 		mcCFG_PICK_REG := 2110, (*Associated with data type MpCfgPickRegType*)
 		mcCFG_PICK_REG_SCN := 2111, (*Associated with data type MpCfgPickRegScnType*)
@@ -80,6 +84,8 @@ TYPE
 		mcCFG_ACP_EXT_ENC_AX_HOME := 11074, (*Associated with data type McCfgAcpExtEncAxHomeType*)
 		mcCFG_AX_FEAT_A_IN := 11103, (*Associated with data type McCfgAxFeatAInType*)
 		mcCFG_AX_FEAT_ACP_PAR_TBL := 11104, (*Associated with data type McCfgAxFeatAcpParTblType*)
+		mcCFG_AX_FEAT_ACP_SPT_CHART := 11105, (*Associated with data type McCfgAxFeatAcpSptChartType*)
+		mcCFG_ACP_SPT_CHART := 11120, (*Associated with data type McCfgAcpSptChartType*)
 		mcCFG_PURE_V_AX := 12000, (*Associated with data type McCfgPureVAxType*)
 		mcCFG_PURE_V_AX_REF := 12011, (*Associated with data type McCfgPureVAxRefType*)
 		mcCFG_PURE_V_AX_HOME := 12012, (*Associated with data type McCfgPureVAxHomeType*)
@@ -96,6 +102,12 @@ TYPE
 		mcCFG_PURE_V_AX_SIM := 12023, (*Associated with data type McCfgPureVAxSimType*)
 		mcCFG_PURE_V_AX_MOD := 12024, (*Associated with data type McCfgPureVAxModType*)
 		mcCFG_PURE_V_AX_ZERO_VIB_FLTR := 12025, (*Associated with data type McCfgPureVAxZeroVibFltrType*)
+		mcCFG_PURE_V_AX_ENC_SET := 12116, (*Associated with data type McCfgPureVAxEncSetType*)
+		mcCFG_PURE_V_AX_POS_ACT_VAL := 12126, (*Associated with data type McCfgPureVAxPosActValType*)
+		mcCFG_PURE_V_AX_STAT_IN_DS402 := 12121, (*Associated with data type McCfgPureVAxStatInDs402Type*)
+		mcCFG_PURE_V_AX_CTRL_OUT_DS402C := 12122, (*Associated with data type McCfgPureVAxCtrlOutDs402CSPType*)
+		mcCFG_PURE_V_AX_CTRL_OUT_DS402V := 12132, (*Associated with data type McCfgPureVAxCtrlOutDs402VLType*)
+		mcCFG_PURE_V_AX_VEL_ACT_VAL := 12136, (*Associated with data type McCfgPureVAxVelActValType*)
 		mcCFG_STP_AX := 13000, (*Associated with data type McCfgStpAxType*)
 		mcCFG_STP_AX_REF := 13011, (*Associated with data type McCfgStpAxRefType*)
 		mcCFG_STP_AX_MECH_ELM := 13012, (*Associated with data type McCfgStpAxMechElmType*)
@@ -135,6 +147,7 @@ TYPE
 		mcCFG_AXGRP_FEAT_COMP := 21102, (*Associated with data type McCfgAxGrpFeatCompType*)
 		mcCFG_AXGRP_FEAT_CDC := 21103, (*Associated with data type McCfgAxGrpFeatCdcType*)
 		mcCFG_AXGRP_FEAT_FF := 21104, (*Associated with data type McCfgAxGrpFeatFfType*)
+		mcCFG_AXGRP_FEAT_FF_M := 21204, (*Associated with data type McCfgAxGrpFeatFfModeType*)
 		mcCFG_AXGRP_FEAT_FRM_HIER_STD := 21105, (*Associated with data type McCfgAxGrpFeatFrmHierStdType*)
 		mcCFG_AXGRP_FEAT_FRM_HIER_CUS := 21106, (*Associated with data type McCfgAxGrpFeatFrmHierCusType*)
 		mcCFG_AXGRP_FEAT_JOG := 21107, (*Associated with data type McCfgAxGrpFeatJogType*)
@@ -157,6 +170,7 @@ TYPE
 		mcCFG_AXGRP_FEAT_REV_MOVE := 21125, (*Associated with data type McCfgAxGrpFeatRevMoveType*)
 		mcCFG_AXGRP_FEAT_TRK := 21126, (*Associated with data type McCfgAxGrpFeatTrkType*)
 		mcCFG_AXGRP_FEAT_PIPE_CUT := 21127, (*Associated with data type McCfgAxGrpPipeCutType*)
+		mcCFG_AXGRP_FEAT_TRKFRM_SEL := 21128, (*Associated with data type McCfgAxGrpFeatTrkFrmSelType*)
 		mcCFG_ASM := 31000, (*Associated with data type McCfgAsmType*)
 		mcCFG_ASM_COGG_COMP := 31001, (*Associated with data type McCfgAsmCoggComp*)
 		mcCFG_ASM_ELONG_COMP := 31002, (*Associated with data type McCfgAsmElongComp*)
@@ -177,12 +191,15 @@ TYPE
 		mcCFG_ASM_FEAT_EX_SEG := 31106, (*Associated with data type McCfgAsmFeatExSegType*)
 		mcCFG_ASM_FEAT_SH_SHP_REG := 31107, (*Associated with data type McCfgAsmFeatShShpRegType*)
 		mcCFG_ASM_FEAT_SEG_GRP := 31108, (*Associated with data type McCfgAsmFeatSegGrpType*)
+		mcCFG_ASM_FEAT_SNAP := 31109, (*Associated with data type McCfgAsmFeatSnapType*)
 		mcCFG_SEC := 31300, (*Associated with data type McCfgSecType*)
 		mcCFG_SEC_COMP := 31301, (*Associated with data type McCfgSecCompType*)
 		mcCFG_SEC_SUB := 31302, (*Associated with data type McCfgSecSubType*)
+		mcCFG_SEC_COMP_POS := 31303, (*Associated with data type McCfgSecCompPosType*)
 		mcCFG_SH_STEREO_TYP := 31400, (*Associated with data type McCfgShStereoTypType*)
 		mcCFG_SH_JERK_FILT := 31401, (*Associated with data type McCfgShJerkFiltType*)
 		mcCFG_SH_STATE_TRANS := 31402, (*Associated with data type McCfgShStateTransType*)
+		mcCFG_SH_ZERO_VIB_FILTER := 31403, (*Associated with data type McCfgShZeroVibFilterType*)
 		mcCFG_SEG := 31500, (*Associated with data type McCfgSegType*)
 		mcCFG_MS_CUS_STD := 50001, (*Associated with data type McCfgMSCusStdType*)
 		mcCFG_MS_2AX_CNC_XY := 51201, (*Associated with data type McCfgMS2AxCncXYType*)
@@ -194,6 +211,7 @@ TYPE
 		mcCFG_MS_4AX_CNC_XYZB := 51401, (*Associated with data type McCfgMS4AxCncXYZBType*)
 		mcCFG_MS_4AX_CNC_XYZC := 51402, (*Associated with data type McCfgMS4AxCncXYZCType*)
 		mcCFG_MS_5AX_CNC_XYZBA := 51502, (*Associated with data type McCfgMS5AxCncXYZBAType*)
+		mcCFG_MS_5AX_CNC_XYZBC := 51503, (*Associated with data type McCfgMS5AxCncXYZBCType*)
 		mcCFG_MS_5AX_CNC_XYZCA := 51504, (*Associated with data type McCfgMS5AxCncXYZCAType*)
 		mcCFG_MS_6AX_CNC_ZXYBCA := 51603, (*Associated with data type McCfgMS6AxCncZXYBCAType*)
 		mcCFG_MS_4AX_SCARA_A := 52041, (*Associated with data type McCfgMS4AxScaraAType*)
@@ -255,9 +273,18 @@ TYPE
 	McMMCProcExpCompOrdType : STRUCT (*Defines the order of computation of components explicitly*)
 		Axis : McMMCPECOAType; (*Defines the order of computation of axis components explicitly*)
 	END_STRUCT;
+	McMMCProcSymMulEnum :
+		( (*Symmetric multiprocessing selector setting*)
+		mcMMCPSM_NOT_USE := 0, (*Not used -*)
+		mcMMCPSM_USE := 1 (*Used - Symmetric multiprocessing is used*)
+		);
+	McMMCProcSymMulType : STRUCT (*Symmetric multiprocessing (SMP) enhances performance by efficiently distributing computational tasks across multiple CPU cores.*)
+		Type : McMMCProcSymMulEnum; (*Symmetric multiprocessing selector setting*)
+	END_STRUCT;
 	McMMCProcType : STRUCT
 		ProcessingTaskClass : McMMCProcProcTskCEnum; (*Cyclic task class for command processing*)
 		ExplicitComputationOrder : McMMCProcExpCompOrdType; (*Defines the order of computation of components explicitly*)
+		SymmetricMultiprocessing : McMMCProcSymMulType; (*Symmetric multiprocessing (SMP) enhances performance by efficiently distributing computational tasks across multiple CPU cores.*)
 	END_STRUCT;
 	McMMCLogSelEnum :
 		( (*Selective logging selector setting*)
@@ -335,16 +362,59 @@ TYPE
 	END_STRUCT;
 	McMMCMcAcpDrvPLKCycPerParIDEnum :
 		( (*Defines the number of POWERLINK cycles per ParID for parameter transfer*)
-		mcMMCMPCPP_ONE := 1, (*One - One ParID every cycle*)
-		mcMMCMPCPP_TWO := 2 (*Two - One ParID every second cycle*)
+		mcMMCMPCPP_TWO := 2, (*Two - One ParID every second cycle*)
+		mcMMCMPCPP_ONE := 1 (*One - One ParID every cycle*)
 		);
 	McMMCMcAcpDrvType : STRUCT (*ACOPOS driver configuration*)
 		POWERLINKCyclesPerParID : McMMCMcAcpDrvPLKCycPerParIDEnum; (*Defines the number of POWERLINK cycles per ParID for parameter transfer*)
+	END_STRUCT;
+	McMcMMCDiSnEnum :
+		( (*Snapshot selector setting*)
+		mcMMCDS_NOT_USE := 0, (*Not used -*)
+		mcMMCDS_USE := 1 (*Used -*)
+		);
+	McMcMMCDiSnUseFCompressionEnum :
+		( (*Compression selector setting*)
+		mcMMCDSUFC_NOT_USE := 0, (*Not used -*)
+		mcMMCDSUFC_USE := 1 (*Used -*)
+		);
+	McMcMMCDiSnUseFCompressionType : STRUCT (*Compression*)
+		Type : McMcMMCDiSnUseFCompressionEnum; (*Compression selector setting*)
+	END_STRUCT;
+	McMcMMCDiSnUseFLimEnum :
+		( (*Limits selector setting*)
+		mcMMCDSUFL_NOT_USE := 0, (*Not used -*)
+		mcMMCDSUFL_USE := 1 (*Used -*)
+		);
+	McMcMMCDiSnUseFLimUseType : STRUCT (*Type mcMMCDSUFL_USE settings*)
+		MaximumSize : UDINT; (*Maximum size of snapshots [KB]*)
+		MaximumNumberOfSnapshots : UDINT; (*Maximum number of snapshots*)
+	END_STRUCT;
+	McMcMMCDiSnUseFLimType : STRUCT (*Limits*)
+		Type : McMcMMCDiSnUseFLimEnum; (*Limits selector setting*)
+		Used : McMcMMCDiSnUseFLimUseType; (*Type mcMMCDSUFL_USE settings*)
+	END_STRUCT;
+	McMcMMCDiSnUseFType : STRUCT
+		FileDevice : STRING[250]; (*Name of file device*)
+		DirectoryName : STRING[250]; (*Name of snapshot directory*)
+		Compression : McMcMMCDiSnUseFCompressionType; (*Compression*)
+		Limits : McMcMMCDiSnUseFLimType; (*Limits*)
+	END_STRUCT;
+	McMcMMCDiSnUseType : STRUCT (*Type mcMMCDS_USE settings*)
+		Files : McMcMMCDiSnUseFType;
+	END_STRUCT;
+	McMcMMCDiSnType : STRUCT (*Snapshot configuration*)
+		Type : McMcMMCDiSnEnum; (*Snapshot selector setting*)
+		Used : McMcMMCDiSnUseType; (*Type mcMMCDS_USE settings*)
+	END_STRUCT;
+	McMMCDiagnosticsType : STRUCT
+		Snapshot : McMcMMCDiSnType; (*Snapshot configuration*)
 	END_STRUCT;
 	McCfgMMCfgType : STRUCT (*Main data type corresponding to McCfgTypeEnum mcCFG_MMCFG*)
 		Processing : McMMCProcType;
 		Logger : McMMCLogType;
 		McAcpDrv : McMMCMcAcpDrvType; (*ACOPOS driver configuration*)
+		Diagnostics : McMMCDiagnosticsType;
 	END_STRUCT;
 	McOHGCSOTypEnum :
 		( (*Type selector setting*)
@@ -636,8 +706,8 @@ TYPE
 		mcLSP_USE := 1 (*Used -*)
 		);
 	McCfgLimPosType : STRUCT (*Type mcLSP_USE settings*)
-		LowerLimit : LREAL; (*Lower software limit position [Measurement units]*)
-		UpperLimit : LREAL; (*Upper software limit position [Measurement units]*)
+		LowerLimit : LREAL; (*Lower software limit position [measurement units]*)
+		UpperLimit : LREAL; (*Upper software limit position [measurement units]*)
 	END_STRUCT;
 	McLSPosType : STRUCT (*Movement range of the axis via two position boundaries*)
 		Type : McLSPosEnum; (*Position selector setting*)
@@ -650,11 +720,11 @@ TYPE
 		mcLSV_ADV := 2 (*Advanced -*)
 		);
 	McCfgLimVelBaseType : STRUCT (*Type mcLSV_BASIC settings*)
-		Velocity : REAL; (*Velocity limit in any movement direction [Measurement units/s]*)
+		Velocity : REAL; (*Velocity limit in any movement direction [measurement units/s]*)
 	END_STRUCT;
 	McCfgLimVelAdvType : STRUCT (*Type mcLSV_ADV settings*)
-		Positive : REAL; (*Velocity limit in positive movement direction [Measurement units/s]*)
-		Negative : REAL; (*Velocity limit in negative movement direction [Measurement units/s]*)
+		Positive : REAL; (*Velocity limit in positive movement direction [measurement units/s]*)
+		Negative : REAL; (*Velocity limit in negative movement direction [measurement units/s]*)
 	END_STRUCT;
 	McLSVelType : STRUCT (*Velocity limits*)
 		Type : McLSVelEnum; (*Velocity selector setting*)
@@ -668,11 +738,11 @@ TYPE
 		mcLSA_ADV := 2 (*Advanced -*)
 		);
 	McCfgLimAccBaseType : STRUCT (*Type mcLSA_BASIC settings*)
-		Acceleration : REAL; (*Acceleration limit in any movement direction [Measurement units/s²]*)
+		Acceleration : REAL; (*Acceleration limit in any movement direction [measurement units/s²]*)
 	END_STRUCT;
 	McCfgLimAccAdvType : STRUCT (*Type mcLSA_ADV settings*)
-		Positive : REAL; (*Acceleration limit in positive movement direction [Measurement units/s²]*)
-		Negative : REAL; (*Acceleration limit in negative movement direction [Measurement units/s²]*)
+		Positive : REAL; (*Acceleration limit in positive movement direction [measurement units/s²]*)
+		Negative : REAL; (*Acceleration limit in negative movement direction [measurement units/s²]*)
 	END_STRUCT;
 	McLSAccType : STRUCT (*Acceleration limits*)
 		Type : McLSAccEnum; (*Acceleration selector setting*)
@@ -686,11 +756,11 @@ TYPE
 		mcLSD_ADV := 2 (*Advanced -*)
 		);
 	McCfgLimDecBaseType : STRUCT (*Type mcLSD_BASIC settings*)
-		Deceleration : REAL; (*Deceleration limit in any movement direction [Measurement units/s²]*)
+		Deceleration : REAL; (*Deceleration limit in any movement direction [measurement units/s²]*)
 	END_STRUCT;
 	McCfgLimDecAdvType : STRUCT (*Type mcLSD_ADV settings*)
-		Positive : REAL; (*Deceleration limit in positive movement direction [Measurement units/s²]*)
-		Negative : REAL; (*Deceleration limit in negative movement direction [Measurement units/s²]*)
+		Positive : REAL; (*Deceleration limit in positive movement direction [measurement units/s²]*)
+		Negative : REAL; (*Deceleration limit in negative movement direction [measurement units/s²]*)
 	END_STRUCT;
 	McLSDecType : STRUCT (*Deceleration limits*)
 		Type : McLSDecEnum; (*Deceleration selector setting*)
@@ -704,13 +774,13 @@ TYPE
 		mcCLJ_ADV := 2 (*Advanced -*)
 		);
 	McCfgLimJerkBasicType : STRUCT (*Type mcCLJ_BASIC settings*)
-		Jerk : REAL; (*Jerk limit in any movement direction [Measurement units/s³]*)
+		Jerk : REAL; (*Jerk limit in any movement direction [measurement units/s³]*)
 	END_STRUCT;
 	McCfgLimJerkAdvType : STRUCT (*Type mcCLJ_ADV settings*)
-		AccelerationPositive : REAL; (*Jerk limit in positive movement direction during acceleration [Measurement units/s³]*)
-		AccelerationNegative : REAL; (*Jerk limit in negative movement direction during acceleration [Measurement units/s³]*)
-		DecelerationPositive : REAL; (*Jerk limit in positive movement direction during deceleration [Measurement units/s³]*)
-		DecelerationNegative : REAL; (*Jerk limit in negative movement direction during deceleration [Measurement units/s³]*)
+		AccelerationPositive : REAL; (*Jerk limit in positive movement direction during acceleration [measurement units/s³]*)
+		AccelerationNegative : REAL; (*Jerk limit in negative movement direction during acceleration [measurement units/s³]*)
+		DecelerationPositive : REAL; (*Jerk limit in positive movement direction during deceleration [measurement units/s³]*)
+		DecelerationNegative : REAL; (*Jerk limit in negative movement direction during deceleration [measurement units/s³]*)
 	END_STRUCT;
 	McCfgLimJerkType : STRUCT (*Jerk limits*)
 		Type : McCfgLimJerkEnum; (*Jerk selector setting*)
@@ -818,8 +888,17 @@ TYPE
 		mcPPTAPBF_OFF := 0, (*Off - Disable barrier functionality*)
 		mcPPTAPBF_ON := 1 (*On - Enable barrier functionality*)
 		);
+	McPPTAcpTrakPtShStopPosEnum :
+		( (*Mode that determines the stop position of a shuttle in front of a barrier*)
+		mcPPTASPSP_EXT := 0, (*Extent - Stop shuttle with extent in front of barrier*)
+		mcPPTASPSP_CTR_PT := 1 (*Center point - Stop shuttle center point in front of barrier*)
+		);
+	McPPTAcpTrakPtBarrFunOnType : STRUCT (*Type mcPPTAPBF_ON settings*)
+		ShuttleStopPosition : McPPTAcpTrakPtShStopPosEnum; (*Mode that determines the stop position of a shuttle in front of a barrier*)
+	END_STRUCT;
 	McPPTAcpTrakPtBarrFunType : STRUCT (*Enable barrier functionality for process point*)
 		Type : McPPTAcpTrakPtBarrFunEnum; (*Barrier functionality selector setting*)
+		On : McPPTAcpTrakPtBarrFunOnType; (*Type mcPPTAPBF_ON settings*)
 	END_STRUCT;
 	McPPTAcpTrakPtPPMMonEnum :
 		( (*Throughput monitor selector setting*)
@@ -836,7 +915,7 @@ TYPE
 	END_STRUCT;
 	McPPTAcpTrakPtType : STRUCT (*Type mcPPT_ACPTRAK_PT settings*)
 		SectorReference : McCfgReferenceType; (*Name of the referenced sector component*)
-		Position : LREAL; (*Position on the sector [Measurement units]*)
+		Position : LREAL; (*Position on the sector [measurement units]*)
 		PositionRelativeTo : McPPTAcpTrakPtPosRelToEnum; (*Absolute position from which the position is counted*)
 		TriggerEventBufferSize : UINT; (*Amount of maximum saved trigger point events*)
 		BarrierFunctionality : McPPTAcpTrakPtBarrFunType; (*Enable barrier functionality for process point*)
@@ -848,6 +927,18 @@ TYPE
 	END_STRUCT;
 	McCfgProcPointType : STRUCT (*Main data type corresponding to McCfgTypeEnum mcCFG_PROC_POINT*)
 		Type : McPPTypType; (*Type of the configured process point*)
+	END_STRUCT;
+	McCfgProcPtTrakPosType : STRUCT (*Main data type corresponding to McCfgTypeEnum mcCFG_PROC_TRAK_POS*)
+		SectorReference : McCfgReferenceType; (*Name of the referenced sector component*)
+		Position : LREAL; (*Position on the sector [measurement units]*)
+		PositionRelativeTo : McPPTAcpTrakPtPosRelToEnum; (*Absolute position from which the position is counted*)
+		TriggerEventBufferSize : UINT; (*Amount of maximum saved trigger point events*)
+	END_STRUCT;
+	McCfgProcPtTrakBarrierType : STRUCT (*Main data type corresponding to McCfgTypeEnum mcCFG_PROC_TRAK_BARRIER*)
+		BarrierFunctionality : McPPTAcpTrakPtBarrFunType; (*Enable barrier functionality for process point*)
+	END_STRUCT;
+	McCfgProcPtTrakMonType : STRUCT (*Main data type corresponding to McCfgTypeEnum mcCFG_PROC_TRAK_MON*)
+		ThroughputMonitor : McPPTAcpTrakPtPPMMonType; (*Enable the throughput monitor functionality*)
 	END_STRUCT;
 	McCfgLocLenUnitEnum :
 		( (*Measurement unit for the axis*)
@@ -874,19 +965,19 @@ TYPE
 		LimitReference : McCfgReferenceType; (*Name of the limit reference*)
 	END_STRUCT;
 	McPTCEnum :
-		( (*Cyclic task class for command processing*)
+		( (*Task class for cyclic data processing*)
 		mcPTC_CYC_1 := 1, (*Cyclic #1 - Task class 1*)
 		mcPTC_USE_MP_MOT_SET := 255 (*Use mapp Motion setting - Use the defined setting from the mapp Motion configuration or Task class 1 if no mapp Motion Configuration exists*)
 		);
 	McCfgGearBoxType : STRUCT (*Ratio between a gearbox input and output*)
-		Input : DINT; (*Number of rotations on the encoder side [Revolutions]*)
-		Output : DINT; (*Number of rotations on the load side which correspond to the number of rotations on the encoder side [Revolutions]*)
+		Input : DINT; (*Number of rotations on the encoder side [revolutions]*)
+		Output : DINT; (*Number of rotations on the load side which correspond to the number of rotations on the encoder side [revolutions]*)
 	END_STRUCT;
 	McCfgRotToLinTrfType : STRUCT (*Specifies a transformation factor between the output of the gear and the actual load movement*)
-		ReferenceDistance : LREAL; (*Distance corresponding to one gearbox output revolution [Measurement units/Gearbox output revolution]*)
+		ReferenceDistance : LREAL; (*Distance corresponding to one gearbox output revolution [measurement units/gearbox output revolution]*)
 	END_STRUCT;
 	McCfgLimJerkBaseType : STRUCT (*Type mcAGFPDPLIJ_BASIC settings*)
-		Jerk : REAL; (*Jerk limit in any movement direction [Measurement units/s³]*)
+		Jerk : REAL; (*Jerk limit in any movement direction [measurement units/s³]*)
 	END_STRUCT;
 	McCfgTransXType : STRUCT (*Translation from base to QX*)
 		X : LREAL; (*Translation in X direction [measurement units]*)

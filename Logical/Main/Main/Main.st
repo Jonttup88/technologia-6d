@@ -82,6 +82,7 @@ PROGRAM _CYCLIC
 					gAcp6D.Input.Command.HardReset := TRUE;	
 					task.SubState := 10;
 					
+				10:
 					task.StateInfo := 'Wait tasks to finish reset procedures';
 					// ---------------------------------------------------------------------------------		
 					IF gAcp6D.Output.Status.ReadyForCommands AND gRobot.Output.Status.ReadyForNextCommand THEN
@@ -232,7 +233,11 @@ PROGRAM _CYCLIC
 					task.StateInfo := 'Wait robot to be ready for next command';
 					// ---------------------------------------------------------------------------------			
 					IF gRobot.Output.Status.ReadyForNextCommand THEN
-						task.SubState := 310;
+						IF task.Input.GameMode = 1 AND (NOT task.Input.WinPrizeFromEasyGame) THEN
+							task.SubState := 311;
+						ELSE
+							task.SubState := 310;	
+						END_IF;
 					END_IF;
 					
 				310: 
@@ -240,6 +245,35 @@ PROGRAM _CYCLIC
 					// ---------------------------------------------------------------------------------			
 					local.actions.substate.robGetPrize := TRUE;
 					local.actions.substate.br6dSpellWin := TRUE;
+					
+					IF gAcp6D.Output.Status.CommandDone THEN
+						task.SubState := 315;
+					END_IF;
+					
+				311: 
+					task.StateInfo := 'Get prize with robot and spell WIN with 6D';
+					// ---------------------------------------------------------------------------------			
+					local.actions.substate.br6dSpellWin := TRUE;
+					
+					IF gAcp6D.Output.Status.CommandDone THEN
+						task.SubState := 312;
+					END_IF;
+				
+				312:
+					task.StateInfo := 'Victory dance';
+					// ---------------------------------------------------------------------------------			
+					local.actions.substate.br6dDance := TRUE;
+					
+					IF  gAcp6D.Output.Status.CommandDone THEN
+						task.SubState := 1000;
+					END_IF;
+					
+					
+				315:
+					task.StateInfo := 'Victory dance';
+					// ---------------------------------------------------------------------------------			
+					local.actions.substate.robGetPrize := TRUE;
+					local.actions.substate.br6dDance := TRUE;
 					
 					IF gRobot.Output.Status.CommandDone AND gAcp6D.Output.Status.CommandDone THEN
 						task.SubState := 320;
@@ -256,7 +290,6 @@ PROGRAM _CYCLIC
 					task.StateInfo := 'Give prize to the winning player with robot';
 					// ---------------------------------------------------------------------------------			
 					local.actions.substate.robGivePrize := TRUE;
-					
 					IF gRobot.Output.Status.CommandDone THEN
 						task.SubState := 1000;
 					END_IF;

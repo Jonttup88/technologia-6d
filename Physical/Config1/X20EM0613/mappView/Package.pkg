@@ -22,5 +22,6 @@
     <Object Type="File" Reference="true">\Physical\Simulation\X20EM0613\mappView\visu.vis</Object>
     <Object Type="File" Reference="true">\Physical\Simulation\X20EM0613\mappView\visWeight.vis</Object>
     <Object Type="File" Reference="true">\Physical\Simulation\X20EM0613\mappView\content_MainPage.binding</Object>
+    <Object Type="File" Reference="true">\Physical\Simulation\X20EM0613\mappView\Content7.eventbinding</Object>
   </Objects>
 </Package>

@@ -18,7 +18,7 @@ ACTION HmiAction:
 		task.Input.Command.StartDemoMode := TRUE;
 	END_IF;
 	
-	R_TRIG_1.CLK := gHMI.General.StopButton OR gHMI.Game.GameRequested;
+	R_TRIG_1.CLK := (gHMI.General.StopButton OR gHMI.Game.GameRequested) AND gFeatureDemo.Active;
 	R_TRIG_1;
 	
 	IF R_TRIG_1.Q THEN
@@ -27,7 +27,7 @@ ACTION HmiAction:
 	
 	gHMI.Status.AllowPlay := (task.State = ACP6D_IDLE);
 	gHMI.Status.AllowStop := gFeatureDemo.Active;
-	
+//	gHMI.Status.AllowReset := 
 	//
 	IF gHMI.Game.NewGame OR gHMI.Game.ExitGame THEN
 		brsmemset(ADR(gHMI.Game),0,SIZEOF(gHMI.Game));

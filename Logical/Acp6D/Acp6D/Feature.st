@@ -4,6 +4,8 @@ ACTION FeatureAction:
 		gFeatureDemo.Active := TRUE;
 		gFeatureDemo.Int.FirstRun := TRUE; // first time
 		
+		gFeatureDemo.featureDemoState := 200;
+		
 		IF gFeatureDemo.featureState = 5 THEN
 			gHMI.ActivateZone := TRUE;
 		END_IF;
@@ -367,7 +369,9 @@ ACTION FeatureAction:
 				gFeatureDemo.FB.MoveInPlaneAsync.Execute := TRUE;
 				gFeatureDemo.FB.MoveInPlaneAsync.Parameters.Velocity := 1;
 				gFeatureDemo.FB.MoveInPlaneAsync.Parameters.Acceleration := 10;
-				gFeatureDemo.featureDemoState := 1;
+				IF shuttleStatus.allIdle THEN
+					gFeatureDemo.featureDemoState := 1;
+				END_IF;
 				
 			1:
 				gFeatureDemo.FB.MoveInPlaneAsync;
@@ -644,7 +648,7 @@ ACTION FeatureAction:
 								IF FeatureShuttles[i].master THEN
 									IF gFeatureDemo.Cmd.StopDemo OR gFeatureDemo.Addition.Levitate OR gFeatureDemo.Addition.Force THEN
 										IF (FeatureShuttles[i].subState > 0) AND (FeatureShuttles[i].subState < 7) THEN
-											FeatureShuttles[i].subState := 7;
+											//FeatureShuttles[i].subState := 7;
 										ELSIF FeatureShuttles[i].subState > 9 THEN
 											FeatureShuttles[i].subState := 20;
 											FeatureShuttles[i].FB.TON_0.IN := FALSE;
@@ -782,7 +786,7 @@ ACTION FeatureAction:
 												ELSE
 													FeatureShuttles[i].FB.MoveShortAxis.Parameters.Position.Rz := 0;
 												END_IF;
-											ELSIF FeatureShuttles[i].FB.MoveShortAxis.Error THEN
+											ELSIF FeatureShuttles[i].FB.MoveShortAxis.Error OR FeatureShuttles[i].FB.MoveShortAxis.CommandAborted THEN
 												FeatureShuttles[i].FB.MoveShortAxis.Execute := FALSE;
 												FeatureShuttles[i].FB.MoveShortAxis;
 												FeatureShuttles[i].subState := 7;
@@ -882,10 +886,18 @@ ACTION FeatureAction:
 													IF FeatureShuttles[i].counter1 > 2 THEN
 														FeatureShuttles[i].subState := 20;
 													ELSE
-														FeatureShuttles[i].subState := 0;
+														IF NOT (gFeatureDemo.Cmd.StopDemo OR gFeatureDemo.Addition.Levitate OR gFeatureDemo.Addition.Force) THEN
+															FeatureShuttles[i].subState := 0;
+														ELSE
+															FeatureShuttles[i].subState := 20;
+														END_IF;
 													END_IF;
 												ELSE
-													FeatureShuttles[i].subState := 11;
+													IF NOT (gFeatureDemo.Cmd.StopDemo OR gFeatureDemo.Addition.Levitate OR gFeatureDemo.Addition.Force) THEN
+														FeatureShuttles[i].subState := 11;
+													ELSE
+														FeatureShuttles[i].subState := 20;
+													END_IF;
 												END_IF;
 											END_IF;
 											
@@ -902,13 +914,14 @@ ACTION FeatureAction:
 											gFeatureDemo.FB.GroupCoupleCtrl.Execute := FALSE;
 											gFeatureDemo.FB.GroupCoupleCtrl;
 											FeatureShuttles[i].ready := TRUE;
+											FeatureShuttles[i].counter := 0;
 											FeatureShuttles[i].counter1 := 0;
 										
 									END_CASE;
 								ELSE
 									IF gFeatureDemo.Cmd.StopDemo THEN
 										IF FeatureShuttles[i].subState > 0 THEN
-											FeatureShuttles[i].subState := 20;
+											//FeatureShuttles[i].subState := 20;
 										END_IF;
 									END_IF;
 									CASE FeatureShuttles[i].subState OF
@@ -948,6 +961,9 @@ ACTION FeatureAction:
 												FeatureShuttles[i].FB.MoveShortAxis.Execute := FALSE;
 												FeatureShuttles[i].FB.MoveShortAxis;
 												FeatureShuttles[i].subState := 12;
+											ELSIF FeatureShuttles[i].FB.MoveShortAxis.CommandAborted OR FeatureShuttles[i].FB.MoveShortAxis.Error THEN
+												FeatureShuttles[i].FB.MoveShortAxis.Execute := FALSE;
+												FeatureShuttles[i].FB.MoveShortAxis;
 											END_IF;
 											
 										12:
@@ -961,7 +977,7 @@ ACTION FeatureAction:
 												FeatureShuttles[i].FB.MoveShortAxis.Execute := FALSE;
 												FeatureShuttles[i].FB.MoveShortAxis;
 												FeatureShuttles[i].counter := FeatureShuttles[i].counter + 1;
-												IF FeatureShuttles[i].counter > 3 THEN
+												IF (FeatureShuttles[i].counter > 3) OR gFeatureDemo.Cmd.StopDemo  THEN
 													FeatureShuttles[i].subState := 20;
 												ELSE
 													FeatureShuttles[i].subState := 11;
@@ -1019,6 +1035,9 @@ ACTION FeatureAction:
 											FeatureShuttles[i].FB.MoveInPlane;
 											
 											FeatureShuttles[i].subState := 2;
+										ELSIF FeatureShuttles[i].FB.MoveInPlane.CommandAborted OR FeatureShuttles[i].FB.MoveInPlane.Error THEN
+											FeatureShuttles[i].FB.MoveInPlane.Execute := FALSE;
+											FeatureShuttles[i].FB.MoveInPlane;
 										END_IF;
 										
 									2:
@@ -1082,6 +1101,9 @@ ACTION FeatureAction:
 											FeatureShuttles[i].FB.MoveInPlane.Execute := FALSE;
 											FeatureShuttles[i].FB.MoveInPlane;
 											FeatureShuttles[i].subState := 6;
+										ELSIF FeatureShuttles[i].FB.MoveInPlane.Error OR FeatureShuttles[i].FB.MoveInPlane.CommandAborted THEN
+											FeatureShuttles[i].FB.MoveInPlane.Execute := FALSE;
+											FeatureShuttles[i].FB.MoveInPlane;
 										END_IF;
 										
 										
@@ -1102,7 +1124,9 @@ ACTION FeatureAction:
 											IF gFeatureDemo.Cmd.StopDemo OR gFeatureDemo.Addition.Levitate OR gFeatureDemo.Addition.Force THEN
 												FeatureShuttles[i].subState := 20;
 											END_IF;	
-											
+										ELSIF FeatureShuttles[i].FB.RotaryMotion.Error OR FeatureShuttles[i].FB.RotaryMotion.CommandAborted THEN
+											FeatureShuttles[i].FB.RotaryMotion.Execute := FALSE;
+											FeatureShuttles[i].FB.RotaryMotion;
 										END_IF;
 										
 									7:
@@ -1119,9 +1143,10 @@ ACTION FeatureAction:
 											FeatureShuttles[i].FB.MoveInPlane.Execute := FALSE;
 											FeatureShuttles[i].FB.MoveInPlane;
 											FeatureShuttles[i].subState := 0;
-											
-																				
-										END_IF;
+										ELSIF FeatureShuttles[i].FB.MoveInPlane.Error OR FeatureShuttles[i].FB.MoveInPlane.CommandAborted THEN
+											FeatureShuttles[i].FB.MoveInPlane.Execute := FALSE;
+											FeatureShuttles[i].FB.MoveInPlane;
+										END_IF;	
 										
 									20:
 										FeatureShuttles[i].FB.RotaryMotion.Execute := FALSE;
@@ -1216,6 +1241,9 @@ ACTION FeatureAction:
 											FeatureShuttles[i].FB.MoveInPlane.Execute := FALSE;
 											FeatureShuttles[i].FB.MoveInPlane;
 											FeatureShuttles[i].subState := 5;
+										ELSIF FeatureShuttles[i].FB.MoveInPlane.Error THEN
+											FeatureShuttles[i].FB.MoveInPlane.Execute := FALSE;
+											FeatureShuttles[i].FB.MoveInPlane;
 										END_IF;
 										
 									5:
@@ -1282,7 +1310,52 @@ ACTION FeatureAction:
 											ELSE
 												FeatureShuttles[i].subState := 3;
 											END_IF;
+										ELSIF shuttles[i].status.state = mcACP6D_SH_STATE_OBSTACLE THEN
+											FeatureShuttles[i].FB.MoveArc.Execute := FALSE;
+											FeatureShuttles[i].FB.MoveArc;
+											FeatureShuttles[i].subState := 8;
 										END_IF;
+										
+									8:
+										FeatureShuttles[i].FB.Stop.Shuttle := ADR(FeatureShuttles[i].Shuttle.Ref);
+										FeatureShuttles[i].FB.Stop.Execute := TRUE;
+										
+										FeatureShuttles[i].FB.Stop;
+										
+										IF FeatureShuttles[i].FB.Stop.Done THEN
+											FeatureShuttles[i].FB.Stop.Execute := FALSE;
+											FeatureShuttles[i].FB.Stop;
+											FeatureShuttles[i].subState := 9;
+										END_IF;
+										
+									9:
+										FeatureShuttles[i].FB.MoveInPlane.Execute := TRUE;
+										FeatureShuttles[i].FB.MoveInPlane.Parameters.Position.X := 0.84;
+										FeatureShuttles[i].FB.MoveInPlane.Parameters.Position.Y := 0.84;
+										FeatureShuttles[i].FB.MoveInPlane.Parameters.Acceleration := 20;
+										FeatureShuttles[i].FB.MoveInPlane.Parameters.Velocity := 0.1;
+										FeatureShuttles[i].FB.MoveInPlane.Parameters.EndVelocity := 0;
+										FeatureShuttles[i].FB.MoveInPlane.Parameters.Path := mcACP6D_PATH_DIRECT;
+										FeatureShuttles[i].FB.MoveInPlane.Shuttle := ADR(FeatureShuttles[i].Shuttle.Ref);
+										FeatureShuttles[i].FB.MoveInPlane;
+										
+										IF FeatureShuttles[i].FB.MoveInPlane.Acknowledge OR FeatureShuttles[i].FB.MoveInPlane.Done THEN
+											FeatureShuttles[i].FB.MoveInPlane.Execute := FALSE;
+											FeatureShuttles[i].FB.MoveInPlane;
+											FeatureShuttles[i].subState := 10;
+										END_IF;	
+										
+									10:
+										FeatureShuttles[i].FB.TON_0.IN := TRUE;
+										FeatureShuttles[i].FB.TON_0.PT := TIME#2s;
+										FeatureShuttles[i].FB.TON_0;
+										
+										IF FeatureShuttles[i].FB.TON_0.Q THEN
+											FeatureShuttles[i].FB.TON_0.IN := FALSE;
+											FeatureShuttles[i].FB.TON_0;
+											FeatureShuttles[i].subState := 3;
+										END_IF;
+										
 								
 									20:
 										FeatureShuttles[i].FB.MoveArc.Execute := FALSE;
@@ -1342,6 +1415,9 @@ ACTION FeatureAction:
 											ELSE
 												FeatureShuttles[i].subState := 1;
 											END_IF;
+										ELSIF FeatureShuttles[i].FB.MoveInPlane.Error THEN
+											FeatureShuttles[i].FB.MoveInPlane.Execute := FALSE;
+											FeatureShuttles[i].FB.MoveInPlane;
 										END_IF;
 									
 									
@@ -1425,15 +1501,71 @@ ACTION FeatureAction:
 				IF gFeatureDemo.FB.StopAll.Done THEN
 					gFeatureDemo.FB.StopAll.Execute := FALSE;
 					gFeatureDemo.FB.StopAll;
-					gFeatureDemo.featureDemoState := 4;
+					gFeatureDemo.featureDemoState := 33;
+				
+					FOR z := 0 TO 7 DO
+						FeatureShuttles[z].subState := 0;
+					END_FOR;
+
+				END_IF;
+				
+			33:
+				ready := TRUE;
+				
+				FOR z := 0 TO 7 DO
+					
+					CASE FeatureShuttles[z].subState OF
+						
+						0:
+							FeatureShuttles[z].FB.StereoTypeAssign.Execute := FALSE;
+							FeatureShuttles[z].FB.StereoTypeAssign.Name := 'default';
+							FeatureShuttles[z].FB.StereoTypeAssign.Shuttle := ADR(FeatureShuttles[z].Shuttle.Ref);
+							FeatureShuttles[z].FB.StereoTypeAssign;
+										
+							FeatureShuttles[z].subState := 1;
+							
+						1:
+							FeatureShuttles[z].FB.StereoTypeAssign.Execute := TRUE;
+							FeatureShuttles[z].FB.StereoTypeAssign.Name := 'default';
+							FeatureShuttles[z].FB.StereoTypeAssign.Shuttle := ADR(FeatureShuttles[z].Shuttle.Ref);
+							FeatureShuttles[z].FB.StereoTypeAssign;
+							
+							FeatureShuttles[z].FB.TON_0.IN := TRUE;
+							FeatureShuttles[z].FB.TON_0.PT := TIME#2s;
+							FeatureShuttles[z].FB.TON_0;
+									
+							IF FeatureShuttles[z].FB.StereoTypeAssign.Done THEN
+								FeatureShuttles[z].FB.StereoTypeAssign.Execute := FALSE;
+								FeatureShuttles[z].FB.StereoTypeAssign;
+								FeatureShuttles[z].FB.TON_0.IN := FALSE;
+								FeatureShuttles[z].FB.TON_0;
+								FeatureShuttles[z].subState := 2;
+							END_IF;
+							
+					END_CASE;
+					
+					IF FeatureShuttles[z].subState < 2 THEN
+						ready := FALSE;
+					END_IF;
+					
+				END_FOR;
+				
+				IF ready THEN
+					IF shuttleStatus.allIdle THEN
+						gFeatureDemo.featureDemoState := 4;
+						
+						FOR z := 0 TO 7 DO
+							FeatureShuttles[z].subState := 0;
+						END_FOR;
+					END_IF;
 					
 					MoveToStartPosition;
 					gFeatureDemo.FB.MoveInPlaneAsync.Assembly := ADR(gAssembly6D_1);
 					gFeatureDemo.FB.MoveInPlaneAsync.Execute := TRUE;
 					gFeatureDemo.FB.MoveInPlaneAsync.Parameters.Velocity := 1;
 					gFeatureDemo.FB.MoveInPlaneAsync.Parameters.Acceleration := 10;
-					
 				END_IF;
+				
 			
 			4:
 				gFeatureDemo.FB.MoveInPlaneAsync;
@@ -1479,7 +1611,9 @@ ACTION FeatureAction:
 				gFeatureDemo.FB.MoveInPlaneAsync.Execute := TRUE;
 				gFeatureDemo.FB.MoveInPlaneAsync.Parameters.Velocity := 1;
 				gFeatureDemo.FB.MoveInPlaneAsync.Parameters.Acceleration := 10;
-				gFeatureDemo.featureDemoState := 11;
+				IF shuttleStatus.allIdle THEN
+					gFeatureDemo.featureDemoState := 11;
+				END_IF;
 			
 			11:
 				gFeatureDemo.FB.MoveInPlaneAsync;
@@ -1634,7 +1768,9 @@ ACTION FeatureAction:
 				gFeatureDemo.FB.MoveInPlaneAsync.Execute := TRUE;
 				gFeatureDemo.FB.MoveInPlaneAsync.Parameters.Velocity := 1;
 				gFeatureDemo.FB.MoveInPlaneAsync.Parameters.Acceleration := 10;
-				gFeatureDemo.featureDemoState := 21;
+				IF shuttleStatus.allIdle THEN
+					gFeatureDemo.featureDemoState := 21;
+				END_IF;
 			
 			21:
 				gFeatureDemo.FB.MoveInPlaneAsync;
@@ -1648,7 +1784,11 @@ ACTION FeatureAction:
 				ELSIF gFeatureDemo.FB.MoveInPlaneAsync.Error THEN
 					gFeatureDemo.FB.MoveInPlaneAsync.Execute := FALSE;
 					gFeatureDemo.FB.MoveInPlaneAsync;
-					gFeatureDemo.FB.MoveInPlaneAsync.Execute := TRUE;
+					gFeatureDemo.featureDemoState := 22;
+					FOR z := 0 TO 7 DO
+						FeatureShuttles[z].subState := 0;
+					END_FOR;
+					//gFeatureDemo.FB.MoveInPlaneAsync.Execute := TRUE;
 				END_IF;
 			
 			22:
@@ -1695,12 +1835,21 @@ ACTION FeatureAction:
 					IF shuttles[z].status.isValid AND NOT((shuttles[z].status.state = mcACP6D_SH_STATE_IDLING) OR (shuttles[z].status.state = mcACP6D_SH_STATE_MOTION)) THEN
 						error := TRUE;
 						gFeatureDemo.featureDemoState := 100;
+						gFeatureDemo.returnState := 23;
+						gHMI.Force.prevMode := 0;
 						EXIT;
 					END_IF;
 				END_FOR;
 				
 				
-				IF gHMI.Force.mode <> gHMI.Force.prevMode THEN
+				IF gFeatureDemo.Cmd.StopDemo OR NOT gFeatureDemo.Addition.Force THEN
+					gFeatureDemo.Addition.Levitate := FALSE;
+					gFeatureDemo.Int.FirstRun := TRUE;
+					FOR z := 0 TO 7 DO
+						FeatureShuttles[z].subState := 0;
+					END_FOR;
+					gFeatureDemo.featureDemoState := 24;
+				ELSIF gHMI.Force.mode <> gHMI.Force.prevMode THEN
 					ready := TRUE;
 					FOR z := 0 TO 7 DO
 						CASE FeatureShuttles[z].subState OF
@@ -1720,6 +1869,9 @@ ACTION FeatureAction:
 									FeatureShuttles[z].FB.Force.Execute := FALSE;
 									FeatureShuttles[z].FB.Force;
 									FeatureShuttles[z].subState := 1;
+								ELSIF FeatureShuttles[z].FB.Force.Error THEN
+									FeatureShuttles[z].FB.Force.Execute := FALSE;
+									FeatureShuttles[z].FB.Force;
 								END_IF;
 							
 						END_CASE;
@@ -1735,13 +1887,6 @@ ACTION FeatureAction:
 							FeatureShuttles[z].subState := 0;
 						END_FOR;
 					END_IF;
-				ELSIF gFeatureDemo.Cmd.StopDemo OR NOT gFeatureDemo.Addition.Force THEN
-					gFeatureDemo.Addition.Levitate := FALSE;
-					gFeatureDemo.Int.FirstRun := TRUE;
-					FOR z := 0 TO 7 DO
-						FeatureShuttles[z].subState := 0;
-					END_FOR;
-					gFeatureDemo.featureDemoState := 24;
 				ELSIF gFeatureDemo.Addition.Levitate THEN
 					gFeatureDemo.Addition.Force := FALSE;
 					gFeatureDemo.featureDemoState := 24;	
@@ -1759,6 +1904,10 @@ ACTION FeatureAction:
 							FeatureShuttles[z].FB.Force;
 							
 							IF FeatureShuttles[z].FB.Force.Done THEN
+								FeatureShuttles[z].FB.Force.Execute := FALSE;
+								FeatureShuttles[z].FB.Force;
+								FeatureShuttles[z].subState := 1;
+							ELSIF FeatureShuttles[z].FB.Force.Error THEN
 								FeatureShuttles[z].FB.Force.Execute := FALSE;
 								FeatureShuttles[z].FB.Force;
 								FeatureShuttles[z].subState := 1;
@@ -1813,7 +1962,12 @@ ACTION FeatureAction:
 				IF gFeatureDemo.FB.PowerOff.Done THEN
 					gFeatureDemo.FB.PowerOff.Execute := FALSE;
 					gFeatureDemo.FB.PowerOff;
+
 					gFeatureDemo.featureDemoState := 102;
+				ELSIF gFeatureDemo.FB.PowerOff.Error THEN
+					gFeatureDemo.FB.PowerOff.Execute := FALSE;
+					gFeatureDemo.FB.PowerOff;
+
 				END_IF;
 			
 			102:
@@ -1824,9 +1978,100 @@ ACTION FeatureAction:
 				IF gFeatureDemo.FB.PowerOn.Done THEN
 					gFeatureDemo.FB.PowerOn.Execute := FALSE;
 					gFeatureDemo.FB.PowerOn;
-					gFeatureDemo.featureDemoState := 20;
+					gFeatureDemo.featureDemoState := gFeatureDemo.returnState;
 					gFeatureDemo.FB.MoveInPlaneAsync.Execute := TRUE;
+				ELSIF gFeatureDemo.FB.PowerOn.Error THEN
+					gFeatureDemo.FB.PowerOn.Execute := FALSE;
+					gFeatureDemo.FB.PowerOn;
+					IF gFeatureDemo.FB.PowerOn.ErrorID = -1065811858 THEN
+						gFeatureDemo.featureDemoState := 104;
+					ELSE
+						gFeatureDemo.featureDemoState := 103;
+					END_IF;
 				END_IF;
+			
+			103:
+				
+				gFeatureDemo.FB.TON_1.IN := TRUE;
+				gFeatureDemo.FB.TON_1.PT := TIME#2s;
+				gFeatureDemo.FB.TON_1;
+			
+				IF gFeatureDemo.FB.TON_1.Q THEN
+					gFeatureDemo.FB.TON_1.IN := FALSE;
+					gFeatureDemo.FB.TON_1;
+					gFeatureDemo.featureDemoState := 102;
+				END_IF;
+			
+			104:
+				gFeatureDemo.FB.Reset.Assembly := ADR(gAssembly6D_1);
+				gFeatureDemo.FB.Reset.Execute := TRUE;
+				gFeatureDemo.FB.Reset;
+			
+				IF gFeatureDemo.FB.Reset.Done THEN
+					gFeatureDemo.FB.Reset.Execute := FALSE;
+					gFeatureDemo.FB.Reset;
+					gFeatureDemo.featureDemoState := 103;
+				END_IF;
+			
+			
+			200:
+				ready := TRUE;
+				
+				FOR z := 0 TO 7 DO
+					
+					CASE FeatureShuttles[z].subState OF
+						
+						0:
+							FeatureShuttles[z].FB.StereoTypeAssign.Execute := FALSE;
+							FeatureShuttles[z].FB.StereoTypeAssign.Name := 'default';
+							FeatureShuttles[z].FB.StereoTypeAssign.Shuttle := ADR(FeatureShuttles[z].Shuttle.Ref);
+							FeatureShuttles[z].FB.StereoTypeAssign;
+										
+							FeatureShuttles[z].subState := 1;
+							
+						1:
+							FeatureShuttles[z].FB.StereoTypeAssign.Execute := TRUE;
+							FeatureShuttles[z].FB.StereoTypeAssign.Name := 'default';
+							FeatureShuttles[z].FB.StereoTypeAssign.Shuttle := ADR(FeatureShuttles[z].Shuttle.Ref);
+							FeatureShuttles[z].FB.StereoTypeAssign;
+							
+							FeatureShuttles[z].FB.TON_0.IN := TRUE;
+							FeatureShuttles[z].FB.TON_0.PT := TIME#2s;
+							FeatureShuttles[z].FB.TON_0;
+									
+							IF FeatureShuttles[z].FB.StereoTypeAssign.Done THEN
+								FeatureShuttles[z].FB.StereoTypeAssign.Execute := FALSE;
+								FeatureShuttles[z].FB.StereoTypeAssign;
+								FeatureShuttles[z].FB.TON_0.IN := FALSE;
+								FeatureShuttles[z].FB.TON_0;
+								FeatureShuttles[z].subState := 2;
+							ELSIF FeatureShuttles[z].FB.StereoTypeAssign.Error THEN
+								FeatureShuttles[z].FB.StereoTypeAssign.Execute := FALSE;
+								FeatureShuttles[z].FB.StereoTypeAssign;
+								FeatureShuttles[z].FB.TON_0.IN := FALSE;
+								FeatureShuttles[z].FB.TON_0;
+								FeatureShuttles[z].subState := 2;
+							END_IF;
+							
+					END_CASE;
+					
+					IF FeatureShuttles[z].subState < 2 THEN
+						ready := FALSE;
+					END_IF;
+					
+				END_FOR;
+				
+				IF ready THEN
+					IF shuttleStatus.allIdle THEN
+						gFeatureDemo.featureDemoState := 0;
+						
+						FOR z := 0 TO 7 DO
+							FeatureShuttles[z].subState := 0;
+						END_FOR;
+					END_IF;
+						gFeatureDemo.featureDemoState := 0;
+				END_IF;
+
 			
 		END_CASE;	
 		

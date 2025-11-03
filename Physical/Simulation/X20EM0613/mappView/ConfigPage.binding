@@ -44,5 +44,25 @@
 <Source xsi:type="opcUa" refId="::AsGlobalPV:gHMI.General.ResetPLC" attribute="value" />
 <Target xsi:type="brease" contentRefId="ConfigPage" widgetRefId="MomentaryPushButton12" attribute="value" />
 </Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gMain.StateInfo" attribute="value" />
+<Target xsi:type="brease" contentRefId="ConfigPage" widgetRefId="TextOutput1" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gAcp6D.StateInfo" attribute="value" />
+<Target xsi:type="brease" contentRefId="ConfigPage" widgetRefId="TextOutput2" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gRobot.StateInfo" attribute="value" />
+<Target xsi:type="brease" contentRefId="ConfigPage" widgetRefId="TextOutput3" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gAcp6D.Error.Acknowledge" attribute="value" />
+<Target xsi:type="brease" contentRefId="ConfigPage" widgetRefId="PushButton4" attribute="value" />
+</Binding>
+<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:gMain.Input.WinPrizeFromEasyGame" attribute="value" />
+<Target xsi:type="brease" contentRefId="ConfigPage" widgetRefId="ToggleSwitch1" attribute="value" />
+</Binding>
 </Bindings>
 </BindingsSet>

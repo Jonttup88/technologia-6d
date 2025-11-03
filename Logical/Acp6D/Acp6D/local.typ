@@ -180,6 +180,7 @@ TYPE
 		WaitCmd : MC_BR_ShWaitCmdLb_Acp6D;
 		Levitate : MC_BR_ShLevitation_Acp6D;
 		Force : MC_BR_ShForceMode_Acp6D;
+		Stop : MC_BR_ShStop_Acp6D;
 	END_STRUCT;
 	FeatureParams_typ : 	STRUCT 
 		UseTime : BOOL;

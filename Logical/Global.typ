@@ -77,6 +77,7 @@ TYPE
 		newStereotypeData : McAcp6DPayloadSizeType;
 		featureState : USINT;
 		featureDemoState : USINT;
+		returnState : USINT;
 		zoneIndex : USINT;
 		FB : gFeatureFB_typ;
 		Cmd : gFeatureDemoCmds_typ;
@@ -105,7 +106,9 @@ TYPE
 		StopAll : MC_BR_AsmStop_Acp6D;
 		PowerOff : MC_BR_AsmPowerOff_Acp6D;
 		PowerOn : MC_BR_AsmPowerOn_Acp6D;
+		TON_1 : TON;
 		TON_0 : TON;
+		Reset : MC_BR_AsmReset_Acp6D;
 	END_STRUCT;
 	gFeatureInternal_typ : 	STRUCT 
 		ready : BOOL;

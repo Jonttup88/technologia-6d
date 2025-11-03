@@ -41,6 +41,7 @@ TYPE
 		Command : MainInputCommandType;
 		Status : MainInputStatusType;
 		GameMode : DINT;
+		WinPrizeFromEasyGame : BOOL;
 	END_STRUCT;
 END_TYPE
 

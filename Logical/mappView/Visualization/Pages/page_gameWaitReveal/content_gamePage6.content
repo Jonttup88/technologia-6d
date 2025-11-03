@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Content id="content_gamePage6" guid="d974e7f5-919b-4b6b-a921-b71b7ddc8d83" height="1000" width="1360" xmlns="http://www.br-automation.com/iat2015/contentDefinition/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Widgets>
-    <Widget xsi:type="widgets.brease.Label" id="Label1" top="120" left="0" width="1360" height="360" zIndex="0" multiLine="true" text="Let's see what the robot says!" textColor="rgba(0, 0, 0, 1)" textAlign="center" fontSize="72px" bold="true" />
+    <Widget xsi:type="widgets.brease.Label" id="Label1" top="120" left="0" width="1360" height="360" zIndex="0" multiLine="true" text="Lets see what the robot says!" textColor="rgba(0, 0, 0, 1)" textAlign="center" fontSize="72px" bold="true" />
   </Widgets>
 </Content>

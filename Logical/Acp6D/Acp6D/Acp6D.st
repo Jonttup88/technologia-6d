@@ -79,7 +79,7 @@ PROGRAM _CYCLIC
 					task.StateInfo := 'Hard reset';
 					// ---------------------------------------------------------------------------------
 					brsmemset(ADR(gFeatureDemo), 0, SIZEOF(gFeatureDemo));
-					IF task.Output.AssemblyInfo.AssemblyState <> mcACP6D_ERRORSTOP THEN
+					IF task.Output.AssemblyInfo.AssemblyState = mcACP6D_ERRORSTOP THEN
 						task.SubState := 10;
 					ELSE
 	  					task.SubState := 20;
@@ -91,6 +91,7 @@ PROGRAM _CYCLIC
 					local.actions.substate.assemblyReset := TRUE;
 					IF task.Output.AssemblyInfo.AssemblyState <> mcACP6D_ERRORSTOP THEN
 						brsmemset(ADR(task.Error), 0, SIZEOF(task.Error));
+						task.SubState := 20;
 					END_IF;
 				
 				20:
@@ -472,7 +473,7 @@ PROGRAM _CYCLIC
 					local.actions.substate.moveInPlaneAsync := TRUE;
 						
 					IF fb.MoveInPlaneAsync.Done THEN
-						task.SubState := 100;
+						task.SubState := 10;
 					ELSIF fb.MoveInPlaneAsync.Error THEN
 						task.Error.Code := fb.MoveInPlaneAsync.ErrorID;	
 						task.State := ACP6D_COMMAND_ERROR;
@@ -526,7 +527,7 @@ PROGRAM _CYCLIC
 					END_IF;
 				
 					IF queueStatus.allDone THEN
-						task.SubState := 20;
+						task.State := ACP6D_COMMAND_DONE;
 					ELSIF queueStatus.error THEN
 						task.Error.Code := queueStatus.errorID;	
 						task.State := ACP6D_COMMAND_ERROR;
@@ -552,13 +553,22 @@ PROGRAM _CYCLIC
 						AddCommand6D_xyz(ADR(commandQueue), sZ, 0, 0, 0.004, 0, 0, 0, mcACP6D_MOVE_ABSOLUTE);  
 						AddCommand6D_xyz(ADR(commandQueue), sZ, 0, 0, 0.001, 0, 0, 0, mcACP6D_MOVE_ABSOLUTE);  
 						
-						FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
+						FOR i := 1 TO gMAX_INDEX_SHUTTLE DO
 							fb.MoveQueue[selected1[i].index].Commands := commandQueue;
 							fb.MoveQueue[selected1[i].index].Commands[1].waitTime := i * 0.1;
 							fb.MoveQueue[selected1[i].index].Parameters.velocity_short := 0.050;
 						END_FOR;
 						
-						fb.MoveQueue[selected1[0].index].Commands[0].mask := 0;
+						AddCommand6D_xyz(ADR(fb.MoveQueue[selected1[0].index].Commands), sZ, 0, 0, 0.004, 0, 0, 0, mcACP6D_MOVE_ABSOLUTE);  
+						AddCommand6D_xyz(ADR(fb.MoveQueue[selected1[0].index].Commands), sZ, 0, 0, 0.001, 0, 0, 0, mcACP6D_MOVE_ABSOLUTE);  
+						AddCommand6D_xyz(ADR(fb.MoveQueue[selected1[0].index].Commands), sZ, 0, 0, 0.004, 0, 0, 0, mcACP6D_MOVE_ABSOLUTE);  
+						AddCommand6D_xyz(ADR(fb.MoveQueue[selected1[0].index].Commands), sZ, 0, 0, 0.001, 0, 0, 0, mcACP6D_MOVE_ABSOLUTE);  
+						AddCommand6D_xyz(ADR(fb.MoveQueue[selected1[0].index].Commands), sZ, 0, 0, 0.004, 0, 0, 0, mcACP6D_MOVE_ABSOLUTE);  
+						AddCommand6D_xyz(ADR(fb.MoveQueue[selected1[0].index].Commands), sZ, 0, 0, 0.001, 0, 0, 0, mcACP6D_MOVE_ABSOLUTE);  
+						AddCommand6D_xyz(ADR(fb.MoveQueue[selected1[0].index].Commands), sZ, 0, 0, 0.004, 0, 0, 0, mcACP6D_MOVE_ABSOLUTE);  
+						AddCommand6D_xyz(ADR(fb.MoveQueue[selected1[0].index].Commands), sZ, 0, 0, 0.001, 0, 0, 0, mcACP6D_MOVE_ABSOLUTE);  
+						AddCommand6D_xyz(ADR(fb.MoveQueue[selected1[0].index].Commands), sZ, 0, 0, 0.004, 0, 0, 0, mcACP6D_MOVE_ABSOLUTE);  
+						AddCommand6D_xyz(ADR(fb.MoveQueue[selected1[0].index].Commands), sZ, 0, 0, 0.001, 0, 0, 0, mcACP6D_MOVE_ABSOLUTE);  
 						
 					END_IF;
 						
@@ -708,14 +718,14 @@ PROGRAM _CYCLIC
 					task.StateInfo := 'Spin, bounce, twist, bow';
 					// ---------------------------------------------------------------------------------
 					IF task.OnStateEntry THEN
-						
-						AddCommand6D_spin(ADR(commandQueue), 3, 0, 500 * 0.10472, 1000);
-						AddCommand6D_wait(ADR(commandQueue), 1);
-						AddCommand6D_spin(ADR(commandQueue), 3, 0, -500 * 0.10472, 1000);
-						AddCommand6D_wait(ADR(commandQueue), 1);
-						AddCommand6D_spin(ADR(commandQueue), 3, 0, 500 * 0.10472, 1000);
-						AddCommand6D_wait(ADR(commandQueue), 1);
-						AddCommand6D_spin(ADR(commandQueue), 3, 0, -500 * 0.10472, 1000);
+//						
+//						AddCommand6D_spin(ADR(commandQueue), 3, 0, 250 * 0.10472, 50);
+//						AddCommand6D_wait(ADR(commandQueue), 1);
+//						AddCommand6D_spin(ADR(commandQueue), 3, 0, -250 * 0.10472, 50);
+//						AddCommand6D_wait(ADR(commandQueue), 1);
+//						AddCommand6D_spin(ADR(commandQueue), 2, 0, 250 * 0.10472, 50);
+//						AddCommand6D_wait(ADR(commandQueue), 1);
+//						AddCommand6D_spin(ADR(commandQueue), 2, 0, -250 * 0.10472, 50);
 					
 						FOR i := 0 TO gMAX_INDEX_SHUTTLE DO
 							fb.MoveQueue[i].Commands := commandQueue;
@@ -723,13 +733,22 @@ PROGRAM _CYCLIC
 						END_FOR;
 					END_IF;
 						
-					IF queueStatus.allDone THEN
-						task.SubState := 120;
+					IF shuttleStatus.allIdle THEN
+						task.SubState := 115;
 					ELSIF queueStatus.error THEN
 						task.Error.Code := queueStatus.errorID;	
 						task.State := ACP6D_COMMAND_ERROR;
 					END_IF;
-				
+					
+				115:
+					task.StateInfo := 'wait until spin ends fully';
+					// ---------------------------------------------------------------------------------
+					fb.TON_delay.PT := T#2s;
+					local.actions.substate.delay := TRUE;
+					IF fb.TON_delay.Q THEN
+	  					task.State := ACP6D_COMMAND_DONE;
+					END_IF;
+					
 				120:
 					task.StateInfo := 'bounce, twist, bow';
 					// ---------------------------------------------------------------------------------
@@ -1569,7 +1588,7 @@ PROGRAM _CYCLIC
 					local.actions.substate.moveInPlaneAsync := TRUE;
 						
 					IF fb.MoveInPlaneAsync.Done THEN
-						task.SubState := 200;
+						task.SubState := 100;
 					ELSIF fb.MoveInPlaneAsync.Error THEN
 						task.Error.Code := fb.MoveInPlaneAsync.ErrorID;	
 						task.State := ACP6D_COMMAND_ERROR;
